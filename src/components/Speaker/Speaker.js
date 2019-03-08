@@ -1,13 +1,16 @@
-import React from 'react';
-import './Speaker.css';
+import React from "react";
+import Card from './Card';
+import speakerData from './speakerData';
 
 const Speaker = ({ onRouteChange }) => {
-    return ( 
-        <div className='card-container'>
-            <div onClick={() => onRouteChange('speech')} className='card'>Steve Jobs</div>
-        </div>
-        
-    );
+  // add condition: if speaker id matches, then return
+  return speakerData.map(ele => (
+    <div onClick={() => onRouteChange('text')}>
+      <Card />
+    </div>
+    
+  ));
 }
+
 
 export default Speaker;
