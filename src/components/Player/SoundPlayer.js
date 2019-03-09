@@ -5,7 +5,7 @@ import Duration from './Duration';
 
 class SoundPlayer extends Component {
   state = {
-    url: "http://localhost:3000/assets/SteveJobsSpeech.mp3",
+    url: '',
     playing: false,
     playbackRate: 1.0,
     volume: 0.8,
@@ -17,7 +17,7 @@ class SoundPlayer extends Component {
   }
 
   playPause = () => {
-    this.setState({ playing: !this.state.playing })
+    this.setState({ playing: !this.state.playing})
   }
 
   stop = () => {

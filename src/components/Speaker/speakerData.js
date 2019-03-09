@@ -1,12 +1,29 @@
 const speakerData = [
     {
-        id: '1',
-        name: 'Steve Jobs'
+        id: 'a',
+        name: 'Steve Jobs',
+        profile: ''
     },
     {
-        id: '2',
-        name: 'Barack Obama'
-    }
+        id: 'b',
+        name: 'Barack Obama',
+        profile: ''
+    },
+    {
+        id: 'c',
+        name: 'Martin Luther King',
+        profile: ''
+    },
+    {
+        id: 'd',
+        name: 'Winston Churchill',
+        profile: ''  
+    },
+    {
+        id: 'e',
+        name: 'Franklin D. Roosevelt',
+        profile: ''  
+    },
 ]
 
 export default speakerData;
