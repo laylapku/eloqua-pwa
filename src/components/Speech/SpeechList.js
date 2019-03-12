@@ -1,39 +1,35 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import queryString from "query-string";
 import speechData from "./speechData";
 
 const styles = theme => ({
-  root: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
+  listcontainer: {
+    width: "100%"
   }
 });
 
-const SpeechList = (props) => {
-  const { classes } = props;
-  const params = queryString.parse(props.location.search);
-
+const SpeechList = props => {
+  const { classes, onSelectSpeech } = props;
   return (
-    <div className={classes.root}>
-      {speechData.map(
-        (item, index) =>
-          item.speakerId === params.id && (
-            <Link to={"/speechplayer?id=" + item.id} key={index}>
-              <ListItem button>
-                <ListItemText primary={item.title} />
-              </ListItem>
-            </Link>
-          )
-      )}
+    <div>
+      <List className={classes.listcontainer}>
+        {speechData.map((item, index) => (
+          <ListItem
+            key={index}
+            button
+            onClick={() => onSelectSpeech(item.url, item.speaker, item.title)}
+          >
+            <ListItemText primary={item.title} />
+          </ListItem>
+        ))}
+      </List>
     </div>
   );
-}; 
+};
 
 SpeechList.propTypes = {
   classes: PropTypes.object.isRequired
