@@ -5,7 +5,7 @@ const App = () => {
   return (
     <div>
       <MiniPlayer />
-    </div>
+    </div> 
   );
 };
 

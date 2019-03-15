@@ -12,16 +12,25 @@ import speechData from "../Speech/speechData";
 
 const styles = theme => ({
   root: {},
-  playerwrapper: {}
+  playercontainer: {},
+  playedbar: {
+    width: "100%",
+    height: "5px",
+  }
 });
 
-const defaultUrl = speechData[0].url;
-const defaultLabel = speechData[0].speaker + " - " + speechData[0].title
+/* const shuffledPlaylist = speechData => {
+  for (let i = speechData.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [speechData[i], speechData[j]] = [speechData[j], speechData[i]];
+  }
+}; */
 
-const  DEFAULT_STATE = {
-  url: defaultUrl,
-  label: defaultLabel
-}
+const DEFAULT_STATE = {
+  index: 0,
+  url: speechData[0].url,
+  label: speechData[0].speaker + " - " + speechData[0].title
+};
 
 class MiniPlayer extends Component {
   state = {
@@ -29,19 +38,11 @@ class MiniPlayer extends Component {
     value: 0,
     playing: false,
     played: 0,
-    loaded: 0,
     duration: 0,
     loop: false,
+    random: false,
     volume: 0.8,
-    muted: false,
-    playbackRate: 1.0
-  };
-
-  onSelectSpeech = (url, speaker, title) => {
-    this.setState({
-      url: url,
-      label: speaker + " - " + title
-    });
+    muted: false
   };
 
   handleTabChange = (event, value) => {
@@ -60,10 +61,6 @@ class MiniPlayer extends Component {
     this.setState({ url: null, playing: false });
   };
 
-  setPlaybackRate = e => {
-    this.setState({ playbackRate: parseFloat(e.target.value) });
-  };
-
   setVolume = e => {
     this.setState({ volume: parseFloat(e.target.value) });
   };
@@ -72,8 +69,16 @@ class MiniPlayer extends Component {
     this.setState({ muted: !this.state.muted });
   };
 
-  toggleLoop = () => {
-    this.setState({ loop: !this.state.loop });
+  toggleLoopRandom = () => {
+    if(this.state.loop === false) {
+      if(this.state.random === false) {
+        this.setState({ loop: true, random: false })
+      } else {
+        this.setState({ loop: false, random: false })
+      }
+    } else {
+      this.setState({ loop: false, random: true })
+    }
   };
 
   onPlay = () => {
@@ -85,10 +90,6 @@ class MiniPlayer extends Component {
     console.log("onPause");
     this.setState({ playing: false });
   };
-
-  onPrevious = () => {};
-
-  onNext = () => {};
 
   onSeekMouseDown = e => {
     this.setState({ seeking: true });
@@ -107,18 +108,75 @@ class MiniPlayer extends Component {
     this.setState({ duration });
   };
 
-  // controls display of values of seek and loaded
+  // controls display of values of seek
   onProgress = state => {
-    console.log("onProgress", state);
-    // We only want to update time slider if we are not currently seeking
     if (!this.state.seeking) {
       this.setState(state);
     }
   };
 
+  onSelectSpeech = index => {
+    this.setState({
+      index: index,
+      url: speechData[index].url,
+      label: speechData[index].speaker + " - " + speechData[index].title
+    });
+  };
+
+  generateRandomIndex = () => {
+    return Math.floor(Math.random() * speechData.length);
+  };
+
+  switchUrl = () => {
+    if (this.state.random === false) {
+      if (this.state.index < speechData.length - 1) {
+        this.setState({
+          playing: true,
+          index: this.state.index + 1,
+          url: speechData[this.state.index + 1].url,
+          label:
+            speechData[this.state.index + 1].speaker +
+            " - " +
+            speechData[this.state.index + 1].title
+        });
+      }
+    } else {
+      const randomIndex = this.generateRandomIndex();
+      this.setState({
+        playing: true,
+        index: randomIndex,
+        url: speechData[randomIndex].url,
+        label:
+          speechData[randomIndex].speaker +
+          " - " +
+          speechData[randomIndex].title
+      });
+    }
+  };
+
+  onNext = () => {
+    this.switchUrl();
+  };
+
   onEnded = () => {
-    console.log("onEnded");
-    this.setState({ playing: this.state.loop });
+    if (this.state.loop === false) {
+      this.switchUrl();
+    } else {
+      this.setState({ playing: this.state.loop });
+    }
+  };
+
+  onPrev = () => {
+    if (this.state.index > 0) {
+      this.setState({
+        index: this.state.index - 1,
+        url: speechData[this.state.index - 1].url,
+        label:
+          speechData[this.state.index - 1].speaker +
+          " - " +
+          speechData[this.state.index - 1].title
+      });
+    }
   };
 
   ref = player => {
@@ -130,14 +188,12 @@ class MiniPlayer extends Component {
     const {
       value,
       url,
+      label,
       playing,
       played,
-      loaded,
       loop,
       volume,
-      muted,
-      playbackRate,
-      label
+      muted
     } = this.state;
 
     return (
@@ -149,26 +205,19 @@ class MiniPlayer extends Component {
             height="100%"
             url={url}
             playing={playing}
-            playbackRate={playbackRate}
             volume={volume}
             muted={muted}
             loop={loop}
-            onReady={() => console.log("onReady")}
-            onStart={() => console.log("onStart")}
             onPlay={this.onPlay}
             onPause={this.onPause}
-            onBuffer={() => console.log("onBuffer")}
-            onSeek={e => console.log("onSeek", e)}
             onProgress={this.onProgress}
             onDuration={this.onDuration}
             onEnded={this.onEnded}
-            onError={e => console.log("onError", e)}
           />
         </div>
 
-        <div className={classes.playerwrapper}>
-          <progress max={1} value={played} />
-          <progress max={1} value={loaded} />
+        <div className={classes.playercontainer}>
+          <progress max={1} value={played} className={classes.playedbar} />
           <AppBar position="static">
             <Tabs value={value} onChange={this.handleTabChange}>
               <Tab
@@ -180,6 +229,7 @@ class MiniPlayer extends Component {
           </AppBar>
           <SwipeableViews
             axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+            slideStyle={{ overflow: 'visible'}}
             index={value}
             onChangeIndex={this.handleTabChangeIndex}
           >
@@ -192,17 +242,20 @@ class MiniPlayer extends Component {
               url={url}
               playing={this.state.playing}
               played={this.state.played}
-              loaded={this.state.loaded}
               duration={this.state.duration}
               volume={this.state.volume}
+              muted={this.state.muted}
+              loop={this.state.loop}
+              random={this.state.random}
               playPause={this.playPause}
+              onPrev={this.onPrev}
+              onNext={this.onNext}
               onSeekMouseDown={this.onSeekMouseDown}
               onSeekChange={this.onSeekChange}
               onSeekMouseUp={this.onSeekMouseUp}
-              toggleLoop={this.toggleLoop}
+              toggleLoopRandom={this.toggleLoopRandom}
               toggleMuted={this.toggleMuted}
               setVolume={this.setVolume}
-              setPlaybackRate={this.setPlaybackRate}
             />
           </SwipeableViews>
         </div>

@@ -16,7 +16,7 @@ const speechData = [
         theme: 'politics',
         year: '2009',
         url: 'http://localhost:3000/assets/ObamaInaugurationSpeech.mp3',
-        title: "President Obama's Inaugural Address",
+        title: "Inaugural Address",
         text: 'Lorem ipsum dolor sit amet, falli aliquip bonorum sea cu, eos ut adolescens instructior. Dolor diceret cum eu, moderatius philosophia has cu, veri atomorum an pro. Eu vel tale sensibus iracundia, elitr forensibus percipitur ne nam. Ea sint congue disputando eum, nam te purto utroque, ad case eripuit equidem his. Suas aperiam recteque pro et. At agam facilisi sit, ea ludus tation propriae pri.'
     },
     {
@@ -66,7 +66,7 @@ const speechData = [
         theme: 'politics',
         year: '1961',
         url: 'http://localhost:3000/assets/JFKInauguralAddress.mp3',
-        title: "President Kennedy's Inaugural Address",
+        title: "Inaugural Address",
         text: 'sea cu, eos ut adolescens instructior. Dolor diceret cum eu, moderatius philosophia has cu, veri atomorum an pro. Eu vel tale sensibus iracundia, elitr forensibus percipitur ne nam. Ea sint congue disputando eum, nam te purto utroque, ad case eripuit equidem his. Suas aperiam recteque pro et. At agam facilisi sit, ea ludus tation propriae pri.'
     },
 ]
