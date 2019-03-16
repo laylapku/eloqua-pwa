@@ -6,16 +6,31 @@ import SwipeableViews from "react-swipeable-views";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
+import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
+import Slider from "@material-ui/lab/Slider";
 import FullPlayer from "./FullPlayer";
 import SpeechList from "../Speech/SpeechList.js";
 import speechData from "../Speech/speechData";
 
 const styles = theme => ({
   root: {},
-  playercontainer: {},
-  playedbar: {
-    width: "100%",
-    height: "5px",
+  sliderContainer: {
+    padding: "0 8px"
+  },
+  sliderThumb: {
+    height: "0px",
+    width: "0px"
+  },
+  appBar: {
+    background: "purple",
+    position: "static"
+  },
+  tabsIndicator: {
+    display: "none"
+  },
+  tabLabelContainer: {
+    padding: "0 0"
   }
 });
 
@@ -35,22 +50,24 @@ const DEFAULT_STATE = {
 class MiniPlayer extends Component {
   state = {
     ...DEFAULT_STATE,
-    value: 0,
+    tabValue: 0,
     playing: false,
     played: 0,
     duration: 0,
     loop: false,
     random: false,
+    muted: false,
     volume: 0.8,
-    muted: false
+    playbackRate: 1.0,
+    style: ""
   };
 
-  handleTabChange = (event, value) => {
-    this.setState({ value });
+  handleTabChange = (event, tabValue) => {
+    this.setState({ tabValue });
   };
 
   handleTabChangeIndex = index => {
-    this.setState({ value: index });
+    this.setState({ tabValue: index });
   };
 
   playPause = () => {
@@ -59,6 +76,10 @@ class MiniPlayer extends Component {
 
   stop = () => {
     this.setState({ url: null, playing: false });
+  };
+
+  setPlaybackRate = e => {
+    this.setState({ playbackRate: parseFloat(e.target.value) });
   };
 
   setVolume = e => {
@@ -70,38 +91,23 @@ class MiniPlayer extends Component {
   };
 
   toggleLoopRandom = () => {
-    if(this.state.loop === false) {
-      if(this.state.random === false) {
-        this.setState({ loop: true, random: false })
+    if (this.state.loop === false) {
+      if (this.state.random === false) {
+        this.setState({ loop: true, random: false });
       } else {
-        this.setState({ loop: false, random: false })
+        this.setState({ loop: false, random: false });
       }
     } else {
-      this.setState({ loop: false, random: true })
+      this.setState({ loop: false, random: true });
     }
   };
 
   onPlay = () => {
-    console.log("onPlay");
     this.setState({ playing: true });
   };
 
   onPause = () => {
-    console.log("onPause");
     this.setState({ playing: false });
-  };
-
-  onSeekMouseDown = e => {
-    this.setState({ seeking: true });
-  };
-
-  onSeekChange = e => {
-    this.setState({ played: parseFloat(e.target.value) });
-  };
-
-  onSeekMouseUp = e => {
-    this.setState({ seeking: false });
-    this.player.seekTo(parseFloat(e.target.value));
   };
 
   onDuration = duration => {
@@ -183,21 +189,34 @@ class MiniPlayer extends Component {
     this.player = player;
   };
 
+  onSeekStart = e => {
+    this.setState({ seeking: true, playing: true });
+  };
+  onSeekChange = (e, value) => {
+    this.value = value;
+    this.setState({ played: value });
+  };
+  onSeekEnd = () => {
+    this.setState({ seeking: false });
+    this.player.seekTo(this.value); // temp workaround for onDragEnd: getting value from handleChange, see: https://stackoverflow.com/questions/47440051/get-material-ui-slider-value-in-ondragstop-event-react
+  };
+
   render() {
     const { classes, theme } = this.props;
     const {
-      value,
+      tabValue,
       url,
       label,
       playing,
       played,
       loop,
+      muted,
       volume,
-      muted
+      playbackRate
     } = this.state;
 
     return (
-      <div className={classes.root}>
+      <div classes={classes.root}>
         <div>
           <ReactPlayer
             ref={this.ref}
@@ -205,6 +224,7 @@ class MiniPlayer extends Component {
             height="100%"
             url={url}
             playing={playing}
+            playbackRate={playbackRate}
             volume={volume}
             muted={muted}
             loop={loop}
@@ -216,21 +236,40 @@ class MiniPlayer extends Component {
           />
         </div>
 
-        <div className={classes.playercontainer}>
-          <progress max={1} value={played} className={classes.playedbar} />
-          <AppBar position="static">
-            <Tabs value={value} onChange={this.handleTabChange}>
+        <div>
+          <Slider
+            classes={{
+              container: classes.sliderContainer,
+              thumb: classes.sliderThumb
+            }}
+            value={played}
+            max={1}
+            onChange={this.onSeekChange}
+            onDragStart={this.onSeekStart}
+            onDragEnd={this.onSeekEnd}
+          />
+          <AppBar className={classes.appBar}>
+            <Tabs
+              classes={{ indicator: classes.tabsIndicator }}
+              value={tabValue}
+              onChange={this.handleTabChange}
+            >
               <Tab
                 onClick={this.playPause}
-                label={playing ? "Pause" : "Play"}
+                label={
+                  playing ? <PauseCircleFilledIcon /> : <PlayCircleFilledIcon />
+                }
               />
-              <Tab label={label} />
+              <Tab
+                classes={{ labelContainer: classes.tabLabelContainer }}
+                label={label}
+              />
             </Tabs>
           </AppBar>
           <SwipeableViews
             axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-            slideStyle={{ overflow: 'visible'}}
-            index={value}
+            slideStyle={{ overflow: "visible" }}
+            index={tabValue}
             onChangeIndex={this.handleTabChangeIndex}
           >
             <SpeechList
@@ -243,19 +282,17 @@ class MiniPlayer extends Component {
               playing={this.state.playing}
               played={this.state.played}
               duration={this.state.duration}
-              volume={this.state.volume}
               muted={this.state.muted}
               loop={this.state.loop}
               random={this.state.random}
               playPause={this.playPause}
               onPrev={this.onPrev}
               onNext={this.onNext}
-              onSeekMouseDown={this.onSeekMouseDown}
+              onSeekStart={this.onSeekStart}
               onSeekChange={this.onSeekChange}
-              onSeekMouseUp={this.onSeekMouseUp}
+              onSeekEnd={this.onSeekEnd}
               toggleLoopRandom={this.toggleLoopRandom}
               toggleMuted={this.toggleMuted}
-              setVolume={this.setVolume}
             />
           </SwipeableViews>
         </div>

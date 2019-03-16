@@ -1,10 +1,14 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
 import speechData from "./speechData";
+
+const styles = theme => ({});
 
 const SpeechText = props => {
   const { url } = props;
   return (
-    <div>
+    <div style={{ maxHeight: "200px", overflow: "auto" }}>
       {speechData.map(
         (item, index) =>
           item.url === url && (
@@ -20,4 +24,8 @@ const SpeechText = props => {
   );
 };
 
-export default SpeechText;
+SpeechText.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(SpeechText);

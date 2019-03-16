@@ -11,20 +11,29 @@ import RepeatOneIcon from "@material-ui/icons/RepeatOne";
 import LoopIcon from "@material-ui/icons/Loop";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
 import VolumeOffIcon from "@material-ui/icons/VolumeOff";
+import Slider from "@material-ui/lab/Slider";
 import Duration from "./Duration.js";
 import SpeechText from "../Speech/SpeechText";
 
 const styles = theme => ({
-  playercontainer: {
-
+  sliderContainer: {
+    marginTop: '10px',
+    padding: "0px 6px"
   },
-  playedbar: {
-    width: '100%'
-  }
- 
 });
 
-const DetailedPlayer = props => {
+/* const divStyle = {
+  WebkitAppearance: "none",
+  width: "100%",
+  height: "10px",
+  background: "#d3d3d3",
+  outline: "none",
+  opacity: 0.7,
+  WebkitTransition: ".2s",
+  transition: "opacity .2s"
+}; */
+
+const FullPlayer = props => {
   const {
     classes,
     url,
@@ -32,41 +41,36 @@ const DetailedPlayer = props => {
     played,
     loop,
     random,
-    volume,
     muted,
     duration,
     playPause,
-    toggleLoopRandom,
     onPrev,
     onNext,
-    onSeekMouseDown,
+    onSeekStart,
     onSeekChange,
-    onSeekMouseUp,
-    toggleMuted,
-    setVolume
+    onSeekEnd,
+    toggleLoopRandom,
+    toggleMuted
   } = props;
 
   return (
     <div>
       <SpeechText url={url} />
-      <div className={classes.playercontainer}>
-        <div>
-          <input
-            type="range"
-            min={0}
-            max={1}
-            step="any"
-            value={played}
-            onMouseDown={onSeekMouseDown}
-            onChange={onSeekChange}
-            onMouseUp={onSeekMouseUp}
-            className={classes.playedbar}
-          />
+      <div>
+        <Slider
+          classes={{ container: classes.sliderContainer }}
+          value={played}
+          max={1}
+          onChange={onSeekChange}
+          onDragStart={onSeekStart}
+          onDragEnd={onSeekEnd}
+        />
+        <span style={{ display: "flex", justifyContent: "flex-end" }}>
           <Duration seconds={duration * played} />/
           <Duration seconds={duration} />
-        </div>
+        </span>
 
-        <div>
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
           <IconButton onClick={toggleLoopRandom}>
             {loop ? <RepeatOneIcon /> : random ? <ShuffleIcon /> : <LoopIcon />}
           </IconButton>
@@ -82,50 +86,14 @@ const DetailedPlayer = props => {
           <IconButton onClick={toggleMuted}>
             {muted ? <VolumeOffIcon /> : <VolumeUpIcon />}
           </IconButton>
-          <input
-            type="range"
-            min={0}
-            max={1}
-            step="any"
-            value={volume}
-            onChange={setVolume}
-          />
-
-         {/*  <form className={classes.root} autoComplete="off">
-            <FormControl variant="filled" className={classes.formControl}>
-              <InputLabel htmlFor="filled-speed-simple">Speed</InputLabel>
-              <Select
-                value={playbackRate}
-                onChange={setPlaybackRate}
-                input={<FilledInput name="age" id="filled-speed-simple" />}
-              >
-                <MenuItem value={1}>
-                  <em>Normal</em>
-                </MenuItem>
-                <MenuItem value={1.5}>1.5x</MenuItem>
-                <MenuItem value={2}>2x</MenuItem>
-              </Select>
-            </FormControl>
-          </form> */}
-          {/*  <button onClick={onPrev}>Previous</button> */}
-          {/* <button onClick={playPause}>{playing ? "Pause" : "Play"}</button> */}
-          {/* <button onClick={onNext}>Next</button> */}
-          {/* <button onClick={toggleLoopRandom}>{loop ? "Random" : "Loop"}</button> */}
-          {/* <button onClick={setPlaybackRate} value={1}>
-            normal
-          </button>
-          <button onClick={setPlaybackRate} value={2}>
-            2x
-          </button> */}
-          {/* <button onClick={toggleMuted}>Mute</button> */}
         </div>
       </div>
     </div>
   );
 };
 
-DetailedPlayer.propTypes = {
+FullPlayer.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(DetailedPlayer);
+export default withStyles(styles)(FullPlayer);
