@@ -1,26 +1,32 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
 import speechData from "./speechData";
 
-const styles = theme => ({});
+const styles = theme => ({
+  root: {
+    ...theme.mixins.gutters(),
+    paddingBottom: theme.spacing.unit * 2,
+    boxShadow: "none",
+    background: 'inherit'
+  }
+});
 
 const SpeechText = props => {
-  const { url } = props;
+  const { classes, url } = props;
   return (
-    <div style={{ maxHeight: "200px", overflow: "auto" }}>
+    <Paper className={classes.root}>
       {speechData.map(
         (item, index) =>
           item.url === url && (
             <div key={index}>
-              <div>
-                <h2>{item.title}</h2>
-                <p>{item.text}</p>
-              </div>
+              <h2>{item.title}</h2>
+              <p>{item.text}</p>
             </div>
           )
       )}
-    </div>
+    </Paper>
   );
 };
 

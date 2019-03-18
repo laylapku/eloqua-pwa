@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
@@ -16,22 +17,22 @@ import Duration from "./Duration.js";
 import SpeechText from "../Speech/SpeechText";
 
 const styles = theme => ({
-  sliderContainer: {
-    marginTop: '10px',
-    padding: "0px 6px"
+  root: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    boxShadow: "none",
+    background: 'inherit'
   },
+  sliderTrack: {
+    background: 'RGB(162,146,102)'
+  },
+  sliderThumb: {
+    background: 'RGB(111,77,57, .7)'
+  },
+  iconButton: {
+    color: 'RGB(230,184,117)' 
+  } 
 });
-
-/* const divStyle = {
-  WebkitAppearance: "none",
-  width: "100%",
-  height: "10px",
-  background: "#d3d3d3",
-  outline: "none",
-  opacity: 0.7,
-  WebkitTransition: ".2s",
-  transition: "opacity .2s"
-}; */
 
 const FullPlayer = props => {
   const {
@@ -47,7 +48,7 @@ const FullPlayer = props => {
     onPrev,
     onNext,
     onSeekStart,
-    onSeekChange,
+    onProgressChange,
     onSeekEnd,
     toggleLoopRandom,
     toggleMuted
@@ -55,23 +56,22 @@ const FullPlayer = props => {
 
   return (
     <div>
-      <SpeechText url={url} />
-      <div>
+      <Paper className={classes.root}>
         <Slider
-          classes={{ container: classes.sliderContainer }}
+          classes={{ track: classes.sliderTrack, thumb: classes.sliderThumb }}
           value={played}
           max={1}
-          onChange={onSeekChange}
+          onChange={onProgressChange}
           onDragStart={onSeekStart}
           onDragEnd={onSeekEnd}
         />
-        <span style={{ display: "flex", justifyContent: "flex-end" }}>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <Duration seconds={duration * played} />/
           <Duration seconds={duration} />
-        </span>
+        </div>
 
         <div style={{ display: "flex", justifyContent: "space-around" }}>
-          <IconButton onClick={toggleLoopRandom}>
+          <IconButton  classes={{root: classes.iconButton}} onClick={toggleLoopRandom} >
             {loop ? <RepeatOneIcon /> : random ? <ShuffleIcon /> : <LoopIcon />}
           </IconButton>
           <IconButton onClick={onPrev}>
@@ -87,7 +87,8 @@ const FullPlayer = props => {
             {muted ? <VolumeOffIcon /> : <VolumeUpIcon />}
           </IconButton>
         </div>
-      </div>
+      </Paper>
+      <SpeechText url={url} />
     </div>
   );
 };

@@ -15,20 +15,18 @@ const styles = theme => ({
 const SpeechList = props => {
   const { classes, onSelectSpeech } = props;
   return (
-    <div>
-      <List className={classes.listcontainer}>
-        {speechData.map((item, index, arr) => (
-          <ListItem
-            key={index}
-            index={index}
-            button
-            onClick={() => onSelectSpeech(index)}
-          >
-            <ListItemText primary={item.title + ' - ' + item.speaker} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
+    <List className={classes.listcontainer}>
+      {speechData.map((item, index, arr) => (
+        <ListItem
+          key={index}
+          index={index}
+          button
+          onClick={() => onSelectSpeech(index)}
+        >
+          <ListItemText primary={item.speaker + " - " + item.title} />
+        </ListItem>
+      ))}
+    </List>
   );
 };
 
