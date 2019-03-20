@@ -9,7 +9,7 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingBottom: theme.spacing.unit * 2,
     boxShadow: "none",
-    background: 'inherit'
+    background: "inherit"
   }
 });
 
@@ -21,8 +21,11 @@ const SpeechText = props => {
         (item, index) =>
           item.url === url && (
             <div key={index}>
-              <h2>{item.title}</h2>
-              <p>{item.text}</p>
+              <div style={{textAlign: 'center'}}>
+                <h3>{item.title}</h3>
+                <p>{item.date}</p>
+              </div>
+              <p style={{maxHeight: '360px', overflow: 'auto'}}>{item.text}</p>
             </div>
           )
       )}
