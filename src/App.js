@@ -1,11 +1,12 @@
 import React from "react";
-import MiniPlayer from "./components/Player/MiniPlayer.js";
-//import Test from "./test.js";
+import RootPlayer from "./components/Player/RootPlayer.js";
+import BottomTabs from './components/BottomTabs.js';
 
 const App = () => {
   return (
     <div>
-        <MiniPlayer />
+        <RootPlayer />
+        <BottomTabs />
     </div>
   );
 }; 
