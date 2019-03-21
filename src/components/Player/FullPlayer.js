@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -16,6 +17,31 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Slider from "@material-ui/lab/Slider";
 import Duration from "./Duration.js";
 import SpeechText from "../Speech/SpeechText";
+import {
+  playPause,
+  onDuration,
+  onPrev,
+  onNext,
+  toggleLoopRandom,
+  toggleMuted,
+  setVolume
+} from "../../actions.js";
+
+const mapStatetoProps = state => {
+  return state;
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    playPause: () => dispatch(playPause()),
+    onDuration: payload => dispatch(onDuration(payload)),
+    onPrev: () => dispatch(onPrev()),
+    onNext: () => dispatch(onNext()),
+    toggleLoopRandom: () => dispatch(toggleLoopRandom()),
+    toggleMuted: () => dispatch(toggleMuted()),
+    setVolume: payload => dispatch(setVolume(payload))
+  };
+};
 
 const styles = theme => ({
   root: {
@@ -46,7 +72,7 @@ const FullPlayer = props => {
     loop,
     random,
     muted,
-    //volume,
+    volume,
     duration,
     playPause,
     onPrev,
@@ -56,7 +82,7 @@ const FullPlayer = props => {
     onSeekEnd,
     toggleLoopRandom,
     toggleMuted,
-    //setVolume,
+    setVolume,
     handleTabChangeIndex
   } = props;
 
@@ -102,8 +128,8 @@ const FullPlayer = props => {
           </IconButton>
           <IconButton onClick={toggleMuted}>
             {muted ? <VolumeOffIcon /> : <VolumeUpIcon />}
-            {/*  <Slider value={volume} max={1} onChange={setVolume} /> */}
           </IconButton>
+          <Slider value={volume} max={1} onChange={setVolume} />
         </div>
       </Paper>
     </div>
@@ -114,4 +140,9 @@ FullPlayer.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(FullPlayer);
+export default withStyles(styles)(
+  connect(
+    mapStatetoProps,
+    mapDispatchToProps
+  )(FullPlayer)
+);
