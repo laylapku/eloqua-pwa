@@ -22,10 +22,10 @@ const SpeechText = props => {
           item.url === url && (
             <div key={index}>
               <div style={{textAlign: 'center'}}>
-                <h3>{item.title}</h3>
+                <h3>{item.speaker + ' - ' + item.title}</h3>
                 <p>{item.date}</p>
               </div>
-              <p style={{maxHeight: '360px', overflow: 'auto'}}>{item.text}</p>
+              <p style={{maxHeight: '350px', overflow: 'auto'}}>{item.text}</p>
             </div>
           )
       )}

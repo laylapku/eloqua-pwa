@@ -39,7 +39,7 @@ class RootPlayer extends Component {
     this.player.seekTo(this.value); // temp workaround for onDragEnd: getting value from onChange, see: https://stackoverflow.com/questions/47440051/get-material-ui-slider-value-in-ondragstop-event-react
   };
 
-  onProgressChange = (e, value) => {
+  onSliderChange = (e, value) => {
     this.value = value;
     this.setState({ played: value });
     this.player.seekTo(this.value); // for visual display of progress

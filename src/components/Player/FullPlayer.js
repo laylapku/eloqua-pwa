@@ -23,8 +23,7 @@ import {
   onPrev,
   onNext,
   toggleLoopRandom,
-  toggleMuted,
-  setVolume
+  toggleMuted
 } from "../../actions.js";
 
 const mapStatetoProps = state => {
@@ -38,8 +37,7 @@ const mapDispatchToProps = dispatch => {
     onPrev: () => dispatch(onPrev()),
     onNext: () => dispatch(onNext()),
     toggleLoopRandom: () => dispatch(toggleLoopRandom()),
-    toggleMuted: () => dispatch(toggleMuted()),
-    setVolume: payload => dispatch(setVolume(payload))
+    toggleMuted: () => dispatch(toggleMuted())
   };
 };
 
@@ -72,17 +70,15 @@ const FullPlayer = props => {
     loop,
     random,
     muted,
-    volume,
     duration,
     playPause,
     onPrev,
     onNext,
-    onProgressChange,
+    onSliderChange,
     onSeekStart,
     onSeekEnd,
     toggleLoopRandom,
     toggleMuted,
-    setVolume,
     handleTabChangeIndex
   } = props;
 
@@ -100,7 +96,7 @@ const FullPlayer = props => {
           classes={{ track: classes.sliderTrack, thumb: classes.sliderThumb }}
           value={played}
           max={1}
-          onChange={onProgressChange}
+          onChange={onSliderChange}
           onDragStart={onSeekStart}
           onDragEnd={onSeekEnd}
         />
@@ -127,9 +123,27 @@ const FullPlayer = props => {
             <SkipNextIcon />
           </IconButton>
           <IconButton onClick={toggleMuted}>
-            {muted ? <VolumeOffIcon /> : <VolumeUpIcon />}
+            {!muted ? <VolumeUpIcon /> : <VolumeOffIcon />}
           </IconButton>
-          <Slider value={volume} max={1} onChange={setVolume} />
+          {/* {!muted ? (
+            <input
+              type="range"
+              min={0}
+              max={1}
+              step="any"
+              value={volume}
+              onChange={setVolume}
+            />
+          ) : (
+            <input
+              type="range"
+              min={0}
+              max={1}
+              step="any"
+              value={0}
+              onChange={setVolume}
+            />
+          )} */}
         </div>
       </Paper>
     </div>

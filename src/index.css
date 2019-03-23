@@ -9,6 +9,14 @@ body {
   background-color: RGB(202,187,143, 0.2)
 }
 
+/* .react-swipeable-view-container > div [aria-hidden="false"] {
+  height: 100%
+}
+
+.react-swipeable-view-container > div [aria-hidden="true"] {
+  height: 0
+} */
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

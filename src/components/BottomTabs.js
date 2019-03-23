@@ -92,6 +92,7 @@ class BottomTabs extends Component {
         )}
 
         <SwipeableViews
+          //animateHeight
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
           slideStyle={{ overflow: "visible" }}
           index={this.state.tabValue}

@@ -3,10 +3,10 @@ const speechData = [
     id: "1",
     speaker: "Steve Jobs",
     speakerId: "a",
-    theme: "motivation",
+    theme: ["motivation, business"],
     date: "12 June 2005",
     url: "http://localhost:3000/assets/JobsStanfordSpeech.mp3",
-    title: "Speech at Stanford",
+    title: "Stanford Speech",
     text: `I am honored to be with you today at your commencement from one of the finest universities in the world. I never graduated from college. Truth be told, this is the closest I’ve ever gotten to a college graduation. Today I want to tell you three stories from my life. That’s it. No big deal. Just three stories.
 
         The first story is about connecting the dots.
@@ -66,9 +66,9 @@ const speechData = [
     id: "2",
     speaker: "Barack Obama",
     speakerId: "b",
-    theme: "politics",
+    theme: ["inauguration", "politics"],
     date: "20 January 2009",
-    url: "http://localhost:3000/assets/ObamaInaugurationSpeech.mp3",
+    url: "http://localhost:3000/assets/ObamaInauguralAddress.mp3",
     title: "Presidential Inaugural Address",
     text: `My fellow citizens:
 
@@ -304,7 +304,7 @@ const speechData = [
     id: "5",
     speaker: "Winston Churchill",
     speakerId: "d",
-    theme: "politics",
+    theme: ["war", "politics"],
     date: "13 May 1940",
     url: "http://localhost:3000/assets/ChurchillBloodToilTearsandSweat.mp3",
     title: "Blood, Toil, Tears and Sweat",
@@ -327,7 +327,7 @@ const speechData = [
     id: "6",
     speaker: "John F. Kennedy",
     speakerId: "e",
-    theme: "politics",
+    theme: ["inauguration", "politics"],
     date: "20 January 1961",
     url: "http://localhost:3000/assets/JFKInauguralAddress.mp3",
     title: "Presidential Inaugural Address",
@@ -391,7 +391,299 @@ const speechData = [
     
     Finally, whether you are citizens of America or citizens of the world, ask of us here the same high standards of strength and sacrifice which we ask of you. With a good conscience our only sure reward, with history the final judge of our deeds, let us go forth to lead the land we love, asking His blessing and His help, but knowing that here on earth God's work must truly be our own.
     `
-  }
+  },
+  {
+    id: "7",
+    speaker: "Franklin D. Roosevelt",
+    speakerId: "f",
+    theme: ["inauguration", "politics"],
+    date: "4 March 1933",
+    url: "http://localhost:3000/assets/FDRFirstInauguralAddress.mp3",
+    title: "First Inaugural Address",
+    text: `President Hoover, Mr. Chief Justice, my friends: 
+
+    This is a day of national consecration. And I am certain that on this day my fellow Americans expect that on my induction into the Presidency, I will address them with a candor and a decision which the present situation of our people impels.
+    
+    This is preeminently the time to speak the truth, the whole truth, frankly and boldly. Nor need we shrink from honestly facing conditions in our country today. This great Nation will endure, as it has endured, will revive and will prosper.
+    
+    So, first of all, let me assert my firm belief that the only thing we have to fear is fear itself -- nameless, unreasoning, unjustified terror which paralyzes needed efforts to convert retreat into advance. In every dark hour of our national life, a leadership of frankness and of vigor has met with that understanding and support of the people themselves which is essential to victory. And I am convinced that you will again give that support to leadership in these critical days.
+    
+    In such a spirit on my part and on yours we face our common difficulties. They concern, thank God, only material things. Values have shrunk to fantastic levels; taxes have risen; our ability to pay has fallen; government of all kinds is faced by serious curtailment of income; the means of exchange are frozen in the currents of trade; the withered leaves of industrial enterprise lie on every side; farmers find no markets for their produce; and the savings of many years in thousands of families are gone. More important, a host of unemployed citizens face the grim problem of existence, and an equally great number toil with little return. Only a foolish optimist can deny the dark realities of the moment.
+    
+    And yet our distress comes from no failure of substance. We are stricken by no plague of locusts. Compared with the perils which our forefathers conquered, because they believed and were not afraid, we have still much to be thankful for. Nature still offers her bounty and human efforts have multiplied it. Plenty is at our doorstep, but a generous use of it languishes in the very sight of the supply.
+    
+    Primarily, this is because the rulers of the exchange of mankind's goods have failed, through their own stubbornness and their own incompetence, have admitted their failure, and have abdicated. Practices of the unscrupulous money changers stand indicted in the court of public opinion, rejected by the hearts and minds of men.
+    
+    True, they have tried. But their efforts have been cast in the pattern of an outworn tradition. Faced by failure of credit, they have proposed only the lending of more money. Stripped of the lure of profit by which to induce our people to follow their false leadership, they have resorted to exhortations, pleading tearfully for restored confidence. They only know the rules of a generation of self-seekers. They have no vision, and when there is no vision the people perish.
+    
+    Yes, the money changers have fled from their high seats in the temple of our civilization. We may now restore that temple to the ancient truths. The measure of that restoration lies in the extent to which we apply social values more noble than mere monetary profit.
+    
+    Happiness lies not in the mere possession of money; it lies in the joy of achievement, in the thrill of creative effort. The joy, the moral stimulation of work no longer must be forgotten in the mad chase of evanescent profits. These dark days, my friends, will be worth all they cost us if they teach us that our true destiny is not to be ministered unto but to minister to ourselves, to our fellow men.
+    
+    Recognition of that falsity of material wealth as the standard of success goes hand in hand with the abandonment of the false belief that public office and high political position are to be valued only by the standards of pride of place and personal profit; and there must be an end to a conduct in banking and in business which too often has given to a sacred trust the likeness of callous and selfish wrongdoing. Small wonder that confidence languishes, for it thrives only on honesty, on honor, on the sacredness of obligations, on faithful protection, and on unselfish performance; without them it cannot live.
+    
+    Restoration calls, however, not for changes in ethics alone. This Nation is asking for action, and action now.
+    
+    Our greatest primary task is to put people to work. This is no unsolvable problem if we face it wisely and courageously. It can be accomplished in part by direct recruiting by the Government itself, treating the task as we would treat the emergency of a war, but at the same time, through this employment, accomplishing great -- greatly needed projects to stimulate and reorganize the use of our great natural resources.
+    
+    Hand in hand with that we must frankly recognize the overbalance of population in our industrial centers and, by engaging on a national scale in a redistribution, endeavor to provide a better use of the land for those best fitted for the land.
+    
+    Yes, the task can be helped by definite efforts to raise the values of agricultural products, and with this the power to purchase the output of our cities. It can be helped by preventing realistically the tragedy of the growing loss through foreclosure of our small homes and our farms. It can be helped by insistence that the Federal, the State, and the local governments act forthwith on the demand that their cost be drastically reduced. It can be helped by the unifying of relief activities which today are often scattered, uneconomical, unequal. It can be helped by national planning for and supervision of all forms of transportation and of communications and other utilities that have a definitely public character. There are many ways in which it can be helped, but it can never be helped by merely talking about it.
+    
+    We must act. We must act quickly.
+    
+       And finally, in our progress towards a resumption of work, we require two safeguards against a return of the evils of the old order. There must be a strict supervision of all banking and credits and investments. There must be an end to speculation with other people's money. And there must be provision for an adequate but sound currency.
+    
+    These, my friends, are the lines of attack. I shall presently urge upon a new Congress in special session detailed measures for their fulfillment, and I shall seek the immediate assistance of the 48 States.
+    
+    Through this program of action we address ourselves to putting our own national house in order and making income balance outgo. Our international trade relations, though vastly important, are in point of time, and necessity, secondary to the establishment of a sound national economy. I favor, as a practical policy, the putting of first things first. I shall spare no effort to restore world trade by international economic readjustment; but the emergency at home cannot wait on that accomplishment.
+    
+    The basic thought that guides these specific means of national recovery is not nationally -- narrowly nationalistic. It is the insistence, as a first consideration, upon the interdependence of the various elements in and parts of the United States of America -- a recognition of the old and permanently important manifestation of the American spirit of the pioneer. It is the way to recovery. It is the immediate way. It is the strongest assurance that recovery will endure.
+    
+    In the field of world policy, I would dedicate this Nation to the policy of the good neighbor: the neighbor who resolutely respects himself and, because he does so, respects the rights of others; the neighbor who respects his obligations and respects the sanctity of his agreements in and with a world of neighbors.
+    
+    If I read the temper of our people correctly, we now realize, as we have never realized before, our interdependence on each other; that we can not merely take, but we must give as well; that if we are to go forward, we must move as a trained and loyal army willing to sacrifice for the good of a common discipline, because without such discipline no progress can be made, no leadership becomes effective.
+    
+    We are, I know, ready and willing to submit our lives and our property to such discipline, because it makes possible a leadership which aims at the larger good. This, I propose to offer, pledging that the larger purposes will bind upon us, bind upon us all as a sacred obligation with a unity of duty hitherto evoked only in times of armed strife.
+    
+    With this pledge taken, I assume unhesitatingly the leadership of this great army of our people dedicated to a disciplined attack upon our common problems.
+    
+    Action in this image, action to this end is feasible under the form of government which we have inherited from our ancestors. Our Constitution is so simple, so practical that it is possible always to meet extraordinary needs by changes in emphasis and arrangement without loss of essential form. That is why our constitutional system has proved itself the most superbly enduring political mechanism the modern world has ever seen.
+    
+    It has met every stress of vast expansion of territory, of foreign wars, of bitter internal strife, of world relations. And it is to be hoped that the normal balance of executive and legislative authority may be wholly equal, wholly adequate to meet the unprecedented task before us. But it may be that an unprecedented demand and need for undelayed action may call for temporary departure from that normal balance of public procedure.
+    
+    I am prepared under my constitutional duty to recommend the measures that a stricken nation in the midst of a stricken world may require. These measures, or such other measures as the Congress may build out of its experience and wisdom, I shall seek, within my constitutional authority, to bring to speedy adoption.
+    
+    But, in the event that the Congress shall fail to take one of these two courses, in the event that the national emergency is still critical, I shall not evade the clear course of duty that will then confront me. I shall ask the Congress for the one remaining instrument to meet the crisis -- broad Executive power to wage a war against the emergency, as great as the power that would be given to me if we were in fact invaded by a foreign foe.
+    
+    For the trust reposed in me, I will return the courage and the devotion that befit the time. I can do no less.
+    
+    We face the arduous days that lie before us in the warm courage of national unity; with the clear consciousness of seeking old and precious moral values; with the clean satisfaction that comes from the stern performance of duty by old and young alike. We aim at the assurance of a rounded, a permanent national life.
+    
+    We do not distrust the -- the future of essential democracy. The people of the United States have not failed. In their need they have registered a mandate that they want direct, vigorous action. They have asked for discipline and direction under leadership. They have made me the present instrument of their wishes. In the spirit of the gift I take it.
+    
+    In this dedication -- In this dedication of a Nation, we humbly ask the blessing of God.
+    
+    May He protect each and every one of us.
+    
+    May He guide me in the days to come.
+    `
+  },
+  {
+    id: "8",
+    speaker: "Franklin D. Roosevelt",
+    speakerId: "f",
+    theme: ["war", "politics"],
+    date: " 8 December 1941",
+    url: "http://localhost:3000/assets/FDRPearlHarborAddress.mp3",
+    title: "Pearl Harbor Address to the Nation",
+    text: `Mr. Vice President, Mr. Speaker, Members of the Senate, and of the House of Representatives:
+
+    Yesterday, December 7th, 1941 -- a date which will live in infamy -- the United States of America was suddenly and deliberately attacked by naval and air forces of the Empire of Japan.
+    
+    The United States was at peace with that nation and, at the solicitation of Japan, was still in conversation with its government and its emperor looking toward the maintenance of peace in the Pacific.
+    
+    Indeed, one hour after Japanese air squadrons had commenced bombing in the American island of Oahu, the Japanese ambassador to the United States and his colleague delivered to our Secretary of State a formal reply to a recent American message. And while this reply stated that it seemed useless to continue the existing diplomatic negotiations, it contained no threat or hint of war or of armed attack.1
+    
+    It will be recorded that the distance of Hawaii from Japan makes it obvious that the attack was deliberately planned many days or even weeks ago. During the intervening time, the Japanese government has deliberately sought to deceive the United States by false statements and expressions of hope for continued peace.
+    
+    The attack yesterday on the Hawaiian islands has caused severe damage to American naval and military forces. I regret to tell you that very many American lives have been lost. In addition, American ships have been reported torpedoed on the high seas between San Francisco and Honolulu.
+    
+    Yesterday, the Japanese government also launched an attack against Malaya.
+    
+    Last night, Japanese forces attacked Hong Kong.
+    
+    Last night, Japanese forces attacked Guam.
+    
+    Last night, Japanese forces attacked the Philippine Islands.
+    
+    Last night, the Japanese attacked Wake Island.
+    
+    And this morning, the Japanese attacked Midway Island.
+    
+    Japan has, therefore, undertaken a surprise offensive extending throughout the Pacific area. The facts of yesterday and today speak for themselves. The people of the United States have already formed their opinions and well understand the implications to the very life and safety of our nation.
+    
+    
+    
+    As Commander in Chief of the Army and Navy, I have directed that all measures be taken for our defense. But always will our whole nation remember the character of the onslaught against us.
+    
+    No matter how long it may take us to overcome this premeditated invasion, the American people in their righteous might will win through to absolute victory.
+    
+    I believe that I interpret the will of the Congress and of the people when I assert that we will not only defend ourselves to the uttermost, but will make it very certain that this form of treachery shall never again endanger us.
+    
+    Hostilities exist. There is no blinking at the fact that our people, our territory, and our interests are in grave danger.
+    
+    With confidence in our armed forces, with the unbounding determination of our people, we will gain the inevitable triumph -- so help us God.
+    
+    I ask that the Congress declare that since the unprovoked and dastardly attack by Japan on Sunday, December 7th, 1941, a state of war has existed between the United States and the Japanese empire.`
+  },
+  {
+    id: "9",
+    speaker: "Barbara Charline Jordan",
+    speakerId: "g",
+    theme: "politics",
+    date: "12 July 1976",
+    url: "http://localhost:3000/assets/BarbaraJordan1976dnc.mp3",
+    title: "1976 Democratic National Convention Keynote Address",
+    text: `Thank you ladies and gentlemen for a very warm reception.
+
+    It was one hundred and forty-four years ago that members of the Democratic Party first met in convention to select a Presidential candidate. Since that time, Democrats have continued to convene once every four years and draft a party platform and nominate a Presidential candidate. And our meeting this week is a continuation of that tradition. But there is something different about tonight. There is something special about tonight. What is different? What is special?
+    
+    I, Barbara Jordan, am a keynote speaker.
+    
+    When -- A lot of years passed since 1832, and during that time it would have been most unusual for any national political party to ask a Barbara Jordan to deliver a keynote address. But tonight, here I am. And I feel -- I feel that notwithstanding the past that my presence here is one additional bit of evidence that the American Dream need not forever be deferred.
+    
+    Now -- Now that I have this grand distinction, what in the world am I supposed to say? I could easily spend this time praising the accomplishments of this party and attacking the Republicans -- but I don't choose to do that. I could list the many problems which Americans have. I could list the problems which cause people to feel cynical, angry, frustrated: problems which include lack of integrity in government; the feeling that the individual no longer counts; the reality of material and spiritual poverty; the feeling that the grand American experiment is failing or has failed. I could recite these problems, and then I could sit down and offer no solutions. But I don't choose to do that either. The citizens of America expect more. They deserve and they want more than a recital of problems.
+    
+    We are a people in a quandary about the present. We are a people in search of our future. We are a people in search of a national community. We are a people trying not only to solve the problems of the present, unemployment, inflation, but we are attempting on a larger scale to fulfill the promise of America. We are attempting to fulfill our national purpose, to create and sustain a society in which all of us are equal.
+    
+    Throughout -- Throughout our history, when people have looked for new ways to solve their problems and to uphold the principles of this nation, many times they have turned to political parties. They have often turned to the Democratic Party. What is it? What is it about the Democratic Party that makes it the instrument the people use when they search for ways to shape their future? Well I believe the answer to that question lies in our concept of governing. Our concept of governing is derived from our view of people. It is a concept deeply rooted in a set of beliefs firmly etched in the national conscience of all of us.
+    
+    Now what are these beliefs? First, we believe in equality for all and privileges for none. This is a belief -- This is a belief that each American, regardless of background, has equal standing in the public forum -- all of us. Because -- Because we believe this idea so firmly, we are an inclusive rather than an exclusive party. Let everybody come.
+    
+    I think it no accident that most of those immigrating to America in the 19th century identified with the Democratic Party. We are a heterogeneous party made up of Americans of diverse backgrounds. We believe that the people are the source of all governmental power; that the authority of the people is to be extended, not restricted.
+    
+    This -- This can be accomplished only by providing each citizen with every opportunity to participate in the management of the government. They must have that, we believe. We believe that the government which represents the authority of all the people, not just one interest group, but all the people, has an obligation to actively -- underscore actively -- seek to remove those obstacles which would block individual achievement -- obstacles emanating from race, sex, economic condition. The government must remove them, seek to remove them.
+    
+    We -- We are a party -- We are a party of innovation. We do not reject our traditions, but we are willing to adapt to changing circumstances, when change we must. We are willing to suffer the discomfort of change in order to achieve a better future. We have a positive vision of the future founded on the belief that the gap between the promise and reality of America can one day be finally closed. We believe that.
+    
+    This, my friends is the bedrock of our concept of governing. This is a part of the reason why Americans have turned to the Democratic Party. These are the foundations upon which a national community can be built. Let all understand that these guiding principles cannot be discarded for short-term political gains. They represent what this country is all about. They are indigenous to the American idea. And these are principles which are not negotiable.
+    
+    In other times -- In other times, I could stand here and give this kind of exposition on the beliefs of the Democratic Party and that would be enough. But today that is not enough. People want more. That is not sufficient reason for the majority of the people of this country to decide to vote Democratic. We have made mistakes. We realize that. We admit our mistakes. In our haste to do all things for all people, we did not foresee the full consequences of our actions. And when the people raised their voices, we didn't hear. But our deafness was only a temporary condition, and not an irreversible condition.
+    
+    Even as I stand here and admit that we have made mistakes, I still believe that as the people of America sit in judgment on each party, they will recognize that our mistakes were mistakes of the heart. They'll recognize that.
+    
+    And now -- now we must look to the future. Let us heed the voice of the people and recognize their common sense. If we do not, we not only blaspheme our political heritage, we ignore the common ties that bind all Americans. Many fear the future. Many are distrustful of their leaders, and believe that their voices are never heard. Many seek only to satisfy their private work -- wants; to satisfy their private interests. But this is the great danger America faces -- that we will cease to be one nation and become instead a collection of interest groups: city against suburb, region against region, individual against individual; each seeking to satisfy private wants. If that happens, who then will speak for America? Who then will speak for the common good?
+    
+    This is the question which must be answered in 1976: Are we to be one people bound together by common spirit, sharing in a common endeavor; or will we become a divided nation? For all of its uncertainty, we cannot flee the future. We must not become the "New Puritans" and reject our society. We must address and master the future together. It can be done if we restore the belief that we share a sense of national community, that we share a common national endeavor. It can be done.
+    
+    There is no executive order; there is no law that can require the American people to form a national community. This we must do as individuals, and if we do it as individuals, there is no President of the United States who can veto that decision.
+    
+    As a first step -- As a first step, we must restore our belief in ourselves. We are a generous people, so why can't we be generous with each other? We need to take to heart the words spoken by Thomas Jefferson:
+    
+    Let us restore the social intercourse -- "Let us restore to social intercourse that harmony and that affection without which liberty and even life are but dreary things."
+    
+    A nation is formed by the willingness of each of us to share in the responsibility for upholding the common good. A government is invigorated when each one of us is willing to participate in shaping the future of this nation. In this election year, we must define the "common good" and begin again to shape a common future. Let each person do his or her part. If one citizen is unwilling to participate, all of us are going to suffer. For the American idea, though it is shared by all of us, is realized in each one of us.
+    
+    And now, what are those of us who are elected public officials supposed to do? We call ourselves "public servants" but I'll tell you this: We as public servants must set an example for the rest of the nation. It is hypocritical for the public official to admonish and exhort the people to uphold the common good if we are derelict in upholding the common good. More is required -- More is required of public officials than slogans and handshakes and press releases. More is required. We must hold ourselves strictly accountable. We must provide the people with a vision of the future.
+    
+    If we promise as public officials, we must deliver. If -- If we as public officials propose, we must produce. If we say to the American people, "It is time for you to be sacrificial" -- sacrifice. If the public official says that, we [public officials] must be the first to give. We must be. And again, if we make mistakes, we must be willing to admit them. We have to do that. What we have to do is strike a balance between the idea that government should do everything and the idea, the belief, that government ought to do nothing. Strike a balance.
+    
+    Let there be no illusions about the difficulty of forming this kind of a national community. It's tough, difficult, not easy. But a spirit of harmony will survive in America only if each of us remembers that we share a common destiny; if each of us remembers, when self-interest and bitterness seem to prevail, that we share a common destiny.
+    
+    I have confidence that we can form this kind of national community.
+    
+    I have confidence that the Democratic Party can lead the way.
+    
+    I have that confidence.
+    
+    We cannot improve on the system of government handed down to us by the founders of the Republic. There is no way to improve upon that. But what we can do is to find new ways to implement that system and realize our destiny.
+    
+    Now I began this speech by commenting to you on the uniqueness of a Barbara Jordan making a keynote address. Well I am going to close my speech by quoting a Republican President and I ask you that as you listen to these words of Abraham Lincoln, relate them to the concept of a national community in which every last one of us participates:
+    
+    "As I would not be a slave, so I would not be a master." This -- This -- "This expresses my idea of Democracy. Whatever differs from this, to the extent of the difference, is no Democracy."
+    
+    Thank you.`
+  },
+  {
+    id: "10",
+    speaker: "Richard M. Nixon",
+    speakerId: "h",
+    theme: "politics",
+    date: "23 September 1952",
+    url: "http://localhost:3000/assets/NixonCheckers.mp3",
+    title: "Checkers",
+    text: `My Fellow Americans,
+
+    I come before you tonight as a candidate for the Vice Presidency and as a man whose honesty and -- and integrity has been questioned.
+    
+    Now, the usual political thing to do when charges are made against you is to either ignore them or to deny them without giving details. I believe we've had enough of that in the United States, particularly with the present Administration in Washington, D.C. To me the office of the Vice Presidency of the United States is a great office, and I feel that the people have got to have confidence in the integrity of the men who run for that office and who might obtain it.
+    
+    I have a theory, too, that the best and only answer to a smear or to an honest misunderstanding of the facts is to tell the truth. And that's why I'm here tonight. I want to tell you my side of the case. I'm sure that you have read the charge, and you've heard it, that I, Senator Nixon, took 18,000 dollars from a group of my supporters.
+    
+    Now, was that wrong? And let me say that it was wrong. I'm saying, incidentally, that it was wrong, not just illegal, because it isn't a question of whether it was legal or illegal, that isn't enough. The question is, was it morally wrong? I say that it was morally wrong -- if any of that 18,000 dollars went to Senator Nixon, for my personal use. I say that it was morally wrong if it was secretly given and secretly handled. And I say that it was morally wrong if any of the contributors got special favors for the contributions that they made.
+    
+    And now to answer those questions let me say this: Not one cent of the 18,000 dollars or any other money of that type ever went to me for my personal use. Every penny of it was used to pay for political expenses that I did not think should be charged to the taxpayers of the United States.  It was not a secret fund. As a matter of  fact, when I was on "Meet the Press" -- some of you may have seen it last Sunday -- Peter Edson came up to me after the program, and he said, "Dick, what about this "fund" we hear about?" And I said, "Well, there's no secret about it. Go out and see Dana Smith who was the administrator of the fund." And I gave him [Edson] his [Smith's] address. And I said you will find that the purpose of the fund simply was to defray political expenses that I did not feel should be charged to the Government.
+    
+    And third, let me point out -- and I want to make this particularly clear -- that no contributor to this fund, no contributor to any of my campaigns, has ever received any consideration that he would not have received as an ordinary constituent. I just don't believe in that, and I can say that never, while I have been in the Senate of the United States, as far as the people that contributed to this fund are concerned, have I made a telephone call for them to an agency, or have I gone down to an agency in their behalf. And the records will show that, the records which are in the hands of the administration.
+    
+    Well, then, some of you will say, and rightly, "Well, what did you use the fund for, Senator?" "Why did you have to have it?" Let me tell you in just a word how a Senate office operates. First of all, a Senator gets 15,000 dollars a year in salary. He gets enough money to pay for one trip a year -- a round trip, that is -- for himself and his family between his home and Washington, D.C. And then he gets an allowance to handle the people that work in his office to handle his mail. And the allowance for my State of California is enough to hire 13 people. And let me say, incidentally, that that allowance is not paid to the Senator. It's paid directly to the individuals that the Senator puts on his pay roll. But all of these people and all of these allowances are for strictly official business; business, for example, when a constituent writes in and wants you to go down to the Veteran's Administration and get some information about his GI policy -- items of that type, for example. But there are other expenses which are not covered by the Government. And I think I can best discuss those expenses by asking you some questions.
+    
+    Do you think that when I or any other Senator makes a political speech, has it printed, should charge the printing of that speech and the mailing of that speech to the taxpayers? Do you think, for example, when I or any other Senator makes a trip to his home State to make a purely political speech that the cost of that trip should be charged to the taxpayers? Do you think when a Senator makes political broadcasts or political television broadcasts, radio or television, that the expense of those broadcasts should be charged to the taxpayers? Well I know what your answer is. It's the same answer that audiences give me whenever I discuss this particular problem: The answer is no. The taxpayers shouldn't be required to finance items which are not official business but which are primarily political business.
+    
+    Well, then the question arises, you say, "Well, how do you pay for these and how can you do it legally?" And there are several ways that it can be done, incidentally, and that it is done legally in the United States Senate and in the Congress. The first way is to be a rich man. I don't happen to be a rich man, so I couldn't use that one. Another way that is used is to put your wife on the pay roll. Let me say, incidentally, that my opponent, my opposite number for the Vice Presidency on the Democratic ticket, does have his wife on the pay roll and has had it -- her on his pay roll for the ten years -- for the past ten years. Now just let me say this: That's his business, and I'm not critical of him for doing that. You will have to pass judgment on that particular point.
+    
+    But I have never done that for this reason: I have found that there are so many deserving stenographers and secretaries in Washington that needed the work that I just didn't feel it was right to put my wife on the pay roll.
+    
+    My wife's sitting over here. She's a wonderful stenographer. She used to teach stenography and she used to teach shorthand in high school. That was when I met her. And I can tell you folks that she's worked many hours at night and many hours on Saturdays and Sundays in my office, and she's done a fine job, and I am proud to say tonight that in the six years I've been in the House and the Senate of the United States, Pat Nixon has never been on the Government pay roll.
+    
+    What are other ways that these finances can be taken care of? Some who are lawyers, and I happen to be a lawyer, continue to practice law, but I haven't been able to do that. I'm so far away from California that I've been so busy with my senatorial work that I have not engaged in any legal practice. And, also, as far as law practice is concerned, it seemed to me that the relationship between an attorney and the client was so personal that you couldn't possibly represent a man as an attorney and then have an unbiased view when he presented his case to you in the event that he had one before Government.
+    
+    And so I felt that the best way to handle these necessary political expenses of getting my message to the American people and the speeches I made -- the speeches that I had printed for the most part concerned this one message of exposing this Administration, the Communism in it, the corruption in it -- the only way that I could do that was to accept the aid which people in my home State of California, who contributed to my campaign and who continued to make these contributions after I was elected, were glad to make.
+    
+    And let me say I'm proud of the fact that not one of them has ever asked me for a special favor. I'm proud of the fact that not one of them has ever asked me to vote on a bill other than of my own conscience would dictate. And I am proud of the fact that the taxpayers, by subterfuge or otherwise, have never paid one dime for expenses which I thought were political and shouldn't be charged to the taxpayers.
+    
+    Let me say, incidentally, that some of you may say, "Well, that's all right, Senator, that's your explanation, but have you got any proof?" And I'd like to tell you this evening that just an hour ago we received an independent audit of this entire fund. I suggested to Governor Sherman Adams, who is the Chief of Staff of the Dwight Eisenhower campaign, that an independent audit and legal report be obtained, and I have that audit here in my hands. It's an audit made by the Price Waterhouse & Company firm, and the legal opinion by Gibson, Dunn, & Crutcher, lawyers in Los Angeles, the biggest law firm, and incidentally, one of the best ones in Los Angeles.
+    
+    I am proud to be able to report to you tonight that this audit and this legal opinion is being forwarded to General Eisenhower. And I'd like to read to you the opinion that was prepared by Gibson, Dunn, & Crutcher, and based on all the pertinent laws and statutes, together with the audit report prepared by the certified public accountants. Quote:
+    
+    It is our conclusion that Senator Nixon did not obtain any financial gain from the collection and disbursement of the fund by Dana Smith; that Senator Nixon did not violate any federal or state law by reason of the operation of the fund; and that neither the portion of the fund paid by Dana Smith directly to third persons, nor the portion paid to Senator Nixon, to reimburse him for designated office expenses, constituted income to the Senator which was either reportable or taxable as income under applicable tax laws.
+    
+              (signed)
+    
+              Gibson, Dunn, & Crutcher,
+    
+              by Elmo H. Conley
+    
+    Now that, my friends, is not Nixon speaking, but that's an independent audit which was requested, because I want the American people to know all the facts, and I am not afraid of having independent people go in and check the facts, and that is exactly what they did. But then I realized that there are still some who may say, and rightfully so -- and let me say that I recognize that some will continue to smear regardless of what the truth may be -- but that there has been, understandably, some honest misunderstanding on this matter, and there are some that will say, "Well, maybe you were able, Senator, to fake this thing. How can we believe what you say? After all, is there a possibility that maybe you got some sums in cash? Is there a possibility that you may have feathered your own nest?" And so now, what I am going to do -- and incidentally this is unprecedented in the history of American politics -- I am going at this time to give to this television and radio audio -- audience, a complete financial history, everything I've earned, everything I've spent, everything I own. And I want you to know the facts.
+    
+    I'll have to start early. I was born in 1913. Our family was one of modest circumstances, and most of my early life was spent in a store out in East Whittier. It was a grocery store, one of those family enterprises. The only reason we were able to make it go was because my mother and dad had five boys, and we all worked in the store. I worked my way through college, and, to a great extent, through law school. And then in 1940, probably the best thing that ever happened to me happened. I married Pat who's sitting over here. We had a rather difficult time after we were married, like so many of the young couples who may be listening to us. I practiced law. She continued to teach school.
+    
+    Then, in 1942, I went into the service. Let me say that my service record was not a particularly unusual one. I went to the South Pacific. I guess I'm entitled to a couple of battle stars. I got a couple of letters of commendation. But I was just there when the bombs were falling. And then I returned -- returned to the United States, and in 1946, I ran for the Congress. When we came out of the war -- Pat and I -- Pat during the war had worked as a stenographer, and in a bank, and as an economist for a Government agency -- and when we came out, the total of our savings, from both my law practice, her teaching and all the time that I was in the war, the total for that entire period was just a little less than 10,000 dollars. Every cent of that, incidentally, was in Government bonds. Well that's where we start, when I go into politics.
+    
+    Now, what have I earned since I went into politics? Well, here it is. I've jotted it down. Let me read the notes. First of all, I've had my salary as a Congressman and as a Senator. Second, I have received a total in this past six years of 1600 dollars from estates which were in my law firm at the time that I severed my connection with it. And, incidentally, as I said before, I have not engaged in any legal practice and have not accepted any fees from business that came into the firm after I went into politics. I have made an average of approximately 1500 dollars a year from nonpolitical speaking engagements and lectures.
+    
+    And then, fortunately, we've inherited a little money. Pat sold her interest in her father's estate for 3,000 dollars, and I inherited 1500 dollars from my grandfather. We lived rather modestly. For four years we lived in an apartment in Parkfairfax, in Alexandria, Virginia. The rent was 80 dollars a month. And we saved for the time that we could buy a house. Now, that was what we took in. What did we do with this money? What do we have today to show for it? This will surprise you because it is so little, I suppose, as standards generally go of people in public life.
+    
+    First of all, we've got a house in Washington, which cost 41,000 dollars and on which we owe 20,000 dollars. We have a house in Whittier, California which cost 13,000 dollars and on which we owe 3000 dollars. My folks are living there at the present time. I have just 4000 dollars in life insurance, plus my GI policy which I've never been able to convert, and which will run out in two years. I have no life insurance whatever on Pat. I have no life insurance on our two youngsters, Tricia and Julie. I own a 1950 Oldsmobile car. We have our furniture. We have no stocks and bonds of any type. We have no interest of any kind, direct or indirect, in any business. Now, that's what we have. What do we owe?
+    
+    Well in addition to the mortgage, the 20,000 dollar mortgage on the house in Washington, the 10,000 dollar one on the house in Whittier, I owe 4500 dollars to the Riggs Bank in Washington, D.C., with interest 4 and 1/2 percent. I owe 3500 dollars to my parents, and the interest on that loan, which I pay regularly, because it's the part of the savings they made through the years they were working so hard -- I pay regularly 4 percent interest. And then I have a 500 dollar loan, which I have on my life insurance.
+    
+    Well, that's about it. That's what we have. And that's what we owe. It isn't very much. But Pat and I have the satisfaction that every dime that we've got is honestly ours. I should say this, that Pat doesn't have a mink coat. But she does have a respectable Republican cloth coat, and I always tell her she'd look good in anything.
+    
+    One other thing I probably should tell you, because if I don't they'll probably be saying this about me, too. We did get something, a gift, after the election. A man down in Texas heard Pat on the radio mention the fact that our two youngsters would like to have a dog. And believe it or not, the day before we left on this campaign trip we got a message from Union Station in Baltimore, saying they had a package for us. We went down to get it. You know what it was? It was a little cocker spaniel dog in a crate that he'd sent all the way from Texas, black and white, spotted. And our little girl Tricia, the six year old, named it "Checkers." And you know, the kids, like all kids, love the dog, and I just want to say this, right now, that regardless of what they say about it, we're gonna keep it.
+    
+    It isn't easy to come before a nationwide audience and bare your life, as I've done. But I want to say some things before I conclude that I think most of you will agree on. Mr. Mitchell, the Chairman of the Democratic National Committee, made this statement -- that if a man couldn't afford to be in the United States Senate, he shouldn't run for the Senate. And I just want to make my position clear. I don't agree with Mr. Mitchell when he says that only a rich man should serve his Government in the United States Senate or in the Congress. I don't believe that represents the thinking of the Democratic Party, and I know that it doesn't represent the thinking of the Republican Party.
+    
+    I believe that it's fine that a man like Governor Stevenson, who inherited a fortune from his father, can run for President. But I also feel that it's essential in this country of ours that a man of modest means can also run for President, because, you know, remember Abraham Lincoln, you remember what he said: "God must have loved the common people -- he made so many of them."
+    
+    And now I'm going to suggest some courses of conduct. First of all, you have read in the papers about other funds, now. Mr. Stevenson apparently had a couple -- one of them in which a group of business people paid and helped to supplement the salaries of State employees. Here is where the money went directly into their pockets, and I think that what Mr. Stevenson should do should be to come before the American people, as I have, give the names of the people that contributed to that fund, give the names of the people who put this money into their pockets at the same time that they were receiving money from their State government and see what favors, if any, they gave out for that.
+    
+    I don't condemn Mr. Stevenson for what he did, but until the facts are in there is a doubt that will be raised. And as far as Mr. Sparkman is concerned, I would suggest the same thing. He's had his wife on the payroll. I don't condemn him for that, but I think that he should come before the American people and indicate what outside sources of income he has had. I would suggest that under the circumstances both Mr. Sparkman and Mr. Stevenson should come before the American people, as I have, and make a complete financial statement as to their financial history, and if they don't it will be an admission that they have something to hide. And I think you will agree with me -- because, folks, remember, a man that's to be President of the United States, a man that's to be Vice President of the United States, must have the confidence of all the people. And that's why I'm doing what I'm doing. And that's why I suggest that Mr. Stevenson and Mr. Sparkman, since they are under attack, should do what they're doing.
+    
+    Now let me say this: I know that this is not the last of the smears. In spite of my explanation tonight, other smears will be made. Others have been made in the past. And the purpose of the smears, I know, is this: to silence me; to make me let up. Well, they just don't know who they're dealing with. I'm going to tell you this: I remember in the dark days of the Hiss case some of the same columnists, some of the same radio commentators who are attacking me now and misrepresenting my position, were violently opposing me at the time I was after Alger Hiss. But I continued to fight because I knew I was right, and I can say to this great television and radio audience that I have no apologies to the American people for my part in putting Alger Hiss where he is today. And as far as this is concerned, I intend to continue to fight.
+    
+    Why do I feel so deeply? Why do I feel that in spite of the smears, the misunderstanding, the necessity for a man to come up here and bare his soul as I have -- why is it necessary for me to continue this fight? And I want to tell you why. Because, you see, I love my country. And I think my country is in danger. And I think the only man that can save America at this time is the man that's running for President, on my ticket -- Dwight Eisenhower. You say, "Why do I think it is in danger?" And I say, look at the record. Seven years of the Truman-Acheson Administration, and what's happened? Six hundred million people lost to the Communists. And a war in Korea in which we have lost 117,000 American casualties, and I say to all of you that a policy that results in the loss of 600 million people to the Communists, and a war which cost us 117,000 American casualties isn't good enough for America. And I say that those in the State Department that made the mistakes which caused that war and which resulted in those losses should be kicked out of the State Department just as fast as we get them out of there.
+    
+    And let me say that I know Mr. Stevenson won't do that because he defends the Truman policy, and I know that Dwight Eisenhower will do that, and that he will give America the leadership that it needs. Take the problem of corruption. You've read about the mess in Washington. Mr. Stevenson can't clean it up because he was picked by the man, Truman, under whose Administration the mess was made. You wouldn't trust the man who made the mess to clean it up. That's Truman. And by the same token you can't trust the man who was picked by the man that made the mess to clean it up -- and that's Stevenson.
+    
+    And so I say, Eisenhower, who owed nothing to Truman, nothing to the big city bosses -- he is the man that can clean up the mess in Washington. Take Communism. I say that as far as that subject is concerned the danger is great to America. In the Hiss case they got the secrets which enabled them to break the American secret State Department code. They got secrets in the atomic bomb case which enabled them to get the secret of the atomic bomb five years before they would have gotten it by their own devices. And I say that any man who called the Alger Hiss case a red herring isn't fit to be President of the United States. I say that a man who, like Mr. Stevenson, has pooh-poohed and ridiculed the Communist threat in the United States -- he said that they are phantoms among ourselves. He has accused us that have attempted to expose the Communists, of looking for Communists in the Bureau of Fisheries and Wildlife. I say that a man who says that isn't qualified to be President of the United States. And I say that the only man who can lead us in this fight to rid the Government of both those who are Communists and those who have corrupted this Government is Eisenhower, because Eisenhower, you can be sure, recognizes the problem, and he knows how to deal with it.
+    
+    Now let me that finally, this evening, I want to read to you, just briefly, excerpts from a letter which I received, a letter which after all this is over no one can take away from us. It reads as follows:
+    
+    Dear Senator Nixon,
+    
+    Since I am only 19 years of age, I can't vote in this presidential election, but believe me if I could you and General Eisenhower would certainly get my vote. My husband is in the Fleet Marines in Korea. He' a corpsman on the front lines and we have a two month old son he's never seen. And I feel confident that with great Americans like you and General Eisenhower in the White House, lonely Americans like myself will be united with their loved ones now in Korea. I only pray to God that you won't be too late. Enclosed is a small check to help you in your campaign. Living on $85 a month, it is all I can afford at present, but let me know what else I can do.
+    
+    Folks, it's a check for 10 dollars, and it's one that I will never cash. And just let me say this: We hear a lot about prosperity these days, but I say why can't we have prosperity built on peace, rather than prosperity built on war? Why can't we have prosperity and an honest Government in Washington, D.C., at the same time? Believe me, we can. And Eisenhower is the man that can lead this crusade to bring us that kind of prosperity.
+    
+    And now, finally, I know that you wonder whether or not I am going to stay on the Republican ticket or resign. Let me say this: I don't believe that I ought to quit, because I am not a quitter. And, incidentally, Pat's not a quitter. After all, her name was Patricia Ryan and she was born on St. Patrick's day, and you know the Irish never quit.
+    
+    But the decision, my friends, is not mine. I would do nothing that would harm the possibilities of Dwight Eisenhower to become President of the United States. And for that reason I am submitting to the Republican National Committee tonight through this television broadcast the decision which it is theirs to make. Let them decide whether my position on the ticket will help or hurt. And I am going to ask you to help them decide. Wire and write the Republican National Committee whether you think I should stay on or whether I should get off. And whatever their decision is, I will abide by it.
+    
+    But just let me say this last word: Regardless of what happens, I'm going to continue this fight. I'm going to campaign up and down in America until we drive the crooks and the Communists and those that defend them out of Washington. And remember folks, Eisenhower is a great man, believe me. He's a great man. And a vote for Eisenhower is a vote for what's good for America. And what's good for America -- [interrupted by announcer]`
+  },
+
 ];
 
 export default speechData;

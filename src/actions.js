@@ -5,14 +5,13 @@ import {
   ON_PROGRESS,
   ON_SEEK_START,
   ON_SEEK_END,
-  ON_PROGRESS_CHANGE,
+  ON_SLIDER_CHANGE,
   ON_DURATION,
   ON_PREV,
   ON_NEXT,
   ON_ENDED,
   TOGGLE_LOOP_RANDOM,
   TOGGLE_MUTED,
-  SET_VOLUME,
   ON_SELECT_SPEECH
 } from './constants.js';
 
@@ -58,8 +57,8 @@ export const onSeekEnd = () => ({
   type: ON_SEEK_END
 });
 
-export const onProgressChange = (e, value) => ({
-  type: ON_PROGRESS_CHANGE
+export const onSliderChange = (e, value) => ({
+  type: ON_SLIDER_CHANGE
 });
 
 export const toggleLoopRandom = () => ({
@@ -70,17 +69,8 @@ export const toggleMuted = () => ({
   type: TOGGLE_MUTED
 });
 
-export const setVolume = payload => ({
-  type: SET_VOLUME,
-  payload
-});
-
 export const onSelectSpeech = index => ({
   type: ON_SELECT_SPEECH,
   payload: index
 });
 
-/* () => setVolumn({ name: a, value: b });
-
-action.payload.name;
- */

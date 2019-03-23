@@ -10,10 +10,9 @@ import {
   ON_ENDED,
   /*  ON_SEEK_START,
   ON_SEEK_END,
-  ON_PROGRESS_CHANGE, */
+  ON_SLIDER_CHANGE, */
   TOGGLE_LOOP_RANDOM,
   TOGGLE_MUTED,
-  SET_VOLUME,
   ON_SELECT_SPEECH
 } from "../constants.js";
 
@@ -24,8 +23,8 @@ const initState = {
   url: speechData[0].url,
   playing: false,
   played: 0,
-  volume: 0,
   muted: false,
+  volume: 0.6,
   duration: 0,
   loop: false,
   random: false
@@ -59,9 +58,6 @@ const handleUrlChange = state => {
 };
 
 const rootReducer = (state = initState, action) => {
-  
-  const volume = state.volume;
-  console.log(action.payload, volume)
   switch (action.type) {
     case PLAY_PAUSE:
       return {
@@ -90,17 +86,6 @@ const rootReducer = (state = initState, action) => {
         ...state,
         duration: action.payload
       };
-    case ON_NEXT:
-      return handleUrlChange(state);
-    case ON_ENDED:
-      if (state.loop === false) {
-        return handleUrlChange(state);
-      } else {
-        return {
-          ...state,
-          playing: state.loop
-        };
-      }
     case ON_PREV:
       if (state.index > 0) {
         return {
@@ -112,6 +97,17 @@ const rootReducer = (state = initState, action) => {
         };
       }
       break;
+    case ON_NEXT:
+      return handleUrlChange(state);
+    case ON_ENDED:
+      if (state.loop === false) {
+        return handleUrlChange(state);
+      } else {
+        return {
+          ...state,
+          playing: state.loop
+        };
+      }
     case TOGGLE_LOOP_RANDOM:
       if (state.loop === false) {
         if (state.random === false) {
@@ -135,23 +131,9 @@ const rootReducer = (state = initState, action) => {
         };
       }
     case TOGGLE_MUTED:
-      if (state.muted === false) {
-        return {
-          ...state,
-          muted: !state.muted,
-          volume: 0
-        };
-      } else {
-        return {
-          ...state,
-          muted: !state.muted,
-          volume: volume
-        };
-      }
-    case SET_VOLUME:
       return {
         ...state,
-        volume: action.payload
+        muted: !state.muted
       };
     case ON_SELECT_SPEECH:
       return {
