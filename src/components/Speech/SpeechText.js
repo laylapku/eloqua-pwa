@@ -1,8 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import speechData from "./speechData";
+
+const mapStatetoProps = state => {
+  return {url: state.url};
+};
 
 const styles = theme => ({
   root: {
@@ -21,11 +26,13 @@ const SpeechText = props => {
         (item, index) =>
           item.url === url && (
             <div key={index}>
-              <div style={{textAlign: 'center'}}>
-                <h3>{item.speaker + ' - ' + item.title}</h3>
+              <div style={{ textAlign: "center" }}>
+                <h3>{item.speaker + " - " + item.title}</h3>
                 <p>{item.date}</p>
               </div>
-              <p style={{maxHeight: '350px', overflow: 'auto'}}>{item.text}</p>
+              <p style={{ maxHeight: "350px", overflow: "auto", lineHeight: '2em' }}>
+                {item.text}
+              </p>
             </div>
           )
       )}
@@ -37,4 +44,4 @@ SpeechText.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SpeechText);
+export default withStyles(styles)(connect(mapStatetoProps)(SpeechText));

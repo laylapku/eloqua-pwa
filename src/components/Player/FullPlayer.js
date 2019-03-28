@@ -64,7 +64,6 @@ const styles = theme => ({
 const FullPlayer = props => {
   const {
     classes,
-    url,
     playing,
     played,
     loop,
@@ -90,7 +89,7 @@ const FullPlayer = props => {
       >
         <ArrowBackIcon />
       </IconButton>
-      <SpeechText url={url} />
+      <SpeechText />
       <Paper className={classes.root}>
         <Slider
           classes={{ track: classes.sliderTrack, thumb: classes.sliderThumb }}
@@ -125,25 +124,6 @@ const FullPlayer = props => {
           <IconButton onClick={toggleMuted}>
             {!muted ? <VolumeUpIcon /> : <VolumeOffIcon />}
           </IconButton>
-          {/* {!muted ? (
-            <input
-              type="range"
-              min={0}
-              max={1}
-              step="any"
-              value={volume}
-              onChange={setVolume}
-            />
-          ) : (
-            <input
-              type="range"
-              min={0}
-              max={1}
-              step="any"
-              value={0}
-              onChange={setVolume}
-            />
-          )} */}
         </div>
       </Paper>
     </div>
