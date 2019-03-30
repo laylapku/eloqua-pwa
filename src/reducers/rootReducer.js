@@ -13,7 +13,7 @@ import {
   ON_SLIDER_CHANGE, */
   TOGGLE_LOOP_RANDOM,
   TOGGLE_MUTED,
-  ON_SELECT_SPEECH
+  ON_SELECT_SPEECH,
 } from "../constants.js";
 
 const initState = {
@@ -24,7 +24,7 @@ const initState = {
   playing: false,
   played: 0,
   muted: false,
-  volume: 0.6,
+  volume: 0.8,
   duration: 0,
   loop: false,
   random: false

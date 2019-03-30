@@ -13,10 +13,8 @@ import RepeatOneIcon from "@material-ui/icons/RepeatOne";
 import LoopIcon from "@material-ui/icons/Loop";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
 import VolumeOffIcon from "@material-ui/icons/VolumeOff";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Slider from "@material-ui/lab/Slider";
 import Duration from "./Duration.js";
-import SpeechText from "../Speech/SpeechText";
 import {
   playPause,
   onDuration,
@@ -55,9 +53,6 @@ const styles = theme => ({
   },
   svgIcons: {
     transform: "scale(1.5)"
-  },
-  backButton: {
-    padding: "0 12px"
   }
 });
 
@@ -77,56 +72,46 @@ const FullPlayer = props => {
     onSeekStart,
     onSeekEnd,
     toggleLoopRandom,
-    toggleMuted,
-    handleTabChangeIndex
+    toggleMuted
   } = props;
 
   return (
-    <div>
-      <IconButton
-        classes={{ root: classes.backButton }}
-        onClick={() => handleTabChangeIndex(0)}
-      >
-        <ArrowBackIcon />
-      </IconButton>
-      <SpeechText />
-      <Paper className={classes.root}>
-        <Slider
-          classes={{ track: classes.sliderTrack, thumb: classes.sliderThumb }}
-          value={played}
-          max={1}
-          onChange={onSliderChange}
-          onDragStart={onSeekStart}
-          onDragEnd={onSeekEnd}
-        />
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <Duration seconds={duration * played} />/
-          <Duration seconds={duration} />
-        </div>
+    <Paper className={classes.root}>
+      <Slider
+        classes={{ track: classes.sliderTrack, thumb: classes.sliderThumb }}
+        value={played}
+        max={1}
+        onChange={onSliderChange}
+        onDragStart={onSeekStart}
+        onDragEnd={onSeekEnd}
+      />
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Duration seconds={duration * played} />/
+        <Duration seconds={duration} />
+      </div>
 
-        <div style={{ display: "flex", justifyContent: "space-around" }}>
-          <IconButton onClick={toggleLoopRandom}>
-            {loop ? <RepeatOneIcon /> : random ? <ShuffleIcon /> : <LoopIcon />}
-          </IconButton>
-          <IconButton onClick={onPrev}>
-            <SkipPreviousIcon />
-          </IconButton>
-          <IconButton onClick={playPause}>
-            {playing ? (
-              <PauseCircleFilledIcon className={classes.svgIcons} />
-            ) : (
-              <PlayCircleFilledIcon className={classes.svgIcons} />
-            )}
-          </IconButton>
-          <IconButton onClick={onNext}>
-            <SkipNextIcon />
-          </IconButton>
-          <IconButton onClick={toggleMuted}>
-            {!muted ? <VolumeUpIcon /> : <VolumeOffIcon />}
-          </IconButton>
-        </div>
-      </Paper>
-    </div>
+      <div style={{ display: "flex", justifyContent: "space-around" }}>
+        <IconButton onClick={toggleLoopRandom}>
+          {loop ? <RepeatOneIcon /> : random ? <ShuffleIcon /> : <LoopIcon />}
+        </IconButton>
+        <IconButton onClick={onPrev}>
+          <SkipPreviousIcon />
+        </IconButton>
+        <IconButton onClick={playPause}>
+          {playing ? (
+            <PauseCircleFilledIcon className={classes.svgIcons} />
+          ) : (
+            <PlayCircleFilledIcon className={classes.svgIcons} />
+          )}
+        </IconButton>
+        <IconButton onClick={onNext}>
+          <SkipNextIcon />
+        </IconButton>
+        <IconButton onClick={toggleMuted}>
+          {!muted ? <VolumeUpIcon /> : <VolumeOffIcon />}
+        </IconButton>
+      </div>
+    </Paper>
   );
 };
 

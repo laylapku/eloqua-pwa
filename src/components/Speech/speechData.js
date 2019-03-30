@@ -5,7 +5,8 @@ const speechData = [
     speakerId: "a",
     theme: ["motivation, business"],
     date: "12 June 2005",
-    url: "http://localhost:3000/assets/JobsStanfordSpeech.mp3",
+    url: "https://ia802902.us.archive.org/14/items/SteveJobsSpeechAtStanfordUniversity/SteveJobsSpeech_64kb.mp3",
+    //"http://localhost:3000/assets/JobsStanfordSpeech.mp3",
     title: "Stanford Speech",
     text: `I am honored to be with you today at your commencement from one of the finest universities in the world. I never graduated from college. Truth be told, this is the closest I’ve ever gotten to a college graduation. Today I want to tell you three stories from my life. That’s it. No big deal. Just three stories.
 
@@ -68,7 +69,8 @@ const speechData = [
     speakerId: "b",
     theme: ["inauguration", "politics"],
     date: "20 January 2009",
-    url: "http://localhost:3000/assets/ObamaInauguralAddress.mp3",
+    url: "http://www.obamadownloads.com/mp3s/inauguration-speech.mp3",
+    //"http://localhost:3000/assets/ObamaInauguralAddress.mp3",
     title: "Presidential Inaugural Address",
     text: `My fellow citizens:
 
@@ -148,7 +150,8 @@ const speechData = [
     speakerId: "b",
     theme: "politics",
     date: "10 April 2014",
-    url: "http://localhost:3000/assets/ObamaCivilRightsSpeech.mp3",
+    url: "http://www.obamadownloads.com/mp3s/civil-rights-speech.mp3",
+    //"http://localhost:3000/assets/ObamaCivilRightsSpeech.mp3",
     title: "Keynote Address at the Civil Rights Summit",
     text: `What a singular honor it is for me to be here today.  I want to thank, first and foremost, the Johnson family for giving us this opportunity and the graciousness with which Michelle and I have been received. 
 
@@ -239,7 +242,8 @@ const speechData = [
     speakerId: "c",
     theme: "politics",
     date: "28 August 1963",
-    url: "http://localhost:3000/assets/KingIHaveaDream.mp3",
+    url: "https://ia600207.us.archive.org/29/items/MLKDream/MLKDream_64kb.mp3",
+    //"http://localhost:3000/assets/KingIHaveaDream.mp3",
     title: "I Have a Dream",
     text: `I am happy to join with you today in what will go down in history as the greatest demonstration for freedom in the history of our nation.
 
@@ -306,7 +310,8 @@ const speechData = [
     speakerId: "d",
     theme: ["war", "politics"],
     date: "13 May 1940",
-    url: "http://localhost:3000/assets/ChurchillBloodToilTearsandSweat.mp3",
+    url: "https://www.americanrhetoric.com/mp3clips/politicalspeeches/winstonchurchillbloodtoilsweattears.mp3",
+    //"http://localhost:3000/assets/ChurchillBloodToilTearsandSweat.mp3",
     title: "Blood, Toil, Tears and Sweat",
     text: `Mr. Speaker:
 
@@ -329,7 +334,8 @@ const speechData = [
     speakerId: "e",
     theme: ["inauguration", "politics"],
     date: "20 January 1961",
-    url: "http://localhost:3000/assets/JFKInauguralAddress.mp3",
+    url: "https://www.americanrhetoric.com/mp3clips/politicalspeeches/jfkinaugural2.mp3", 
+    //"http://localhost:3000/assets/JFKInauguralAddress.mp3",
     title: "Presidential Inaugural Address",
     text: `Vice President Johnson, Mr. Speaker, Mr. Chief Justice, President Eisenhower, Vice President Nixon, President Truman, reverend clergy, fellow citizens:
 
@@ -398,7 +404,8 @@ const speechData = [
     speakerId: "f",
     theme: ["inauguration", "politics"],
     date: "4 March 1933",
-    url: "http://localhost:3000/assets/FDRFirstInauguralAddress.mp3",
+    url: "https://www.americanrhetoric.com/mp3clips/politicalspeeches/fdrfirstinaugural11223.mp3", 
+    //"http://localhost:3000/assets/FDRFirstInauguralAddress.mp3",
     title: "First Inaugural Address",
     text: `President Hoover, Mr. Chief Justice, my friends: 
 
@@ -475,7 +482,8 @@ const speechData = [
     speakerId: "f",
     theme: ["war", "politics"],
     date: " 8 December 1941",
-    url: "http://localhost:3000/assets/FDRPearlHarborAddress.mp3",
+    url: "https://www.americanrhetoric.com/mp3clips/politicalspeeches/fdrwarmessage344.mp3",
+    //"http://localhost:3000/assets/FDRPearlHarborAddress.mp3",
     title: "Pearl Harbor Address to the Nation",
     text: `Mr. Vice President, Mr. Speaker, Members of the Senate, and of the House of Representatives:
 
@@ -523,7 +531,8 @@ const speechData = [
     speakerId: "g",
     theme: "politics",
     date: "12 July 1976",
-    url: "http://localhost:3000/assets/BarbaraJordan1976dnc.mp3",
+    url: "https://www.americanrhetoric.com/mp3clips/politicalspeeches/barbarajordan1976dnc.mp3", 
+    //"http://localhost:3000/assets/BarbaraJordan1976dnc.mp3",
     title: "1976 Democratic National Convention Keynote Address",
     text: `Thank you ladies and gentlemen for a very warm reception.
 
@@ -682,8 +691,7 @@ const speechData = [
     But the decision, my friends, is not mine. I would do nothing that would harm the possibilities of Dwight Eisenhower to become President of the United States. And for that reason I am submitting to the Republican National Committee tonight through this television broadcast the decision which it is theirs to make. Let them decide whether my position on the ticket will help or hurt. And I am going to ask you to help them decide. Wire and write the Republican National Committee whether you think I should stay on or whether I should get off. And whatever their decision is, I will abide by it.
     
     But just let me say this last word: Regardless of what happens, I'm going to continue this fight. I'm going to campaign up and down in America until we drive the crooks and the Communists and those that defend them out of Washington. And remember folks, Eisenhower is a great man, believe me. He's a great man. And a vote for Eisenhower is a vote for what's good for America. And what's good for America -- [interrupted by announcer]`
-  },
-
+  }
 ];
 
 export default speechData;
