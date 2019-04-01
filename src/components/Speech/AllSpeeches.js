@@ -20,7 +20,7 @@ const styles = theme => ({
   }
 });
 
-const SpeechList = props => {
+const AllSpeeches = props => {
   const { classes, onSelectSpeech } = props;
   return (
     <List className={classes.root}>
@@ -38,7 +38,7 @@ const SpeechList = props => {
   );
 };
 
-SpeechList.propTypes = {
+AllSpeeches.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
@@ -46,5 +46,5 @@ export default withStyles(styles)(
   connect(
     null,
     mapDispatchToProps
-  )(SpeechList)
+  )(AllSpeeches)
 );

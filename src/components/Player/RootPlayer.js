@@ -59,23 +59,21 @@ class RootPlayer extends Component {
     } = this.props;
 
     return (
-      <div>
-        <ReactPlayer
-          ref={this.ref}
-          width="100%"
-          height="100%"
-          url={url}
-          playing={playing}
-          volume={volume}
-          muted={muted}
-          loop={loop}
-          onPlay={onPlay}
-          onPause={onPause}
-          onProgress={onProgress}
-          onDuration={onDuration}
-          onEnded={onEnded}
-        />
-      </div>
+      <ReactPlayer
+        ref={this.ref}
+        width="100%"
+        height="100%"
+        url={url}
+        playing={playing}
+        volume={volume}
+        muted={muted}
+        loop={loop}
+        onPlay={onPlay}
+        onPause={onPause}
+        onProgress={onProgress}
+        onDuration={onDuration}
+        onEnded={onEnded}
+      />
     );
   }
 }
