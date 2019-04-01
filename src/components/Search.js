@@ -5,22 +5,10 @@ import SwipeableViews from "react-swipeable-views";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
 import AllSpeeches from "./Speech/AllSpeeches.js";
+import Speakers from "./Speech/Speakers.js";
+import Themes from "./Speech/Themes.js";
 import BottomBar from "./BottomBar.js";
-
-function TabContainer({ children, dir }) {
-  return (
-    <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
-      {children}
-    </Typography>
-  );
-}
-
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-  dir: PropTypes.string.isRequired
-};
 
 const styles = {
   root: {}
@@ -40,7 +28,7 @@ class Search extends React.Component {
   };
 
   render() {
-    const { classes, theme } = this.props;
+    const { theme } = this.props;
 
     return (
       <React.Fragment>
@@ -65,8 +53,8 @@ class Search extends React.Component {
           onChangeIndex={this.handleChangeIndex}
         >
           <AllSpeeches dir={theme.direction} />
-          <TabContainer dir={theme.direction}>Speaker</TabContainer>
-          <TabContainer dir={theme.direction}>Theme</TabContainer>
+          <Speakers dir={theme.direction} />
+          <Themes dir={theme.direction} />
         </SwipeableViews>
 
         <BottomBar />
