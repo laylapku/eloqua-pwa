@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
-import speakerData from "./speakerData.js";
+import speeches from "../../data/speeches.js";
 
 const styles = {
   avatar: {
@@ -13,13 +13,26 @@ const styles = {
   }
 };
 
-const Speakers = props => {
-  const { classes } = props;
+const ThemeList = props => {
+  const { classes, filterSpeech } = props;
+  const themes = [
+    ...new Set(
+      speeches
+        .map(item => item.theme)
+        .toString()
+        .split(",")
+    )
+  ];
+
   return (
     <Grid container justify="space-around">
-      {speakerData.map((item, index) => (
+      {themes.map((item, index) => (
         <div key={index}>
-          <Avatar alt={item.name} src={item.img} className={classes.avatar} />
+          <Avatar
+            alt={item}
+            className={classes.avatar}
+            onClick={() => filterSpeech(item)}
+          />
           <p
             style={{
               fontSize: "12px",
@@ -27,7 +40,7 @@ const Speakers = props => {
               justifyContent: "space-around"
             }}
           >
-            {item.name}
+            {item}
           </p>
         </div>
       ))}
@@ -35,8 +48,8 @@ const Speakers = props => {
   );
 };
 
-Speakers.propTypes = {
+ThemeList.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Speakers);
+export default withStyles(styles)(ThemeList);

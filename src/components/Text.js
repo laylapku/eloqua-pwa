@@ -5,8 +5,9 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import speechData from "./Speech/speechData";
 import FullPlayer from "./Player/FullPlayer.js";
+import speeches from "../data/speeches";
+import speakers from "../data/speakers";
 
 const mapStatetoProps = state => {
   return { url: state.url };
@@ -27,33 +28,23 @@ const styles = theme => ({
 
 const Text = props => {
   const { classes, url } = props;
+  const speechPlayed = speeches.find(item => item.url === url);
+  const speaker = speakers[speechPlayed.speakerId].name;
+
   return (
     <React.Fragment>
       <Link to="/search">
-        <ArrowBackIcon classes={{ root: classes.backButton }} />
+        <ArrowBackIcon className={classes.backButton} />
       </Link>
 
       <Paper className={classes.textContainer}>
-        {speechData.map(
-          (item, index) =>
-            item.url === url && (
-              <div key={index}>
-                <div style={{ textAlign: "center" }}>
-                  <h3>{item.speaker + " - " + item.title}</h3>
-                  <p>{item.date}</p>
-                </div>
-                <p
-                  style={{
-                    maxHeight: "350px",
-                    overflow: "auto",
-                    lineHeight: "2em"
-                  }}
-                >
-                  {item.text}
-                </p>
-              </div>
-            )
-        )}
+        <div style={{ textAlign: "center" }}>
+          <h3>{speaker + " - " + speechPlayed.title}</h3>
+          <p>{speechPlayed.date}</p>
+        </div>
+        <p style={{ maxHeight: "350px", overflow: "auto", lineHeight: "2em" }}>
+          {speechPlayed.text}
+        </p>
       </Paper>
 
       <FullPlayer />

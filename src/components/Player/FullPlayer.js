@@ -7,6 +7,7 @@ import {
   createMuiTheme
 } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import Slider from "@material-ui/lab/Slider";
 import IconButton from "@material-ui/core/IconButton";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
@@ -20,7 +21,7 @@ import VolumeOffIcon from "@material-ui/icons/VolumeOff";
 import CommentIcon from "@material-ui/icons/Comment";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ShareIcon from "@material-ui/icons/Share";
-import Slider from "@material-ui/lab/Slider";
+import LinkIcon from "@material-ui/icons/Link";
 import Duration from "./Duration.js";
 import {
   playPause,
@@ -129,6 +130,9 @@ const FullPlayer = props => {
       </div>
 
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <IconButton>
+          <LinkIcon />
+        </IconButton>
         <IconButton>
           <FavoriteBorderIcon />
         </IconButton>

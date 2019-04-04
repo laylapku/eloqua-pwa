@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import RootPlayer from "./components/Player/RootPlayer.js";
-import Text from "./components/Text.js";
-import Search from "./components/Search.js";
-import DailyRecommend from "./components/DailyRecommend.js";
-import Favorites from "./components/Favorites.js";
-import Account from "./components/Account.js";
+import RootPlayer from "../components/Player/RootPlayer.js";
+import DailyRecommend from "../components/DailyRecommend.js";
+import Search from "../components/Search.js";
+import Favorites from "../components/Favorites.js";
+import Account from "../components/Account.js";
+import Text from "../components/Text.js";
 
 const App = () => {
   return (

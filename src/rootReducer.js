@@ -1,4 +1,5 @@
-import speechData from "../components/Speech/speechData";
+import speeches from "./data/speeches";
+import speakers from "./data/speakers";
 import {
   PLAY_PAUSE,
   ON_PLAY,
@@ -13,14 +14,16 @@ import {
   ON_SLIDER_CHANGE, */
   TOGGLE_LOOP_RANDOM,
   TOGGLE_MUTED,
-  ON_SELECT_SPEECH,
-} from "../constants.js";
+  ON_SELECT_SPEECH
+} from "./constants.js";
+
+const initSpeaker = speakers[speeches[0].speakerId].name;
 
 const initState = {
   index: 0,
-  speaker: speechData[0].speaker,
-  title: speechData[0].title,
-  url: speechData[0].url,
+  speaker: initSpeaker,
+  title: speeches[0].title,
+  url: speeches[0].url,
   playing: false,
   played: 0,
   muted: false,
@@ -31,18 +34,18 @@ const initState = {
 };
 
 const generateRandomIndex = () => {
-  return Math.floor(Math.random() * speechData.length);
+  return Math.floor(Math.random() * speeches.length);
 };
 
 const handleUrlChange = state => {
   if (state.random === false) {
-    if (state.index < speechData.length - 1) {
+    if (state.index < speeches.length - 1) {
       return {
         ...state,
         index: state.index + 1,
-        speaker: speechData[state.index + 1].speaker,
-        title: speechData[state.index + 1].title,
-        url: speechData[state.index + 1].url
+        speaker: speeches[state.index + 1].speaker,
+        title: speeches[state.index + 1].title,
+        url: speeches[state.index + 1].url
       };
     }
   } else {
@@ -50,9 +53,9 @@ const handleUrlChange = state => {
     return {
       ...state,
       index: randomIndex,
-      speaker: speechData[randomIndex].speaker,
-      title: speechData[randomIndex].title,
-      url: speechData[randomIndex].url
+      speaker: speeches[randomIndex].speaker,
+      title: speeches[randomIndex].title,
+      url: speeches[randomIndex].url
     };
   }
 };
@@ -91,9 +94,9 @@ const rootReducer = (state = initState, action) => {
         return {
           ...state,
           index: state.index - 1,
-          speaker: speechData[state.index - 1].speaker,
-          title: speechData[state.index - 1].title,
-          url: speechData[state.index - 1].url
+          speaker: speeches[state.index - 1].speaker,
+          title: speeches[state.index - 1].title,
+          url: speeches[state.index - 1].url
         };
       }
       break;
@@ -136,12 +139,13 @@ const rootReducer = (state = initState, action) => {
         muted: !state.muted
       };
     case ON_SELECT_SPEECH:
+      const speaker = speakers[speeches[action.payload].speakerId].name;
       return {
         ...state,
         index: action.payload,
-        speaker: speechData[action.payload].speaker,
-        title: speechData[action.payload].title,
-        url: speechData[action.payload].url
+        speaker: speaker,
+        title: speeches[action.payload].title,
+        url: speeches[action.payload].url
       };
     default:
       return state;
