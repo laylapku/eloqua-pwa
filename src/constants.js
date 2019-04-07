@@ -26,5 +26,6 @@ export const TOGGLE_MUTED = "TOGGLE_MUTED";
 
 //export const SET_VOLUME = "SET_VOLUME";
 
-export const ON_SELECT_SPEECH = "ON_SELECT_SPEECH";
+export const ADD_TO_PLAYLIST = "ADD_TO_PLAYLIST";
+
 

@@ -18,6 +18,7 @@ import RepeatOneIcon from "@material-ui/icons/RepeatOne";
 import LoopIcon from "@material-ui/icons/Loop";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
 import VolumeOffIcon from "@material-ui/icons/VolumeOff";
+import SaveAltIcon from "@material-ui/icons/SaveAlt";
 import CommentIcon from "@material-ui/icons/Comment";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ShareIcon from "@material-ui/icons/Share";
@@ -126,6 +127,9 @@ const FullPlayer = props => {
         </IconButton>
         <IconButton onClick={toggleMuted}>
           {!muted ? <VolumeUpIcon /> : <VolumeOffIcon />}
+        </IconButton>
+        <IconButton>
+          <SaveAltIcon />
         </IconButton>
       </div>
 

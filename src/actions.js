@@ -12,7 +12,7 @@ import {
   ON_ENDED,
   TOGGLE_LOOP_RANDOM,
   TOGGLE_MUTED,
-  ON_SELECT_SPEECH
+  ADD_TO_PLAYLIST
 } from './constants.js';
 
 export const playPause = () => ({
@@ -69,10 +69,12 @@ export const toggleMuted = () => ({
   type: TOGGLE_MUTED
 });
 
-export const onSelectSpeech = index => ({
-  type: ON_SELECT_SPEECH,
-  payload: index
+export const addToPlaylist = id => ({
+  type: ADD_TO_PLAYLIST,
+  payload: id
 });
+
+
 
 
 

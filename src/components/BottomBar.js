@@ -12,13 +12,15 @@ import Toolbar from "@material-ui/core/Toolbar";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
-import SearchIcon from "@material-ui/icons/Search";
+import ExploreIcon from "@material-ui/icons/Explore";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import PersonPinIcon from "@material-ui/icons/PersonPin";
 import IconButton from "@material-ui/core/IconButton";
+import ListIcon from "@material-ui/icons/List";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
-import { playPause } from "../actions.js";
+import SkipNextIcon from "@material-ui/icons/SkipNext";
+import { playPause, onNext } from "../actions.js";
 
 const mapStatetoProps = state => {
   return state;
@@ -26,7 +28,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    playPause: () => dispatch(playPause())
+    playPause: () => dispatch(playPause()),
+    onNext: () => dispatch(onNext())
   };
 };
 
@@ -50,7 +53,8 @@ const styles = {
   },
   toolBar: {
     background: "RGB(203,125,64)",
-    justifyContent: "space-between"
+    display: "grid",
+    gridTemplateColumns: "auto 12% 10% 10%"
   },
   navContainer: {
     background: "RGB(202,187,143)"
@@ -59,7 +63,7 @@ const styles = {
 
 class BottomBar extends Component {
   render() {
-    const { classes, speaker, title, playing, playPause } = this.props;
+    const { classes, speaker, title, playing, playPause, onNext } = this.props;
 
     return (
       <AppBar className={classes.appBar}>
@@ -73,8 +77,14 @@ class BottomBar extends Component {
               </span>
             }
           </Link>
+          <Link to="/playlist">
+            <ListIcon />
+          </Link>
           <IconButton onClick={playPause}>
             {playing ? <PauseCircleFilledIcon /> : <PlayCircleFilledIcon />}
+          </IconButton>
+          <IconButton onClick={onNext}>
+            <SkipNextIcon />
           </IconButton>
         </Toolbar>
 
@@ -90,7 +100,7 @@ class BottomBar extends Component {
               component={Link}
               to="/search"
               label="Explore"
-              icon={<SearchIcon />}
+              icon={<ExploreIcon />}
             />
             <BottomNavigationAction
               component={Link}

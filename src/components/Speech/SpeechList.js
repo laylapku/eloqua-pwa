@@ -7,13 +7,18 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import SortIcon from "@material-ui/icons/Sort";
+import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import speeches from "../../data/speeches";
 import speakers from "../../data/speakers";
-import { onSelectSpeech } from "../../actions.js";
+import { addToPlaylist } from "../../actions.js";
+
+const mapStateToProps = state => {
+  return { playList: state.playList };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSelectSpeech: index => dispatch(onSelectSpeech(index))
+    addToPlaylist: id => dispatch(addToPlaylist(id))
   };
 };
 
@@ -24,40 +29,46 @@ const styles = theme => ({
 });
 
 const SpeechList = props => {
-  const { classes, filter, onSelectSpeech } = props;
-  console.log(filter);
+  const { classes, filter, addToPlaylist } = props;
 
   return (
-    <List className={classes.root}>
-      <IconButton>
-        <SortIcon />
-      </IconButton>
-      {speeches
-        .filter(
-          item =>
-            item.speakerId === filter || //by speaker
-            item.theme.includes(filter) || //by theme
-            item.title.toLowerCase().includes(filter) || //by search of speech title
-            speakers[item.speakerId].name.toLowerCase().includes(filter) //by search of speaker name, better solution??
-        )
-        .map((item, index) => {
-          const year = item.date.split(" ")[2];
-          const speaker = speakers[item.speakerId].name;
+    <React.Fragment>
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <IconButton>
+          <PlaylistAddIcon />
+        </IconButton>
+        <IconButton>
+          <SortIcon />
+        </IconButton>
+      </div>
 
-          return (
-            <ListItem
-              key={index}
-              index={index}
-              button
-              onClick={() => onSelectSpeech(index)}
-            >
-              <ListItemText
-                primary={speaker + " - " + item.title + "(" + year + ")"}
-              />
-            </ListItem>
-          );
-        })}
-    </List>
+      <List className={classes.root}>
+        {speeches
+          .filter(
+            item =>
+              item.speakerId === filter || //by speaker
+              item.theme.includes(filter) || //by theme
+              item.title.toLowerCase().includes(filter) || //by search of speech title
+              speakers[item.speakerId].name.toLowerCase().includes(filter) //by search of speaker name, better solution??
+          )
+          .map((item, index) => {
+            const year = item.date.split(" ")[2];
+            const speaker = speakers[item.speakerId].name;
+
+            return (
+              <ListItem
+                key={index}
+                button
+                onClick={() => addToPlaylist(item.id)}
+              >
+                <ListItemText
+                  primary={speaker + " - " + item.title + "(" + year + ")"}
+                />
+              </ListItem>
+            );
+          })}
+      </List>
+    </React.Fragment>
   );
 };
 
@@ -67,7 +78,7 @@ SpeechList.propTypes = {
 
 export default withStyles(styles)(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(SpeechList)
 );

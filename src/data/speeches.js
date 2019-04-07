@@ -2,7 +2,7 @@ const speeches = [
   {
     id: "1",
     speakerId: "1",
-    theme: "Motivation,Business",
+    theme: "Motivation,Commencement,Business",
     date: "12 June 2005",
     url: "https://ia802902.us.archive.org/14/items/SteveJobsSpeechAtStanfordUniversity/SteveJobsSpeech_64kb.mp3",
     //"http://localhost:3000/assets/JobsStanfordSpeech.mp3",
@@ -331,6 +331,7 @@ const speeches = [
     url: "https://www.americanrhetoric.com/mp3clips/politicalspeeches/jfkinaugural2.mp3", 
     //"http://localhost:3000/assets/JFKInauguralAddress.mp3",
     title: "Presidential Inaugural Address",
+    
     text: `Vice President Johnson, Mr. Speaker, Mr. Chief Justice, President Eisenhower, Vice President Nixon, President Truman, reverend clergy, fellow citizens:
 
     We observe today not a victory of party, but a celebration of freedom -- symbolizing an end, as well as a beginning -- signifying renewal, as well as change. For I have sworn before you and Almighty God the same solemn oath our forebears prescribed nearly a century and three-quarters ago.
@@ -524,6 +525,7 @@ const speeches = [
     date: "23 September 1952",
     url: "http://localhost:3000/assets/NixonCheckers.mp3",
     title: "Checkers",
+    quotes: `I should say this, that Pat doesn't have a mink coat. But she does have a respectable Republican cloth coat, and I always tell her she would look good in anything.`,
     text: `My Fellow Americans,
 
     I come before you tonight as a candidate for the Vice Presidency and as a man whose honesty and -- and integrity has been questioned.

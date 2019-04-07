@@ -14,48 +14,77 @@ import {
   ON_SLIDER_CHANGE, */
   TOGGLE_LOOP_RANDOM,
   TOGGLE_MUTED,
-  ON_SELECT_SPEECH
+  ADD_TO_PLAYLIST
 } from "./constants.js";
 
-const initSpeaker = speakers[speeches[0].speakerId].name;
-
 const initState = {
-  index: 0,
-  speaker: initSpeaker,
-  title: speeches[0].title,
-  url: speeches[0].url,
   playing: false,
   played: 0,
   muted: false,
   volume: 0.8,
   duration: 0,
   loop: false,
-  random: false
+  random: false,
+  playList: [],
+  index: 0,
+  id: "1",
+  url: speeches[0].url,
+  title: speeches[0].title,
+  speaker: speakers[speeches[0].speakerId].name
 };
 
-const generateRandomIndex = () => {
-  return Math.floor(Math.random() * speeches.length);
+const generateRandomIndex = state => {
+  return Math.floor(Math.random() * state.playList.length);
 };
 
+//fix slider(using ref), random feature??
 const handleUrlChange = state => {
   if (state.random === false) {
-    if (state.index < speeches.length - 1) {
+    if (state.index < state.playList.length - 1) {
+      const next = state.playList[state.index + 1];
+      const speaker = speakers[next.speakerId].name;
       return {
         ...state,
         index: state.index + 1,
-        speaker: speeches[state.index + 1].speaker,
-        title: speeches[state.index + 1].title,
-        url: speeches[state.index + 1].url
+        id: next.id,
+        url: next.url,
+        title: next.title,
+        speaker
+      };
+    } else if (state.index === state.playList.length - 1) {
+      const next = state.playList[0];
+      const speaker = speakers[next.speakerId].name;
+      return {
+        ...state,
+        index: 0,
+        id: next.id,
+        url: next.url,
+        title: next.title,
+        speaker
       };
     }
   } else {
-    const randomIndex = generateRandomIndex();
+    /* const copylist = [...state.playList];
+    const randomList = copylist => {
+      for (var i = copylist.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = copylist[i];
+        copylist[i] = copylist[j];
+        copylist[j] = temp;
+      }
+    }; */
+
+    const randomIndex = generateRandomIndex(state);
+    const random = state.playList[randomIndex];
+    const speaker = speakers[random.speakerId].name;
+
     return {
       ...state,
       index: randomIndex,
-      speaker: speeches[randomIndex].speaker,
-      title: speeches[randomIndex].title,
-      url: speeches[randomIndex].url
+      id: random.id,
+      url: random.url,
+      title: random.title,
+      speaker
     };
   }
 };
@@ -91,15 +120,28 @@ const rootReducer = (state = initState, action) => {
       };
     case ON_PREV:
       if (state.index > 0) {
+        const prev = state.playList[state.index - 1];
+        const speaker = speakers[prev.speakerId].name;
         return {
           ...state,
           index: state.index - 1,
-          speaker: speeches[state.index - 1].speaker,
-          title: speeches[state.index - 1].title,
-          url: speeches[state.index - 1].url
+          id: prev.id,
+          url: prev.url,
+          title: prev.title,
+          speaker
+        };
+      } else {
+        const prev = state.playList[state.playList.length - 1];
+        const speaker = speakers[prev.speakerId].name;
+        return {
+          ...state,
+          index: state.playList.length - 1,
+          id: prev.id,
+          url: prev.url,
+          title: prev.title,
+          speaker
         };
       }
-      break;
     case ON_NEXT:
       return handleUrlChange(state);
     case ON_ENDED:
@@ -138,15 +180,42 @@ const rootReducer = (state = initState, action) => {
         ...state,
         muted: !state.muted
       };
-    case ON_SELECT_SPEECH:
-      const speaker = speakers[speeches[action.payload].speakerId].name;
+    case ADD_TO_PLAYLIST:
+      const speechSelected = speeches.find(item => item.id === action.payload);
+      if (state.playList.indexOf(speechSelected) === -1) {
+        const speaker = speakers[speechSelected.speakerId].name;
+        return {
+          ...state,
+          playList: [...state.playList, speechSelected],
+          index: state.playList.length,
+          id: speechSelected.id,
+          url: speechSelected.url,
+          title: speechSelected.title,
+          speaker
+        };
+      } else {
+        const index = state.playList.indexOf(speechSelected);
+        const speaker = speakers[speechSelected.speakerId].name;
+        return {
+          ...state,
+          index: index,
+          id: speechSelected.id,
+          url: speechSelected.url,
+          title: speechSelected.title,
+          speaker
+        };
+      }
+    /*  case LINK_QUOTE_TO_TEXT: 
+      const speechLinked = speeches.find(item => item.id === action.payload);
+      console.log(speechLinked);
       return {
         ...state,
-        index: action.payload,
-        speaker: speaker,
-        title: speeches[action.payload].title,
-        url: speeches[action.payload].url
-      };
+        playList: [...state.playList, speechLinked],
+        id: action.payload,
+        url: speechLinked.url,
+        title: speechLinked.title,
+        speaker: speakers[speechLinked.speakerId].name
+      }; */
     default:
       return state;
   }

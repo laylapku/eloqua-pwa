@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import SwipeableViews from "react-swipeable-views";
@@ -22,7 +22,7 @@ const styles = theme => ({
   }
 });
 
-class Search extends React.Component {
+class Search extends Component {
   state = {
     tabValue: 0,
     filter: ""
