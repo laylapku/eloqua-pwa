@@ -12,8 +12,13 @@ import {
   ON_ENDED,
   TOGGLE_LOOP_RANDOM,
   TOGGLE_MUTED,
-  ADD_TO_PLAYLIST
-} from './constants.js';
+  ADD_TO_PLAYLIST,
+  ADD_ALL_TO_PLAYLIST,
+  DELETE_FROM_PLAYLIST,
+  DELETE_ALL_FROM_PLAYLIST,
+  HANDLE_PLAYLIST_ITEM_CLICK,
+  TOGGLE_ADD_TO_FAVLIST
+} from "./constants.js";
 
 export const playPause = () => ({
   type: PLAY_PAUSE
@@ -74,9 +79,25 @@ export const addToPlaylist = id => ({
   payload: id
 });
 
+export const addAllToPlaylist = () => ({
+  type: ADD_ALL_TO_PLAYLIST
+});
 
+export const deleteFromPlaylist = id => ({
+  type: DELETE_FROM_PLAYLIST,
+  payload: id
+});
 
+export const deleteAllFromPlaylist = () => ({
+  type: DELETE_ALL_FROM_PLAYLIST
+});
 
+export const handlePlaylistItemClick = index => ({
+  type: HANDLE_PLAYLIST_ITEM_CLICK,
+  payload: index
+});
 
-
-
+export const toggleAddToFavlist = id => ({
+  type: TOGGLE_ADD_TO_FAVLIST,
+  payload: id
+});

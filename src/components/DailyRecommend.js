@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -6,9 +6,9 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ShareIcon from "@material-ui/icons/Share";
+import BottomBar from "./BottomBar.js";
 import quotes from "../data/quotes.js";
 import { addToPlaylist } from "../actions.js";
-import BottomBar from "./BottomBar.js";
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -32,46 +32,31 @@ const styles = theme => ({
   }
 });
 
-class DailyRecommend extends Component {
-  /*  state = {
-    speechId: "",
-    url2: ""
-  };
+const DailyRecommend = props => {
+  const { classes, addToPlaylist } = props;
+  //const quotesPick = quotes[Math.floor(Math.random() * quotes.length)];
+  const speechId = quotes[1].speechId;
+  const content = quotes[1].quote;
 
-  linkQuoteToText = speechId => {
-    const speechSelected = speeches.find(item => item.id === speechId);
-    this.setState({
-      speechId,
-      url2: speechSelected.url
-    });
-  }; */
-
-  render() {
-    const { classes, addToPlaylist } = this.props;
-    //const quotesPick = quotes[Math.floor(Math.random() * quotes.length)];
-    const speechId = quotes[1].speechId;
-    const content = quotes[1].quotes;
-
-    return (
-      <React.Fragment>
-        <div className={classes.header}>
-          <FavoriteBorderIcon />
-          <ShareIcon />
-        </div>
-        <Link to="/text">
-          <Paper
-            className={classes.container}
-            onClick={() => addToPlaylist(speechId)}
-          >
-            <p>{content}</p>
-            {/* <p>- xxx</p> */}
-          </Paper>
-        </Link>
-        <BottomBar />
-      </React.Fragment>
-    );
-  }
-}
+  return (
+    <React.Fragment>
+      <div className={classes.header}>
+        <FavoriteBorderIcon />
+        <ShareIcon />
+      </div>
+      <Link to="/text">
+        <Paper
+          className={classes.container}
+          onClick={() => addToPlaylist(speechId)}
+        >
+          <p>{content}</p>
+          {/* <p>- xxx</p> */}
+        </Paper>
+      </Link>
+      <BottomBar />
+    </React.Fragment>
+  );
+};
 
 DailyRecommend.propTypes = {
   classes: PropTypes.object.isRequired

@@ -24,11 +24,23 @@ const mapDispatchToProps = dispatch => {
 };
 
 class RootPlayer extends Component {
-  value = this.props.played; // initiated to prevent "TypeError: The provided double value is non-finite" in method onSeekEnd()
+  state = {
+    url: ""
+  };
+
+  componentWillReceiveProps = nextProps => {
+    //console.log(nextProps, nextProps.playlist)
+    if (nextProps.playlist.length >= 1) {
+      const speechToPlay = nextProps.playlist[nextProps.index];
+      this.setState({ url: speechToPlay.url });
+    }
+  };
 
   ref = player => {
     this.player = player;
   };
+
+  value = this.props.played; // initiated to prevent "TypeError: The provided double value is non-finite" in method onSeekEnd()
 
   onSeekStart = e => {
     this.setState({ seeking: true });
@@ -47,7 +59,6 @@ class RootPlayer extends Component {
 
   render() {
     const {
-      url,
       playing,
       loop,
       muted,
@@ -63,11 +74,11 @@ class RootPlayer extends Component {
         ref={this.ref}
         width="100%"
         height="100%"
-        url={url}
+        url={this.state.url}
         playing={playing}
+        loop={loop}
         volume={volume}
         muted={muted}
-        loop={loop}
         onPlay={onPlay}
         onPause={onPause}
         onProgress={onProgress}

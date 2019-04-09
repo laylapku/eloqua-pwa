@@ -3,22 +3,36 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import IconButton from "@material-ui/core/IconButton";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ShareIcon from "@material-ui/icons/Share";
 import SaveAltIcon from "@material-ui/icons/SaveAlt";
 import DeleteIcon from "@material-ui/icons/Delete";
-import speakers from "../../data/speakers";
-import { addToPlaylist } from "../../actions.js";
 import BottomBar from "../BottomBar.js";
+import speakers from "../../data/speakers";
+import {
+  handlePlaylistItemClick,
+  deleteFromPlaylist,
+  deleteAllFromPlaylist,
+  toggleAddToFavlist
+} from "../../actions.js";
 
 const mapStateToProps = state => {
-  return { playList: state.playList, url: state.url };
+  return {
+    playlist: state.playlist,
+    index: state.index,
+    favlist: state.favlist
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    addToPlaylist: id => dispatch(addToPlaylist(id))
+    handlePlaylistItemClick: index => dispatch(handlePlaylistItemClick(index)),
+    deleteFromPlaylist: index => dispatch(deleteFromPlaylist(index)),
+    deleteAllFromPlaylist: () => dispatch(deleteAllFromPlaylist()),
+    toggleAddToFavlist: id => dispatch(toggleAddToFavlist(id))
   };
 };
 
@@ -41,30 +55,46 @@ const styles = theme => ({
   }
 });
 
-const Playlist = props => {
-  const { classes, url, playList, addToPlaylist } = props;
+const PlayList = props => {
+  const {
+    classes,
+    playlist,
+    handlePlaylistItemClick,
+    deleteFromPlaylist,
+    deleteAllFromPlaylist,
+    favlist,
+    toggleAddToFavlist
+  } = props;
 
   return (
     <React.Fragment>
       <Paper className={classes.root}>
         {/* todo: list overflow */}
         <div className={classes.header}>
-          <h3>Your Playlist</h3>
+          <h3>Your PlayList</h3>
           <FavoriteBorderIcon />
-          <DeleteIcon />
+          <DeleteIcon onClick={deleteAllFromPlaylist} />
         </div>
-        {playList.map(item => {
+
+        {playlist.map((item, index) => {
           const speaker = speakers[item.speakerId].name;
+
           return (
-            <div className={classes.list} key={item.id}>
-              {item.url === url ? <PlayArrowIcon /> : <p />}
-              <p onClick={() => addToPlaylist(item.id)}>
+            <div className={classes.list} key={index}>
+              {index === props.index ? <PlayArrowIcon /> : <p />}
+              <p onClick={() => handlePlaylistItemClick(index)}>
                 {item.title + " - " + speaker}
               </p>
-              <FavoriteBorderIcon />
+              <IconButton onClick={() => toggleAddToFavlist(item.id)}>
+                {favlist.indexOf(item.id) !== -1 ? (
+                  <FavoriteIcon />
+                ) : (
+                  <FavoriteBorderIcon />
+                )}
+              </IconButton>
               <ShareIcon />
               <SaveAltIcon />
-              <DeleteIcon />
+              <DeleteIcon onClick={() => deleteFromPlaylist(index)} />
             </div>
           );
         })}
@@ -74,7 +104,7 @@ const Playlist = props => {
   );
 };
 
-Playlist.propTypes = {
+PlayList.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
@@ -82,5 +112,5 @@ export default withStyles(styles)(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(Playlist)
+  )(PlayList)
 );

@@ -12,10 +12,6 @@ import speeches from "../../data/speeches";
 import speakers from "../../data/speakers";
 import { addToPlaylist } from "../../actions.js";
 
-const mapStateToProps = state => {
-  return { playList: state.playList };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     addToPlaylist: id => dispatch(addToPlaylist(id))
@@ -78,7 +74,7 @@ SpeechList.propTypes = {
 
 export default withStyles(styles)(
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
   )(SpeechList)
 );

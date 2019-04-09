@@ -6,9 +6,10 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ListIcon from "@material-ui/icons/List";
-import FullPlayer from "./Player/FullPlayer.js";
+import PlayerControls from "./Player/PlayerControls.js";
 import speeches from "../data/speeches";
 import speakers from "../data/speakers";
+import texts from "../data/texts";
 
 const mapStatetoProps = state => {
   return { id: state.id };
@@ -26,6 +27,7 @@ const styles = theme => ({
 const Text = props => {
   const { classes, id } = props;
   const speechPlayed = speeches.find(item => item.id === id);
+  const textShown = texts.find(item => item.speechId === id);
   const speaker = speakers[speechPlayed.speakerId].name;
 
   return (
@@ -51,11 +53,11 @@ const Text = props => {
           <p>{speechPlayed.date}</p>
         </div>
         <p style={{ maxHeight: "350px", overflow: "auto", lineHeight: "2em" }}>
-          {speechPlayed.text}
+          {textShown.text}
         </p>
       </Paper>
 
-      <FullPlayer />
+      <PlayerControls />
     </React.Fragment>
   );
 };
