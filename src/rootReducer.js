@@ -79,7 +79,6 @@ const handleUrlChange = state => {
     const randomIndex = generateRandomIndex(state);
     const random = state.playlist[randomIndex];
     let speaker = speakers[random.speakerId].name;
-
     return {
       ...state,
       index: randomIndex,
@@ -191,8 +190,8 @@ const rootReducer = (state = initState, action) => {
       };
     case ADD_TO_PLAYLIST:
       let speechToAdd = speeches.find(item => item.id === action.payload);
+      speaker = speakers[speechToAdd.speakerId].name;
       if (state.playlist.indexOf(speechToAdd) === -1) {
-        let speaker = speakers[speechToAdd.speakerId].name;
         return {
           ...state,
           playlist: [...state.playlist, speechToAdd],
@@ -203,7 +202,6 @@ const rootReducer = (state = initState, action) => {
         };
       } else {
         let index = state.playlist.indexOf(speechToAdd);
-        let speaker = speakers[speechToAdd.speakerId].name;
         return {
           ...state,
           index: index,
@@ -240,11 +238,14 @@ const rootReducer = (state = initState, action) => {
         playlist
       };
     case DELETE_ALL_FROM_PLAYLIST:
-      return {
-        ...state,
-        playlist: []
-      };
-    case TOGGLE_ADD_TO_FAVLIST:
+      if (state.playlist.length > 0) {
+        return {
+          ...state,
+          playlist: []
+        };
+      }
+      return state;
+    /* case TOGGLE_ADD_TO_FAVLIST:
       if (state.favlist.indexOf(action.payload) === -1) {
         return {
           ...state,
@@ -255,7 +256,28 @@ const rootReducer = (state = initState, action) => {
       return {
         ...state,
         favlist
-      };
+      }; */
+    case TOGGLE_ADD_TO_FAVLIST:
+      if (state.playlist.length > 0) {
+        let favCheck = action.payload.every(
+          item => state.favlist.indexOf(item) > -1
+        );
+        if (favCheck === false) {
+          let favlist = [...new Set([...state.favlist, ...action.payload])];
+          return {
+            ...state,
+            favlist
+          };
+        }
+        let favlist = state.favlist.filter(
+          item => !action.payload.includes(item)
+        );
+        return {
+          ...state,
+          favlist
+        };
+      }
+      return state;
     default:
       return state;
   }

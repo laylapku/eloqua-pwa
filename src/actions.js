@@ -17,7 +17,8 @@ import {
   DELETE_FROM_PLAYLIST,
   DELETE_ALL_FROM_PLAYLIST,
   HANDLE_PLAYLIST_ITEM_CLICK,
-  TOGGLE_ADD_TO_FAVLIST
+  TOGGLE_ADD_TO_FAVLIST,
+  TOGGLE_ADD_ALL_TO_FAVLIST
 } from "./constants.js";
 
 export const playPause = () => ({
@@ -99,5 +100,10 @@ export const handlePlaylistItemClick = index => ({
 
 export const toggleAddToFavlist = id => ({
   type: TOGGLE_ADD_TO_FAVLIST,
+  payload: id
+});
+
+export const toggleAddAllToFavlist = id => ({
+  type: TOGGLE_ADD_ALL_TO_FAVLIST,
   payload: id
 });

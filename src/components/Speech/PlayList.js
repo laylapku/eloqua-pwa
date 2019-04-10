@@ -23,7 +23,8 @@ const mapStateToProps = state => {
   return {
     playlist: state.playlist,
     index: state.index,
-    favlist: state.favlist
+    favlist: state.favlist,
+    favall: state.favall
   };
 };
 
@@ -65,6 +66,8 @@ const PlayList = props => {
     favlist,
     toggleAddToFavlist
   } = props;
+  const favCheck = playlist.every(item => favlist.indexOf(item.id) > -1);
+  const ids = playlist.map(item => item.id);
 
   return (
     <React.Fragment>
@@ -72,7 +75,11 @@ const PlayList = props => {
         {/* todo: list overflow */}
         <div className={classes.header}>
           <h3>Your PlayList</h3>
-          <FavoriteBorderIcon />
+          {playlist.length > 0 && favCheck === true ? (
+            <FavoriteIcon onClick={() => toggleAddToFavlist(ids)} />
+          ) : (
+            <FavoriteBorderIcon onClick={() => toggleAddToFavlist(ids)} />
+          )}
           <DeleteIcon onClick={deleteAllFromPlaylist} />
         </div>
 
@@ -85,7 +92,7 @@ const PlayList = props => {
               <p onClick={() => handlePlaylistItemClick(index)}>
                 {item.title + " - " + speaker}
               </p>
-              <IconButton onClick={() => toggleAddToFavlist(item.id)}>
+              <IconButton onClick={() => toggleAddToFavlist([item.id])}>
                 {favlist.indexOf(item.id) !== -1 ? (
                   <FavoriteIcon />
                 ) : (
