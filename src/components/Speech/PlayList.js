@@ -23,8 +23,7 @@ const mapStateToProps = state => {
   return {
     playlist: state.playlist,
     index: state.index,
-    favlist: state.favlist,
-    favall: state.favall
+    favlist: state.favlist
   };
 };
 

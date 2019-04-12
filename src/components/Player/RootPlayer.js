@@ -29,15 +29,10 @@ class RootPlayer extends Component {
   };
 
   componentWillReceiveProps = nextProps => {
-    //console.log(nextProps, nextProps.playlist)
     if (nextProps.playlist.length >= 1) {
       const speechToPlay = nextProps.playlist[nextProps.index];
       this.setState({ url: speechToPlay.url });
     }
-  };
-
-  ref = player => {
-    this.player = player;
   };
 
   value = this.props.played; // initiated to prevent "TypeError: The provided double value is non-finite" in method onSeekEnd()
@@ -55,6 +50,10 @@ class RootPlayer extends Component {
     this.value = value;
     this.setState({ played: value });
     this.player.seekTo(this.value); // for visual display of progress
+  };
+
+  ref = player => {
+    this.player = player;
   };
 
   render() {

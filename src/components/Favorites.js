@@ -41,7 +41,7 @@ const Favorites = props => {
 
           return (
             <ListItem key={index} button>
-              <IconButton onClick={() => toggleAddToFavlist(item)}>
+              <IconButton onClick={() => toggleAddToFavlist([item])}>
                 <FavoriteIcon />
               </IconButton>
               <ListItemText

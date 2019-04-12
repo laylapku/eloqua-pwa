@@ -2,7 +2,6 @@ import {
   PLAY_PAUSE,
   ON_PLAY,
   ON_PAUSE,
-  ON_PROGRESS,
   ON_SEEK_START,
   ON_SEEK_END,
   ON_SLIDER_CHANGE,
@@ -31,10 +30,6 @@ export const onPlay = () => ({
 
 export const onPause = () => ({
   type: ON_PAUSE
-});
-
-export const onProgress = () => ({
-  type: ON_PROGRESS
 });
 
 export const onDuration = payload => ({

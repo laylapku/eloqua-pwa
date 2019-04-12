@@ -4,14 +4,10 @@ import {
   PLAY_PAUSE,
   ON_PLAY,
   ON_PAUSE,
-  ON_PROGRESS,
   ON_DURATION,
   ON_PREV,
   ON_NEXT,
   ON_ENDED,
-  /*  ON_SEEK_START,
-  ON_SEEK_END,
-  ON_SLIDER_CHANGE, */
   TOGGLE_LOOP_RANDOM,
   TOGGLE_MUTED,
   ADD_TO_PLAYLIST,
@@ -24,7 +20,6 @@ import {
 
 const initState = {
   playing: false,
-  played: 0,
   muted: false,
   volume: 0.8,
   duration: 0,
@@ -106,13 +101,6 @@ const rootReducer = (state = initState, action) => {
         ...state,
         playing: false
       };
-    case ON_PROGRESS:
-      if (!state.seeking) {
-        return {
-          ...state
-        };
-      }
-      break;
     case ON_DURATION:
       return {
         ...state,
@@ -258,26 +246,23 @@ const rootReducer = (state = initState, action) => {
         favlist
       }; */
     case TOGGLE_ADD_TO_FAVLIST:
-      if (state.playlist.length > 0) {
-        let favCheck = action.payload.every(
-          item => state.favlist.indexOf(item) > -1
-        );
-        if (favCheck === false) {
-          let favlist = [...new Set([...state.favlist, ...action.payload])];
-          return {
-            ...state,
-            favlist
-          };
-        }
-        let favlist = state.favlist.filter(
-          item => !action.payload.includes(item)
-        );
+      let favCheck = action.payload.every(
+        item => state.favlist.indexOf(item) > -1
+      );
+      if (favCheck === false) {
+        let favlist = [...new Set([...state.favlist, ...action.payload])];
         return {
           ...state,
           favlist
         };
       }
-      return state;
+      let favlist = state.favlist.filter(
+        item => !action.payload.includes(item)
+      );
+      return {
+        ...state,
+        favlist
+      };
     default:
       return state;
   }

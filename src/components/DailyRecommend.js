@@ -4,15 +4,22 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import IconButton from "@material-ui/core/IconButton";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ShareIcon from "@material-ui/icons/Share";
 import BottomBar from "./BottomBar.js";
 import quotes from "../data/quotes.js";
-import { addToPlaylist } from "../actions.js";
+import { addToPlaylist, toggleAddToFavlist } from "../actions.js";
+
+const mapStatetoProps = state => {
+  return { favlist: state.favlist };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
-    addToPlaylist: id => dispatch(addToPlaylist(id))
+    addToPlaylist: id => dispatch(addToPlaylist(id)),
+    toggleAddToFavlist: id => dispatch(toggleAddToFavlist(id))
   };
 };
 
@@ -26,14 +33,13 @@ const styles = theme => ({
     color: "#000"
   },
   header: {
-    display: "grid",
-    justifyItems: "end",
-    gridTemplateColumns: "auto 10%"
+    display: "flex",
+    justifyContent: "flex-end"
   }
 });
 
 const DailyRecommend = props => {
-  const { classes, addToPlaylist } = props;
+  const { classes, favlist, addToPlaylist, toggleAddToFavlist } = props;
   //const quotesPick = quotes[Math.floor(Math.random() * quotes.length)];
   const speechId = quotes[1].speechId;
   const content = quotes[1].quote;
@@ -41,8 +47,16 @@ const DailyRecommend = props => {
   return (
     <React.Fragment>
       <div className={classes.header}>
-        <FavoriteBorderIcon />
-        <ShareIcon />
+        <IconButton onClick={() => toggleAddToFavlist([speechId])}>
+          {favlist.indexOf(speechId) !== -1 ? (
+            <FavoriteIcon />
+          ) : (
+            <FavoriteBorderIcon />
+          )}
+        </IconButton>
+        <IconButton>
+          <ShareIcon />
+        </IconButton>
       </div>
       <Link to="/text">
         <Paper
@@ -64,7 +78,7 @@ DailyRecommend.propTypes = {
 
 export default withStyles(styles)(
   connect(
-    null,
+    mapStatetoProps,
     mapDispatchToProps
   )(DailyRecommend)
 );

@@ -4,8 +4,6 @@ export const ON_PLAY = "ON_PLAY";
 
 export const ON_PAUSE = "ON_PAUSE";
 
-export const ON_PROGRESS = "ON_PROGRESS";
-
 export const ON_DURATION = "ON_DURATION";
 
 export const ON_ENDED = "ON_ENDED";

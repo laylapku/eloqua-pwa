@@ -18,11 +18,6 @@ import RepeatOneIcon from "@material-ui/icons/RepeatOne";
 import LoopIcon from "@material-ui/icons/Loop";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
 import VolumeOffIcon from "@material-ui/icons/VolumeOff";
-import SaveAltIcon from "@material-ui/icons/SaveAlt";
-import CommentIcon from "@material-ui/icons/Comment";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import ShareIcon from "@material-ui/icons/Share";
-import LinkIcon from "@material-ui/icons/Link";
 import Duration from "./Duration.js";
 import {
   playPause,
@@ -73,11 +68,10 @@ const styles = {
   }
 };
 
-const FullPlayer = props => {
+const PlayControls = props => {
   const {
     classes,
     playing,
-    played,
     loop,
     random,
     muted,
@@ -85,11 +79,12 @@ const FullPlayer = props => {
     playPause,
     onPrev,
     onNext,
+    toggleLoopRandom,
+    toggleMuted,
     onSliderChange,
     onSeekStart,
     onSeekEnd,
-    toggleLoopRandom,
-    toggleMuted
+    played
   } = props;
 
   return (
@@ -128,30 +123,12 @@ const FullPlayer = props => {
         <IconButton onClick={toggleMuted}>
           {!muted ? <VolumeUpIcon /> : <VolumeOffIcon />}
         </IconButton>
-        <IconButton>
-          <SaveAltIcon />
-        </IconButton>
-      </div>
-
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <IconButton>
-          <LinkIcon />
-        </IconButton>
-        <IconButton>
-          <FavoriteBorderIcon />
-        </IconButton>
-        <IconButton>
-          <CommentIcon />
-        </IconButton>
-        <IconButton>
-          <ShareIcon />
-        </IconButton>
       </div>
     </Paper>
   );
 };
 
-FullPlayer.propTypes = {
+PlayControls.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
@@ -159,5 +136,5 @@ export default withStyles(styles)(
   connect(
     mapStatetoProps,
     mapDispatchToProps
-  )(FullPlayer)
+  )(PlayControls)
 );
