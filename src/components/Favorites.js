@@ -34,22 +34,24 @@ const Favorites = props => {
   return (
     <React.Fragment>
       <List className={classes.root}>
-        {favlist.map((item, index) => {
-          const speech = speeches.find(ele => ele.id === item);
-          const speaker = speakers[speech.speakerId].name;
-          const year = speech.date.split(" ")[2];
+        {favlist.length < 1
+          ? <p>Add your first favorite speech here!</p>
+          : favlist.map((item, index) => {
+              const speech = speeches.find(ele => ele.id === item);
+              const speaker = speakers[speech.speakerId].name;
+              const year = speech.date.split(" ")[2];
 
-          return (
-            <ListItem key={index} button>
-              <IconButton onClick={() => toggleAddToFavlist([item])}>
-                <FavoriteIcon />
-              </IconButton>
-              <ListItemText
-                primary={speaker + " - " + speech.title + "(" + year + ")"}
-              />
-            </ListItem>
-          );
-        })}
+              return (
+                <ListItem key={index} button>
+                  <IconButton onClick={() => toggleAddToFavlist([item])}>
+                    <FavoriteIcon />
+                  </IconButton>
+                  <ListItemText
+                    primary={speaker + " - " + speech.title + "(" + year + ")"}
+                  />
+                </ListItem>
+              );
+            })}
       </List>
       <BottomBar />
     </React.Fragment>

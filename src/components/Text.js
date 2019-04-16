@@ -7,12 +7,9 @@ import Paper from "@material-ui/core/Paper";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ListIcon from "@material-ui/icons/List";
 import IconButton from "@material-ui/core/IconButton";
-import SaveAltIcon from "@material-ui/icons/SaveAlt";
-import CommentIcon from "@material-ui/icons/Comment";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
-import LinkIcon from "@material-ui/icons/Link";
 import PlayerControls from "./Player/PlayerControls.js";
 import speeches from "../data/speeches";
 import speakers from "../data/speakers";
@@ -55,20 +52,9 @@ const Text = props => {
 
   return (
     <React.Fragment>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          padding: "5px 10px"
-        }}
-      >
-        <Link to="/search">
-          <ArrowBackIcon />
-        </Link>
-        <Link to="/playlist">
-          <ListIcon />
-        </Link>
-      </div>
+      <IconButton component={Link} to="/">
+        <ArrowBackIcon />
+      </IconButton>
       <Paper className={classes.textContainer}>
         <div style={{ textAlign: "center" }}>
           <h3>{speaker + " - " + speechPlayed.title}</h3>
@@ -85,8 +71,13 @@ const Text = props => {
         onSeekEnd={onSeekEnd}
         onSliderChange={onSliderChange}
       />
-
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          margin: "20px 20px"
+        }}
+      >
         <IconButton onClick={() => toggleAddToFavlist([speechPlayed.id])}>
           {favlist.indexOf(speechPlayed.id) !== -1 ? (
             <FavoriteIcon />
@@ -95,16 +86,10 @@ const Text = props => {
           )}
         </IconButton>
         <IconButton>
-          <SaveAltIcon />
-        </IconButton>
-        <IconButton>
-          <LinkIcon />
-        </IconButton>
-        <IconButton>
-          <CommentIcon />
-        </IconButton>
-        <IconButton>
           <ShareIcon />
+        </IconButton>
+        <IconButton component={Link} to="/playlist">
+          <ListIcon />
         </IconButton>
       </div>
     </React.Fragment>

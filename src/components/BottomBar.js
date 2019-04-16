@@ -11,10 +11,9 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import ExploreIcon from "@material-ui/icons/Explore";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import PersonPinIcon from "@material-ui/icons/PersonPin";
+import SettingsIcon from "@material-ui/icons/Settings";
 import IconButton from "@material-ui/core/IconButton";
 import ListIcon from "@material-ui/icons/List";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
@@ -93,12 +92,6 @@ class BottomBar extends Component {
             <BottomNavigationAction
               component={Link}
               to="/"
-              label="Today"
-              icon={<CalendarTodayIcon />}
-            />
-            <BottomNavigationAction
-              component={Link}
-              to="/search"
               label="Explore"
               icon={<ExploreIcon />}
             />
@@ -110,9 +103,9 @@ class BottomBar extends Component {
             />
             <BottomNavigationAction
               component={Link}
-              to="/account"
-              label="Account"
-              icon={<PersonPinIcon />}
+              to="/settings"
+              label="Settings"
+              icon={<SettingsIcon />}
             />
           </BottomNavigation>
         </MuiThemeProvider>

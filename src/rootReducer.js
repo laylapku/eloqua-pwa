@@ -10,12 +10,12 @@ import {
   ON_ENDED,
   TOGGLE_LOOP_RANDOM,
   TOGGLE_MUTED,
+  SET_INDEX_ON_CLICK,
   ADD_TO_PLAYLIST,
-  ADD_ALL_TO_PLAYLIST,
+  TOGGLE_ADD_TO_FAVLIST,
   DELETE_FROM_PLAYLIST,
   DELETE_ALL_FROM_PLAYLIST,
-  HANDLE_PLAYLIST_ITEM_CLICK,
-  TOGGLE_ADD_TO_FAVLIST
+  HANDLE_PLAYLIST_ITEM_CLICK
 } from "./constants.js";
 
 const initState = {
@@ -26,10 +26,10 @@ const initState = {
   loop: false,
   random: false,
   playlist: [],
-  index: null,
-  id: "",
-  title: "--", //speeches[0].title,
-  speaker: "--", //speakers[speeches[0].speakerId].name
+  index: 0,
+  id: "1",
+  title: speeches[0].title,
+  speaker: speakers[speeches[0].speakerId].name,
   favlist: []
 };
 
@@ -62,15 +62,6 @@ const handleUrlChange = state => {
       };
     }
   } else {
-    /* const copylist = [...state.playlist];
-    const randomList = copylist => {
-      for (var i = copylist.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = copylist[i];
-        copylist[i] = copylist[j];
-        copylist[j] = temp;
-      }
-    }; */
     const randomIndex = generateRandomIndex(state);
     const random = state.playlist[randomIndex];
     let speaker = speakers[random.speakerId].name;
@@ -166,9 +157,58 @@ const rootReducer = (state = initState, action) => {
         ...state,
         muted: !state.muted
       };
-    case HANDLE_PLAYLIST_ITEM_CLICK:
-      let speechSelected = state.playlist[action.payload];
+    case SET_INDEX_ON_CLICK:
+      let speechSelected = speeches.find(item => item.id === action.payload);
       let speaker = speakers[speechSelected.speakerId].name;
+      if (state.playlist.indexOf(speechSelected) === -1) {
+        return {
+          ...state,
+          playlist: [...state.playlist, speechSelected],
+          index: state.playlist.length,
+          id: speechSelected.id,
+          title: speechSelected.title,
+          speaker
+        };
+      } else {
+        let index = state.playlist.indexOf(speechSelected);
+        return {
+          ...state,
+          index: index,
+          id: speechSelected.id,
+          title: speechSelected.title,
+          speaker
+        };
+      }
+    case ADD_TO_PLAYLIST:
+      let speechToAdd = speeches.find(item => item.id === action.payload);
+      if (state.playlist.indexOf(speechToAdd) === -1) {
+        return {
+          ...state,
+          playlist: [...state.playlist, speechToAdd]
+        };
+      }
+      return state;
+    case TOGGLE_ADD_TO_FAVLIST:
+      let favCheck = action.payload.every(
+        item => state.favlist.indexOf(item) > -1
+      );
+      if (favCheck === false) {
+        let favlist = [...new Set([...state.favlist, ...action.payload])];
+        return {
+          ...state,
+          favlist
+        };
+      }
+      let favlist = state.favlist.filter(
+        item => !action.payload.includes(item)
+      );
+      return {
+        ...state,
+        favlist
+      };
+    case HANDLE_PLAYLIST_ITEM_CLICK:
+      speechSelected = state.playlist[action.payload];
+      speaker = speakers[speechSelected.speakerId].name;
       return {
         ...state,
         index: action.payload,
@@ -176,28 +216,6 @@ const rootReducer = (state = initState, action) => {
         title: speechSelected.title,
         speaker
       };
-    case ADD_TO_PLAYLIST:
-      let speechToAdd = speeches.find(item => item.id === action.payload);
-      speaker = speakers[speechToAdd.speakerId].name;
-      if (state.playlist.indexOf(speechToAdd) === -1) {
-        return {
-          ...state,
-          playlist: [...state.playlist, speechToAdd],
-          index: state.playlist.length,
-          id: speechToAdd.id,
-          title: speechToAdd.title,
-          speaker
-        };
-      } else {
-        let index = state.playlist.indexOf(speechToAdd);
-        return {
-          ...state,
-          index: index,
-          id: speechToAdd.id,
-          title: speechToAdd.title,
-          speaker
-        };
-      }
     case DELETE_FROM_PLAYLIST:
       let playlist = state.playlist.filter(
         (item, index) => index !== action.payload
@@ -229,40 +247,12 @@ const rootReducer = (state = initState, action) => {
       if (state.playlist.length > 0) {
         return {
           ...state,
-          playlist: []
+          playlist: [],
+          index: 0,
+          playing: false
         };
       }
       return state;
-    /* case TOGGLE_ADD_TO_FAVLIST:
-      if (state.favlist.indexOf(action.payload) === -1) {
-        return {
-          ...state,
-          favlist: [...state.favlist, action.payload]
-        };
-      }
-      let favlist = state.favlist.filter(item => item !== action.payload);
-      return {
-        ...state,
-        favlist
-      }; */
-    case TOGGLE_ADD_TO_FAVLIST:
-      let favCheck = action.payload.every(
-        item => state.favlist.indexOf(item) > -1
-      );
-      if (favCheck === false) {
-        let favlist = [...new Set([...state.favlist, ...action.payload])];
-        return {
-          ...state,
-          favlist
-        };
-      }
-      let favlist = state.favlist.filter(
-        item => !action.payload.includes(item)
-      );
-      return {
-        ...state,
-        favlist
-      };
     default:
       return state;
   }

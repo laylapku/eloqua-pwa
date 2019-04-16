@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ReactPlayer from "react-player";
-import DailyRecommend from "../components/DailyRecommend.js";
 import Search from "../components/Search.js";
 import Favorites from "../components/Favorites.js";
-import Account from "../components/Account.js";
+import Settings from "../components/Settings.js";
 import About from "../components/About.js";
-import Text from "../components/Text.js";
 import PlayList from "../components/Speech/PlayList.js";
+import Text from "../components/Text.js";
+import speeches from "../data/speeches.js";
 import { onPlay, onPause, onDuration, onEnded } from "../actions.js";
 
 const mapStatetoProps = state => {
@@ -26,7 +26,7 @@ const mapDispatchToProps = dispatch => {
 
 class App extends Component {
   state = {
-    url: "",
+    url: speeches[0].url,
     played: 0
   };
 
@@ -90,10 +90,9 @@ class App extends Component {
           onProgress={this.onProgress}
         />
         <Switch>
-          <Route exact path="/" component={DailyRecommend} />
-          <Route path="/search" component={Search} />
+          <Route exact path="/" component={Search} />
           <Route path="/favorites" component={Favorites} />
-          <Route path="/account" component={Account} />
+          <Route path="/settings" component={Settings} />
           <Route path="/about" component={About} />
           <Route path="/playlist" component={PlayList} />
           <Route

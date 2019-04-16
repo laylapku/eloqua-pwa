@@ -5,9 +5,6 @@ import SwipeableViews from "react-swipeable-views";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Input from "@material-ui/core/Input";
-import IconButton from "@material-ui/core/IconButton";
-import SearchIcon from "@material-ui/icons/Search";
 import SpeechList from "./Speech/SpeechList.js";
 import SpeakerList from "./Speech/SpeakerList.js";
 import ThemeList from "./Speech/ThemeList.js";
@@ -24,48 +21,26 @@ const styles = theme => ({
 
 class Search extends Component {
   state = {
-    tabValue: 0,
-    filter: ""
+    value: 0
   };
 
   handleTabChange = (event, value) => {
-    this.setState({ tabValue: value });
+    this.setState({ value });
   };
 
   handleTabChangeIndex = index => {
-    this.setState({ tabValue: index });
-  };
-
-  handleInputChange = e => {
-    this.setState({ filter: e.target.value });
-  };
-
-  filterSpeech = value => {
-    this.setState({ filter: value, tabValue: 0 });
+    this.setState({ value: index });
   };
 
   render() {
     const { classes, theme } = this.props;
-    const { tabValue, filter} = this.state;
+    const { value } = this.state;
 
     return (
       <React.Fragment>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <Input
-            className={classes.input}
-            placeholder="Find speaker or speech"
-            inputProps={{
-              "aria-label": "Description"
-            }}
-            onChange={this.handleInputChange}
-          />
-          <IconButton onClick={() => this.filterSpeech(filter)}> 
-            <SearchIcon />
-          </IconButton>
-        </div>
         <AppBar position="static" color="default" className={classes.appBar}>
           <Tabs
-            value={tabValue}
+            value={value}
             onChange={this.handleTabChange}
             indicatorColor="primary"
             textColor="primary"
@@ -80,12 +55,12 @@ class Search extends Component {
         <SwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
           slideStyle={{ overflow: "visible" }}
-          index={tabValue}
+          index={value}
           onChangeIndex={this.handleTabChangeIndex}
         >
-          <SpeechList dir={theme.direction} filter={filter} />
-          <SpeakerList dir={theme.direction} filterSpeech={this.filterSpeech} />
-          <ThemeList dir={theme.direction} filterSpeech={this.filterSpeech} />
+          <SpeechList dir={theme.direction} />
+          <SpeakerList dir={theme.direction} />
+          <ThemeList dir={theme.direction} />
         </SwipeableViews>
 
         <BottomBar />
