@@ -5,16 +5,17 @@ import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import FilteredList from "./FilteredList";
 import speeches from "../../data/speeches.js";
+import categories from "../../data/categories.js";
 
 const styles = {
-  avatar: {
+  icon: {
     margin: 10,
     width: 80,
     height: 80
   }
 };
 
-class ThemeList extends Component {
+class CategoryList extends Component {
   state = {
     filter: ""
   };
@@ -25,25 +26,26 @@ class ThemeList extends Component {
 
   render() {
     const { classes } = this.props;
-    const themes = [
+    /* const categories = [
       ...new Set(
         speeches
-          .map(item => item.theme)
+          .map(item => item.category)
           .toString()
           .split(",")
       )
-    ];
+    ]; */
 
     return (
       <React.Fragment>
         {this.state.filter === "" ? (
           <Grid container justify="space-around">
-            {themes.map((item, index) => (
+            {categories.map((item, index) => (
               <div key={index}>
                 <Avatar
-                  alt={item}
-                  className={classes.avatar}
-                  onClick={() => this.filterSpeech(item)}
+                  alt={item.theme}
+                  src={item.icon}
+                  className={classes.icon}
+                  onClick={() => this.filterSpeech(item.theme)}
                 />
                 <p
                   style={{
@@ -52,7 +54,7 @@ class ThemeList extends Component {
                     justifyContent: "space-around"
                   }}
                 >
-                  {item}
+                  {item.theme}
                 </p>
               </div>
             ))}
@@ -65,8 +67,8 @@ class ThemeList extends Component {
   }
 }
 
-ThemeList.propTypes = {
+CategoryList.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ThemeList);
+export default withStyles(styles)(CategoryList);

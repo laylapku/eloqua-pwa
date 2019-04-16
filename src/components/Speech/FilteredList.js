@@ -34,7 +34,7 @@ const FilteredList = props => {
         .filter(
           item =>
             item.speakerId === filter || //by speaker
-            item.theme.includes(filter) || //by theme
+            item.category.includes(filter) || //by category
             item.title.toLowerCase().includes(filter) || //by search of speech title
             speakers[item.speakerId].name.toLowerCase().includes(filter) //by search of speaker name, better solution??
         )

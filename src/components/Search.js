@@ -7,7 +7,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import SpeechList from "./Speech/SpeechList.js";
 import SpeakerList from "./Speech/SpeakerList.js";
-import ThemeList from "./Speech/ThemeList.js";
+import CategoryList from "./Speech/CategoryList.js";
 import BottomBar from "./BottomBar.js";
 
 const styles = theme => ({
@@ -48,7 +48,7 @@ class Search extends Component {
           >
             <Tab label="All" />
             <Tab label="Speaker" />
-            <Tab label="Theme" />
+            <Tab label="Category" />
           </Tabs>
         </AppBar>
 
@@ -60,7 +60,7 @@ class Search extends Component {
         >
           <SpeechList dir={theme.direction} />
           <SpeakerList dir={theme.direction} />
-          <ThemeList dir={theme.direction} />
+          <CategoryList dir={theme.direction} />
         </SwipeableViews>
 
         <BottomBar />
