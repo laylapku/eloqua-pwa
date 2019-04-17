@@ -45,7 +45,7 @@ class CategoryList extends Component {
                   alt={item.theme}
                   src={item.icon}
                   className={classes.icon}
-                  onClick={() => this.filterSpeech(item.theme)}
+                  onClick={() => this.filterSpeech(item.id)}
                 />
                 <p
                   style={{
@@ -60,7 +60,7 @@ class CategoryList extends Component {
             ))}
           </Grid>
         ) : (
-          <FilteredList filter={this.state.filter} />
+          <FilteredList categoryFilter={this.state.filter} />
         )}
       </React.Fragment>
     );

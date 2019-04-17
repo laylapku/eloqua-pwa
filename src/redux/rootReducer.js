@@ -1,5 +1,5 @@
-import speeches from "./data/speeches";
-import speakers from "./data/speakers";
+import speeches from "../data/speeches";
+import speakers from "../data/speakers";
 import {
   PLAY_PAUSE,
   ON_PLAY,
@@ -158,7 +158,7 @@ const rootReducer = (state = initState, action) => {
         muted: !state.muted
       };
     case SET_INDEX_ON_CLICK:
-      let speechSelected = speeches.find(item => item.id === action.payload);
+      let speechSelected = speeches.find(ele => ele.id === action.payload);
       let speaker = speakers[speechSelected.speakerId].name;
       if (state.playlist.indexOf(speechSelected) === -1) {
         return {
@@ -180,8 +180,8 @@ const rootReducer = (state = initState, action) => {
         };
       }
     case ADD_TO_PLAYLIST:
-      let speechToAdd = speeches.find(item => item.id === action.payload);
-      if (state.playlist.indexOf(speechToAdd) === -1) {
+      let speechToAdd = speeches.find(ele => ele.id === action.payload);
+      if (!state.playlist.some(ele => ele.id === action.payload)) {
         return {
           ...state,
           playlist: [...state.playlist, speechToAdd]
@@ -190,7 +190,7 @@ const rootReducer = (state = initState, action) => {
       return state;
     case TOGGLE_ADD_TO_FAVLIST:
       let favCheck = action.payload.every(
-        item => state.favlist.indexOf(item) > -1
+        ele => state.favlist.indexOf(ele) > -1
       );
       if (favCheck === false) {
         let favlist = [...new Set([...state.favlist, ...action.payload])];
@@ -200,7 +200,7 @@ const rootReducer = (state = initState, action) => {
         };
       }
       let favlist = state.favlist.filter(
-        item => !action.payload.includes(item)
+        ele => !action.payload.includes(ele)
       );
       return {
         ...state,
@@ -218,7 +218,7 @@ const rootReducer = (state = initState, action) => {
       };
     case DELETE_FROM_PLAYLIST:
       let playlist = state.playlist.filter(
-        (item, index) => index !== action.payload
+        (ele, index) => index !== action.payload
       );
       if (state.index === state.playlist.length - 1) {
         return {

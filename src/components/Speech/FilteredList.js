@@ -10,7 +10,7 @@ import IconButton from "@material-ui/core/IconButton";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import speeches from "../../data/speeches";
 import speakers from "../../data/speakers";
-import { addToPlaylist, setIndexOnClick } from "../../actions.js";
+import { addToPlaylist, setIndexOnClick } from "../../redux/actions.js";
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -26,17 +26,24 @@ const styles = theme => ({
 });
 
 const FilteredList = props => {
-  const { classes, filter, addToPlaylist, setIndexOnClick } = props;
+  const {
+    classes,
+    speakerFilter,
+    categoryFilter,
+    inputFilter,
+    addToPlaylist,
+    setIndexOnClick
+  } = props;
 
   return (
     <List className={classes.root}>
       {speeches
         .filter(
           item =>
-            item.speakerId === filter || //by speaker
-            item.category.includes(filter) || //by category
-            item.title.toLowerCase().includes(filter) || //by search of speech title
-            speakers[item.speakerId].name.toLowerCase().includes(filter) //by search of speaker name, better solution??
+            item.speakerId === speakerFilter || //by speaker
+            item.category.includes(categoryFilter) || //by category
+            item.title.toLowerCase().includes(inputFilter) || //by search of speech title
+            speakers[item.speakerId].name.toLowerCase().includes(inputFilter) //by search of speaker name, better solution??
         )
         .map((item, index) => {
           const year = item.date.split(" ")[2];

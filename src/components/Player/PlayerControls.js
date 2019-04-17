@@ -26,7 +26,7 @@ import {
   onNext,
   toggleLoopRandom,
   toggleMuted
-} from "../../actions.js";
+} from "../../redux/actions.js";
 
 const mapStatetoProps = state => {
   return state;

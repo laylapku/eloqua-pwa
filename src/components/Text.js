@@ -14,7 +14,7 @@ import PlayerControls from "./Player/PlayerControls.js";
 import speeches from "../data/speeches";
 import speakers from "../data/speakers";
 import texts from "../data/texts";
-import { toggleAddToFavlist } from "../actions.js";
+import { toggleAddToFavlist } from "../redux/actions.js";
 
 const mapStatetoProps = state => {
   return { id: state.id, favlist: state.favlist };

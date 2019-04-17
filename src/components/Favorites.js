@@ -10,7 +10,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import BottomBar from "./BottomBar.js";
 import speeches from "../data/speeches";
 import speakers from "../data/speakers";
-import { toggleAddToFavlist } from "../actions.js";
+import { toggleAddToFavlist } from "../redux/actions.js";
 
 const mapStateToProps = state => {
   return { favlist: state.favlist };

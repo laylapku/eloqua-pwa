@@ -8,7 +8,6 @@ import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ShareIcon from "@material-ui/icons/Share";
-import SaveAltIcon from "@material-ui/icons/SaveAlt";
 import DeleteIcon from "@material-ui/icons/Delete";
 import BottomBar from "../BottomBar.js";
 import speakers from "../../data/speakers";
@@ -17,7 +16,7 @@ import {
   deleteFromPlaylist,
   deleteAllFromPlaylist,
   toggleAddToFavlist
-} from "../../actions.js";
+} from "../../redux/actions.js";
 
 const mapStateToProps = state => {
   return {
@@ -51,7 +50,7 @@ const styles = theme => ({
   list: {
     display: "grid",
     alignItems: "center",
-    gridTemplateColumns: "8% auto repeat(4, 8%)"
+    gridTemplateColumns: "8% auto repeat(3, 10%)"
   }
 });
 
@@ -74,12 +73,16 @@ const PlayList = props => {
         {/* todo: list overflow */}
         <div className={classes.header}>
           <h3>Your PlayList</h3>
-          {playlist.length > 0 && favCheck === true ? (
-            <FavoriteIcon onClick={() => toggleAddToFavlist(ids)} />
-          ) : (
-            <FavoriteBorderIcon onClick={() => toggleAddToFavlist(ids)} />
-          )}
-          <DeleteIcon onClick={deleteAllFromPlaylist} />
+          <IconButton>
+            {playlist.length > 0 && favCheck === true ? (
+              <FavoriteIcon onClick={() => toggleAddToFavlist(ids)} />
+            ) : (
+              <FavoriteBorderIcon onClick={() => toggleAddToFavlist(ids)} />
+            )}
+          </IconButton>
+          <IconButton>
+            <DeleteIcon onClick={deleteAllFromPlaylist} />
+          </IconButton>
         </div>
 
         {playlist.map((item, index) => {
@@ -87,7 +90,13 @@ const PlayList = props => {
 
           return (
             <div className={classes.list} key={index}>
-              {index === props.index ? <PlayArrowIcon /> : <p />}
+              {index === props.index ? (
+                <IconButton>
+                  <PlayArrowIcon />
+                </IconButton>
+              ) : (
+                <p />
+              )}
               <p onClick={() => handlePlaylistItemClick(index)}>
                 {item.title + " - " + speaker}
               </p>
@@ -98,9 +107,12 @@ const PlayList = props => {
                   <FavoriteBorderIcon />
                 )}
               </IconButton>
-              <ShareIcon />
-              <SaveAltIcon />
-              <DeleteIcon onClick={() => deleteFromPlaylist(index)} />
+              <IconButton>
+                <ShareIcon />
+              </IconButton>
+              <IconButton>
+                <DeleteIcon onClick={() => deleteFromPlaylist(index)} />
+              </IconButton>
             </div>
           );
         })}

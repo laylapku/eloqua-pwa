@@ -19,7 +19,7 @@ import ListIcon from "@material-ui/icons/List";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
-import { playPause, onNext } from "../actions.js";
+import { playPause, onNext } from "../redux/actions.js";
 
 const mapStatetoProps = state => {
   return state;

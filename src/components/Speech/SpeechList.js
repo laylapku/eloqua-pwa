@@ -13,7 +13,7 @@ import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import FilteredList from "./FilteredList";
 import speeches from "../../data/speeches";
 import speakers from "../../data/speakers";
-import { addToPlaylist, setIndexOnClick } from "../../actions.js";
+import { addToPlaylist, setIndexOnClick } from "../../redux/actions.js";
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -27,7 +27,8 @@ const styles = theme => ({
     width: "100%"
   },
   input: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
+    width: "200px"
   }
 });
 
@@ -85,7 +86,7 @@ class SpeechList extends Component {
               );
             })
           ) : (
-            <FilteredList filter={this.state.filter} />
+            <FilteredList inputFilter={this.state.filter} />
           )}
         </List>
       </React.Fragment>

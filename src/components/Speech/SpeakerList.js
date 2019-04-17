@@ -50,7 +50,7 @@ class SpeakerList extends Component {
             ))}
           </Grid>
         ) : (
-          <FilteredList filter={this.state.filter} />
+          <FilteredList speakerFilter={this.state.filter} />
         )}
       </React.Fragment>
     );
