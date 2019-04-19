@@ -2,12 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import ShareIcon from "@material-ui/icons/Share";
 import DeleteIcon from "@material-ui/icons/Delete";
 import BottomBar from "../BottomBar.js";
 import speakers from "../../data/speakers";
@@ -50,7 +50,18 @@ const styles = theme => ({
   list: {
     display: "grid",
     alignItems: "center",
-    gridTemplateColumns: "8% auto repeat(3, 10%)"
+    gridTemplateColumns: "8% auto repeat(2, 10%)"
+  },
+  listItem: {
+    "&:hover": {
+      backgroundColor: "#EDEAE0",
+      borderRadius: "3px",
+      padding: "5px 10px",
+      easeInOut: "all 1s"
+      /* "@media(hover:none)": {
+        backgroundColor: "red"
+      } */
+    }
   }
 });
 
@@ -69,8 +80,7 @@ const PlayList = props => {
 
   return (
     <React.Fragment>
-      <Paper className={classes.root}>
-        {/* todo: list overflow */}
+      <div className={classes.root}>
         <div className={classes.header}>
           <h3>Your PlayList</h3>
           <IconButton>
@@ -97,9 +107,12 @@ const PlayList = props => {
               ) : (
                 <p />
               )}
-              <p onClick={() => handlePlaylistItemClick(index)}>
-                {item.title + " - " + speaker}
-              </p>
+              <ListItem button classes={{ button: classes.listItem }}>
+                <ListItemText
+                  onClick={() => handlePlaylistItemClick(index)}
+                  primary={item.title + " - " + speaker}
+                />
+              </ListItem>
               <IconButton onClick={() => toggleAddToFavlist([item.id])}>
                 {favlist.indexOf(item.id) !== -1 ? (
                   <FavoriteIcon />
@@ -108,19 +121,51 @@ const PlayList = props => {
                 )}
               </IconButton>
               <IconButton>
-                <ShareIcon />
-              </IconButton>
-              <IconButton>
                 <DeleteIcon onClick={() => deleteFromPlaylist(index)} />
               </IconButton>
             </div>
           );
         })}
-      </Paper>
+      </div>
       <BottomBar />
     </React.Fragment>
   );
 };
+
+{
+  /* <Grid item xs={12} md={6}>
+              <List>
+                <ListItem>
+                  <ListItemAvatar>
+                    {index === props.index ? (
+                      <IconButton>
+                        <PlayArrowIcon />
+                      </IconButton>
+                    ) : (
+                      <p />
+                    )}
+                  </ListItemAvatar>
+                  <ListItemText
+                    onClick={() => handlePlaylistItemClick(index)}
+                    primary={item.title + " - " + speaker}
+                    classes={{ root: classes.text }}
+                  />
+                  <ListItemSecondaryAction>
+                    <IconButton onClick={() => toggleAddToFavlist([item.id])}>
+                      {favlist.indexOf(item.id) !== -1 ? (
+                        <FavoriteIcon />
+                      ) : (
+                        <FavoriteBorderIcon />
+                      )}
+                    </IconButton>
+                    <IconButton>
+                      <DeleteIcon onClick={() => deleteFromPlaylist(index)} />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              </List>
+            </Grid> */
+}
 
 PlayList.propTypes = {
   classes: PropTypes.object.isRequired

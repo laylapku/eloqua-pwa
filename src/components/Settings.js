@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import About from "./About.js";
@@ -32,20 +31,20 @@ class Settings extends Component {
 
     return (
       <React.Fragment>
-        <AppBar position="static" color="default" className={classes.appBar}>
-          <Tabs
-            value={value}
-            onChange={this.handleTabChange}
-            indicatorColor="primary"
-            textColor="primary"
-            centered
-          >
-            <Tab label="General" />
-            <Tab label="About" />
-          </Tabs>
-        </AppBar>
+        <Tabs
+          value={value}
+          onChange={this.handleTabChange}
+          indicatorColor="primary"
+          textColor="primary"
+          centered
+        >
+          <Tab label="General" />
+          <Tab label="About" />
+        </Tabs>
         {value === 0 && <p>Item One</p>}
         {value === 1 && <About />}
+
+        <BottomBar />
       </React.Fragment>
     );
   }

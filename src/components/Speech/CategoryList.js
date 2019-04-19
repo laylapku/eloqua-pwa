@@ -4,10 +4,13 @@ import { withStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import FilteredList from "./FilteredList";
-import speeches from "../../data/speeches.js";
 import categories from "../../data/categories.js";
 
 const styles = {
+  root: {
+    marginBottom: "100px",
+    marginTop: "50px"
+  },
   icon: {
     margin: 10,
     width: 80,
@@ -26,17 +29,9 @@ class CategoryList extends Component {
 
   render() {
     const { classes } = this.props;
-    /* const categories = [
-      ...new Set(
-        speeches
-          .map(item => item.category)
-          .toString()
-          .split(",")
-      )
-    ]; */
 
     return (
-      <React.Fragment>
+      <div className={classes.root}>
         {this.state.filter === "" ? (
           <Grid container justify="space-around">
             {categories.map((item, index) => (
@@ -62,7 +57,7 @@ class CategoryList extends Component {
         ) : (
           <FilteredList categoryFilter={this.state.filter} />
         )}
-      </React.Fragment>
+      </div>
     );
   }
 }

@@ -6,16 +6,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: RGB(202, 187, 143, 0.2);
+  background: linear-gradient(
+    90deg,
+    RGB(202, 187, 143, 0.3) 0%,
+    RGB(202, 187, 143, 0.5) 100%
+  );
 }
-
-/* .react-swipeable-view-container > div [aria-hidden="false"] {
-  height: 100%
-}
-
-.react-swipeable-view-container > div [aria-hidden="true"] {
-  height: 0
-} */
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -25,5 +21,5 @@ code {
 a {
   cursor: pointer;
   text-decoration: none;
-  color:		#232B2B;
+  color: #fff;
 }

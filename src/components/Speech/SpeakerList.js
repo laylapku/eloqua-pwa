@@ -1,18 +1,28 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Avatar from "@material-ui/core/Avatar";
-import Grid from "@material-ui/core/Grid";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
 import FilteredList from "./FilteredList";
 import speakers from "../../data/speakers.js";
 
-const styles = {
-  avatar: {
-    margin: 10,
-    width: 80,
-    height: 80
+const styles = theme => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    overflow: "hidden",
+    backgroundColor: "inherit",
+    marginBottom: "100px",
+    marginTop: "50px"
+  },
+  title: {
+    fontSize: "0.8rem",
+    lineHeight: "20px",
+    whiteSpace: "normal"
   }
-};
+});
 
 class SpeakerList extends Component {
   state = {
@@ -26,33 +36,26 @@ class SpeakerList extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <React.Fragment>
+      <div className={classes.root}>
         {this.state.filter === "" ? (
-          <Grid container justify="space-around">
-            {Object.values(speakers).map((item, index) => (
-              <div key={index}>
-                <Avatar
-                  alt={item.name}
-                  src={item.img}
-                  className={classes.avatar}
-                  onClick={() => this.filterSpeech(item.id)}
+          <GridList cellHeight={150} cols={3} spacing={1}>
+            {Object.values(speakers).map((ele, index) => (
+              <GridListTile
+                key={index}
+                onClick={() => this.filterSpeech(ele.id)}
+              >
+                <img src={ele.img} alt={ele.name} />
+                <GridListTileBar
+                  title={ele.name}
+                  classes={{ title: classes.title }}
                 />
-                <p
-                  style={{
-                    fontSize: "12px",
-                    display: "flex",
-                    justifyContent: "space-around"
-                  }}
-                >
-                  {item.name}
-                </p>
-              </div>
+              </GridListTile>
             ))}
-          </Grid>
+          </GridList>
         ) : (
           <FilteredList speakerFilter={this.state.filter} />
         )}
-      </React.Fragment>
+      </div>
     );
   }
 }

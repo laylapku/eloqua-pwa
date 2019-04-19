@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   withStyles,
@@ -34,14 +34,30 @@ const mapDispatchToProps = dispatch => {
 
 const theme = createMuiTheme({
   overrides: {
+    MuiToolbar: {
+      gutters: {
+        paddingRight: 0
+      }
+    },
+    MuiIconButton: {
+      root: {
+        color: "inherit"
+      }
+    },
+    MuiBottomNavigation: {
+      root: {
+        backgroundColor: "#F4F4F4"
+      }
+    },
     MuiBottomNavigationAction: {
       root: {
-        color: "#fff",
-        padding: 0
+        color: "RGB(111,134,131)",
+        "&$selected": {
+          color: "RGB(203,125,64)"
+        }
       }
     }
-  },
-  typography: { useNextVariants: true }
+  }
 });
 
 const styles = {
@@ -51,44 +67,49 @@ const styles = {
     bottom: 0
   },
   toolBar: {
-    background: "RGB(203,125,64)",
     display: "grid",
-    gridTemplateColumns: "auto 12% 10% 10%"
-  },
-  navContainer: {
+    gridTemplateColumns: "auto 12% 10% 10%",
     background: "RGB(202,187,143)"
   }
 };
 
 class BottomBar extends Component {
   render() {
-    const { classes, speaker, title, playing, playPause, onNext } = this.props;
+    const {
+      classes,
+      speaker,
+      title,
+      playing,
+      playPause,
+      onNext,
+      location: { pathname }
+    } = this.props;
 
     return (
-      <AppBar className={classes.appBar}>
-        <Toolbar className={classes.toolBar}>
-          <Link to="/text">
-            {
-              <span>
-                {title}
-                <br />
-                <em>{speaker}</em>
-              </span>
-            }
-          </Link>
-          <Link to="/playlist">
-            <ListIcon />
-          </Link>
-          <IconButton onClick={playPause}>
-            {playing ? <PauseCircleFilledIcon /> : <PlayCircleFilledIcon />}
-          </IconButton>
-          <IconButton onClick={onNext}>
-            <SkipNextIcon />
-          </IconButton>
-        </Toolbar>
+      <MuiThemeProvider theme={theme}>
+        <AppBar className={classes.appBar}>
+          <Toolbar className={classes.toolBar}>
+            <Link to="/text">
+              {
+                <span>
+                  {title}
+                  <br />
+                  <em>{speaker}</em>
+                </span>
+              }
+            </Link>
+            <IconButton component={Link} to="/playlist">
+              <ListIcon />
+            </IconButton>
+            <IconButton onClick={playPause}>
+              {playing ? <PauseCircleFilledIcon /> : <PlayCircleFilledIcon />}
+            </IconButton>
+            <IconButton onClick={onNext}>
+              <SkipNextIcon />
+            </IconButton>
+          </Toolbar>
 
-        <MuiThemeProvider theme={theme}>
-          <BottomNavigation className={classes.navContainer} showLabels>
+          <BottomNavigation showLabels value={setRouteIndex(pathname)}>
             <BottomNavigationAction
               component={Link}
               to="/"
@@ -108,8 +129,8 @@ class BottomBar extends Component {
               icon={<SettingsIcon />}
             />
           </BottomNavigation>
-        </MuiThemeProvider>
-      </AppBar>
+        </AppBar>
+      </MuiThemeProvider>
     );
   }
 }
@@ -119,8 +140,21 @@ BottomBar.propTypes = {
 };
 
 export default withStyles(styles, { withTheme: true })(
-  connect(
-    mapStatetoProps,
-    mapDispatchToProps
-  )(BottomBar)
+  withRouter(
+    connect(
+      mapStatetoProps,
+      mapDispatchToProps
+    )(BottomBar)
+  )
 );
+
+function setRouteIndex(pathname) {
+  switch (pathname) {
+    case "/favorites":
+      return 1;
+    case "/settings":
+      return 2;
+    default:
+      return 0;
+  }
+}

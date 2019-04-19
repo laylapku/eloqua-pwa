@@ -24,11 +24,20 @@ const mapDispatchToProps = dispatch => {
 
 const styles = theme => ({
   root: {
-    width: "100%"
+    marginBottom: "100px",
+    marginTop: "50px"
   },
   input: {
     margin: theme.spacing.unit,
     width: "200px"
+  },
+  line: {
+    height: 0,
+    width: "100%",
+    border: "1px groove RGB(202,187,143,0.2)"
+  },
+  list: {
+    padding: 0
   }
 });
 
@@ -49,7 +58,7 @@ class SpeechList extends Component {
     const { classes, addToPlaylist, setIndexOnClick } = this.props;
 
     return (
-      <React.Fragment>
+      <div className={classes.root}>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Input
             className={classes.input}
@@ -63,33 +72,37 @@ class SpeechList extends Component {
             <SearchIcon />
           </IconButton>
         </div>
-        <List className={classes.root}>
+
+        <div>
           {this.state.filter === "" ? (
             speeches.map((item, index) => {
               const year = item.date.split(" ")[2];
               const speaker = speakers[item.speakerId].name;
               return (
-                <ListItem
-                  key={index}
-                  button
-                  onClick={() => setIndexOnClick(item.id)}
-                >
-                  <ListItemText
-                    primary={speaker + " - " + item.title + "(" + year + ")"}
-                  />
-                  <ListItemSecondaryAction>
-                    <IconButton onClick={() => addToPlaylist(item.id)}>
-                      <PlaylistAddIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
+                <List classes={{ padding: classes.list }}>
+                  <ListItem
+                    key={index}
+                    button
+                    onClick={() => setIndexOnClick(item.id)}
+                  >
+                    <ListItemText
+                      primary={speaker + " - " + item.title + "(" + year + ")"}
+                    />
+                    <ListItemSecondaryAction>
+                      <IconButton onClick={() => addToPlaylist(item.id)}>
+                        <PlaylistAddIcon />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                  <div className={classes.line} />
+                </List>
               );
             })
           ) : (
             <FilteredList inputFilter={this.state.filter} />
           )}
-        </List>
-      </React.Fragment>
+        </div>
+      </div>
     );
   }
 }

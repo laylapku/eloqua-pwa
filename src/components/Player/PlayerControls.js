@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   withStyles,
@@ -18,14 +19,19 @@ import RepeatOneIcon from "@material-ui/icons/RepeatOne";
 import LoopIcon from "@material-ui/icons/Loop";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
 import VolumeOffIcon from "@material-ui/icons/VolumeOff";
+import ListIcon from "@material-ui/icons/List";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import Duration from "./Duration.js";
+import speeches from "../../data/speeches";
 import {
   playPause,
   onDuration,
   onPrev,
   onNext,
   toggleLoopRandom,
-  toggleMuted
+  toggleMuted,
+  toggleAddToFavlist
 } from "../../redux/actions.js";
 
 const mapStatetoProps = state => {
@@ -39,7 +45,8 @@ const mapDispatchToProps = dispatch => {
     onPrev: () => dispatch(onPrev()),
     onNext: () => dispatch(onNext()),
     toggleLoopRandom: () => dispatch(toggleLoopRandom()),
-    toggleMuted: () => dispatch(toggleMuted())
+    toggleMuted: () => dispatch(toggleMuted()),
+    toggleAddToFavlist: id => dispatch(toggleAddToFavlist(id))
   };
 };
 
@@ -52,9 +59,13 @@ const theme = createMuiTheme({
       thumb: {
         backgroundColor: "RGB(203,125,64)"
       }
+    },
+    MuiIconButton: {
+      root: {
+        padding: "20px"
+      }
     }
-  },
-  typography: { useNextVariants: true }
+  }
 });
 
 const styles = {
@@ -76,20 +87,24 @@ const PlayControls = props => {
     random,
     muted,
     duration,
+    id,
+    favlist,
     playPause,
     onPrev,
     onNext,
     toggleLoopRandom,
     toggleMuted,
+    toggleAddToFavlist,
     onSliderChange,
     onSeekStart,
     onSeekEnd,
     played
   } = props;
+  const speechPlayed = speeches.find(item => item.id === id);
 
   return (
-    <Paper className={classes.root}>
-      <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={theme}>
+      <Paper className={classes.root}>
         <Slider
           value={played}
           max={1}
@@ -97,34 +112,44 @@ const PlayControls = props => {
           onDragStart={onSeekStart}
           onDragEnd={onSeekEnd}
         />
-      </MuiThemeProvider>
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Duration seconds={duration * played} />/
-        <Duration seconds={duration} />
-      </div>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <Duration seconds={duration * played} />/
+          <Duration seconds={duration} />
+        </div>
 
-      <div style={{ display: "flex", justifyContent: "space-around" }}>
-        <IconButton onClick={toggleLoopRandom}>
-          {loop ? <RepeatOneIcon /> : random ? <ShuffleIcon /> : <LoopIcon />}
-        </IconButton>
-        <IconButton onClick={onPrev}>
-          <SkipPreviousIcon />
-        </IconButton>
-        <IconButton onClick={playPause}>
-          {playing ? (
-            <PauseCircleOutlineIcon className={classes.playPauseIcon} />
-          ) : (
-            <PlayCircleOutlineIcon className={classes.playPauseIcon} />
-          )}
-        </IconButton>
-        <IconButton onClick={onNext}>
-          <SkipNextIcon />
-        </IconButton>
-        <IconButton onClick={toggleMuted}>
-          {!muted ? <VolumeUpIcon /> : <VolumeOffIcon />}
-        </IconButton>
-      </div>
-    </Paper>
+        <div style={{display: "flex", justifyContent: "center", flexWrap: "wrap"}}>
+          <IconButton onClick={toggleLoopRandom}>
+            {loop ? <RepeatOneIcon /> : random ? <ShuffleIcon /> : <LoopIcon />}
+          </IconButton>
+          <IconButton onClick={onPrev}>
+            <SkipPreviousIcon />
+          </IconButton>
+          <IconButton onClick={playPause}>
+            {playing ? (
+              <PauseCircleOutlineIcon className={classes.playPauseIcon} />
+            ) : (
+              <PlayCircleOutlineIcon className={classes.playPauseIcon} />
+            )}
+          </IconButton>
+          <IconButton onClick={onNext}>
+            <SkipNextIcon />
+          </IconButton>
+          <IconButton onClick={toggleMuted}>
+            {!muted ? <VolumeUpIcon /> : <VolumeOffIcon />}
+          </IconButton>
+          <IconButton onClick={() => toggleAddToFavlist([speechPlayed.id])}>
+            {favlist.indexOf(speechPlayed.id) !== -1 ? (
+              <FavoriteIcon />
+            ) : (
+              <FavoriteBorderIcon />
+            )}
+          </IconButton>
+          <IconButton component={Link} to="/playlist">
+            <ListIcon />
+          </IconButton>
+        </div>
+      </Paper>
+    </MuiThemeProvider>
   );
 };
 

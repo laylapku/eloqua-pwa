@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import SwipeableViews from "react-swipeable-views";
+import {
+  withStyles,
+  MuiThemeProvider,
+  createMuiTheme
+} from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -10,14 +13,34 @@ import SpeakerList from "./Speech/SpeakerList.js";
 import CategoryList from "./Speech/CategoryList.js";
 import BottomBar from "./BottomBar.js";
 
-const styles = theme => ({
-  appBar: {
-    borderRadius: "3px"
-  },
-  input: {
-    margin: theme.spacing.unit
+const theme = createMuiTheme({
+  overrides: {
+    MuiAppBar: {
+      colorPrimary: {
+        backgroundColor: "#EDEAE0",
+        color: "(0,0,0,0.8)"
+      }
+    },
+    MuiTabs: {
+      indicator: {
+        display: "none"
+      }
+    },
+    MuiTab: {
+      root: {
+        minHeight: "40px",
+        borderRadius: "5px",
+        marginTop: "5px"
+      },
+      "&$selected": {
+        background: "RGB(111,134,131,0.6)", //"#c0b283"
+        color: "#fff"
+      }
+    }
   }
 });
+
+const styles = theme => ({});
 
 class Search extends Component {
   state = {
@@ -33,35 +56,23 @@ class Search extends Component {
   };
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
     const { value } = this.state;
 
     return (
       <React.Fragment>
-        <AppBar position="static" color="default" className={classes.appBar}>
-          <Tabs
-            value={value}
-            onChange={this.handleTabChange}
-            indicatorColor="primary"
-            textColor="primary"
-            centered
-          >
-            <Tab label="All" />
-            <Tab label="Speaker" />
-            <Tab label="Category" />
-          </Tabs>
-        </AppBar>
-
-        <SwipeableViews
-          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-          slideStyle={{ overflow: "visible" }}
-          index={value}
-          onChangeIndex={this.handleTabChangeIndex}
-        >
-          <SpeechList dir={theme.direction} />
-          <SpeakerList dir={theme.direction} />
-          <CategoryList dir={theme.direction} />
-        </SwipeableViews>
+        <MuiThemeProvider theme={theme}>
+          <AppBar>
+            <Tabs value={value} onChange={this.handleTabChange} centered>
+              <Tab label="All" />
+              <Tab label="Speaker" />
+              <Tab label="Category" />
+            </Tabs>
+          </AppBar>
+        </MuiThemeProvider>
+        {value === 0 && <SpeechList />}
+        {value === 1 && <SpeakerList />}
+        {value === 2 && <CategoryList />}
 
         <BottomBar />
       </React.Fragment>

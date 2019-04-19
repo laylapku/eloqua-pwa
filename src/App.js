@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ReactPlayer from "react-player";
-import Search from "../components/Search.js";
-import Favorites from "../components/Favorites.js";
-import Settings from "../components/Settings.js";
-import About from "../components/About.js";
-import PlayList from "../components/Speech/PlayList.js";
-import Text from "../components/Text.js";
-import speeches from "../data/speeches.js";
-import { onPlay, onPause, onDuration, onEnded } from "../redux/actions.js";
+import Search from "./components/Search.js";
+import Favorites from "./components/Favorites.js";
+import Settings from "./components/Settings.js";
+import About from "./components/About.js";
+import PlayList from "./components/Speech/PlayList.js";
+import Text from "./components/Text.js";
+import speeches from "./data/speeches.js";
+import { onPlay, onPause, onDuration, onEnded } from "./redux/actions.js";
 
 const mapStatetoProps = state => {
   return state;

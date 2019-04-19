@@ -21,7 +21,12 @@ const mapDispatchToProps = dispatch => {
 
 const styles = theme => ({
   root: {
-    width: "100%"
+    marginBottom: "100px"
+  },
+  line: {
+    height: 0,
+    width: "100%",
+    border: "1px groove RGB(202,187,143,0.2)"
   }
 });
 
@@ -36,7 +41,7 @@ const FilteredList = props => {
   } = props;
 
   return (
-    <List className={classes.root}>
+    <div className={classes.root}>
       {speeches
         .filter(
           item =>
@@ -50,23 +55,26 @@ const FilteredList = props => {
           const speaker = speakers[item.speakerId].name;
 
           return (
-            <ListItem
-              key={index}
-              button
-              onClick={() => setIndexOnClick(item.id)}
-            >
-              <ListItemText
-                primary={speaker + " - " + item.title + "(" + year + ")"}
-              />
-              <ListItemSecondaryAction>
-                <IconButton onClick={() => addToPlaylist(item.id)}>
-                  <PlaylistAddIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
+            <List>
+              <ListItem
+                key={index}
+                button
+                onClick={() => setIndexOnClick(item.id)}
+              >
+                <ListItemText
+                  primary={speaker + " - " + item.title + "(" + year + ")"}
+                />
+                <ListItemSecondaryAction>
+                  <IconButton onClick={() => addToPlaylist(item.id)}>
+                    <PlaylistAddIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+              <div className={classes.line} />
+            </List>
           );
         })}
-    </List>
+    </div>
   );
 };
 
