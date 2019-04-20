@@ -68,7 +68,7 @@ const styles = {
   },
   toolBar: {
     display: "grid",
-    gridTemplateColumns: "auto 12% 10% 10%",
+    gridTemplateColumns: "auto 20% 10% 10%",
     background: "RGB(202,187,143)"
   }
 };

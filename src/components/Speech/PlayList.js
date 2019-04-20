@@ -107,11 +107,12 @@ const PlayList = props => {
               ) : (
                 <p />
               )}
-              <ListItem button classes={{ button: classes.listItem }}>
-                <ListItemText
-                  onClick={() => handlePlaylistItemClick(index)}
-                  primary={item.title + " - " + speaker}
-                />
+              <ListItem
+                button
+                onClick={() => handlePlaylistItemClick(index)}
+                classes={{ button: classes.listItem }}
+              >
+                <ListItemText primary={item.title + " - " + speaker} />
               </ListItem>
               <IconButton onClick={() => toggleAddToFavlist([item.id])}>
                 {favlist.indexOf(item.id) !== -1 ? (

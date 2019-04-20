@@ -188,6 +188,16 @@ const rootReducer = (state = initState, action) => {
         };
       }
       return state;
+    case HANDLE_PLAYLIST_ITEM_CLICK:
+      speechSelected = state.playlist[action.payload];
+      speaker = speakers[speechSelected.speakerId].name;
+      return {
+        ...state,
+        index: action.payload,
+        id: speechSelected.id,
+        title: speechSelected.title,
+        speaker
+      };
     case TOGGLE_ADD_TO_FAVLIST:
       let favCheck = action.payload.every(
         ele => state.favlist.indexOf(ele) > -1
@@ -199,22 +209,10 @@ const rootReducer = (state = initState, action) => {
           favlist
         };
       }
-      let favlist = state.favlist.filter(
-        ele => !action.payload.includes(ele)
-      );
+      let favlist = state.favlist.filter(ele => !action.payload.includes(ele));
       return {
         ...state,
         favlist
-      };
-    case HANDLE_PLAYLIST_ITEM_CLICK:
-      speechSelected = state.playlist[action.payload];
-      speaker = speakers[speechSelected.speakerId].name;
-      return {
-        ...state,
-        index: action.payload,
-        id: speechSelected.id,
-        title: speechSelected.title,
-        speaker
       };
     case DELETE_FROM_PLAYLIST:
       let playlist = state.playlist.filter(
