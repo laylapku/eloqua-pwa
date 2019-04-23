@@ -19,6 +19,8 @@ import ListIcon from "@material-ui/icons/List";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
+import speeches from "../data/speeches";
+import speakers from "../data/speakers";
 import { playPause, onNext } from "../redux/actions.js";
 
 const mapStatetoProps = state => {
@@ -57,6 +59,9 @@ const theme = createMuiTheme({
         }
       }
     }
+  },
+  typography: {
+    useNextVariants: true
   }
 });
 
@@ -68,7 +73,7 @@ const styles = {
   },
   toolBar: {
     display: "grid",
-    gridTemplateColumns: "auto 20% 10% 10%",
+    gridTemplateColumns: "auto 20% 12% 12%",
     background: "RGB(202,187,143)"
   }
 };
@@ -77,13 +82,14 @@ class BottomBar extends Component {
   render() {
     const {
       classes,
-      speaker,
-      title,
+      id,
       playing,
       playPause,
       onNext,
       location: { pathname }
     } = this.props;
+    const speechSelected = speeches.find(ele => ele.id === id);
+    const speaker = speakers[speechSelected.speakerId].name;
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -92,9 +98,9 @@ class BottomBar extends Component {
             <Link to="/text">
               {
                 <span>
-                  {title}
+                  {speechSelected.title}
                   <br />
-                  <em>{speaker}</em>
+                  <em className="speaker">{speaker}</em>
                 </span>
               }
             </Link>

@@ -28,15 +28,20 @@ const theme = createMuiTheme({
     },
     MuiTab: {
       root: {
-        minHeight: "40px",
-        borderRadius: "5px",
-        marginTop: "5px"
+        minHeight: "35px",
+        marginTop: "8px",
+        borderRadius: "5px"
       },
-      "&$selected": {
-        background: "RGB(111,134,131,0.6)", //"#c0b283"
-        color: "#fff"
+      textColorInherit: {
+        "&$selected": {
+          background: "RGB(203,125,64,0.6)",
+          color: "#fff"
+        }
       }
     }
+  },
+  typography: {
+    useNextVariants: true
   }
 });
 
@@ -56,7 +61,6 @@ class Search extends Component {
   };
 
   render() {
-    const { classes } = this.props;
     const { value } = this.state;
 
     return (
@@ -69,11 +73,10 @@ class Search extends Component {
               <Tab label="Category" />
             </Tabs>
           </AppBar>
+          {value === 0 && <SpeechList />}
+          {value === 1 && <SpeakerList />}
+          {value === 2 && <CategoryList />}
         </MuiThemeProvider>
-        {value === 0 && <SpeechList />}
-        {value === 1 && <SpeakerList />}
-        {value === 2 && <CategoryList />}
-
         <BottomBar />
       </React.Fragment>
     );

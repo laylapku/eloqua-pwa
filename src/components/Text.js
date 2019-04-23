@@ -26,21 +26,26 @@ const styles = theme => ({
 
 const Text = props => {
   const { classes, id, onSeekStart, onSeekEnd, onSliderChange, played } = props;
-  const speechPlayed = speeches.find(item => item.id === id);
-  const textShown = texts.find(item => item.speechId === id);
+  const speechPlayed = speeches.find(ele => ele.id === id);
+  const textShown = texts.find(ele => ele.speechId === id);
   const speaker = speakers[speechPlayed.speakerId].name;
 
   return (
     <React.Fragment>
-      <IconButton component={Link} to="/">
-        <ArrowBackIcon />
-      </IconButton>
       <Paper className={classes.textContainer}>
+        <IconButton component={Link} to="/">
+          <ArrowBackIcon />
+        </IconButton>
+
         <div style={{ textAlign: "center" }}>
-          <h3>{speaker + " - " + speechPlayed.title}</h3>
-          <p>{speechPlayed.date}</p>
+          <h4>
+            {speechPlayed.title}
+            <br />
+            <em className="speaker">{speaker}</em>
+          </h4>
+          <h5>{speechPlayed.date}</h5>
         </div>
-        <p style={{ maxHeight: "400px", overflow: "auto", lineHeight: "2em" }}>
+        <p style={{ maxHeight: "360px", overflow: "auto", lineHeight: "2em" }}>
           {textShown.text}
         </p>
       </Paper>

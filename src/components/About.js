@@ -16,11 +16,13 @@ const theme = createMuiTheme({
   overrides: {
     MuiSvgIcon: {
       root: {
-        fill: "#36454F",
+        fill: "RGB(111,134,131)",
         fontSize: "20px"
       }
-    },
-    typography: { useNextVariants: true }
+    }
+  },
+  typography: {
+    useNextVariants: true
   }
 });
 
@@ -45,41 +47,38 @@ const About = props => {
   return (
     <div>
       <Paper className={classes.header}>
-        <p>app logo</p>
-        <h3>PWA Quanto</h3>
+        <h3>Speech App</h3>
       </Paper>
       <div className={classes.container}>
         <MuiThemeProvider theme={theme}>
           <ContactSupportIcon />
           <p>Version</p>
-          <p>1.0.0</p>
+          <p>1.0</p>
           <PermIdentityIcon />
-          <p>Developer</p>
-          <p>Sean Lee</p>
+          <p>Created by</p>
+          <p>Layla Oyang & Sean Lee</p>
           <EmailIcon />
           <p>Email</p>
-          <p>seanleecoder@gmail.com</p>
+          <p>
+            laylaoyang@gmail.com
+            <br />
+            seanleecoder@gmail.com
+          </p>
           <WebIcon />
           <p>Github</p>
-          <p>https://github.com/ilovepku/</p>
+          <p>
+            https://github.com/laylaoyang/
+            <br />
+            https://github.com/ilovepku/
+          </p>
           <StarIcon />
           <p>Credits</p>
           <p style={{ lineHeight: "1.5rem" }}>
             <strong>@material-ui</strong> for UI components
             <br />
-            <strong>localforage</strong> for offline storage
-            <br />
-            <strong>nanoid</strong> as ID generator
-            <br />
-            <strong>notistack</strong> for notification snackbars
-            <br />
-            <strong>react-beautiful-dnd</strong> for drag and drop lists
-            <br />
             <strong>create-react-app, redux, react-redux</strong>
             <br />
             <strong>redux-persist</strong> to persist redux store
-            <br />
-            <strong>victory</strong> for data visualization
           </p>
         </MuiThemeProvider>
       </div>
@@ -92,7 +91,7 @@ const About = props => {
           textAlign: "center"
         }}
       >
-        <p>copyright 2019 - </p>
+        <p>copyright © 2019 - </p>
       </footer>
     </div>
   );

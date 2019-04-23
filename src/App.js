@@ -68,7 +68,8 @@ class App extends Component {
       volume,
       onPlay,
       onPause,
-      onDuration
+      onDuration,
+      onEnded
     } = this.props;
 
     return (

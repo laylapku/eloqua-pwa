@@ -6,13 +6,13 @@ import {
   ON_PREV,
   ON_NEXT,
   ON_ENDED,
-  TOGGLE_LOOP_RANDOM,
+  TOGGLE_LOOP,
   TOGGLE_MUTED,
-  SET_INDEX_ON_CLICK,
   ADD_TO_PLAYLIST,
+  SET_INDEX_ON_CLICK,
+  HANDLE_PLAYLIST_ITEM_CLICK,
   DELETE_FROM_PLAYLIST,
   DELETE_ALL_FROM_PLAYLIST,
-  HANDLE_PLAYLIST_ITEM_CLICK,
   TOGGLE_ADD_TO_FAVLIST
 } from "./constants.js";
 
@@ -33,6 +33,10 @@ export const onDuration = payload => ({
   payload
 });
 
+export const onPrev = () => ({
+  type: ON_PREV
+});
+
 export const onNext = () => ({
   type: ON_NEXT
 });
@@ -41,21 +45,12 @@ export const onEnded = () => ({
   type: ON_ENDED
 });
 
-export const onPrev = () => ({
-  type: ON_PREV
-});
-
-export const toggleLoopRandom = () => ({
-  type: TOGGLE_LOOP_RANDOM
+export const toggleLoop = () => ({
+  type: TOGGLE_LOOP
 });
 
 export const toggleMuted = () => ({
   type: TOGGLE_MUTED
-});
-
-export const setIndexOnClick = id => ({
-  type: SET_INDEX_ON_CLICK,
-  payload: id
 });
 
 export const addToPlaylist = id => ({
@@ -63,9 +58,14 @@ export const addToPlaylist = id => ({
   payload: id
 });
 
-export const toggleAddToFavlist = id => ({
-  type: TOGGLE_ADD_TO_FAVLIST,
+export const setIndexOnClick = id => ({
+  type: SET_INDEX_ON_CLICK,
   payload: id
+});
+
+export const handlePlaylistItemClick = index => ({
+  type: HANDLE_PLAYLIST_ITEM_CLICK,
+  payload: index
 });
 
 export const deleteFromPlaylist = id => ({
@@ -77,8 +77,7 @@ export const deleteAllFromPlaylist = () => ({
   type: DELETE_ALL_FROM_PLAYLIST
 });
 
-export const handlePlaylistItemClick = index => ({
-  type: HANDLE_PLAYLIST_ITEM_CLICK,
-  payload: index
+export const toggleAddToFavlist = id => ({
+  type: TOGGLE_ADD_TO_FAVLIST,
+  payload: id
 });
-

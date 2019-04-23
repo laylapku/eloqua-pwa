@@ -23,3 +23,17 @@ a {
   text-decoration: none;
   color: #fff;
 }
+
+.page-container {
+  margin-bottom: 120px;
+  margin-top: 50px
+}
+
+.list-item {
+  box-shadow: 5px 5px 10px RGB(192,178,131,0.5);
+}
+
+.speaker {
+  font-size: 0.8rem;
+  opacity: 0.7
+}

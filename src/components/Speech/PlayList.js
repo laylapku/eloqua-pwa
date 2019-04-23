@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -37,31 +38,25 @@ const mapDispatchToProps = dispatch => {
 
 const styles = theme => ({
   root: {
-    ...theme.mixins.gutters(),
-    paddingBottom: theme.spacing.unit * 2,
-    boxShadow: "none",
-    background: "inherit"
+    marginBottom: "120px"
   },
   header: {
     display: "grid",
+    gridTemplateColumns: "auto 12% 8%",
     alignItems: "center",
-    gridTemplateColumns: "auto 12% 8%"
+    padding: "0 15px",
+    borderBottom: "1px groove RGB(202,187,143,0.1)"
   },
-  list: {
+  listItem: {
     display: "grid",
     alignItems: "center",
     gridTemplateColumns: "8% auto repeat(2, 10%)"
   },
-  listItem: {
-    "&:hover": {
-      backgroundColor: "#EDEAE0",
-      borderRadius: "3px",
-      padding: "5px 10px",
-      easeInOut: "all 1s"
-      /* "@media(hover:none)": {
-        backgroundColor: "red"
-      } */
-    }
+  deleteIcon: {
+    fill: "RGB(132,132,130)"
+  },
+  favIcon: {
+    fill: "RGB(206,32,41, 0.8)"
   }
 });
 
@@ -75,98 +70,71 @@ const PlayList = props => {
     favlist,
     toggleAddToFavlist
   } = props;
-  const favCheck = playlist.every(item => favlist.indexOf(item.id) > -1);
-  const ids = playlist.map(item => item.id);
+  const favCheck = playlist.every(ele => favlist.indexOf(ele.id) > -1);
+  const ids = playlist.map(ele => ele.id);
 
   return (
-    <React.Fragment>
-      <div className={classes.root}>
-        <div className={classes.header}>
-          <h3>Your PlayList</h3>
-          <IconButton>
-            {playlist.length > 0 && favCheck === true ? (
-              <FavoriteIcon onClick={() => toggleAddToFavlist(ids)} />
-            ) : (
-              <FavoriteBorderIcon onClick={() => toggleAddToFavlist(ids)} />
-            )}
-          </IconButton>
-          <IconButton>
-            <DeleteIcon onClick={deleteAllFromPlaylist} />
-          </IconButton>
-        </div>
-
-        {playlist.map((item, index) => {
-          const speaker = speakers[item.speakerId].name;
-
-          return (
-            <div className={classes.list} key={index}>
-              {index === props.index ? (
-                <IconButton>
-                  <PlayArrowIcon />
-                </IconButton>
-              ) : (
-                <p />
-              )}
-              <ListItem
-                button
-                onClick={() => handlePlaylistItemClick(index)}
-                classes={{ button: classes.listItem }}
-              >
-                <ListItemText primary={item.title + " - " + speaker} />
-              </ListItem>
-              <IconButton onClick={() => toggleAddToFavlist([item.id])}>
-                {favlist.indexOf(item.id) !== -1 ? (
-                  <FavoriteIcon />
-                ) : (
-                  <FavoriteBorderIcon />
-                )}
-              </IconButton>
-              <IconButton>
-                <DeleteIcon onClick={() => deleteFromPlaylist(index)} />
-              </IconButton>
-            </div>
-          );
-        })}
+    <div className={classes.root}>
+      <div className={classes.header}>
+        <h3>Your PlayList</h3>
+        <IconButton onClick={() => toggleAddToFavlist(ids)}>
+          {playlist.length > 0 && favCheck === true ? (
+            <FavoriteIcon classes={{ root: classes.favIcon }} />
+          ) : (
+            <FavoriteBorderIcon />
+          )}
+        </IconButton>
+        <IconButton onClick={deleteAllFromPlaylist}>
+          <DeleteIcon classes={{ root: classes.deleteIcon }} />
+        </IconButton>
       </div>
+
+      {playlist.map((ele, index) => {
+        const year = ele.date.split(" ")[2];
+        const speaker = speakers[ele.speakerId].name;
+        const stylesOnPlay = index => ({
+          color: index === props.index ? "#CC5500" : "#1B1811"
+        });
+
+        return (
+          <div className={classes.listItem} key={index}>
+            {index === props.index ? (
+              <IconButton>
+                <PlayArrowIcon style={stylesOnPlay(index)} />
+              </IconButton>
+            ) : (
+              <p />
+            )}
+
+            <ListItem button onClick={() => handlePlaylistItemClick(index)}>
+              <ListItemText
+                primary={
+                  <Typography style={stylesOnPlay(index)}>
+                    {ele.title + "(" + year + ")"}
+                    <br />
+                    <em className="speaker">{speaker}</em>
+                  </Typography>
+                }
+              />
+            </ListItem>
+            <IconButton onClick={() => toggleAddToFavlist([ele.id])}>
+              {favlist.indexOf(ele.id) !== -1 ? (
+                <FavoriteIcon classes={{ root: classes.favIcon }} />
+              ) : (
+                <FavoriteBorderIcon />
+              )}
+            </IconButton>
+            <IconButton onClick={() => deleteFromPlaylist(index)}>
+              <DeleteIcon classes={{ root: classes.deleteIcon }} />
+            </IconButton>
+          </div>
+        );
+      })}
+
       <BottomBar />
-    </React.Fragment>
+    </div>
   );
 };
-
-{
-  /* <Grid item xs={12} md={6}>
-              <List>
-                <ListItem>
-                  <ListItemAvatar>
-                    {index === props.index ? (
-                      <IconButton>
-                        <PlayArrowIcon />
-                      </IconButton>
-                    ) : (
-                      <p />
-                    )}
-                  </ListItemAvatar>
-                  <ListItemText
-                    onClick={() => handlePlaylistItemClick(index)}
-                    primary={item.title + " - " + speaker}
-                    classes={{ root: classes.text }}
-                  />
-                  <ListItemSecondaryAction>
-                    <IconButton onClick={() => toggleAddToFavlist([item.id])}>
-                      {favlist.indexOf(item.id) !== -1 ? (
-                        <FavoriteIcon />
-                      ) : (
-                        <FavoriteBorderIcon />
-                      )}
-                    </IconButton>
-                    <IconButton>
-                      <DeleteIcon onClick={() => deleteFromPlaylist(index)} />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              </List>
-            </Grid> */
-}
 
 PlayList.propTypes = {
   classes: PropTypes.object.isRequired

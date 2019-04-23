@@ -14,7 +14,6 @@ import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
 import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
-import ShuffleIcon from "@material-ui/icons/Shuffle";
 import RepeatOneIcon from "@material-ui/icons/RepeatOne";
 import LoopIcon from "@material-ui/icons/Loop";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
@@ -29,7 +28,7 @@ import {
   onDuration,
   onPrev,
   onNext,
-  toggleLoopRandom,
+  toggleLoop,
   toggleMuted,
   toggleAddToFavlist
 } from "../../redux/actions.js";
@@ -44,7 +43,7 @@ const mapDispatchToProps = dispatch => {
     onDuration: payload => dispatch(onDuration(payload)),
     onPrev: () => dispatch(onPrev()),
     onNext: () => dispatch(onNext()),
-    toggleLoopRandom: () => dispatch(toggleLoopRandom()),
+    toggleLoop: () => dispatch(toggleLoop()),
     toggleMuted: () => dispatch(toggleMuted()),
     toggleAddToFavlist: id => dispatch(toggleAddToFavlist(id))
   };
@@ -64,7 +63,15 @@ const theme = createMuiTheme({
       root: {
         padding: "20px"
       }
+    },
+    MuiSvgIcon: {
+      root: {
+        fill: "RGB(111,134,131)"
+      }
     }
+  },
+  typography: {
+    useNextVariants: true
   }
 });
 
@@ -76,6 +83,9 @@ const styles = {
   },
   playPauseIcon: {
     transform: "scale(1.5)"
+  },
+  favIcon: {
+    fill: "RGB(206,32,41, 0.8)"
   }
 };
 
@@ -84,7 +94,6 @@ const PlayControls = props => {
     classes,
     playing,
     loop,
-    random,
     muted,
     duration,
     id,
@@ -92,7 +101,7 @@ const PlayControls = props => {
     playPause,
     onPrev,
     onNext,
-    toggleLoopRandom,
+    toggleLoop,
     toggleMuted,
     toggleAddToFavlist,
     onSliderChange,
@@ -117,9 +126,15 @@ const PlayControls = props => {
           <Duration seconds={duration} />
         </div>
 
-        <div style={{display: "flex", justifyContent: "center", flexWrap: "wrap"}}>
-          <IconButton onClick={toggleLoopRandom}>
-            {loop ? <RepeatOneIcon /> : random ? <ShuffleIcon /> : <LoopIcon />}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap"
+          }}
+        >
+          <IconButton onClick={toggleLoop}>
+            {loop ? <RepeatOneIcon /> : <LoopIcon />}
           </IconButton>
           <IconButton onClick={onPrev}>
             <SkipPreviousIcon />
@@ -139,7 +154,7 @@ const PlayControls = props => {
           </IconButton>
           <IconButton onClick={() => toggleAddToFavlist([speechPlayed.id])}>
             {favlist.indexOf(speechPlayed.id) !== -1 ? (
-              <FavoriteIcon />
+              <FavoriteIcon classes={{ root: classes.favIcon }} />
             ) : (
               <FavoriteBorderIcon />
             )}

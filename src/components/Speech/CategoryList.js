@@ -7,10 +7,6 @@ import FilteredList from "./FilteredList";
 import categories from "../../data/categories.js";
 
 const styles = {
-  root: {
-    marginBottom: "100px",
-    marginTop: "50px"
-  },
   icon: {
     margin: 10,
     width: 80,
@@ -31,16 +27,16 @@ class CategoryList extends Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
+      <div className="page-container">
         {this.state.filter === "" ? (
           <Grid container justify="space-around">
-            {categories.map((item, index) => (
+            {categories.map((ele, index) => (
               <div key={index}>
                 <Avatar
-                  alt={item.theme}
-                  src={item.icon}
+                  alt={ele.theme}
+                  src={ele.icon}
                   className={classes.icon}
-                  onClick={() => this.filterSpeech(item.id)}
+                  onClick={() => this.filterSpeech(ele.id)}
                 />
                 <p
                   style={{
@@ -49,7 +45,7 @@ class CategoryList extends Component {
                     justifyContent: "space-around"
                   }}
                 >
-                  {item.theme}
+                  {ele.theme}
                 </p>
               </div>
             ))}

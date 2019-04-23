@@ -8,14 +8,12 @@ import FilteredList from "./FilteredList";
 import speakers from "../../data/speakers.js";
 
 const styles = theme => ({
-  root: {
+  gridList: {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-around",
     overflow: "hidden",
-    backgroundColor: "inherit",
-    marginBottom: "100px",
-    marginTop: "50px"
+    backgroundColor: "inherit"
   },
   title: {
     fontSize: "0.8rem",
@@ -36,9 +34,14 @@ class SpeakerList extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.root}>
+      <div className="page-container">
         {this.state.filter === "" ? (
-          <GridList cellHeight={150} cols={3} spacing={1}>
+          <GridList
+            cellHeight={150}
+            cols={3}
+            spacing={1}
+            className={classes.gridList}
+          >
             {Object.values(speakers).map((ele, index) => (
               <GridListTile
                 key={index}
