@@ -11,9 +11,7 @@ const styles = theme => ({
   gridList: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-around",
-    overflow: "hidden",
-    backgroundColor: "inherit"
+    overflow: "hidden"
   },
   title: {
     fontSize: "0.8rem",
@@ -33,6 +31,7 @@ class SpeakerList extends Component {
 
   render() {
     const { classes } = this.props;
+
     return (
       <div className="page-container">
         {this.state.filter === "" ? (
@@ -45,7 +44,7 @@ class SpeakerList extends Component {
             {Object.values(speakers).map((ele, index) => (
               <GridListTile
                 key={index}
-                onClick={() => this.filterSpeech(ele.id)}
+                onClick={() => this.filterSpeech(ele.id)} 
               >
                 <img src={ele.img} alt={ele.name} />
                 <GridListTileBar

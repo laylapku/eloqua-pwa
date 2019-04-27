@@ -13,11 +13,7 @@ import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import BottomBar from "./BottomBar.js";
 import speeches from "../data/speeches";
 import speakers from "../data/speakers";
-import {
-  toggleAddToFavlist,
-  setIndexOnClick,
-  addToPlaylist
-} from "../redux/actions.js";
+import { toggleAddToFavlist, addToPlaylist } from "../redux/actions.js";
 
 const mapStateToProps = state => {
   return { favlist: state.favlist };
@@ -26,8 +22,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     toggleAddToFavlist: id => dispatch(toggleAddToFavlist(id)),
-    setIndexOnClick: id => dispatch(setIndexOnClick(id)),
-    addToPlaylist: id => dispatch(addToPlaylist(id))
+    addToPlaylist: payload => dispatch(addToPlaylist(payload))
   };
 };
 
@@ -42,17 +37,14 @@ const styles = theme => ({
     fontSize: "22px",
     textAlign: "center",
     opacity: 0.3
+  },
+  typo: {
+    paddingRight: "20px"
   }
 });
 
 const Favorites = props => {
-  const {
-    classes,
-    favlist,
-    toggleAddToFavlist,
-    setIndexOnClick,
-    addToPlaylist
-  } = props;
+  const { classes, favlist, toggleAddToFavlist, addToPlaylist } = props;
 
   return (
     <React.Fragment>
@@ -66,10 +58,17 @@ const Favorites = props => {
             const speaker = speakers[speech.speakerId].name;
 
             return (
-              <ListItem key={index} button onClick={() => setIndexOnClick(ele)} className="list-item">
+              <ListItem
+                key={index}
+                button
+                onClick={() => {
+                  addToPlaylist(ele);
+                }}
+                className="list-item"
+              >
                 <ListItemText
                   primary={
-                    <Typography>
+                    <Typography className={classes.typo}>
                       {speech.title + "(" + year + ")"}
                       <br />
                       <em className="speaker">{speaker}</em>
@@ -80,7 +79,7 @@ const Favorites = props => {
                   <IconButton onClick={() => toggleAddToFavlist([ele])}>
                     <FavoriteIcon classes={{ root: classes.favIcon }} />
                   </IconButton>
-                  <IconButton onClick={() => addToPlaylist(ele)}>
+                  <IconButton onClick={() => addToPlaylist({id: ele, bool: true})}>
                     <PlaylistAddIcon />
                   </IconButton>
                 </ListItemSecondaryAction>

@@ -12,7 +12,10 @@ import speakers from "../data/speakers";
 import texts from "../data/texts";
 
 const mapStatetoProps = state => {
-  return { id: state.id };
+  return {
+    playlist: state.playlist,
+    index: state.index
+  };
 };
 
 const styles = theme => ({
@@ -21,19 +24,31 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     boxShadow: "none",
     background: "inherit"
+  },
+  backButton: {
+    padding: 0
   }
 });
 
 const Text = props => {
-  const { classes, id, onSeekStart, onSeekEnd, onSliderChange, played } = props;
-  const speechPlayed = speeches.find(ele => ele.id === id);
-  const textShown = texts.find(ele => ele.speechId === id);
+  const {
+    classes,
+    playlist,
+    index,
+    onSeekStart,
+    onSeekEnd,
+    onSliderChange,
+    played
+  } = props;
+  //const speechPlayed = speeches.find(ele => ele.id === id);
+  const speechPlayed = speeches.find(ele => ele.id === playlist[index]);
+  const textShown = texts.find(ele => ele.speechId === playlist[index]);
   const speaker = speakers[speechPlayed.speakerId].name;
 
   return (
     <React.Fragment>
       <Paper className={classes.textContainer}>
-        <IconButton component={Link} to="/">
+        <IconButton component={Link} to="/" className={classes.backButton}>
           <ArrowBackIcon />
         </IconButton>
 

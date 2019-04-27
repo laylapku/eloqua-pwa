@@ -9,23 +9,16 @@ import IconButton from "@material-ui/core/IconButton";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import speeches from "../../data/speeches";
 import speakers from "../../data/speakers";
-import { addToPlaylist, setIndexOnClick } from "../../redux/actions.js";
+import { addToPlaylist } from "../../redux/actions.js";
 
 const mapDispatchToProps = dispatch => {
   return {
-    addToPlaylist: id => dispatch(addToPlaylist(id)),
-    setIndexOnClick: id => dispatch(setIndexOnClick(id))
+    addToPlaylist: payload => dispatch(addToPlaylist(payload))
   };
 };
 
 const FilteredList = props => {
-  const {
-    speakerFilter,
-    categoryFilter,
-    inputFilter,
-    addToPlaylist,
-    setIndexOnClick
-  } = props;
+  const { speakerFilter, categoryFilter, inputFilter, addToPlaylist } = props;
 
   return (
     <List>
@@ -34,8 +27,12 @@ const FilteredList = props => {
           ele =>
             ele.speakerId === speakerFilter || //by speaker
             ele.category.includes(categoryFilter) || //by category
-            ele.title.toLowerCase().includes(inputFilter) || //by search of speech title
-            speakers[ele.speakerId].name.toLowerCase().includes(inputFilter) //by search of speaker name, better solution??
+            (inputFilter &&
+              ele.title.toLowerCase().includes(inputFilter.toLowerCase())) || //by search of speech title
+            (inputFilter &&
+              speakers[ele.speakerId].name
+                .toLowerCase()
+                .includes(inputFilter.toLowerCase())) //by search of speaker, better solution??
         )
         .map((ele, index) => {
           const year = ele.date.split(" ")[2];
@@ -45,7 +42,9 @@ const FilteredList = props => {
             <ListItem
               button
               key={index}
-              onClick={() => setIndexOnClick(ele.id)}
+              onClick={() => {
+                addToPlaylist({ id: ele.id });
+              }}
               className="list-item"
             >
               <ListItemText
@@ -58,7 +57,9 @@ const FilteredList = props => {
                 }
               />
               <ListItemSecondaryAction>
-                <IconButton onClick={() => addToPlaylist(ele.id)}>
+                <IconButton
+                  onClick={() => addToPlaylist({ id: ele.id, bool: true })}
+                >
                   <PlaylistAddIcon />
                 </IconButton>
               </ListItemSecondaryAction>

@@ -30,7 +30,8 @@ import {
   onNext,
   toggleLoop,
   toggleMuted,
-  toggleAddToFavlist
+  toggleAddToFavlist,
+  addToPlaylist
 } from "../../redux/actions.js";
 
 const mapStatetoProps = state => {
@@ -45,7 +46,8 @@ const mapDispatchToProps = dispatch => {
     onNext: () => dispatch(onNext()),
     toggleLoop: () => dispatch(toggleLoop()),
     toggleMuted: () => dispatch(toggleMuted()),
-    toggleAddToFavlist: id => dispatch(toggleAddToFavlist(id))
+    toggleAddToFavlist: id => dispatch(toggleAddToFavlist(id)),
+    addToPlaylist: payload => dispatch(addToPlaylist(payload))
   };
 };
 
@@ -61,7 +63,7 @@ const theme = createMuiTheme({
     },
     MuiIconButton: {
       root: {
-        padding: "20px"
+        padding: "12px 20px"
       }
     },
     MuiSvgIcon: {
@@ -96,7 +98,8 @@ const PlayControls = props => {
     loop,
     muted,
     duration,
-    id,
+    playlist,
+    index,
     favlist,
     playPause,
     onPrev,
@@ -104,12 +107,13 @@ const PlayControls = props => {
     toggleLoop,
     toggleMuted,
     toggleAddToFavlist,
+    addToPlaylist,
     onSliderChange,
     onSeekStart,
     onSeekEnd,
     played
   } = props;
-  const speechPlayed = speeches.find(item => item.id === id);
+  const speechPlayed = speeches.find(item => item.id === playlist[index]);
 
   return (
     <MuiThemeProvider theme={theme}>
@@ -139,7 +143,12 @@ const PlayControls = props => {
           <IconButton onClick={onPrev}>
             <SkipPreviousIcon />
           </IconButton>
-          <IconButton onClick={playPause}>
+          <IconButton
+            onClick={() => {
+              playPause();
+              addToPlaylist({ id: speechPlayed.id });
+            }}
+          >
             {playing ? (
               <PauseCircleOutlineIcon className={classes.playPauseIcon} />
             ) : (

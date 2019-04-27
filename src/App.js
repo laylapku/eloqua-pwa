@@ -32,7 +32,9 @@ class App extends Component {
 
   componentWillReceiveProps = nextProps => {
     if (nextProps.playlist.length >= 1) {
-      const speechToPlay = nextProps.playlist[nextProps.index];
+      const speechToPlay = speeches.find(
+        ele => ele.id === nextProps.playlist[nextProps.index]
+      );
       this.setState({ url: speechToPlay.url });
     }
   };

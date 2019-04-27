@@ -14,19 +14,18 @@ import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import FilteredList from "./FilteredList";
 import speeches from "../../data/speeches";
 import speakers from "../../data/speakers";
-import { addToPlaylist, setIndexOnClick } from "../../redux/actions.js";
+import { addToPlaylist } from "../../redux/actions.js";
 
 const mapDispatchToProps = dispatch => {
   return {
-    addToPlaylist: id => dispatch(addToPlaylist(id)),
-    setIndexOnClick: id => dispatch(setIndexOnClick(id))
+    addToPlaylist: payload => dispatch(addToPlaylist(payload))
   };
 };
 
 const styles = theme => ({
   input: {
     margin: theme.spacing.unit,
-    width: "75%",
+    width: "80%",
     marginLeft: "20px"
   }
 });
@@ -45,7 +44,7 @@ class SpeechList extends Component {
   };
 
   render() {
-    const { classes, addToPlaylist, setIndexOnClick } = this.props;
+    const { classes, addToPlaylist } = this.props;
 
     return (
       <div className="page-container">
@@ -70,7 +69,7 @@ class SpeechList extends Component {
                 <ListItem
                   button
                   key={index}
-                  onClick={() => setIndexOnClick(ele.id)}
+                  onClick={() => addToPlaylist({ id: ele.id })}
                   className="list-item"
                 >
                   <ListItemText
@@ -83,7 +82,9 @@ class SpeechList extends Component {
                     }
                   />
                   <ListItemSecondaryAction>
-                    <IconButton onClick={() => addToPlaylist(ele.id)}>
+                    <IconButton
+                      onClick={() => addToPlaylist({ id: ele.id, bool: true })}
+                    >
                       <PlaylistAddIcon />
                     </IconButton>
                   </ListItemSecondaryAction>

@@ -10,10 +10,7 @@ import {
   TOGGLE_LOOP,
   TOGGLE_MUTED,
   ADD_TO_PLAYLIST,
-  SET_INDEX_ON_CLICK,
-  HANDLE_PLAYLIST_ITEM_CLICK,
   DELETE_FROM_PLAYLIST,
-  DELETE_ALL_FROM_PLAYLIST,
   TOGGLE_ADD_TO_FAVLIST
 } from "./constants.js";
 
@@ -23,26 +20,21 @@ const initState = {
   volume: 0.8,
   duration: 0,
   loop: false,
-  playlist: [speeches[0]],
+  playlist: ["1"],
   index: 0,
-  id: "1",
   favlist: []
 };
 
 const handleNextEnded = state => {
   if (state.index < state.playlist.length - 1) {
-    let next = state.playlist[state.index + 1];
     return {
       ...state,
-      index: state.index + 1,
-      id: next.id
+      index: state.index + 1
     };
   } else if (state.index === state.playlist.length - 1) {
-    let next = state.playlist[0];
     return {
       ...state,
-      index: 0,
-      id: next.id
+      index: 0
     };
   }
 };
@@ -71,18 +63,14 @@ const rootReducer = (state = initState, action) => {
       };
     case ON_PREV:
       if (state.index > 0) {
-        let prev = state.playlist[state.index - 1];
         return {
           ...state,
-          index: state.index - 1,
-          id: prev.id
+          index: state.index - 1
         };
       } else {
-        let prev = state.playlist[state.playlist.length - 1];
         return {
           ...state,
-          index: state.playlist.length - 1,
-          id: prev.id
+          index: state.playlist.length - 1
         };
       }
     case ON_NEXT:
@@ -110,53 +98,39 @@ const rootReducer = (state = initState, action) => {
         muted: !state.muted
       };
     case ADD_TO_PLAYLIST:
-      let speechToAdd = speeches.find(ele => ele.id === action.payload);
-      if (!state.playlist.some(ele => ele.id === action.payload)) {
-        return {
-          ...state,
-          playlist: [...state.playlist, speechToAdd]
+      let newState = { ...state };
+      let index = state.playlist.findIndex(ele => ele === action.payload.id);
+      if (index === -1) {
+        index = state.playlist.length;
+        newState = {
+          ...newState,
+          playlist: [...state.playlist, action.payload.id]
         };
       }
-      return state;
-    case SET_INDEX_ON_CLICK:
-      let speechSelected = speeches.find(ele => ele.id === action.payload);
-      if (!state.playlist.some(ele => ele.id === action.payload)) {
-        return {
-          ...state,
-          playlist: [...state.playlist, speechSelected],
-          index: state.playlist.length,
-          id: speechSelected.id
-        };
-      } else {
-        let index = state.playlist.findIndex(ele => ele.id === action.payload);
-        return {
-          ...state,
-          index: index,
-          id: speechSelected.id
+      if (action.payload.bool !== true) {
+        newState = {
+          ...newState,
+          index
         };
       }
-    case HANDLE_PLAYLIST_ITEM_CLICK:
-      speechSelected = state.playlist[action.payload];
-      return {
-        ...state,
-        index: action.payload,
-        id: speechSelected.id
-      };
+      return newState;
     case DELETE_FROM_PLAYLIST:
       let playlist = state.playlist.filter(
         (ele, index) => index !== action.payload
       );
+      if (playlist.length === 0 || action.payload === "all") {
+        return {
+          ...state,
+          playlist: [speeches[Math.floor(Math.random() * 48)].id],
+          index: 0,
+          playing: false
+        };
+      }
       if (state.index === state.playlist.length - 1) {
         return {
           ...state,
           playlist,
           index: state.playlist.length - 2
-        };
-      } else if (state.index === 0) {
-        return {
-          ...state,
-          playlist,
-          index: 0
         };
       } else if (action.payload < state.index) {
         return {
@@ -169,16 +143,6 @@ const rootReducer = (state = initState, action) => {
         ...state,
         playlist
       };
-    case DELETE_ALL_FROM_PLAYLIST:
-      if (state.playlist.length > 0) {
-        return {
-          ...state,
-          playlist: [],
-          index: 0,
-          playing: false
-        };
-      }
-      return state;
     case TOGGLE_ADD_TO_FAVLIST:
       let favCheck = action.payload.every(
         ele => state.favlist.indexOf(ele) > -1

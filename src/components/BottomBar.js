@@ -19,9 +19,9 @@ import ListIcon from "@material-ui/icons/List";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
-import speeches from "../data/speeches";
 import speakers from "../data/speakers";
-import { playPause, onNext } from "../redux/actions.js";
+import speeches from "../data/speeches";
+import { addToPlaylist, playPause, onNext } from "../redux/actions.js";
 
 const mapStatetoProps = state => {
   return state;
@@ -29,6 +29,7 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    addToPlaylist: payload => dispatch(addToPlaylist(payload)),
     playPause: () => dispatch(playPause()),
     onNext: () => dispatch(onNext())
   };
@@ -73,7 +74,7 @@ const styles = {
   },
   toolBar: {
     display: "grid",
-    gridTemplateColumns: "auto 20% 12% 12%",
+    gridTemplateColumns: "auto 16% 12% 12%",
     background: "RGB(202,187,143)"
   }
 };
@@ -82,14 +83,20 @@ class BottomBar extends Component {
   render() {
     const {
       classes,
-      id,
       playing,
+      playlist,
+      index,
       playPause,
       onNext,
+      addToPlaylist,
       location: { pathname }
     } = this.props;
-    const speechSelected = speeches.find(ele => ele.id === id);
+    const speechSelected = speeches.find(ele => ele.id === playlist[index]);
     const speaker = speakers[speechSelected.speakerId].name;
+    const useMarquee = () => {
+      const titleLength = speechSelected.title.split("").length;
+      return titleLength > 27 && "marquee";
+    };
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -97,17 +104,22 @@ class BottomBar extends Component {
           <Toolbar className={classes.toolBar}>
             <Link to="/text">
               {
-                <span>
-                  {speechSelected.title}
+                <div className={useMarquee()}>
+                  <span>{speechSelected.title}</span>
                   <br />
                   <em className="speaker">{speaker}</em>
-                </span>
+                </div>
               }
             </Link>
             <IconButton component={Link} to="/playlist">
               <ListIcon />
             </IconButton>
-            <IconButton onClick={playPause}>
+            <IconButton
+              onClick={() => {
+                playPause();
+                addToPlaylist({ id: speechSelected.id });
+              }}
+            >
               {playing ? <PauseCircleFilledIcon /> : <PlayCircleFilledIcon />}
             </IconButton>
             <IconButton onClick={onNext}>

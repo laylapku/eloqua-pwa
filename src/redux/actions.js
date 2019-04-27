@@ -9,10 +9,7 @@ import {
   TOGGLE_LOOP,
   TOGGLE_MUTED,
   ADD_TO_PLAYLIST,
-  SET_INDEX_ON_CLICK,
-  HANDLE_PLAYLIST_ITEM_CLICK,
   DELETE_FROM_PLAYLIST,
-  DELETE_ALL_FROM_PLAYLIST,
   TOGGLE_ADD_TO_FAVLIST
 } from "./constants.js";
 
@@ -53,28 +50,14 @@ export const toggleMuted = () => ({
   type: TOGGLE_MUTED
 });
 
-export const addToPlaylist = id => ({
+export const addToPlaylist = payload => ({
   type: ADD_TO_PLAYLIST,
-  payload: id
+  payload
 });
 
-export const setIndexOnClick = id => ({
-  type: SET_INDEX_ON_CLICK,
-  payload: id
-});
-
-export const handlePlaylistItemClick = index => ({
-  type: HANDLE_PLAYLIST_ITEM_CLICK,
-  payload: index
-});
-
-export const deleteFromPlaylist = id => ({
+export const deleteFromPlaylist = payload => ({
   type: DELETE_FROM_PLAYLIST,
-  payload: id
-});
-
-export const deleteAllFromPlaylist = () => ({
-  type: DELETE_ALL_FROM_PLAYLIST
+  payload
 });
 
 export const toggleAddToFavlist = id => ({
