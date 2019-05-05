@@ -37,7 +37,7 @@ const Text = props => {
     index,
     onSeekStart,
     onSeekEnd,
-    onSliderChange,
+    onSliderClick,
     played
   } = props;
   //const speechPlayed = speeches.find(ele => ele.id === id);
@@ -69,7 +69,7 @@ const Text = props => {
         played={played}
         onSeekStart={onSeekStart}
         onSeekEnd={onSeekEnd}
-        onSliderChange={onSliderChange}
+        onSliderClick={onSliderClick}
       />
     </React.Fragment>
   );

@@ -95,7 +95,7 @@ class BottomBar extends Component {
     const speaker = speakers[speechSelected.speakerId].name;
     const useMarquee = () => {
       const titleLength = speechSelected.title.split("").length;
-      return titleLength > 27 && "marquee";
+      return titleLength > 27 ? "marquee" : null;
     };
 
     return (

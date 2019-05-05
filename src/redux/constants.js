@@ -12,12 +12,6 @@ export const ON_NEXT = "ON_NEXT";
 
 export const ON_PREV = "ON_PREV";
 
-export const ON_SEEK_START = "ON_SEEK_START";
-
-export const ON_SEEK_END = "ON_SEEK_END";
-
-export const ON_SLIDER_CHANGE = "ON_SLIDER_CHANGE";
-
 export const TOGGLE_LOOP = "TOGGLE_LOOP";
 
 export const TOGGLE_MUTED = "TOGGLE_MUTED";

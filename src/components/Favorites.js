@@ -62,7 +62,7 @@ const Favorites = props => {
                 key={index}
                 button
                 onClick={() => {
-                  addToPlaylist(ele);
+                  addToPlaylist({ id: ele });
                 }}
                 className="list-item"
               >

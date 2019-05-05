@@ -108,7 +108,7 @@ const PlayControls = props => {
     toggleMuted,
     toggleAddToFavlist,
     addToPlaylist,
-    onSliderChange,
+    onSliderClick,
     onSeekStart,
     onSeekEnd,
     played
@@ -121,7 +121,7 @@ const PlayControls = props => {
         <Slider
           value={played}
           max={1}
-          onChange={onSliderChange}
+          onChange={onSliderClick}
           onDragStart={onSeekStart}
           onDragEnd={onSeekEnd}
         />

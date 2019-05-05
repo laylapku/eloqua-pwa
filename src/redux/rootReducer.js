@@ -29,14 +29,15 @@ const handleNextEnded = state => {
   if (state.index < state.playlist.length - 1) {
     return {
       ...state,
-      index: state.index + 1
-    };
-  } else if (state.index === state.playlist.length - 1) {
-    return {
-      ...state,
-      index: 0
+      index: state.index + 1,
+      playing: true
     };
   }
+  return {
+    ...state,
+    index: 0,
+    playing: true
+  };
 };
 
 const rootReducer = (state = initState, action) => {
@@ -77,16 +78,12 @@ const rootReducer = (state = initState, action) => {
       return handleNextEnded(state);
     case ON_ENDED:
       if (state.loop === false) {
-        handleNextEnded(state);
-        return {
-          ...state
-        };
-      } else {
-        return {
-          ...state,
-          playing: state.loop
-        };
+        return handleNextEnded(state);
       }
+      return {
+        ...state,
+        playing: state.loop
+      };
     case TOGGLE_LOOP:
       return {
         ...state,
@@ -121,7 +118,7 @@ const rootReducer = (state = initState, action) => {
       if (playlist.length === 0 || action.payload === "all") {
         return {
           ...state,
-          playlist: [speeches[Math.floor(Math.random() * 48)].id],
+          playlist: [speeches[Math.floor(Math.random() * speeches.length)].id],
           index: 0,
           playing: false
         };
