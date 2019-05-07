@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -22,14 +20,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const styles = theme => ({
-  input: {
-    margin: theme.spacing.unit,
-    width: "80%",
-    marginLeft: "20px"
-  }
-});
-
 class SpeechList extends Component {
   state = {
     filter: ""
@@ -44,21 +34,22 @@ class SpeechList extends Component {
   };
 
   render() {
-    const { classes, addToPlaylist } = this.props;
+    const { addToPlaylist } = this.props;
 
     return (
       <div className="page-container">
-        <Input
-          className={classes.input}
-          placeholder="Search for speaker or speech"
-          inputProps={{
-            "aria-label": "Description"
-          }}
-          onChange={this.handleInputChange}
-        />
-        <IconButton onClick={() => this.filterSpeech(this.state.filter)}>
-          <SearchIcon />
-        </IconButton>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Input
+            placeholder="Find by speaker/speech"
+            inputProps={{
+              "aria-label": "Description"
+            }}
+            onChange={this.handleInputChange}
+          />
+          <IconButton onClick={() => this.filterSpeech(this.state.filter)}>
+            <SearchIcon />
+          </IconButton>
+        </div>
 
         <List>
           {this.state.filter === "" ? (
@@ -100,13 +91,7 @@ class SpeechList extends Component {
   }
 }
 
-SpeechList.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(
-  connect(
-    null,
-    mapDispatchToProps
-  )(SpeechList)
-);
+export default connect(
+  null,
+  mapDispatchToProps
+)(SpeechList);
