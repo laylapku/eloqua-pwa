@@ -81,7 +81,9 @@ const styles = {
   root: {
     ...theme.mixins.gutters(),
     boxShadow: "none",
-    background: "inherit"
+    background: "inherit",
+    overflowX: "hidden",
+    paddingTop: "10px"
   },
   playPauseIcon: {
     transform: "scale(1.5)"

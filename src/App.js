@@ -73,18 +73,20 @@ class App extends Component {
     );
     let speaker = speakers[speech.speakerId].name;
     let avatar = speakers[speech.speakerId].img;
-    navigator.mediaSession.metadata = new MediaMetadata({
-      title: speech.title,
-      artist: speaker,
-      artwork: [
-        { src: avatar, sizes: "96x96", type: "image/png" },
-        { src: avatar, sizes: "128x128", type: "image/png" },
-        { src: avatar, sizes: "192x192", type: "image/png" },
-        { src: avatar, sizes: "256x256", type: "image/png" },
-        { src: avatar, sizes: "384x384", type: "image/png" },
-        { src: avatar, sizes: "512x512", type: "image/png" }
-      ]
-    });
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: speech.title,
+        artist: speaker,
+        artwork: [
+          { src: avatar, sizes: "96x96", type: "image/png" },
+          { src: avatar, sizes: "128x128", type: "image/png" },
+          { src: avatar, sizes: "192x192", type: "image/png" },
+          { src: avatar, sizes: "256x256", type: "image/png" },
+          { src: avatar, sizes: "384x384", type: "image/png" },
+          { src: avatar, sizes: "512x512", type: "image/png" }
+        ]
+      });
+    }
   };
 
   state = {
@@ -126,7 +128,7 @@ class App extends Component {
 
   onSeekEnd = () => {
     this.setState({ seeking: false });
-    this.player.seekTo(this.played); // temp workaround for onDragEnd: getting value from onChange, see: https://stackoverflow.com/questions/47440051/get-material-ui-slider-value-in-ondragstop-event-react
+    this.player.seekTo(this.played); // temp workaround for onDragEnd: getting value from onSliderClick, see: https://stackoverflow.com/questions/47440051/get-material-ui-slider-value-in-ondragstop-event-react
   };
 
   onSliderClick = (e, value) => {

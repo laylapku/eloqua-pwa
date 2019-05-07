@@ -21,7 +21,6 @@ const mapStatetoProps = state => {
 const styles = theme => ({
   textContainer: {
     ...theme.mixins.gutters(),
-    paddingBottom: theme.spacing.unit * 2,
     boxShadow: "none",
     background: "inherit"
   },
@@ -40,7 +39,7 @@ const Text = props => {
     onSliderClick,
     played
   } = props;
-  //const speechPlayed = speeches.find(ele => ele.id === id);
+
   const speechPlayed = speeches.find(ele => ele.id === playlist[index]);
   const textShown = texts.find(ele => ele.speechId === playlist[index]);
   const speaker = speakers[speechPlayed.speakerId].name;

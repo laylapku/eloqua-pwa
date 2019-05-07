@@ -56,18 +56,18 @@ const About = props => {
           <p>1.0</p>
           <PermIdentityIcon />
           <p>Created by</p>
-          <p>Layla Oyang & Sean Lee</p>
+          <p>Layla Ouyang & Sean Lee</p>
           <EmailIcon />
           <p>Email</p>
           <p>
-            laylaoyang@gmail.com
+            ...@gmail.com
             <br />
             seanleecoder@gmail.com
           </p>
           <WebIcon />
           <p>Github</p>
           <p>
-            https://github.com/laylaoyang/
+            https://github.com/laylapku/
             <br />
             https://github.com/ilovepku/
           </p>
@@ -75,6 +75,8 @@ const About = props => {
           <p>Credits</p>
           <p style={{ lineHeight: "1.5rem" }}>
             <strong>@material-ui</strong> for UI components
+            <br />
+            <strong>react-player</strong> for audio playing
             <br />
             <strong>create-react-app, redux, react-redux</strong>
             <br />
