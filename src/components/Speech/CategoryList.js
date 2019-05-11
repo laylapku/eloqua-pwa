@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
+
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
+import { withStyles } from "@material-ui/core/styles";
+
 import FilteredList from "./FilteredList";
+
 import categories from "../../data/categories.js";
 
 const styles = {
@@ -19,8 +21,8 @@ class CategoryList extends Component {
     filter: ""
   };
 
-  filterSpeech = value => {
-    this.setState({ filter: value });
+  filterSpeech = filter => {
+    this.setState({ filter });
   };
 
   render() {
@@ -31,7 +33,7 @@ class CategoryList extends Component {
         {this.state.filter === "" ? (
           <Grid container justify="space-around">
             {categories.map((ele, index) => (
-              <div key={index}>
+              <div key={"category-" + index}>
                 <Avatar
                   alt={ele.theme}
                   src={ele.icon}
@@ -57,9 +59,5 @@ class CategoryList extends Component {
     );
   }
 }
-
-CategoryList.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 export default withStyles(styles)(CategoryList);

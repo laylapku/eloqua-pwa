@@ -1,18 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App.js";
-import * as serviceWorker from "./serviceWorker";
+
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
 import { PersistGate } from "redux-persist/integration/react";
+
+import localForage from "localforage";
+
 import rootReducer from "./redux/rootReducer";
+
+import * as serviceWorker from "./serviceWorker";
+
+import "./index.css";
+import App from "./App.js";
 
 const persistConfig = {
   key: "root",
-  storage
+  storage: localForage
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -1,6 +1,8 @@
 import React from "react";
+
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import { toggleAddToFavlist, addToPlaylist } from "../redux/actions.js";
+
 import { withStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -8,12 +10,14 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
+
 import BottomBar from "./BottomBar.js";
+
 import speeches from "../data/speeches";
 import speakers from "../data/speakers";
-import { toggleAddToFavlist, addToPlaylist } from "../redux/actions.js";
 
 const mapStateToProps = state => {
   return { favlist: state.favlist };
@@ -26,7 +30,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     width: "100%"
   },
@@ -55,11 +59,11 @@ const Favorites = props => {
           favlist.map((ele, index) => {
             const speech = speeches.find(item => item.id === ele);
             const year = speech.date.split(" ")[2];
-            const speaker = speakers[speech.speakerId].name;
+            const speakerName = speakers[speech.speakerId].name;
 
             return (
               <ListItem
-                key={index}
+                key={"favListSpeech-" + index}
                 button
                 onClick={() => {
                   addToPlaylist({ id: ele });
@@ -71,7 +75,7 @@ const Favorites = props => {
                     <Typography className={classes.typo}>
                       {speech.title + "(" + year + ")"}
                       <br />
-                      <em className="speaker">{speaker}</em>
+                      <em className="speaker">{speakerName}</em>
                     </Typography>
                   }
                 />
@@ -79,7 +83,9 @@ const Favorites = props => {
                   <IconButton onClick={() => toggleAddToFavlist([ele])}>
                     <FavoriteIcon classes={{ root: classes.favIcon }} />
                   </IconButton>
-                  <IconButton onClick={() => addToPlaylist({id: ele, bool: true})}>
+                  <IconButton
+                    onClick={() => addToPlaylist({ id: ele, noPlay: true })}
+                  >
                     <PlaylistAddIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
@@ -91,10 +97,6 @@ const Favorites = props => {
       <BottomBar />
     </React.Fragment>
   );
-};
-
-Favorites.propTypes = {
-  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(

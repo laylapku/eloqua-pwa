@@ -1,15 +1,19 @@
 import React from "react";
+
 import { connect } from "react-redux";
+import { addToPlaylist } from "../../redux/actions.js";
+
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
+
 import speeches from "../../data/speeches";
 import speakers from "../../data/speakers";
-import { addToPlaylist } from "../../redux/actions.js";
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -25,23 +29,26 @@ const FilteredList = props => {
       {speeches
         .filter(
           ele =>
-            ele.speakerId === speakerFilter || //by speaker
-            ele.category.includes(categoryFilter) || //by category
-            (inputFilter &&
-              ele.title.toLowerCase().includes(inputFilter.toLowerCase())) || //by search of speech title
-            (inputFilter &&
-              speakers[ele.speakerId].name
-                .toLowerCase()
-                .includes(inputFilter.toLowerCase())) //by search of speaker, better solution??
+            (speakerFilter && ele.speakerId === speakerFilter) || //by speaker
+            (categoryFilter && ele.category.includes(categoryFilter)) || //by category
+            ((inputFilter &&
+              //by filtering speech title
+              (ele.title.toLowerCase().includes(inputFilter.toLowerCase()) ||
+                //by filtering speaker name
+                speakers[ele.speakerId].name
+                  .toLowerCase()
+                  .includes(inputFilter.toLowerCase()))) ||
+              // keep all speeches if inputFilter is empty for SpeechList
+              inputFilter === "")
         )
         .map((ele, index) => {
-          const year = ele.date.split(" ")[2];
-          const speaker = speakers[ele.speakerId].name;
+          const year = ele.date.split(" ")[2]; // "27 October 1964" -> "1964"
+          const speakerName = speakers[ele.speakerId].name;
 
           return (
             <ListItem
               button
-              key={index}
+              key={"filteredListSpeech-" + index}
               onClick={() => {
                 addToPlaylist({ id: ele.id });
               }}
@@ -52,13 +59,13 @@ const FilteredList = props => {
                   <Typography>
                     {ele.title + "(" + year + ")"}
                     <br />
-                    <em className="speaker">{speaker}</em>
+                    <em className="speaker">{speakerName}</em>
                   </Typography>
                 }
               />
               <ListItemSecondaryAction>
                 <IconButton
-                  onClick={() => addToPlaylist({ id: ele.id, bool: true })}
+                  onClick={() => addToPlaylist({ id: ele.id, noPlay: true })} // just add to playlist, don't play
                 >
                   <PlaylistAddIcon />
                 </IconButton>

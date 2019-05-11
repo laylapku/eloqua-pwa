@@ -1,16 +1,19 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
+
+import { connect } from "react-redux";
+import { playPause, onNext } from "../redux/actions.js";
+
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import {
   withStyles,
   MuiThemeProvider,
   createMuiTheme
 } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+
 import ExploreIcon from "@material-ui/icons/Explore";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import SettingsIcon from "@material-ui/icons/Settings";
@@ -19,9 +22,9 @@ import ListIcon from "@material-ui/icons/List";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
+
 import speakers from "../data/speakers";
 import speeches from "../data/speeches";
-import { addToPlaylist, playPause, onNext } from "../redux/actions.js";
 
 const mapStatetoProps = state => {
   return state;
@@ -29,7 +32,6 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addToPlaylist: payload => dispatch(addToPlaylist(payload)),
     playPause: () => dispatch(playPause()),
     onNext: () => dispatch(onNext())
   };
@@ -88,11 +90,10 @@ class BottomBar extends Component {
       index,
       playPause,
       onNext,
-      addToPlaylist,
       location: { pathname }
     } = this.props;
     const speechSelected = speeches.find(ele => ele.id === playlist[index]);
-    const speaker = speakers[speechSelected.speakerId].name;
+    const speakerName = speakers[speechSelected.speakerId].name;
     const useMarquee = () => {
       const titleLength = speechSelected.title.split("").length;
       return titleLength > 27 ? "marquee" : null;
@@ -107,19 +108,14 @@ class BottomBar extends Component {
                 <div className={useMarquee()}>
                   <span>{speechSelected.title}</span>
                   <br />
-                  <em className="speaker">{speaker}</em>
+                  <em className="speaker">{speakerName}</em>
                 </div>
               }
             </Link>
             <IconButton component={Link} to="/playlist">
               <ListIcon />
             </IconButton>
-            <IconButton
-              onClick={() => {
-                playPause();
-                addToPlaylist({ id: speechSelected.id });
-              }}
-            >
+            <IconButton onClick={playPause}>
               {playing ? <PauseCircleFilledIcon /> : <PlayCircleFilledIcon />}
             </IconButton>
             <IconButton onClick={onNext}>
@@ -152,10 +148,6 @@ class BottomBar extends Component {
     );
   }
 }
-
-BottomBar.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 export default withStyles(styles, { withTheme: true })(
   withRouter(

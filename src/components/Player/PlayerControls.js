@@ -1,15 +1,26 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+
+import { connect } from "react-redux";
+import {
+  playPause,
+  onDuration,
+  onPrev,
+  onNext,
+  toggleLoop,
+  toggleMuted,
+  toggleAddToFavlist
+} from "../../redux/actions.js";
+
+import Paper from "@material-ui/core/Paper";
+import Slider from "@material-ui/lab/Slider";
+import IconButton from "@material-ui/core/IconButton";
 import {
   withStyles,
   MuiThemeProvider,
   createMuiTheme
 } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Slider from "@material-ui/lab/Slider";
-import IconButton from "@material-ui/core/IconButton";
+
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
 import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
@@ -21,18 +32,10 @@ import VolumeOffIcon from "@material-ui/icons/VolumeOff";
 import ListIcon from "@material-ui/icons/List";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+
 import Duration from "./Duration.js";
+
 import speeches from "../../data/speeches";
-import {
-  playPause,
-  onDuration,
-  onPrev,
-  onNext,
-  toggleLoop,
-  toggleMuted,
-  toggleAddToFavlist,
-  addToPlaylist
-} from "../../redux/actions.js";
 
 const mapStatetoProps = state => {
   return state;
@@ -46,8 +49,7 @@ const mapDispatchToProps = dispatch => {
     onNext: () => dispatch(onNext()),
     toggleLoop: () => dispatch(toggleLoop()),
     toggleMuted: () => dispatch(toggleMuted()),
-    toggleAddToFavlist: id => dispatch(toggleAddToFavlist(id)),
-    addToPlaylist: payload => dispatch(addToPlaylist(payload))
+    toggleAddToFavlist: id => dispatch(toggleAddToFavlist(id))
   };
 };
 
@@ -83,7 +85,10 @@ const styles = {
     boxShadow: "none",
     background: "inherit",
     overflowX: "hidden",
-    paddingTop: "10px"
+    paddingTop: "10px",
+    position: "fixed",
+    top: "auto",
+    bottom: 0
   },
   playPauseIcon: {
     transform: "scale(1.5)"
@@ -109,7 +114,6 @@ const PlayControls = props => {
     toggleLoop,
     toggleMuted,
     toggleAddToFavlist,
-    addToPlaylist,
     onSliderClick,
     onSeekStart,
     onSeekEnd,
@@ -145,12 +149,7 @@ const PlayControls = props => {
           <IconButton onClick={onPrev}>
             <SkipPreviousIcon />
           </IconButton>
-          <IconButton
-            onClick={() => {
-              playPause();
-              addToPlaylist({ id: speechPlayed.id });
-            }}
-          >
+          <IconButton onClick={playPause}>
             {playing ? (
               <PauseCircleOutlineIcon className={classes.playPauseIcon} />
             ) : (
@@ -177,10 +176,6 @@ const PlayControls = props => {
       </Paper>
     </MuiThemeProvider>
   );
-};
-
-PlayControls.propTypes = {
-  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(

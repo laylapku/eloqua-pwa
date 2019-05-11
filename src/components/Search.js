@@ -1,13 +1,10 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import {
-  withStyles,
-  MuiThemeProvider,
-  createMuiTheme
-} from "@material-ui/core/styles";
+import React, { Component, Fragment } from "react";
+
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+
 import SpeechList from "./Speech/SpeechList.js";
 import SpeakerList from "./Speech/SpeakerList.js";
 import CategoryList from "./Speech/CategoryList.js";
@@ -45,47 +42,36 @@ const theme = createMuiTheme({
   }
 });
 
-const styles = theme => ({});
-
 class Search extends Component {
   state = {
-    value: 0
+    tabIdx: 0
   };
 
-  handleTabChange = (event, value) => {
-    this.setState({ value });
-  };
-
-  handleTabChangeIndex = index => {
-    this.setState({ value: index });
+  handleTabChange = (event, tabIdx) => {
+    this.setState({ tabIdx });
   };
 
   render() {
-    const { value } = this.state;
+    const { tabIdx } = this.state;
 
     return (
-      <React.Fragment>
+      <Fragment>
         <MuiThemeProvider theme={theme}>
           <AppBar>
-            <Tabs value={value} onChange={this.handleTabChange} centered>
+            <Tabs value={tabIdx} onChange={this.handleTabChange} centered>
               <Tab label="All" />
               <Tab label="Speaker" />
               <Tab label="Category" />
             </Tabs>
           </AppBar>
-          {value === 0 && <SpeechList />}
-          {value === 1 && <SpeakerList />}
-          {value === 2 && <CategoryList />}
+          {tabIdx === 0 && <SpeechList />}
+          {tabIdx === 1 && <SpeakerList />}
+          {tabIdx === 2 && <CategoryList />}
         </MuiThemeProvider>
         <BottomBar />
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
 
-Search.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired
-};
-
-export default withStyles(styles, { withTheme: true })(Search);
+export default Search;
