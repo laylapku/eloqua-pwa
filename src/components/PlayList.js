@@ -5,7 +5,7 @@ import {
   addToPlaylist,
   deleteFromPlaylist,
   toggleAddToFavlist
-} from "../../redux/actions.js";
+} from "../redux/actions.js";
 
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -18,10 +18,10 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-import BottomBar from "../BottomBar.js";
+import BottomBar from "./BottomBar.js";
 
-import speeches from "../../data/speeches";
-import speakers from "../../data/speakers";
+import speeches from "../data/speeches";
+import speakers from "../data/speakers";
 
 const mapStateToProps = state => {
   return {

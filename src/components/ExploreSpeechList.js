@@ -5,9 +5,9 @@ import IconButton from "@material-ui/core/IconButton";
 
 import SearchIcon from "@material-ui/icons/Search";
 
-import FilteredList from "./FilteredList";
+import ExploreFilteredList from "./ExploreFilteredList";
 
-class SpeechList extends Component {
+class ExploreSpeechList extends Component {
   state = {
     filter: ""
   };
@@ -32,10 +32,10 @@ class SpeechList extends Component {
           />
         </div>
 
-        <FilteredList inputFilter={this.state.filter} />
+        <ExploreFilteredList inputFilter={this.state.filter} />
       </div>
     );
   }
 }
 
-export default SpeechList;
+export default ExploreSpeechList;

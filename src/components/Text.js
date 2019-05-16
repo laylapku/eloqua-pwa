@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
@@ -49,32 +49,30 @@ const Text = props => {
   const speakerName = speakers[speechPlayed.speakerId].name;
 
   return (
-    <React.Fragment>
+    <Fragment>
       <Paper className={classes.textContainer}>
         <IconButton component={Link} to="/" className={classes.backButton}>
           <ArrowBackIcon />
         </IconButton>
 
-        <div style={{ textAlign: "center" }}>
-          <h4>
-            {speechPlayed.title}
-            <br />
-            <em className="speaker">{speakerName}</em>
-          </h4>
-          <h5>{speechPlayed.date}</h5>
-        </div>
-        <p style={{ maxHeight: "360px", overflow: "auto", lineHeight: "2em" }}>
+        <h4>
+          {speechPlayed.title}
+          <br />
+          <em className="speaker">{speakerName}</em>
+        </h4>
+        <h5>{speechPlayed.date}</h5>
+        <p style={{ maxHeight: "385px", overflow: "auto", lineHeight: "2em" }}>
           {textShown.text}
         </p>
       </Paper>
 
-      <PlayerControls        
+      <PlayerControls
         played={played}
         onSeekStart={onSeekStart}
         onSeekEnd={onSeekEnd}
         onSliderClick={onSliderClick}
       />
-    </React.Fragment>
+    </Fragment>
   );
 };
 

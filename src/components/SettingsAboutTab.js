@@ -43,7 +43,7 @@ const styles = theme => ({
   }
 });
 
-const About = props => {
+const SettingsAboutTab = props => {
   const { classes } = props;
   return (
     <div>
@@ -100,4 +100,4 @@ const About = props => {
   );
 };
 
-export default withStyles(styles)(About);
+export default withStyles(styles)(SettingsAboutTab);

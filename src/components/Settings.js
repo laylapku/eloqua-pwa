@@ -7,7 +7,7 @@ import {
   createMuiTheme
 } from "@material-ui/core/styles";
 
-import About from "./About.js";
+import SettingsAboutTab from "./SettingsAboutTab.js";
 import BottomBar from "./BottomBar.js";
 
 const theme = createMuiTheme({
@@ -61,7 +61,7 @@ class Settings extends Component {
           <Tab label="About" />
         </Tabs>
         {tabIdx === 0 && <BottomBar />}
-        {tabIdx === 1 && <About />}
+        {tabIdx === 1 && <SettingsAboutTab />}
       </MuiThemeProvider>
     );
   }

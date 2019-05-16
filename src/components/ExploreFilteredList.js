@@ -1,7 +1,7 @@
 import React from "react";
 
 import { connect } from "react-redux";
-import { addToPlaylist } from "../../redux/actions.js";
+import { addToPlaylist } from "../redux/actions.js";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -12,8 +12,8 @@ import IconButton from "@material-ui/core/IconButton";
 
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 
-import speeches from "../../data/speeches";
-import speakers from "../../data/speakers";
+import speeches from "../data/speeches";
+import speakers from "../data/speakers";
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const FilteredList = props => {
+const ExploreFilteredList = props => {
   const { speakerFilter, categoryFilter, inputFilter, addToPlaylist } = props;
 
   return (
@@ -80,4 +80,4 @@ const FilteredList = props => {
 export default connect(
   null,
   mapDispatchToProps
-)(FilteredList);
+)(ExploreFilteredList);

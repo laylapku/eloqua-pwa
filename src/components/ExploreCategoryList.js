@@ -4,9 +4,9 @@ import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 
-import FilteredList from "./FilteredList";
+import ExploreFilteredList from "./ExploreFilteredList";
 
-import categories from "../../data/categories.js";
+import categories from "../data/categories.js";
 
 const styles = {
   icon: {
@@ -16,7 +16,7 @@ const styles = {
   }
 };
 
-class CategoryList extends Component {
+class ExploreCategoryList extends Component {
   state = {
     filter: ""
   };
@@ -53,11 +53,11 @@ class CategoryList extends Component {
             ))}
           </Grid>
         ) : (
-          <FilteredList categoryFilter={this.state.filter} />
+          <ExploreFilteredList categoryFilter={this.state.filter} />
         )}
       </div>
     );
   }
 }
 
-export default withStyles(styles)(CategoryList);
+export default withStyles(styles)(ExploreCategoryList);

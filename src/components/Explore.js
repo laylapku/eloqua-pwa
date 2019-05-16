@@ -5,9 +5,9 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
-import SpeechList from "./Speech/SpeechList.js";
-import SpeakerList from "./Speech/SpeakerList.js";
-import CategoryList from "./Speech/CategoryList.js";
+import ExploreSpeechList from "./ExploreSpeechList.js";
+import ExploreSpeakerList from "./ExploreSpeakerList.js";
+import ExploreCategoryList from "./ExploreCategoryList.js";
 import BottomBar from "./BottomBar.js";
 
 const theme = createMuiTheme({
@@ -42,7 +42,7 @@ const theme = createMuiTheme({
   }
 });
 
-class Search extends Component {
+class Explore extends Component {
   state = {
     tabIdx: 0
   };
@@ -64,9 +64,9 @@ class Search extends Component {
               <Tab label="Category" />
             </Tabs>
           </AppBar>
-          {tabIdx === 0 && <SpeechList />}
-          {tabIdx === 1 && <SpeakerList />}
-          {tabIdx === 2 && <CategoryList />}
+          {tabIdx === 0 && <ExploreSpeechList />}
+          {tabIdx === 1 && <ExploreSpeakerList />}
+          {tabIdx === 2 && <ExploreCategoryList />}
         </MuiThemeProvider>
         <BottomBar />
       </Fragment>
@@ -74,4 +74,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default Explore;

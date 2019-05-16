@@ -5,9 +5,9 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import { withStyles } from "@material-ui/core/styles";
 
-import FilteredList from "./FilteredList";
+import FilteredList from "./ExploreFilteredList";
 
-import speakers from "../../data/speakers.js";
+import speakers from "../data/speakers.js";
 
 const styles = () => ({
   gridList: {
@@ -22,7 +22,7 @@ const styles = () => ({
   }
 });
 
-class SpeakerList extends Component {
+class ExploreSpeakerList extends Component {
   state = {
     filter: ""
   };
@@ -64,4 +64,4 @@ class SpeakerList extends Component {
   }
 }
 
-export default withStyles(styles)(SpeakerList);
+export default withStyles(styles)(ExploreSpeakerList);

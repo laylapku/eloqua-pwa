@@ -1,8 +1,7 @@
 body {
   padding: 0;
-  font-family: "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(
@@ -21,6 +20,13 @@ a {
   cursor: pointer;
   text-decoration: none;
   color: #fff;
+}
+
+h4,
+h5 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  text-align: center
 }
 
 .page-container {
@@ -50,9 +56,9 @@ a {
 }
 @keyframes marquee {
   0% {
-    transform: translateX(0); 
+    transform: translateX(0);
   }
   100% {
-    transform: translateX(-55%)
+    transform: translateX(-55%);
   }
 }
