@@ -2978,7 +2978,7 @@ const texts = [
   {
     speechId: "",
     text: ``
-  },
+  }
 ];
 
 export default texts;

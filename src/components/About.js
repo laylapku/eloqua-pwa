@@ -1,11 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
+
+import Paper from "@material-ui/core/Paper";
 import {
   withStyles,
   MuiThemeProvider,
   createMuiTheme
 } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
+
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import EmailIcon from "@material-ui/icons/Email";
 import WebIcon from "@material-ui/icons/Web";
@@ -97,10 +98,6 @@ const About = props => {
       </footer>
     </div>
   );
-};
-
-About.propTypes = {
-  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(About);

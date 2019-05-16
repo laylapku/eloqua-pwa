@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 import {
-  withStyles,
   MuiThemeProvider,
   createMuiTheme
 } from "@material-ui/core/styles";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+
 import About from "./About.js";
 import BottomBar from "./BottomBar.js";
 
@@ -36,28 +36,22 @@ const theme = createMuiTheme({
   }
 });
 
-const styles = () => ({});
-
 class Settings extends Component {
   state = {
-    value: 0
+    tabIdx: 0
   };
 
-  handleTabChange = (event, value) => {
-    this.setState({ value: value });
-  };
-
-  handleTabChangeIndex = index => {
-    this.setState({ value: index });
+  handleTabChange = (event, tabIdx) => {
+    this.setState({ tabIdx });
   };
 
   render() {
-    const { value } = this.state;
+    const { tabIdx } = this.state;
 
     return (
       <MuiThemeProvider theme={theme}>
         <Tabs
-          value={value}
+          value={tabIdx}
           onChange={this.handleTabChange}
           indicatorColor="primary"
           textColor="primary"
@@ -66,16 +60,11 @@ class Settings extends Component {
           <Tab label="General" />
           <Tab label="About" />
         </Tabs>
-        {value === 0 && <BottomBar />}
-        {value === 1 && <About />}
+        {tabIdx === 0 && <BottomBar />}
+        {tabIdx === 1 && <About />}
       </MuiThemeProvider>
     );
   }
 }
 
-Settings.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired
-};
-
-export default withStyles(styles, { withTheme: true })(Settings);
+export default Settings;

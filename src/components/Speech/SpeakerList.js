@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
+
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
+import { withStyles } from "@material-ui/core/styles";
+
 import FilteredList from "./FilteredList";
+
 import speakers from "../../data/speakers.js";
 
-const styles = theme => ({
+const styles = () => ({
   gridList: {
     display: "flex",
     flexWrap: "wrap",
@@ -25,8 +27,8 @@ class SpeakerList extends Component {
     filter: ""
   };
 
-  filterSpeech = value => {
-    this.setState({ filter: value });
+  filterSpeech = filter => {
+    this.setState({ filter });
   };
 
   render() {
@@ -43,8 +45,8 @@ class SpeakerList extends Component {
           >
             {Object.values(speakers).map((ele, index) => (
               <GridListTile
-                key={index}
-                onClick={() => this.filterSpeech(ele.id)} 
+                key={"speakerTile-" + index}
+                onClick={() => this.filterSpeech(ele.id)}
               >
                 <img src={ele.img} alt={ele.name} />
                 <GridListTileBar
@@ -61,9 +63,5 @@ class SpeakerList extends Component {
     );
   }
 }
-
-SpeakerList.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 export default withStyles(styles)(SpeakerList);

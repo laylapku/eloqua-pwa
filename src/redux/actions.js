@@ -1,11 +1,8 @@
 import {
   PLAY_PAUSE,
-  ON_PLAY,
-  ON_PAUSE,
   ON_DURATION,
   ON_PREV,
   ON_NEXT,
-  ON_ENDED,
   TOGGLE_LOOP,
   TOGGLE_MUTED,
   ADD_TO_PLAYLIST,
@@ -15,14 +12,6 @@ import {
 
 export const playPause = () => ({
   type: PLAY_PAUSE
-});
-
-export const onPlay = () => ({
-  type: ON_PLAY
-});
-
-export const onPause = () => ({
-  type: ON_PAUSE
 });
 
 export const onDuration = payload => ({
@@ -36,10 +25,6 @@ export const onPrev = () => ({
 
 export const onNext = () => ({
   type: ON_NEXT
-});
-
-export const onEnded = () => ({
-  type: ON_ENDED
 });
 
 export const toggleLoop = () => ({
@@ -60,7 +45,7 @@ export const deleteFromPlaylist = payload => ({
   payload
 });
 
-export const toggleAddToFavlist = id => ({
+export const toggleAddToFavlist = payload => ({
   type: TOGGLE_ADD_TO_FAVLIST,
-  payload: id
+  payload
 });
