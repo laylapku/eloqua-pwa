@@ -2,7 +2,13 @@ import React, { Component, Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { connect } from "react-redux";
-import { playPause, onDuration, onPrev, onNext } from "../redux/actions.js";
+import {
+  updateDuration,
+  updatePlayed,
+  playPause,
+  onPrev,
+  onNext
+} from "../redux/actions.js";
 
 import ReactPlayer from "react-player";
 
@@ -11,6 +17,7 @@ import Favorites from "./Favorites.js";
 import Settings from "./Settings.js";
 import PlayList from "./PlayList.js";
 import Text from "./Text.js";
+import BottomBar from "./BottomBar.js";
 
 import speeches from "../data/speeches.js";
 import speakers from "../data/speakers.js";
@@ -21,7 +28,8 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     playPause: () => dispatch(playPause()),
-    onDuration: payload => dispatch(onDuration(payload)),
+    updateDuration: payload => dispatch(updateDuration(payload)),
+    updatePlayed: payload => dispatch(updatePlayed(payload)),
     onPrev: () => dispatch(onPrev()),
     onNext: () => dispatch(onNext())
   };
@@ -80,20 +88,6 @@ class App extends Component {
     }
   };
 
-  state = {
-    url: speeches.find(ele => ele.id === this.props.playlist[this.props.index])
-      .url,
-    played: 0 // init progress, move to reducer?
-  };
-
-  componentWillReceiveProps = nextProps => {
-    const speechToPlay = speeches.find(
-      ele => ele.id === nextProps.playlist[nextProps.index]
-    );
-    this.setState({ url: speechToPlay.url });
-    this.updateMetadata();
-  };
-
   // seek methods for media session
   seekBackward = () => {
     let skipTime = 0.02;
@@ -110,42 +104,55 @@ class App extends Component {
     });
   };
 
+  state = {
+    url: speeches.find(ele => ele.id === this.props.playlist[this.props.index])
+      .url
+  };
+
+  componentWillReceiveProps = nextProps => {
+    const speechToPlay = speeches.find(
+      ele => ele.id === nextProps.playlist[nextProps.index]
+    );
+    this.setState({ url: speechToPlay.url });
+    this.updateMetadata();
+  };
+
   // player slider methods
   onSeekStart = () => {
     this.setState({ seeking: true });
   };
   onSeekEnd = () => {
     this.setState({ seeking: false });
-    this.player.seekTo(this.state.played);
+    this.player.seekTo(this.props.played);
   };
+
   onSliderClick = (e, value) => {
-    this.setState({ played: value });
+    this.props.updatePlayed(value);
     this.player.seekTo(value);
   };
 
   // update ui values with values from player
   onProgress = status => {
     if (!this.state.seeking) {
-      this.setState({ played: status.played });
+      this.props.updatePlayed(status.played);
     }
   };
 
   render() {
-    const { playing, loop, muted, onNext, onDuration } = this.props;
+    const { playing, played, loop, playbackRate, onNext, updateDuration } = this.props;
 
     return (
       <Fragment>
         <ReactPlayer
           ref={player => (this.player = player)} // for seekTo method
-          //width="100%" not needed?
           height="0px" // required
           url={this.state.url}
-          played={this.state.played}
           playing={playing}
+          played={played}
           loop={loop}
-          muted={muted}
+          playbackRate={playbackRate}
           onEnded={onNext}
-          onDuration={onDuration} // updates audio duration
+          onDuration={updateDuration} // updates audio duration
           onProgress={this.onProgress}
         />
 
@@ -159,7 +166,6 @@ class App extends Component {
               path="/text"
               render={() => (
                 <Text
-                  played={this.state.played}
                   onSeekStart={this.onSeekStart}
                   onSeekEnd={this.onSeekEnd}
                   onSliderClick={this.onSliderClick}
@@ -167,6 +173,7 @@ class App extends Component {
               )}
             />
           </Switch>
+          <BottomBar />
         </Router>
       </Fragment>
     );

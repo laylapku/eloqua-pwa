@@ -44,9 +44,9 @@ const Text = props => {
     played
   } = props;
 
-  const speechPlayed = speeches.find(ele => ele.id === playlist[index]);
+  const speechPlaying = speeches.find(ele => ele.id === playlist[index]);
   const textShown = texts.find(ele => ele.speechId === playlist[index]);
-  const speakerName = speakers[speechPlayed.speakerId].name;
+  const speakerName = speakers[speechPlaying.speakerId].name;
 
   return (
     <Fragment>
@@ -56,12 +56,12 @@ const Text = props => {
         </IconButton>
 
         <h4>
-          {speechPlayed.title}
+          {speechPlaying.title}
           <br />
           <em className="speaker">{speakerName}</em>
         </h4>
-        <h5>{speechPlayed.date}</h5>
-        <p style={{ maxHeight: "385px", overflow: "auto", lineHeight: "2em" }}>
+        <h5>{speechPlaying.date}</h5>
+        <p style={{ maxHeight: "450px", overflow: "auto", lineHeight: "2em" }}>
           {textShown.text}
         </p>
       </Paper>

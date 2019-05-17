@@ -1,107 +1,92 @@
 import React from "react";
 
 import { connect } from "react-redux";
-import { toggleAddToFavlist, addToPlaylist } from "../redux/actions.js";
 
+import AppBar from "@material-ui/core/AppBar";
 import { withStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
 
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
-
-import BottomBar from "./BottomBar.js";
-
-import speeches from "../data/speeches";
-import speakers from "../data/speakers";
+import TemplateList from "./TemplateList.js";
 
 const mapStateToProps = state => {
   return { favlist: state.favlist };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    toggleAddToFavlist: id => dispatch(toggleAddToFavlist(id)),
-    addToPlaylist: payload => dispatch(addToPlaylist(payload))
-  };
-};
-
 const styles = () => ({
-  root: {
-    width: "100%"
-  },
-  favIcon: {
-    fill: "RGB(206,32,41, 0.8)"
+  appBar: {
+    background: "linear-gradient(to bottom, #ddd 0%, #EDEAE0 100%)",
+    color: "inherit",
+    boxShadow: "0 0 5px #d2d4dc",
+    height: "48px",
+    padding: "0 20px"
   },
   reminder: {
-    fontSize: "22px",
+    fontSize: "20px",
     textAlign: "center",
-    opacity: 0.3
-  },
-  typo: {
-    paddingRight: "20px"
+    opacity: 0.2,
+    marginTop: "80px"
   }
 });
 
 const Favorites = props => {
-  const { classes, favlist, toggleAddToFavlist, addToPlaylist } = props;
+  const { classes, favlist } = props;
 
   return (
-    <React.Fragment>
-      <List className={classes.root}>
-        {favlist.length < 1 ? (
-          <h3 className={classes.reminder}>Add your first favorite speech!</h3>
-        ) : (
-          favlist.map((ele, index) => {
-            const speech = speeches.find(item => item.id === ele);
-            const year = speech.date.split(" ")[2];
-            const speakerName = speakers[speech.speakerId].name;
-
-            return (
-              <ListItem
-                key={"favListSpeech-" + index}
-                button
-                onClick={() => {
-                  addToPlaylist({ id: ele });
-                }}
-                className="list-item"
-              >
-                <ListItemText
-                  primary={
-                    <Typography className={classes.typo}>
-                      {speech.title + "(" + year + ")"}
-                      <br />
-                      <em className="speaker">{speakerName}</em>
-                    </Typography>
-                  }
-                />
-                <ListItemSecondaryAction>
-                  <IconButton onClick={() => toggleAddToFavlist([ele])}>
-                    <FavoriteIcon classes={{ root: classes.favIcon }} />
-                  </IconButton>
-                  <IconButton
-                    onClick={() => addToPlaylist({ id: ele, noPlay: true })}
-                  >
-                    <PlaylistAddIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            );
-          })
-        )}
-      </List>
-      <BottomBar />
-    </React.Fragment>
+    <div className="page-container">
+      <AppBar classes={{ root: classes.appBar }}>
+        <h3>My Library</h3>
+      </AppBar>
+      {favlist.length < 1 ? (
+        <h3 className={classes.reminder}>Add the first speech!</h3>
+      ) : (
+        favlist.map((ele, index) => {
+          return (
+            <TemplateList
+              key={"favListSpeech-" + index}
+              id={ele}
+              noPlay={true}
+            />
+          );
+        })
+      )}
+    </div>
   );
 };
 
-export default withStyles(styles)(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Favorites)
-);
+export default withStyles(styles)(connect(mapStateToProps)(Favorites));
+
+/* favlist.map((ele, index) => {
+  const speech = speeches.find(item => item.id === ele);
+  const year = speech.date.split(" ")[2];
+  const speakerName = speakers[speech.speakerId].name;
+
+  return (
+    <ListItem
+      key={"favListSpeech-" + index}
+      button
+      onClick={() => {
+        addToPlaylist({ id: ele });
+      }}
+      className="list-item"
+    >
+      <ListItemText
+        primary={
+          <Typography className={classes.typo}>
+            {speech.title + "(" + year + ")"}
+            <br />
+            <em className="speaker">{speakerName}</em>
+          </Typography>
+        }
+      />
+      <ListItemSecondaryAction>
+        <IconButton onClick={() => toggleAddToFavlist([ele])}>
+          <FavoriteIcon classes={{ root: classes.favIcon }} />
+        </IconButton>
+        <IconButton
+          onClick={() => addToPlaylist({ id: ele, noPlay: true })}
+        >
+          <PlaylistAddIcon />
+        </IconButton>
+      </ListItemSecondaryAction>
+    </ListItem>
+  );
+}) */

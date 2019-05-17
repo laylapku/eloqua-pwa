@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
@@ -8,7 +8,6 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import ExploreSpeechList from "./ExploreSpeechList.js";
 import ExploreSpeakerList from "./ExploreSpeakerList.js";
 import ExploreCategoryList from "./ExploreCategoryList.js";
-import BottomBar from "./BottomBar.js";
 
 const theme = createMuiTheme({
   overrides: {
@@ -55,21 +54,18 @@ class Explore extends Component {
     const { tabIdx } = this.state;
 
     return (
-      <Fragment>
-        <MuiThemeProvider theme={theme}>
-          <AppBar>
-            <Tabs value={tabIdx} onChange={this.handleTabChange} centered>
-              <Tab label="All" />
-              <Tab label="Speaker" />
-              <Tab label="Category" />
-            </Tabs>
-          </AppBar>
-          {tabIdx === 0 && <ExploreSpeechList />}
-          {tabIdx === 1 && <ExploreSpeakerList />}
-          {tabIdx === 2 && <ExploreCategoryList />}
-        </MuiThemeProvider>
-        <BottomBar />
-      </Fragment>
+      <MuiThemeProvider theme={theme}>
+        <AppBar>
+          <Tabs value={tabIdx} onChange={this.handleTabChange} centered>
+            <Tab label="All" />
+            <Tab label="Speaker" />
+            <Tab label="Category" />
+          </Tabs>
+        </AppBar>
+        {tabIdx === 0 && <ExploreSpeechList />}
+        {tabIdx === 1 && <ExploreSpeakerList />}
+        {tabIdx === 2 && <ExploreCategoryList />}
+      </MuiThemeProvider>
     );
   }
 }

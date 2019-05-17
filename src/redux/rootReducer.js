@@ -1,10 +1,11 @@
 import {
+  UPDATE_DURATION,
+  UPDATE_PLAYED,
   PLAY_PAUSE,
-  ON_DURATION,
   ON_PREV,
   ON_NEXT,
   TOGGLE_LOOP,
-  TOGGLE_MUTED,
+  SET_PLAYBACK_RATE,
   ADD_TO_PLAYLIST,
   DELETE_FROM_PLAYLIST,
   TOGGLE_ADD_TO_FAVLIST
@@ -14,9 +15,10 @@ import speeches from "../data/speeches";
 
 const initState = {
   playing: false,
-  muted: false,
+  played: 0,
   duration: 0,
   loop: false,
+  playbackRate: 1.0,
   playlist: ["1"],
   index: 0,
   favlist: []
@@ -26,10 +28,15 @@ const rootReducer = (state = initState, action) => {
   let newState;
   switch (action.type) {
     // player callbacks
-    case ON_DURATION:
+    case UPDATE_DURATION:
       return {
         ...state,
         duration: action.payload
+      };
+    case UPDATE_PLAYED:
+      return {
+        ...state,
+        played: action.payload
       };
 
     // player controls
@@ -64,10 +71,11 @@ const rootReducer = (state = initState, action) => {
         ...state,
         loop: !state.loop
       };
-    case TOGGLE_MUTED:
+    case SET_PLAYBACK_RATE:
+      console.log(action.payload);
       return {
         ...state,
-        muted: !state.muted
+        playbackRate: action.payload
       };
 
     case ADD_TO_PLAYLIST:

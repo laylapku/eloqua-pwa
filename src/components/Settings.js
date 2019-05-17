@@ -2,13 +2,9 @@ import React, { Component } from "react";
 
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import {
-  MuiThemeProvider,
-  createMuiTheme
-} from "@material-ui/core/styles";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 import SettingsAboutTab from "./SettingsAboutTab.js";
-import BottomBar from "./BottomBar.js";
 
 const theme = createMuiTheme({
   overrides: {
@@ -60,7 +56,7 @@ class Settings extends Component {
           <Tab label="General" />
           <Tab label="About" />
         </Tabs>
-        {tabIdx === 0 && <BottomBar />}
+        {tabIdx === 0 && <p />}
         {tabIdx === 1 && <SettingsAboutTab />}
       </MuiThemeProvider>
     );

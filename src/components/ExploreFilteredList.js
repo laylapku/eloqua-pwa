@@ -1,31 +1,15 @@
-import React from "react";
+import React, { Fragment } from "react";
 
-import { connect } from "react-redux";
-import { addToPlaylist } from "../redux/actions.js";
-
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-
-import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
+import TemplateList from "./TemplateList.js";
 
 import speeches from "../data/speeches";
 import speakers from "../data/speakers";
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addToPlaylist: payload => dispatch(addToPlaylist(payload))
-  };
-};
-
 const ExploreFilteredList = props => {
-  const { speakerFilter, categoryFilter, inputFilter, addToPlaylist } = props;
+  const { speakerFilter, categoryFilter, inputFilter } = props;
 
   return (
-    <List>
+    <Fragment>
       {speeches
         .filter(
           ele =>
@@ -42,11 +26,21 @@ const ExploreFilteredList = props => {
               inputFilter === "")
         )
         .map((ele, index) => {
-          const year = ele.date.split(" ")[2]; // "27 October 1964" -> "1964"
-          const speakerName = speakers[ele.speakerId].name;
-
           return (
-            <ListItem
+            <TemplateList
+              key={"filteredListSpeech-" + index}
+              id={ele.id}
+              noPlay={true}
+            />
+          );
+        })}
+    </Fragment>
+  );
+};
+
+export default ExploreFilteredList;
+
+/* <ListItem
               button
               key={"filteredListSpeech-" + index}
               onClick={() => {
@@ -70,14 +64,4 @@ const ExploreFilteredList = props => {
                   <PlaylistAddIcon />
                 </IconButton>
               </ListItemSecondaryAction>
-            </ListItem>
-          );
-        })}
-    </List>
-  );
-};
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(ExploreFilteredList);
+            </ListItem> */
