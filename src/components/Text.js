@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
 
@@ -23,11 +23,19 @@ const mapStatetoProps = state => {
 };
 
 const styles = theme => ({
-  textContainer: {
-    ...theme.mixins.gutters(),
+  root: {
     boxShadow: "none",
     background: "inherit"
   },
+  textContainer: {
+    overflow: "auto",
+    position: "absolute",
+    top: "105px",
+    bottom: "105px",
+    lineHeight: "2em",
+    padding: "0 15px"
+  },
+
   backButton: {
     padding: 0
   }
@@ -50,20 +58,20 @@ const Text = props => {
 
   return (
     <Fragment>
-      <Paper className={classes.textContainer}>
-        <IconButton component={Link} to="/" className={classes.backButton}>
+      <Paper className={classes.root}>
+        <IconButton
+          onClick={props.history.goBack}
+          className={classes.backButton}
+        >
           <ArrowBackIcon />
         </IconButton>
-
         <h4>
           {speechPlaying.title}
           <br />
           <em className="speaker">{speakerName}</em>
         </h4>
         <h5>{speechPlaying.date}</h5>
-        <p style={{ maxHeight: "450px", overflow: "auto", lineHeight: "2em" }}>
-          {textShown.text}
-        </p>
+        <p className={classes.textContainer}>{textShown.text}</p>
       </Paper>
 
       <PlayerControls
@@ -76,4 +84,4 @@ const Text = props => {
   );
 };
 
-export default withStyles(styles)(connect(mapStatetoProps)(Text));
+export default withStyles(styles)(withRouter(connect(mapStatetoProps)(Text)));

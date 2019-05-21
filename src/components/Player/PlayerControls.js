@@ -14,9 +14,8 @@ import {
 import Slider from "@material-ui/lab/Slider";
 
 import Paper from "@material-ui/core/Paper";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
 import IconButton from "@material-ui/core/IconButton";
 import {
   withStyles,
@@ -70,7 +69,37 @@ const theme = createMuiTheme({
     },
     MuiSvgIcon: {
       root: {
-        fill: "RGB(111,134,131)"
+        fill: "RGB(111,134,131)",
+        transform: "scale(1.2)"
+      }
+    },
+    /*  MuiButton: {
+      root: {
+        height: "25px",
+        minWidth: "35px",
+        fontSize: "10px",
+        marginTop: "10px",
+        padding: 0,
+        lineHeight: 0,
+        borderRadius: "5px"
+      },
+      outlined: {
+        padding: 0
+      },
+      outlinedPrimary: {
+        border: "1px solid RGB(111,134,131)"
+      }
+    }, */
+    MuiDialogContent: {
+      root: {
+        padding: "18px 18px",
+        position: "fixed",
+        bottom: "30px",
+        borderRadius: "5px",
+        background: "linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%)",
+        "&:first-child": {
+          paddingTop: 0
+        }
       }
     }
   },
@@ -90,23 +119,41 @@ const styles = {
     top: "auto",
     bottom: 0
   },
+  iconContainer: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap"
+  },
   playPauseIcon: {
-    transform: "scale(1.5)"
+    transform: "scale(1.8)"
   },
   favIcon: {
-    fill: "RGB(206,32,41, 0.8)"
+    fill: "RGB(206,32,41,0.8)"
+  },
+  label: {
+    height: "20px",
+    minWidth: "30px",
+    fontSize: "14px",
+    borderRadius: "5px",
+    border: "2px solid RGB(111,134,131)"
   }
 };
 
 class PlayControls extends Component {
   state = {
-    speed: 1
+    speed: 1,
+    open: false
   };
 
   handleSpeedChange = e => {
-    this.setState({ speed: e.target.value });
-    this.props.setPlaybackRate(e.target.value);
+    this.setState({ speed: e.target.value, open: false });
+    this.props.setPlaybackRate(parseFloat(e.target.value));
   };
+
+  handleDialogOpen = () => {
+    this.setState({ open: true });
+  };
+
   render() {
     const {
       classes,
@@ -126,6 +173,7 @@ class PlayControls extends Component {
       onSeekStart,
       onSeekEnd
     } = this.props;
+    const { speed, open } = this.state;
     const speechPlaying = speeches.find(item => item.id === playlist[index]);
 
     return (
@@ -143,13 +191,7 @@ class PlayControls extends Component {
             <Duration seconds={duration} />
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              flexWrap: "wrap"
-            }}
-          >
+          <div className={classes.iconContainer}>
             <IconButton onClick={toggleLoop}>
               {loop ? <RepeatOneIcon /> : <LoopIcon />}
             </IconButton>
@@ -173,23 +215,25 @@ class PlayControls extends Component {
                 <FavoriteBorderIcon />
               )}
             </IconButton>
-            <IconButton component={Link} to="/playlist">
-              <ListIcon />
-            </IconButton>
 
-            <FormControl variant="filled" className={classes.formControl}>
-              <InputLabel htmlFor="speed">Speed</InputLabel>
-              <Select
-                native
-                value={this.state.speed}
-                onChange={this.handleSpeedChange}
-              >
+            <IconButton
+              variant="outlined"
+              color="primary"
+              onClick={this.handleDialogOpen}
+            >
+              <span className={classes.label}>{speed + "x"}</span>
+            </IconButton>
+            <Dialog open={open} aria-labelledby="speed-dialog">
+              <DialogContent value={speed} onClick={this.handleSpeedChange}>
                 <option value={0.75}>0.75x</option>
                 <option value={1}>1x</option>
                 <option value={1.5}>1.5x</option>
                 <option value={2}>2x</option>
-              </Select>
-            </FormControl>
+              </DialogContent>
+            </Dialog>
+            <IconButton component={Link} to="/playlist">
+              <ListIcon />
+            </IconButton>
           </div>
         </Paper>
       </MuiThemeProvider>

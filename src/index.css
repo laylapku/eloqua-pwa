@@ -24,8 +24,13 @@ a {
 
 h4,
 h5 {
-  margin: 10px auto;
+  margin: 8px auto;
   text-align: center;
+}
+
+option {
+  padding: 10px;
+  border-bottom: 1px solid #afafaf;
 }
 
 .page-container {

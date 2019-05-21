@@ -1,13 +1,10 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router";
 
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
+import ExploreTabs from "./ExploreTabs";
 import ExploreSpeechList from "./ExploreSpeechList.js";
-import ExploreSpeakerList from "./ExploreSpeakerList.js";
-import ExploreCategoryList from "./ExploreCategoryList.js";
 
 const theme = createMuiTheme({
   overrides: {
@@ -42,32 +39,73 @@ const theme = createMuiTheme({
 });
 
 class Explore extends Component {
-  state = {
-    tabIdx: 0
-  };
-
-  handleTabChange = (event, tabIdx) => {
-    this.setState({ tabIdx });
-  };
-
   render() {
-    const { tabIdx } = this.state;
-
     return (
+      /*  <Router>
+        <Route
+          path="/"
+          render={({ location }) => (
+            <Fragment>
+              <MuiThemeProvider theme={theme}>
+                <AppBar>
+                  <Tabs value={location.pathname}>
+                    <Tab label="All" component={Link} to="/" />
+                    <Tab label="Speaker" component={Link} to="/speakerlist" />
+                    <Tab label="Category" component={Link} to="/categorylist" />
+                  </Tabs>
+                </AppBar>
+              </MuiThemeProvider>
+              <Switch>
+                <Route path="/" render={() => <ExploreSpeechList />} />
+                <Route
+                  path="/speakerlist"
+                  render={() => <ExploreSpeakerList />}
+                />
+                <Route
+                  path="/categorylist"
+                  render={() => <ExploreCategoryList />}
+                />
+              </Switch>
+            </Fragment>
+          )}
+        />
+      </Router> */
+      // <BrowserRouter>
       <MuiThemeProvider theme={theme}>
-        <AppBar>
-          <Tabs value={tabIdx} onChange={this.handleTabChange} centered>
-            <Tab label="All" />
-            <Tab label="Speaker" />
-            <Tab label="Category" />
-          </Tabs>
-        </AppBar>
-        {tabIdx === 0 && <ExploreSpeechList />}
-        {tabIdx === 1 && <ExploreSpeakerList />}
-        {tabIdx === 2 && <ExploreCategoryList />}
+        <ExploreTabs />
+        <ExploreSpeechList />
+        {/*tabValue === "speech" && <ExploreSpeechList />}
+        {tabValue === "speaker" && <ExploreSpeakerList />}
+        {tabValue === "category" && <ExploreCategoryList />*}
+        {/* <Route
+            path="/"
+            render={({ location }) => (
+              <Fragment>
+                <AppBar>
+                  <Tabs value={location.pathname}>
+                    <Tab label="All" component={Link} to="/all" />
+                    <Tab label="Speaker" component={Link} to="/speaker" />
+                    <Tab label="Category" component={Link} to="/category" />
+                  </Tabs>
+                </AppBar>
+                <Switch>
+                  <Route path="/all" render={() => <ExploreSpeechList />} />
+                  <Route
+                    path="/speaker"
+                    render={() => <ExploreSpeakerList />}
+                  />
+                  <Route
+                    path="/category"
+                    render={() => <ExploreCategoryList />}
+                  />
+                </Switch>
+              </Fragment>
+            )}
+          /> */}
       </MuiThemeProvider>
+      //</BrowserRouter>
     );
   }
 }
 
-export default Explore;
+export default withRouter(Explore);
