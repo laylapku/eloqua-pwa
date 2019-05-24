@@ -33,7 +33,7 @@ const styles = theme => ({
     top: "105px",
     bottom: "105px",
     lineHeight: "2em",
-    padding: "0 15px"
+    margin: "15px 20px"
   },
 
   backButton: {

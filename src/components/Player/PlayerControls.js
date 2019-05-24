@@ -56,7 +56,8 @@ const theme = createMuiTheme({
   overrides: {
     MuiSlider: {
       track: {
-        backgroundColor: "RGB(202,187,143)"
+        backgroundColor: "RGB(202,187,143)",
+        height: "3px"
       },
       thumb: {
         backgroundColor: "RGB(203,125,64)"
@@ -73,23 +74,6 @@ const theme = createMuiTheme({
         transform: "scale(1.2)"
       }
     },
-    /*  MuiButton: {
-      root: {
-        height: "25px",
-        minWidth: "35px",
-        fontSize: "10px",
-        marginTop: "10px",
-        padding: 0,
-        lineHeight: 0,
-        borderRadius: "5px"
-      },
-      outlined: {
-        padding: 0
-      },
-      outlinedPrimary: {
-        border: "1px solid RGB(111,134,131)"
-      }
-    }, */
     MuiDialogContent: {
       root: {
         padding: "18px 18px",
@@ -117,7 +101,8 @@ const styles = {
     paddingTop: "10px",
     position: "fixed",
     top: "auto",
-    bottom: 0
+    bottom: 0,
+    touchAction: "none" // to fix slider error "Unable to preventDefault inside passive event listener due to target being treated as passive."
   },
   iconContainer: {
     display: "flex",

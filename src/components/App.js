@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Switch, Route, Link, BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { connect } from "react-redux";
 import {
@@ -12,14 +12,7 @@ import {
 
 import ReactPlayer from "react-player";
 
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-
 import Explore from "./Explore.js";
-import ExploreSpeechList from "./ExploreSpeakerList.js";
-import ExploreSpeakerList from "./ExploreSpeakerList.js";
-import ExploreCategoryList from "./ExploreCategoryList.js";
 import Favorites from "./Favorites.js";
 import Settings from "./Settings.js";
 import PlayList from "./PlayList.js";
@@ -116,13 +109,16 @@ class App extends Component {
       .url
   };
 
-  componentWillReceiveProps = nextProps => {
-    const speechToPlay = speeches.find(
-      ele => ele.id === nextProps.playlist[nextProps.index]
-    );
-    this.setState({ url: speechToPlay.url });
-    this.updateMetadata();
-  };
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.index !== prevProps.index) {
+      const speechToPlay = speeches.find(
+        ele => ele.id === this.props.playlist[this.props.index]
+      );
+      this.setState({ url: speechToPlay.url });
+      this.updateMetadata();
+    }
+  }
 
   // player slider methods
   onSeekStart = () => {
@@ -173,31 +169,6 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Explore} />
-            {/* render=
-            {({ location }) => (
-              <Fragment>
-                <AppBar>
-                  <Tabs value={location.pathname}>
-                    <Tab label="All" component={Link} to="/" />
-                    <Tab label="Speaker" component={Link} to="/speakerlist" />
-                    <Tab label="Category" component={Link} to="/categorylist" />
-                  </Tabs>
-                </AppBar>
-
-                <Switch>
-                  <Route path="/" render={() => <ExploreSpeechList />} />
-                  <Route
-                    path="/speakerlist"
-                    render={() => <ExploreSpeakerList />}
-                  />
-                  <Route
-                    path="/categorylist"
-                    render={() => <ExploreCategoryList />}
-                  />
-                </Switch>
-              </Fragment>
-            )}
-            */}
             <Route path="/playlist" component={PlayList} />
             <Route path="/favorites" component={Favorites} />
             <Route path="/settings" component={Settings} />
@@ -211,8 +182,6 @@ class App extends Component {
                 />
               )}
             />
-            <Route path="/speaker" component={ExploreSpeakerList} />
-            <Route path="/category" component={ExploreCategoryList} />
           </Switch>
           <BottomBar />
         </BrowserRouter>

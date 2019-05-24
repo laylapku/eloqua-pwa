@@ -169,7 +169,6 @@ export default withRouter(
 function setRouteIndex(pathname) {
   switch (pathname) {
     case "/":
-    
       return 0;
     case "/favorites":
       return 1;
