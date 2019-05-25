@@ -102,6 +102,7 @@ const styles = {
     position: "fixed",
     top: "auto",
     bottom: 0,
+ 
     touchAction: "none" // to fix slider error "Unable to preventDefault inside passive event listener due to target being treated as passive."
   },
   iconContainer: {

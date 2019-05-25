@@ -1,7 +1,7 @@
 import {
-  UPDATE_DURATION,
-  UPDATE_PLAYED,
+  ON_DURATION,
   PLAY_PAUSE,
+  UPDATE_PLAYED,
   ON_PREV,
   ON_NEXT,
   TOGGLE_LOOP,
@@ -28,15 +28,10 @@ const rootReducer = (state = initState, action) => {
   let newState;
   switch (action.type) {
     // player callbacks
-    case UPDATE_DURATION:
+    case ON_DURATION:
       return {
         ...state,
         duration: action.payload
-      };
-    case UPDATE_PLAYED:
-      return {
-        ...state,
-        played: action.payload
       };
 
     // player controls
@@ -45,6 +40,13 @@ const rootReducer = (state = initState, action) => {
         ...state,
         playing: !state.playing
       };
+
+    case UPDATE_PLAYED:
+      return {
+        ...state,
+        played: action.payload
+      };
+
     case ON_PREV:
       return state.index > 0
         ? {
@@ -55,6 +57,7 @@ const rootReducer = (state = initState, action) => {
             ...state,
             index: state.playlist.length - 1
           };
+
     case ON_NEXT:
       return state.index < state.playlist.length - 1
         ? {
@@ -71,8 +74,8 @@ const rootReducer = (state = initState, action) => {
         ...state,
         loop: !state.loop
       };
+
     case SET_PLAYBACK_RATE:
-      console.log(action.payload);
       return {
         ...state,
         playbackRate: action.payload

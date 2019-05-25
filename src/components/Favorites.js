@@ -54,39 +54,3 @@ const Favorites = props => {
 
 export default withStyles(styles)(connect(mapStateToProps)(Favorites));
 
-/* favlist.map((ele, index) => {
-  const speech = speeches.find(item => item.id === ele);
-  const year = speech.date.split(" ")[2];
-  const speakerName = speakers[speech.speakerId].name;
-
-  return (
-    <ListItem
-      key={"favListSpeech-" + index}
-      button
-      onClick={() => {
-        addToPlaylist({ id: ele });
-      }}
-      className="list-item"
-    >
-      <ListItemText
-        primary={
-          <Typography className={classes.typo}>
-            {speech.title + "(" + year + ")"}
-            <br />
-            <em className="speaker">{speakerName}</em>
-          </Typography>
-        }
-      />
-      <ListItemSecondaryAction>
-        <IconButton onClick={() => toggleAddToFavlist([ele])}>
-          <FavoriteIcon classes={{ root: classes.favIcon }} />
-        </IconButton>
-        <IconButton
-          onClick={() => addToPlaylist({ id: ele, noPlay: true })}
-        >
-          <PlaylistAddIcon />
-        </IconButton>
-      </ListItemSecondaryAction>
-    </ListItem>
-  );
-}) */

@@ -4,8 +4,13 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import { withStyles } from "@material-ui/core/styles";
+import {
+  withStyles,
+  MuiThemeProvider,
+  createMuiTheme
+} from "@material-ui/core/styles";
 
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
@@ -22,24 +27,44 @@ const mapStatetoProps = state => {
   };
 };
 
-const styles = theme => ({
-  root: {
-    boxShadow: "none",
-    background: "inherit"
-  },
+const theme = createMuiTheme({
+  overrides: {
+    MuiPaper: {
+      root: {
+        backgroundColor: "inherit"
+      },
+      elevation2: {
+        boxShadow: "none"
+      }
+    },
+    MuiTypography: {
+      root: {
+        textAlign: "center"
+      }
+    },
+    MuiIconButton: {
+      root: {
+        padding: 0
+      }
+    },
+    typography: {
+      useNextVariants: true
+    }
+  }
+});
+
+const styles = {
   textContainer: {
     overflow: "auto",
     position: "absolute",
-    top: "105px",
-    bottom: "105px",
+    top: "115px",
+    bottom: "135px",
     lineHeight: "2em",
-    margin: "15px 20px"
-  },
-
-  backButton: {
-    padding: 0
+    padding: "0 20px",
+    textAlign: "justify",
+    opacity: 0.7
   }
-});
+};
 
 const Text = props => {
   const {
@@ -58,21 +83,23 @@ const Text = props => {
 
   return (
     <Fragment>
-      <Paper className={classes.root}>
-        <IconButton
-          onClick={props.history.goBack}
-          className={classes.backButton}
-        >
-          <ArrowBackIcon />
-        </IconButton>
-        <h4>
-          {speechPlaying.title}
-          <br />
-          <em className="speaker">{speakerName}</em>
-        </h4>
-        <h5>{speechPlaying.date}</h5>
-        <p className={classes.textContainer}>{textShown.text}</p>
-      </Paper>
+      <MuiThemeProvider theme={theme}>
+        <Paper>
+          <IconButton onClick={props.history.goBack}>
+            <ArrowBackIcon />
+          </IconButton>
+          <Typography>
+            <strong>{speechPlaying.title}</strong>
+          </Typography>
+          <Typography className="speaker">
+            <em>{speakerName}</em>{" "}
+          </Typography>
+          <Typography>{speechPlaying.date} </Typography>
+          <Typography className={classes.textContainer}>
+            {textShown.text}
+          </Typography>
+        </Paper>
+      </MuiThemeProvider>
 
       <PlayerControls
         played={played}

@@ -39,29 +39,3 @@ const ExploreFilteredList = props => {
 };
 
 export default ExploreFilteredList;
-
-/* <ListItem
-              button
-              key={"filteredListSpeech-" + index}
-              onClick={() => {
-                addToPlaylist({ id: ele.id });
-              }}
-              className="list-item"
-            >
-              <ListItemText
-                primary={
-                  <Typography>
-                    {ele.title + "(" + year + ")"}
-                    <br />
-                    <em className="speaker">{speakerName}</em>
-                  </Typography>
-                }
-              />
-              <ListItemSecondaryAction>
-                <IconButton
-                  onClick={() => addToPlaylist({ id: ele.id, noPlay: true })} // just add to playlist, don't play
-                >
-                  <PlaylistAddIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem> */

@@ -1,7 +1,7 @@
 import {
-  UPDATE_DURATION,
-  UPDATE_PLAYED,
+  ON_DURATION,
   PLAY_PAUSE,
+  UPDATE_PLAYED,
   ON_PREV,
   ON_NEXT,
   TOGGLE_LOOP,
@@ -11,18 +11,18 @@ import {
   TOGGLE_ADD_TO_FAVLIST
 } from "./constants.js";
 
-export const updateDuration = payload => ({
-  type: UPDATE_DURATION,
-  payload
-});
-
-export const updatePlayed = payload => ({
-  type: UPDATE_PLAYED,
+export const onDuration = payload => ({
+  type: ON_DURATION,
   payload
 });
 
 export const playPause = () => ({
   type: PLAY_PAUSE
+});
+
+export const updatePlayed = payload => ({
+  type: UPDATE_PLAYED,
+  payload
 });
 
 export const onPrev = () => ({

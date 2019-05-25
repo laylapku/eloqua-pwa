@@ -22,19 +22,13 @@ a {
   color: #fff;
 }
 
-h4,
-h5 {
-  margin: 8px auto;
-  text-align: center;
-}
-
 option {
   padding: 10px;
   border-bottom: 1px solid #afafaf;
 }
 
 .page-container {
-  margin-bottom: 110px;
+  margin-bottom: 100px;
   margin-top: 50px;
 }
 
@@ -43,7 +37,6 @@ option {
 }
 
 .speaker {
-  font-size: 0.8rem;
   opacity: 0.8;
 }
 

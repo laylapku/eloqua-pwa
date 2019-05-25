@@ -1,8 +1,8 @@
-export const UPDATE_DURATION = "UPDATE_DURATION";
-
-export const UPDATE_PLAYED = "UPDATE_PLAYED";
+export const ON_DURATION = "ON_DURATION";
 
 export const PLAY_PAUSE = "PLAY_PAUSE";
+
+export const UPDATE_PLAYED = "UPDATE_PLAYED";
 
 export const ON_NEXT = "ON_NEXT";
 

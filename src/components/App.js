@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { connect } from "react-redux";
 import {
-  updateDuration,
+  onDuration,
   updatePlayed,
   playPause,
   onPrev,
@@ -28,7 +28,7 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     playPause: () => dispatch(playPause()),
-    updateDuration: payload => dispatch(updateDuration(payload)),
+    onDuration: payload => dispatch(onDuration(payload)),
     updatePlayed: payload => dispatch(updatePlayed(payload)),
     onPrev: () => dispatch(onPrev()),
     onNext: () => dispatch(onNext())
@@ -90,18 +90,16 @@ class App extends Component {
 
   // seek methods for media session
   seekBackward = () => {
-    let skipTime = 0.02;
-    let played = Math.max(this.state.played - skipTime, 0);
-    this.setState({ played }, () => {
-      this.player.seekTo(played);
-    });
+    let skipTime = 0.05;
+    let played = Math.max(this.props.played - skipTime, 0);
+    this.props.updatePlayed(played);
+    this.player.seekTo(played);
   };
   seekForward = () => {
-    let skipTime = 0.02;
-    let played = Math.min(this.state.played + skipTime, this.props.duration);
-    this.setState({ played }, () => {
-      this.player.seekTo(played);
-    });
+    let skipTime = 0.05;
+    let played = Math.min(this.props.played + skipTime, this.props.duration);
+    this.props.updatePlayed(played);
+    this.player.seekTo(played);
   };
 
   state = {
@@ -148,7 +146,7 @@ class App extends Component {
       loop,
       playbackRate,
       onNext,
-      updateDuration
+      onDuration
     } = this.props;
 
     return (
@@ -162,7 +160,7 @@ class App extends Component {
           loop={loop}
           playbackRate={playbackRate}
           onEnded={onNext}
-          onDuration={updateDuration} // updates audio duration
+          onDuration={onDuration} // updates audio duration
           onProgress={this.onProgress}
         />
 
