@@ -48,7 +48,7 @@ const SettingsAboutTab = props => {
   return (
     <div>
       <Paper className={classes.header}>
-        <h3>Speech App</h3>
+        <h3><em>Eloqua</em></h3>
       </Paper>
       <div className={classes.container}>
         <MuiThemeProvider theme={theme}>
@@ -79,9 +79,9 @@ const SettingsAboutTab = props => {
             <br />
             <strong>react-player</strong> for audio playing
             <br />
-            <strong>create-react-app, redux, react-redux</strong>
-            <br />
             <strong>redux-persist</strong> to persist redux store
+            <br />
+            <strong>localforage</strong> for local storage
           </p>
         </MuiThemeProvider>
       </div>

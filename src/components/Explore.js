@@ -43,15 +43,24 @@ const theme = createMuiTheme({
 
 class Explore extends Component {
   state = {
-    tabIdx: 0
+    tabIdx: 0,
+    filter: ""
   };
 
   handleTabChange = (event, tabIdx) => {
-    this.setState({ tabIdx });
+    this.setState({ tabIdx, filter: "" });
+  };
+
+  onSearchInputChange = e => {
+    this.setState({ filter: e.target.value });
+  };
+
+  filterSpeech = filter => {
+    this.setState({ filter });
   };
 
   render() {
-    const { tabIdx } = this.state;
+    const { tabIdx, filter } = this.state;
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -62,9 +71,25 @@ class Explore extends Component {
             <Tab label="Category" />
           </Tabs>
         </AppBar>
-        {tabIdx === 0 && <ExploreSpeechList />}
-        {tabIdx === 1 && <ExploreSpeakerList />}
-        {tabIdx === 2 && <ExploreCategoryList />}
+
+        {tabIdx === 0 && (
+          <ExploreSpeechList
+            filter={filter}
+            onSearchInputChange={this.onSearchInputChange}
+          />
+        )}
+        {tabIdx === 1 && (
+          <ExploreSpeakerList
+            filter={filter}
+            filterSpeech={this.filterSpeech}
+          />
+        )}
+        {tabIdx === 2 && (
+          <ExploreCategoryList
+            filter={filter}
+            filterSpeech={this.filterSpeech}
+          />
+        )}
       </MuiThemeProvider>
     );
   }
