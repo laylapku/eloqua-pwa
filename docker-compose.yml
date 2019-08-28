@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  speech-log:
+    container_name: speech-log-container
+    build: .
+    command: npm start
+    working_dir: /user/src/speech-log
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./://user/src/speech-log
