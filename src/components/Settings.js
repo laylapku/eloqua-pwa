@@ -1,9 +1,12 @@
-import React, { Component } from "react";
+//react
+import React, { useState } from "react";
 
+//material ui
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
+//data
 import SettingsAboutTab from "./SettingsAboutTab.js";
 
 const theme = createMuiTheme({
@@ -32,35 +35,29 @@ const theme = createMuiTheme({
   }
 });
 
-class Settings extends Component {
-  state = {
-    tabIdx: 0
+const Settings = () => {
+  const [tabIdx, setIdx] = useState(0);
+
+  const handleTabChange = (event, tabIdx) => {
+    setIdx(tabIdx);
   };
 
-  handleTabChange = (event, tabIdx) => {
-    this.setState({ tabIdx });
-  };
-
-  render() {
-    const { tabIdx } = this.state;
-
-    return (
-      <MuiThemeProvider theme={theme}>
-        <Tabs
-          value={tabIdx}
-          onChange={this.handleTabChange}
-          indicatorColor="primary"
-          textColor="primary"
-          centered
-        >
-          <Tab label="General" />
-          <Tab label="About" />
-        </Tabs>
-        {tabIdx === 0 && <p />}
-        {tabIdx === 1 && <SettingsAboutTab />}
-      </MuiThemeProvider>
-    );
-  }
-}
+  return (
+    <MuiThemeProvider theme={theme}>
+      <Tabs
+        value={tabIdx}
+        onChange={handleTabChange}
+        indicatorColor="primary"
+        textColor="primary"
+        centered
+      >
+        <Tab label="General" />
+        <Tab label="About" />
+      </Tabs>
+      {tabIdx === 0 && <p />}
+      {tabIdx === 1 && <SettingsAboutTab />}
+    </MuiThemeProvider>
+  );
+};
 
 export default Settings;

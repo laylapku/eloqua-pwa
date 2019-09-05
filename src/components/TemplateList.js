@@ -1,14 +1,15 @@
-import React, { Fragment } from "react";
+//react
+import React, { Fragment, useContext } from "react";
 import { withRouter } from "react-router-dom";
-
-import { connect } from "react-redux";
+import { PlayerContext } from "../contexts/PlayerContext";
 import {
-  playPause,
-  addToPlaylist,
-  deleteFromPlaylist,
-  toggleAddToFavlist
-} from "../redux/actions.js";
+  PLAY_PAUSE,
+  ADD_TO_PLAYLIST,
+  DELETE_FROM_PLAYLIST,
+  TOGGLE_ADD_TO_FAVLIST
+} from "../reducers/constants";
 
+//material ui
 import AppBar from "@material-ui/core/AppBar";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -16,7 +17,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import { withStyles } from "@material-ui/core/styles";
-
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PauseIcon from "@material-ui/icons/Pause";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -24,26 +24,9 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import DeleteIcon from "@material-ui/icons/Delete";
 
+//data
 import speeches from "../data/speeches";
 import speakers from "../data/speakers";
-
-const mapStateToProps = state => {
-  return {
-    playing: state.playing,
-    playlist: state.playlist,
-    index: state.index,
-    favlist: state.favlist
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    playPause: () => dispatch(playPause()),
-    addToPlaylist: payload => dispatch(addToPlaylist(payload)),
-    deleteFromPlaylist: index => dispatch(deleteFromPlaylist(index)),
-    toggleAddToFavlist: id => dispatch(toggleAddToFavlist(id))
-  };
-};
 
 const styles = () => ({
   appBar: {
@@ -77,17 +60,12 @@ const styles = () => ({
 });
 
 const TemplateList = props => {
+  const { player, dispatch } = useContext(PlayerContext);
+  const { playing, index, playlist, favlist } = player;
+
   const {
     classes,
-    playing,
-    index,
-    playlist,
-    favlist,
-    playPause,
-    addToPlaylist,
-    deleteFromPlaylist,
-    toggleAddToFavlist,
-    // props passed by parent components
+    //props passed by parent components
     id,
     speechIndex,
     noPlay,
@@ -95,7 +73,7 @@ const TemplateList = props => {
   } = props;
   const favCheck = playlist.every(ele => favlist.indexOf(ele) !== -1);
   const speechShown = speeches.find(item => item.id === id);
-  const year = speechShown.date.split(" ")[2]; // "27 October 1964" -> "1964"
+  const year = speechShown.date.split(" ")[2]; //"27 October 1964" -> "1964"
   const speakerName = speakers[speechShown.speakerId].name;
   const speechPlaying = speeches.find(item => item.id === playlist[index]);
   const stylesOnPlay = id => ({
@@ -108,14 +86,22 @@ const TemplateList = props => {
         <AppBar classes={{ root: classes.appBar }}>
           <div className={classes.header}>
             <h3>My Playlist</h3>
-            <IconButton onClick={() => toggleAddToFavlist(playlist)}>
+            <IconButton
+              onClick={() =>
+                dispatch({ type: TOGGLE_ADD_TO_FAVLIST, payload: playlist })
+              }
+            >
               {favCheck ? (
                 <FavoriteIcon classes={{ root: classes.favIcon }} />
               ) : (
                 <FavoriteBorderIcon />
               )}
             </IconButton>
-            <IconButton onClick={() => deleteFromPlaylist("all")}>
+            <IconButton
+              onClick={() =>
+                dispatch({ type: DELETE_FROM_PLAYLIST, payload: "all" })
+              }
+            >
               <DeleteIcon classes={{ root: classes.deleteIcon }} />
             </IconButton>
           </div>
@@ -124,13 +110,23 @@ const TemplateList = props => {
 
       <List className={classes.list}>
         {id === speechPlaying.id ? (
-          <IconButton onClick={playPause} style={stylesOnPlay(id)}>
+          <IconButton
+            onClick={() => {
+              dispatch({ type: PLAY_PAUSE });
+            }}
+            style={stylesOnPlay(id)}
+          >
             {playing ? <PauseIcon /> : <PlayArrowIcon />}
           </IconButton>
         ) : (
           <p />
         )}
-        <ListItem button onClick={() => addToPlaylist({ id })}>
+        <ListItem
+          button
+          onClick={() => {
+            dispatch({ type: ADD_TO_PLAYLIST, payload: { id } });
+          }}
+        >
           <ListItemText
             primary={
               <Typography style={stylesOnPlay(id)}>
@@ -142,7 +138,14 @@ const TemplateList = props => {
             classes={{ root: classes.listItemText }}
           />
         </ListItem>
-        <IconButton onClick={() => toggleAddToFavlist([id])}>
+        <IconButton
+          onClick={() =>
+            dispatch({
+              type: TOGGLE_ADD_TO_FAVLIST,
+              payload: [id]
+            })
+          }
+        >
           {favlist.indexOf(id) !== -1 ? (
             <FavoriteIcon classes={{ root: classes.favIcon }} />
           ) : (
@@ -150,12 +153,21 @@ const TemplateList = props => {
           )}
         </IconButton>
         {pathname === "/playlist" ? (
-          <IconButton onClick={() => deleteFromPlaylist(speechIndex)}>
+          <IconButton
+            onClick={() =>
+              dispatch({
+                type: DELETE_FROM_PLAYLIST,
+                payload: speechIndex
+              })
+            }
+          >
             <DeleteIcon classes={{ root: classes.deleteIcon }} />
           </IconButton>
         ) : (
           <IconButton
-            onClick={() => addToPlaylist({ id, noPlay })} // just add to playlist, don't play
+            onClick={() =>
+              dispatch({ type: ADD_TO_PLAYLIST, payload: { id, noPlay } })
+            } //just add to playlist, don't play
           >
             <PlaylistAddIcon />
           </IconButton>
@@ -165,11 +177,4 @@ const TemplateList = props => {
   );
 };
 
-export default withStyles(styles)(
-  withRouter(
-    connect(
-      mapStateToProps,
-      mapDispatchToProps
-    )(TemplateList)
-  )
-);
+export default withStyles(styles)(withRouter(TemplateList));

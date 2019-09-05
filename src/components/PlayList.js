@@ -1,17 +1,13 @@
-import React from "react";
+//react
+import React, { useContext } from "react";
+import { PlayerContext } from "../contexts/PlayerContext";
 
-import { connect } from "react-redux";
-
+//components
 import TemplateList from "./TemplateList.js";
 
-const mapStateToProps = state => {
-  return {
-    playlist: state.playlist
-  };
-};
-
-const PlayList = props => {
-  const { playlist } = props;
+const PlayList = () => {
+  const { player } = useContext(PlayerContext);
+  const { playlist } = player;
 
   return (
     <div className="page-container">
@@ -28,5 +24,4 @@ const PlayList = props => {
   );
 };
 
-export default connect(mapStateToProps)(PlayList);
-
+export default PlayList;

@@ -1,28 +1,22 @@
-import React, { Component } from "react";
+// react
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-
-import { connect } from "react-redux";
+import { PlayerContext } from "../../contexts/PlayerContext";
 import {
-  playPause,
-  onPrev,
-  onNext,
-  toggleLoop,
-  setPlaybackRate,
-  toggleAddToFavlist
-} from "../../redux/actions.js";
+  PLAY_PAUSE,
+  ON_PREV,
+  ON_NEXT,
+  TOGGLE_LOOP,
+  SET_PLAYBACK_RATE,
+  TOGGLE_ADD_TO_FAVLIST
+} from "../../reducers/constants";
 
-import Slider from "@material-ui/lab/Slider";
-
+// material ui
+import Slider from "@material-ui/core/Slider";
 import Paper from "@material-ui/core/Paper";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import IconButton from "@material-ui/core/IconButton";
-import {
-  withStyles,
-  MuiThemeProvider,
-  createMuiTheme
-} from "@material-ui/core/styles";
-
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
 import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
@@ -32,40 +26,34 @@ import LoopIcon from "@material-ui/icons/Loop";
 import ListIcon from "@material-ui/icons/List";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import {
+  withStyles,
+  createMuiTheme,
+  MuiThemeProvider
+} from "@material-ui/core/styles";
 
+// components
 import Duration from "./Duration.js";
 
+// data
 import speeches from "../../data/speeches";
-
-const mapStatetoProps = state => {
-  return state;
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    playPause: () => dispatch(playPause()),
-    onPrev: () => dispatch(onPrev()),
-    onNext: () => dispatch(onNext()),
-    toggleLoop: () => dispatch(toggleLoop()),
-    setPlaybackRate: value => dispatch(setPlaybackRate(value)),
-    toggleAddToFavlist: id => dispatch(toggleAddToFavlist(id))
-  };
-};
 
 const theme = createMuiTheme({
   overrides: {
     MuiSlider: {
-      track: {
+      root /* thumb */: {
+        color: "RGB(203,125,64)",
+        padding: 0
+      },
+      /* track */ rail: {
         backgroundColor: "RGB(202,187,143)",
         height: "3px"
-      },
-      thumb: {
-        backgroundColor: "RGB(203,125,64)"
       }
     },
     MuiIconButton: {
       root: {
-        padding: "12px 20px"
+        padding: "12px 20px",
+        color: "red"
       }
     },
     MuiSvgIcon: {
@@ -102,7 +90,6 @@ const styles = {
     position: "fixed",
     top: "auto",
     bottom: 0,
- 
     touchAction: "none" // to fix slider error "Unable to preventDefault inside passive event listener due to target being treated as passive."
   },
   iconContainer: {
@@ -125,111 +112,97 @@ const styles = {
   }
 };
 
-class PlayControls extends Component {
-  state = {
-    speed: 1,
-    open: false
+const PlayControls = props => {
+  const [speed, setSpeed] = useState(1);
+  const [open, setOpen] = useState(false);
+  const { player, dispatch } = useContext(PlayerContext);
+  const { playing, played, duration, loop, playlist, index, favlist } = player;
+  const speechPlaying = speeches.find(item => item.id === playlist[index]);
+
+  const { classes, onSliderClick, onSeekEnd } = props;
+
+  const handleSpeedChange = e => {
+    setSpeed(e.target.value);
+    setOpen(false);
+    dispatch({
+      type: SET_PLAYBACK_RATE,
+      payload: parseFloat(e.target.value)
+    });
   };
 
-  handleSpeedChange = e => {
-    this.setState({ speed: e.target.value, open: false });
-    this.props.setPlaybackRate(parseFloat(e.target.value));
-  };
+  return (
+    <MuiThemeProvider theme={theme}>
+      <Paper className={classes.root}>
+        <Slider
+          value={played * 100}
+          onChange={onSliderClick}
+          onChangeCommitted={onSeekEnd}
+        />
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <Duration seconds={duration * played} />/
+          <Duration seconds={duration} />
+        </div>
 
-  handleDialogOpen = () => {
-    this.setState({ open: true });
-  };
+        <div className={classes.iconContainer}>
+          <IconButton onClick={() => dispatch({ type: TOGGLE_LOOP })}>
+            {loop ? <RepeatOneIcon /> : <LoopIcon />}
+          </IconButton>
+          <IconButton onClick={() => dispatch({ type: ON_PREV })}>
+            <SkipPreviousIcon />
+          </IconButton>
+          <IconButton
+            onClick={() => {
+              dispatch({ type: PLAY_PAUSE });
+            }}
+          >
+            {playing ? (
+              <PauseCircleOutlineIcon className={classes.playPauseIcon} />
+            ) : (
+              <PlayCircleOutlineIcon className={classes.playPauseIcon} />
+            )}
+          </IconButton>
+          <IconButton onClick={() => dispatch({ type: ON_NEXT })}>
+            <SkipNextIcon />
+          </IconButton>
+          <IconButton
+            onClick={() =>
+              dispatch({
+                type: TOGGLE_ADD_TO_FAVLIST,
+                payload: [speechPlaying.id]
+              })
+            }
+          >
+            {favlist.indexOf(speechPlaying.id) !== -1 ? (
+              <FavoriteIcon classes={{ root: classes.favIcon }} />
+            ) : (
+              <FavoriteBorderIcon />
+            )}
+          </IconButton>
 
-  render() {
-    const {
-      classes,
-      playing,
-      played,
-      loop,
-      duration,
-      playlist,
-      index,
-      favlist,
-      playPause,
-      onPrev,
-      onNext,
-      toggleLoop,
-      toggleAddToFavlist,
-      onSliderClick,
-      onSeekStart,
-      onSeekEnd
-    } = this.props;
-    const { speed, open } = this.state;
-    const speechPlaying = speeches.find(item => item.id === playlist[index]);
+          <IconButton
+            variant="outlined"
+            color="primary"
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
+            <span className={classes.label}>{speed + "x"}</span>
+          </IconButton>
+          <Dialog open={open} aria-labelledby="speed-dialog">
+            <DialogContent value={speed} onClick={handleSpeedChange}>
+              <option value={0.75}>0.75x</option>
+              <option value={1}>1x</option>
+              <option value={1.5}>1.5x</option>
+              <option value={2}>2x</option>
+            </DialogContent>
+          </Dialog>
+          <IconButton component={Link} to="/playlist">
+            <ListIcon />
+          </IconButton>
+        </div>
+      </Paper>
+    </MuiThemeProvider>
+  );
+};
 
-    return (
-      <MuiThemeProvider theme={theme}>
-        <Paper className={classes.root}>
-          <Slider
-            value={played}
-            max={1}
-            onChange={onSliderClick}
-            onDragStart={onSeekStart}
-            onDragEnd={onSeekEnd}
-          />
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <Duration seconds={duration * played} />/
-            <Duration seconds={duration} />
-          </div>
-
-          <div className={classes.iconContainer}>
-            <IconButton onClick={toggleLoop}>
-              {loop ? <RepeatOneIcon /> : <LoopIcon />}
-            </IconButton>
-            <IconButton onClick={onPrev}>
-              <SkipPreviousIcon />
-            </IconButton>
-            <IconButton onClick={playPause}>
-              {playing ? (
-                <PauseCircleOutlineIcon className={classes.playPauseIcon} />
-              ) : (
-                <PlayCircleOutlineIcon className={classes.playPauseIcon} />
-              )}
-            </IconButton>
-            <IconButton onClick={onNext}>
-              <SkipNextIcon />
-            </IconButton>
-            <IconButton onClick={() => toggleAddToFavlist([speechPlaying.id])}>
-              {favlist.indexOf(speechPlaying.id) !== -1 ? (
-                <FavoriteIcon classes={{ root: classes.favIcon }} />
-              ) : (
-                <FavoriteBorderIcon />
-              )}
-            </IconButton>
-
-            <IconButton
-              variant="outlined"
-              color="primary"
-              onClick={this.handleDialogOpen}
-            >
-              <span className={classes.label}>{speed + "x"}</span>
-            </IconButton>
-            <Dialog open={open} aria-labelledby="speed-dialog">
-              <DialogContent value={speed} onClick={this.handleSpeedChange}>
-                <option value={0.75}>0.75x</option>
-                <option value={1}>1x</option>
-                <option value={1.5}>1.5x</option>
-                <option value={2}>2x</option>
-              </DialogContent>
-            </Dialog>
-            <IconButton component={Link} to="/playlist">
-              <ListIcon />
-            </IconButton>
-          </div>
-        </Paper>
-      </MuiThemeProvider>
-    );
-  }
-}
-
-export default withStyles(styles)(
-  connect(
-    mapStatetoProps,
-    mapDispatchToProps
-  )(PlayControls)
-);
+export default withStyles(styles)(PlayControls);

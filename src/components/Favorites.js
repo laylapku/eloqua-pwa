@@ -1,15 +1,13 @@
-import React from "react";
+//react
+import React, { useContext } from "react";
+import { PlayerContext } from "../contexts/PlayerContext";
 
-import { connect } from "react-redux";
-
+//material ui
 import AppBar from "@material-ui/core/AppBar";
 import { withStyles } from "@material-ui/core/styles";
 
+//components
 import TemplateList from "./TemplateList.js";
-
-const mapStateToProps = state => {
-  return { favlist: state.favlist };
-};
 
 const styles = () => ({
   appBar: {
@@ -28,7 +26,9 @@ const styles = () => ({
 });
 
 const Favorites = props => {
-  const { classes, favlist } = props;
+  const { player } = useContext(PlayerContext);
+  const { favlist } = player;
+  const { classes } = props;
 
   return (
     <div className="page-container">
@@ -52,5 +52,4 @@ const Favorites = props => {
   );
 };
 
-export default withStyles(styles)(connect(mapStateToProps)(Favorites));
-
+export default withStyles(styles)(Favorites);

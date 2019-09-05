@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+//react
+import React, { useContext } from "react";
 import { Link, withRouter } from "react-router-dom";
+import { PlayerContext } from "../contexts/PlayerContext";
+import { PLAY_PAUSE, ON_NEXT } from "../reducers/constants";
 
-import { connect } from "react-redux";
-import { playPause, onNext } from "../redux/actions.js";
-
-import Slider from "@material-ui/lab/Slider";
-
+//material ui
+import Slider from "@material-ui/core/Slider";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
@@ -21,19 +21,9 @@ import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
 
+//data
 import speakers from "../data/speakers";
 import speeches from "../data/speeches";
-
-const mapStatetoProps = state => {
-  return state;
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    playPause: () => dispatch(playPause()),
-    onNext: () => dispatch(onNext())
-  };
-};
 
 const theme = createMuiTheme({
   overrides: {
@@ -88,83 +78,77 @@ const theme = createMuiTheme({
   }
 });
 
-class BottomBar extends Component {
-  render() {
-    const {
-      playing,
-      played,
-      playlist,
-      index,
-      playPause,
-      onNext,
-      location: { pathname }
-    } = this.props;
-    const speechPlaying = speeches.find(ele => ele.id === playlist[index]);
-    const speakerName = speakers[speechPlaying.speakerId].name;
-    const useMarquee = () => {
-      const titleLength = speechPlaying.title.split("").length;
-      return titleLength > 27 ? "marquee" : null;
-    };
+const BottomBar = props => {
+  const { player, dispatch } = useContext(PlayerContext);
+  const { playing, played, playlist, index } = player;
+  const {
+    location: { pathname }
+  } = props;
 
-    return (
-      <MuiThemeProvider theme={theme}>
-        {pathname !== "/settings" && pathname !== "/text" && (
-          <AppBar>
-            <Slider value={played} max={1} />
-            <Toolbar>
-              <Link to="/text">
-                {
-                  <div className={useMarquee()}>
-                    <span>{speechPlaying.title}</span>
-                    <br />
-                    <em className="speaker">{speakerName}</em>
-                  </div>
-                }
-              </Link>
-              <IconButton component={Link} to="/playlist">
-                <ListIcon />
-              </IconButton>
-              <IconButton onClick={playPause}>
-                {playing ? <PauseCircleFilledIcon /> : <PlayCircleFilledIcon />}
-              </IconButton>
-              <IconButton onClick={onNext}>
-                <SkipNextIcon />
-              </IconButton>
-            </Toolbar>
+  const speechPlaying = speeches.find(ele => ele.id === playlist[index]);
+  const speakerName = speakers[speechPlaying.speakerId].name;
+  const titleMarquee = () => {
+    const titleLength = speechPlaying.title.split("").length;
+    return titleLength > 27 ? "marquee" : null;
+  };
 
-            <BottomNavigation showLabels value={setRouteIndex(pathname)}>
-              <BottomNavigationAction
-                component={Link}
-                to="/"
-                label="Explore"
-                icon={<ExploreIcon />}
-              />
-              <BottomNavigationAction
-                component={Link}
-                to="/favorites"
-                label="Favorites"
-                icon={<FavoriteIcon />}
-              />
-              <BottomNavigationAction
-                component={Link}
-                to="/settings"
-                label="Settings"
-                icon={<SettingsIcon />}
-              />
-            </BottomNavigation>
-          </AppBar>
-        )}
-      </MuiThemeProvider>
-    );
-  }
-}
+  return (
+    <MuiThemeProvider theme={theme}>
+      {pathname !== "/settings" && pathname !== "/text" && (
+        <AppBar>
+         {/*  <Slider value={played * 100} max={100} /> */}
+          <Toolbar>
+            <Link to="/text">
+              {
+                <div className={titleMarquee()}>
+                  <span>{speechPlaying.title}</span>
+                  <br />
+                  <em className="speaker">{speakerName}</em>
+                </div>
+              }
+            </Link>
+            <IconButton component={Link} to="/playlist">
+              <ListIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                dispatch({ type: PLAY_PAUSE });
+              }}
+            >
+              {playing ? <PauseCircleFilledIcon /> : <PlayCircleFilledIcon />}
+            </IconButton>
+            <IconButton onClick={() => dispatch({ type: ON_NEXT })}>
+              <SkipNextIcon />
+            </IconButton>
+          </Toolbar>
 
-export default withRouter(
-  connect(
-    mapStatetoProps,
-    mapDispatchToProps
-  )(BottomBar)
-);
+          <BottomNavigation showLabels value={setRouteIndex(pathname)}>
+            <BottomNavigationAction
+              component={Link}
+              to="/"
+              label="Explore"
+              icon={<ExploreIcon />}
+            />
+            <BottomNavigationAction
+              component={Link}
+              to="/favorites"
+              label="Favorites"
+              icon={<FavoriteIcon />}
+            />
+            <BottomNavigationAction
+              component={Link}
+              to="/settings"
+              label="Settings"
+              icon={<SettingsIcon />}
+            />
+          </BottomNavigation>
+        </AppBar>
+      )}
+    </MuiThemeProvider>
+  );
+};
+
+export default withRouter(BottomBar);
 
 function setRouteIndex(pathname) {
   switch (pathname) {

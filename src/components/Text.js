@@ -1,31 +1,26 @@
-import React, { Fragment } from "react";
+//react
+import React, { Fragment, useContext } from "react";
 import { withRouter } from "react-router-dom";
+import { PlayerContext } from "../contexts/PlayerContext";
 
-import { connect } from "react-redux";
-
+//material ui
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import {
   withStyles,
   MuiThemeProvider,
   createMuiTheme
 } from "@material-ui/core/styles";
 
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-
+//components
 import PlayerControls from "./Player/PlayerControls.js";
 
+//data
 import speeches from "../data/speeches";
 import speakers from "../data/speakers";
 import texts from "../data/texts";
-
-const mapStatetoProps = state => {
-  return {
-    playlist: state.playlist,
-    index: state.index
-  };
-};
 
 const theme = createMuiTheme({
   overrides: {
@@ -67,15 +62,10 @@ const styles = {
 };
 
 const Text = props => {
-  const {
-    classes,
-    playlist,
-    index,
-    onSeekStart,
-    onSeekEnd,
-    onSliderClick,
-    played
-  } = props;
+  const { player } = useContext(PlayerContext);
+  const { playlist, index } = player;
+
+  const { classes, onSeekStart, onSeekEnd, onSliderClick, played } = props;
 
   const speechPlaying = speeches.find(ele => ele.id === playlist[index]);
   const textShown = texts.find(ele => ele.speechId === playlist[index]);
@@ -111,4 +101,4 @@ const Text = props => {
   );
 };
 
-export default withStyles(styles)(withRouter(connect(mapStatetoProps)(Text)));
+export default withStyles(styles)(withRouter(Text));

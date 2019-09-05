@@ -1,11 +1,15 @@
+//react
 import React from "react";
 
+//material ui
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 
+//components
 import ExploreFilteredList from "./ExploreFilteredList";
 
+//data
 import categories from "../data/categories.js";
 
 const styles = {
@@ -22,14 +26,6 @@ const styles = {
 };
 
 const ExploreCategoryList = props => {
-  /* state = {
-    filter: ""
-  };
-
-  filterSpeech = filter => {
-    this.setState({ filter });
-  }; */
-
   const { classes, filter, filterSpeech } = props;
 
   return (
