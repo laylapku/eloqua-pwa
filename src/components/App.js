@@ -8,35 +8,27 @@ import React, {
 } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { PlayerContext } from "../contexts/PlayerContext.js";
-
-// redux
-//import { updatePlayed, playPause, onPrev, onNext } from "../redux/actions.js";
+import {
+  PLAY_PAUSE,
+  ON_NEXT,
+  ON_DURATION,
+  UPDATE_PLAYED
+} from "../reducers/constants";
 
 // libs
 import ReactPlayer from "react-player";
 
 // components
-import Explore from "./Explore.js";
-import Favorites from "./Favorites.js";
-import Settings from "./Settings.js";
-import PlayList from "./PlayList.js";
-import Text from "./Text.js";
-import BottomBar from "./BottomBar.js";
+import Explore from "./Explore";
+import Favorites from "./Favorites";
+import Settings from "./Settings";
+import PlayList from "./PlayList";
+import Text from "./Text";
+import BottomView from "./BottomView";
 
 // data
-import speeches from "../data/speeches.js";
-import speakers from "../data/speakers.js";
-
-/* const mapDispatchToProps = dispatch => {
-  return {
-    playPause: () => dispatch(playPause()),
-    updatePlayed: payload => dispatch(updatePlayed(payload)),
-    onPrev: () => dispatch(onPrev()),
-    onNext: () => dispatch(onNext())
-  };
-}; */
-
-//const MediaMetadata = window.MediaMetadata;
+import speeches from "../data/speeches";
+//import speakers from "../data/speakers.js";
 
 /* class App extends Component {
    constructor(props) {
@@ -112,7 +104,7 @@ const App = () => {
     played,
     loop,
     playbackRate,
-    duration,
+    //duration,
     playlist,
     index
   } = player;
@@ -129,7 +121,7 @@ const App = () => {
   }, [seeking]);
   // check out this react-player issue: https://github.com/CookPete/react-player/issues/511
   // and more importantly this react issue: https://github.com/facebook/react/issues/14031
-  // also react documentation: https://reactjs.org/docs/hooks-faq.html#how-to-read-an-often-changing-value-from-usecallback 
+  // also react documentation: https://reactjs.org/docs/hooks-faq.html#how-to-read-an-often-changing-value-from-usecallback
 
   //get new url when component updates
   useEffect(() => {
@@ -137,67 +129,6 @@ const App = () => {
     setUrl(speechToPlay.url);
     //updateMetadata();
   }, [playlist, index]);
-
-  //media session api
-  useEffect(() => {
-    updateMetadata();
-    navigator.mediaSession.setActionHandler("play", () => {
-      dispatch({ type: "PLAY_PAUSE" });
-    });
-    navigator.mediaSession.setActionHandler("pause", () => {
-      dispatch({ type: "PLAY_PAUSE" });
-    });
-    navigator.mediaSession.setActionHandler("previoustrack", () => {
-      dispatch({ type: "ON_PREV" });
-      updateMetadata();
-    });
-    navigator.mediaSession.setActionHandler("nexttrack", () => {
-      dispatch({ type: "ON_NEXT" });
-      updateMetadata();
-    });
-    navigator.mediaSession.setActionHandler("seekbackward", () => {
-      seekBackward();
-    });
-    navigator.mediaSession.setActionHandler("seekforward", () => {
-      seekForward();
-    });
-  }, ["mediaSession" in navigator]);
-
-  const MediaMetadata = window.MediaMetadata;
-
-  //media data update
-  const updateMetadata = () => {
-    let speech = speeches.find(ele => ele.id === playlist[index]);
-    let speaker = speakers[speech.speakerId].name;
-    let avatar = speakers[speech.speakerId].img;
-    if ("mediaSession" in navigator) {
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: speech.title,
-        artist: speaker,
-        artwork: [
-          { src: avatar, sizes: "96x96", type: "image/png" },
-          { src: avatar, sizes: "128x128", type: "image/png" },
-          { src: avatar, sizes: "192x192", type: "image/png" },
-          { src: avatar, sizes: "256x256", type: "image/png" },
-          { src: avatar, sizes: "384x384", type: "image/png" },
-          { src: avatar, sizes: "512x512", type: "image/png" }
-        ]
-      });
-    }
-  };
-  // seek methods for media session
-  const seekBackward = () => {
-    let skipTime = 0.05;
-    let newPlayed = Math.max(played - skipTime, 0);
-    dispatch({ type: "UPDATE_PLAYED", payload: newPlayed });
-    playerRef.current.seekTo(played);
-  };
-  const seekForward = () => {
-    let skipTime = 0.05;
-    let newPlayed = Math.min(played + skipTime, duration);
-    dispatch({ type: "UPDATE_PLAYED", payload: newPlayed });
-    playerRef.current.seekTo(played);
-  }; 
 
   // seek methods for player slider
   const onSeekEnd = (e, value) => {
@@ -220,11 +151,11 @@ const App = () => {
         played={played}
         loop={loop}
         playbackRate={playbackRate}
-        onEnded={() => dispatch({ type: "ON_NEXT" })}
-        onDuration={payload => dispatch({ type: "ON_DURATION", payload })} // updates audio duration
+        onEnded={() => dispatch({ type: ON_NEXT })}
+        onDuration={payload => dispatch({ type: ON_DURATION, payload })} // updates audio duration
         onProgress={status =>
           !seekingRef.current &&
-          dispatch({ type: "UPDATE_PLAYED", payload: status.played })
+          dispatch({ type: UPDATE_PLAYED, payload: status.played })
         } // update ui values with values from player
       />
 
@@ -246,7 +177,7 @@ const App = () => {
           />
         </Switch>
 
-        <BottomBar />
+        <BottomView />
       </BrowserRouter>
     </Fragment>
   );

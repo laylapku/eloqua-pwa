@@ -1,5 +1,5 @@
 //react
-import React, { Component } from "react";
+import React, { useState } from "react";
 
 //material ui
 import AppBar from "@material-ui/core/AppBar";
@@ -44,58 +44,47 @@ const theme = createMuiTheme({
   }
 });
 
-class Explore extends Component {
-  state = {
-    tabIdx: 0,
-    filter: ""
+const Explore = () => {
+  const [tabIdx, setIdx] = useState(0);
+  const [filter, setFilter] = useState("");
+
+  const handleTabChange = (event, tabIdx) => {
+    setIdx(tabIdx);
+    setFilter("");
   };
 
-  handleTabChange = (event, tabIdx) => {
-    this.setState({ tabIdx, filter: "" });
+  const onSearchInputChange = e => {
+    setFilter(e.target.value);
   };
 
-  onSearchInputChange = e => {
-    this.setState({ filter: e.target.value });
+  const filterSpeech = filter => {
+    setFilter(filter);
   };
 
-  filterSpeech = filter => {
-    this.setState({ filter });
-  };
+  return (
+    <MuiThemeProvider theme={theme}>
+      <AppBar>
+        <Tabs value={tabIdx} onChange={handleTabChange} centered>
+          <Tab label="All" />
+          <Tab label="Speaker" />
+          <Tab label="Category" />
+        </Tabs>
+      </AppBar>
 
-  render() {
-    const { tabIdx, filter } = this.state;
-
-    return (
-      <MuiThemeProvider theme={theme}>
-        <AppBar>
-          <Tabs value={tabIdx} onChange={this.handleTabChange} centered>
-            <Tab label="All" />
-            <Tab label="Speaker" />
-            <Tab label="Category" />
-          </Tabs>
-        </AppBar>
-
-        {tabIdx === 0 && (
-          <ExploreSpeechList
-            filter={filter}
-            onSearchInputChange={this.onSearchInputChange}
-          />
-        )}
-        {tabIdx === 1 && (
-          <ExploreSpeakerList
-            filter={filter}
-            filterSpeech={this.filterSpeech}
-          />
-        )}
-        {tabIdx === 2 && (
-          <ExploreCategoryList
-            filter={filter}
-            filterSpeech={this.filterSpeech}
-          />
-        )}
-      </MuiThemeProvider>
-    );
-  }
-}
+      {tabIdx === 0 && (
+        <ExploreSpeechList
+          filter={filter}
+          onSearchInputChange={onSearchInputChange}
+        />
+      )}
+      {tabIdx === 1 && (
+        <ExploreSpeakerList filter={filter} filterSpeech={filterSpeech} />
+      )}
+      {tabIdx === 2 && (
+        <ExploreCategoryList filter={filter} filterSpeech={filterSpeech} />
+      )}
+    </MuiThemeProvider>
+  );
+};
 
 export default Explore;
