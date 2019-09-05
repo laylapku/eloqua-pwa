@@ -1,7 +1,10 @@
+//react
 import React, { Fragment } from "react";
 
+//components
 import TemplateList from "./TemplateList.js";
 
+//data
 import speeches from "../data/speeches";
 import speakers from "../data/speakers";
 
@@ -22,7 +25,7 @@ const ExploreFilteredList = props => {
                 speakers[ele.speakerId].name
                   .toLowerCase()
                   .includes(inputFilter.toLowerCase()))) ||
-              // keep all speeches if inputFilter is empty for SpeechList
+              //keep all speeches if inputFilter is empty for SpeechList
               inputFilter === "")
         )
         .map((ele, index) => {

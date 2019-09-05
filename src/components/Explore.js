@@ -1,10 +1,13 @@
+//react
 import React, { Component } from "react";
 
+//material ui
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
+//components
 import ExploreSpeechList from "./ExploreSpeechList.js";
 import ExploreSpeakerList from "./ExploreSpeakerList.js";
 import ExploreCategoryList from "./ExploreCategoryList.js";

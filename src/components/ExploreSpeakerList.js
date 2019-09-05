@@ -1,12 +1,16 @@
+//react
 import React from "react";
 
+//material ui
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import { withStyles } from "@material-ui/core/styles";
 
+//components
 import FilteredList from "./ExploreFilteredList";
 
+//data
 import speakers from "../data/speakers.js";
 
 const styles = () => ({
@@ -23,14 +27,6 @@ const styles = () => ({
 });
 
 const ExploreSpeakerList = props => {
-  /* state = {
-    filter: ""
-  };
-
-  filterSpeech = filter => {
-    this.setState({ filter });
-  }; */
-
   const { classes, filter, filterSpeech } = props;
 
   return (
