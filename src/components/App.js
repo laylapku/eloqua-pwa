@@ -1,11 +1,5 @@
 // react
-import React, {
-  Fragment,
-  useContext,
-  useState,
-  useEffect,
-  useRef
-} from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { PlayerContext } from "../contexts/PlayerContext.js";
 import {
@@ -17,18 +11,22 @@ import {
 
 // libs
 import ReactPlayer from "react-player";
+import { ThemeProvider } from "@material-ui/styles";
 
 // components
-import Explore from "./Explore";
-import Favorites from "./Favorites";
-import Settings from "./Settings";
-import PlayList from "./PlayList";
-import Text from "./Text";
+import ExploreTabView from "./ExploreTabView";
+import FavoritesTabView from "./FavoritesTabView";
+import SettingsTabView from "./SettingsTabView";
+import PlayListTabView from "./PlayListTabView";
+import ScriptTabView from "./ScriptTabView";
 import BottomView from "./BottomView";
 
 // data
 import speeches from "../data/speeches";
 //import speakers from "../data/speakers.js";
+
+//styles
+import defaultTheme from "../styles/defaultTheme";
 
 /* class App extends Component {
    constructor(props) {
@@ -112,16 +110,9 @@ const App = () => {
     speeches.find(ele => ele.id === playlist[index]).url
   );
   const [seeking, setSeeking] = useState(false);
-  const playerRef = useRef(null);
-
   // workaround for react-player onProgress compatible issue with react hooks
   const seekingRef = useRef(null);
-  useEffect(() => {
-    seekingRef.current = seeking;
-  }, [seeking]);
-  // check out this react-player issue: https://github.com/CookPete/react-player/issues/511
-  // and more importantly this react issue: https://github.com/facebook/react/issues/14031
-  // also react documentation: https://reactjs.org/docs/hooks-faq.html#how-to-read-an-often-changing-value-from-usecallback
+  const playerRef = useRef(null);
 
   //get new url when component updates
   useEffect(() => {
@@ -129,6 +120,13 @@ const App = () => {
     setUrl(speechToPlay.url);
     //updateMetadata();
   }, [playlist, index]);
+
+  useEffect(() => {
+    seekingRef.current = seeking;
+  }, [seeking]);
+  // check out this react-player issue: https://github.com/CookPete/react-player/issues/511
+  // and more importantly this react issue: https://github.com/facebook/react/issues/14031
+  // also react documentation: https://reactjs.org/docs/hooks-faq.html#how-to-read-an-often-changing-value-from-usecallback
 
   // seek methods for player slider
   const onSeekEnd = (e, value) => {
@@ -142,7 +140,7 @@ const App = () => {
   };
 
   return (
-    <Fragment>
+    <ThemeProvider theme={defaultTheme}>
       <ReactPlayer
         ref={playerRef} // for seekTo method
         height="0px" // required
@@ -161,25 +159,23 @@ const App = () => {
 
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={Explore} />
-          <Route path="/playlist" component={PlayList} />
-          <Route path="/favorites" component={Favorites} />
-          <Route path="/settings" component={Settings} />
+          <Route exact path="/" component={ExploreTabView} />
+          <Route path="/playlist" component={PlayListTabView} />
+          <Route path="/favorites" component={FavoritesTabView} />
+          <Route path="/settings" component={SettingsTabView} />
           <Route
-            path="/text"
+            path="/script"
             render={() => (
-              <Text
-                played={played}
+              <ScriptTabView
                 onSeekEnd={onSeekEnd}
                 onSliderClick={onSliderClick}
               />
             )}
           />
         </Switch>
-
         <BottomView />
       </BrowserRouter>
-    </Fragment>
+    </ThemeProvider>
   );
 };
 

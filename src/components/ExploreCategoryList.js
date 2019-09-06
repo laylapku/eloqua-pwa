@@ -4,7 +4,6 @@ import React from "react";
 //material ui
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
-import { withStyles } from "@material-ui/core/styles";
 
 //components
 import ExploreFilteredList from "./ExploreFilteredList";
@@ -12,24 +11,15 @@ import ExploreFilteredList from "./ExploreFilteredList";
 //data
 import categories from "../data/categories.js";
 
-const styles = {
-  icon: {
-    margin: 10,
-    width: 80,
-    height: 80
-  },
-  typo: {
-    fontSize: "12px",
-    display: "flex",
-    justifyContent: "space-around"
-  }
-};
+//styles
+import useStyles from "../styles/customizedStyles";
 
 const ExploreCategoryList = props => {
-  const { classes, filter, filterSpeech } = props;
+  const { filter, filterSpeech } = props;
+  const classes = useStyles();
 
   return (
-    <div className="page-container">
+    <div className={classes.listContainer}>
       {filter === "" ? (
         <Grid container justify="space-around">
           {categories.map((ele, index) => (
@@ -37,10 +27,9 @@ const ExploreCategoryList = props => {
               <Avatar
                 alt={ele.theme}
                 src={ele.icon}
-                className={classes.icon}
                 onClick={() => filterSpeech(ele.id)}
               />
-              <p className={classes.typo}>{ele.theme}</p>
+              <p className={classes.categoryName}>{ele.theme}</p>
             </div>
           ))}
         </Grid>
@@ -51,4 +40,4 @@ const ExploreCategoryList = props => {
   );
 };
 
-export default withStyles(styles)(ExploreCategoryList);
+export default ExploreCategoryList;

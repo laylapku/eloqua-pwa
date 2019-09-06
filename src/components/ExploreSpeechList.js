@@ -9,11 +9,16 @@ import SearchIcon from "@material-ui/icons/Search";
 //components
 import ExploreFilteredList from "./ExploreFilteredList";
 
+//styles
+import useStyles from "../styles/customizedStyles";
+
 const ExploreSpeechList = props => {
   const { filter, onSearchInputChange } = props;
+  const classes = useStyles();
+
   return (
-    <div className="page-container">
-      <div style={{ display: "flex", justifyContent: "center" }}>
+    <div className={classes.listContainer}>
+      <div className={classes.searchInputArea}>
         <IconButton>
           <SearchIcon />
         </IconButton>

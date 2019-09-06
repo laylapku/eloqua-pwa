@@ -11,11 +11,6 @@ body {
   );
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 a {
   cursor: pointer;
   text-decoration: none;
@@ -25,19 +20,6 @@ a {
 option {
   padding: 10px;
   border-bottom: 1px solid #afafaf;
-}
-
-.page-container {
-  margin-bottom: 100px;
-  margin-top: 50px;
-}
-
-.list-item {
-  box-shadow: 5px 5px 10px RGB(192, 178, 131, 0.5);
-}
-
-.speaker {
-  opacity: 0.8;
 }
 
 .marquee {
@@ -58,4 +40,8 @@ option {
   100% {
     transform: translateX(-55%);
   }
+}
+
+.speaker-name {
+  opacity: 0.8;
 }

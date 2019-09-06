@@ -7,7 +7,7 @@ import AppBar from "@material-ui/core/AppBar";
 
 //components
 import BottomViewToolbar from "./BottomViewToolbar";
-import BottomViewNav from "./BottomViewNav";
+import BottomViewTabs from "./BottomViewTabs";
 
 const BottomView = props => {
   const {
@@ -16,10 +16,10 @@ const BottomView = props => {
 
   return (
     <Fragment>
-      {pathname !== "/settings" && pathname !== "/text" && (
+      {pathname !== "/script" && (
         <AppBar style={{ bottom: 0, top: "auto" }}>
           <BottomViewToolbar />
-          <BottomViewNav />
+          <BottomViewTabs />
         </AppBar>
       )}
     </Fragment>
