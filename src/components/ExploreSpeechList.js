@@ -2,8 +2,7 @@
 import React from "react";
 
 //material ui
-import Input from "@material-ui/core/Input";
-import IconButton from "@material-ui/core/IconButton";
+import { Input, IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 
 //components

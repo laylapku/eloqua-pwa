@@ -2,8 +2,7 @@
 import React from "react";
 
 //material ui
-import Avatar from "@material-ui/core/Avatar";
-import Grid from "@material-ui/core/Grid";
+import { Avatar, Grid } from "@material-ui/core";
 
 //components
 import ExploreFilteredList from "./ExploreFilteredList";

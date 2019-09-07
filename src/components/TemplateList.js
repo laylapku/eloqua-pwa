@@ -10,11 +10,13 @@ import {
 } from "../reducers/constants";
 
 //material ui
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
+import {
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+  IconButton
+} from "@material-ui/core";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PauseIcon from "@material-ui/icons/Pause";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -35,11 +37,11 @@ const TemplateList = props => {
   const classes = useStyles();
 
   const {
+    location: { pathname },
     //props passed by parent components
     id,
     speechIndex,
-    noPlay,
-    location: { pathname }
+    noPlay
   } = props;
 
   const speechDisplayed = speeches.find(item => item.id === id);
@@ -104,7 +106,7 @@ const TemplateList = props => {
             })
           }
         >
-          <DeleteIcon classes={{ root: classes.deleteIcon }} />
+          <DeleteIcon />
         </IconButton>
       ) : (
         <IconButton

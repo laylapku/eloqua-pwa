@@ -1,36 +1,39 @@
 //react
-import React, { Fragment, useState } from "react";
+import React from "react";
+import { withRouter } from "react-router-dom";
 
 //material ui
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import { List, ListItem, ListItemText } from "@material-ui/core";
+import HelpIcon from "@material-ui/icons/Help";
+import ColorLensIcon from "@material-ui/icons/ColorLens";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import Divider from "@material-ui/core/Divider";
 
-//data
-import SettingsAboutTab from "./SettingsAboutTab.js";
+//styles
+import useStyles from "../styles/customizedStyles";
 
-const SettingsTabView = () => {
-  const [tabIdx, setIdx] = useState(0);
-
-  const handleTabChange = (event, tabIdx) => {
-    setIdx(tabIdx);
+const SettingsTabView = props => {
+  const classes = useStyles();
+  const routeChange = path => {
+    props.history.push(path);
   };
 
   return (
-    <Fragment>
-      <Tabs
-        value={tabIdx}
-        onChange={handleTabChange}
-        indicatorColor="primary"
-        textColor="primary"
-        centered
-      >
-        <Tab label="General" />
-        <Tab label="About" />
-      </Tabs>
-      {tabIdx === 0 && <p />}
-      {tabIdx === 1 && <SettingsAboutTab />}
-    </Fragment>
+    <List>
+      <ListItem button onClick={() => routeChange("/about")}>
+        <HelpIcon />
+        <ListItemText primary="About" className={classes.listItemText} />
+        <ChevronRightIcon />
+      </ListItem>
+      <Divider component="li" />
+      <ListItem button onClick={() => routeChange("/theme")}>
+        <ColorLensIcon />
+        <ListItemText primary="Theme" className={classes.listItemText} />
+        <ChevronRightIcon />
+      </ListItem>
+      <Divider component="li" />
+    </List>
   );
 };
 
-export default SettingsTabView;
+export default withRouter(SettingsTabView);

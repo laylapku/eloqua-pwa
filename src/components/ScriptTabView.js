@@ -4,10 +4,8 @@ import { withRouter } from "react-router-dom";
 import { PlayerContext } from "../contexts/PlayerContext";
 
 //material ui
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { Container, Typography, IconButton } from "@material-ui/core";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
 //components
 import PlayerControls from "./Player/PlayerControls.js";
@@ -32,12 +30,12 @@ const ScriptTabView = props => {
 
   return (
     <Fragment>
-      <Paper>
+      <Container>
         <IconButton
           onClick={props.history.goBack}
-          classes={{ root: classes.backButton }}
+          classes={{ root: classes.backBtn }}
         >
-          <ArrowBackIcon />
+          <ChevronLeftIcon />
         </IconButton>
         <div className={classes.scriptHeader}>
           <Typography>
@@ -51,7 +49,7 @@ const ScriptTabView = props => {
         <Typography className={classes.scriptContainer}>
           {scriptShown.text}
         </Typography>
-      </Paper>
+      </Container>
 
       <PlayerControls
         played={played}

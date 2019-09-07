@@ -15,9 +15,13 @@ import SkipNextIcon from "@material-ui/icons/SkipNext";
 import speakers from "../data/speakers";
 import speeches from "../data/speeches";
 
+//styles
+import useStyles from "../styles/customizedStyles";
+
 const BottomViewToolbar = () => {
   const { player, dispatch } = useContext(PlayerContext);
   const { playing, played, playlist, index } = player;
+  const classes = useStyles();
 
   const speechPlaying = speeches.find(ele => ele.id === playlist[index]);
   const speakerName = speakers[speechPlaying.speakerId].name;
@@ -40,17 +44,21 @@ const BottomViewToolbar = () => {
           }
         </Link>
         <IconButton component={Link} to="/playlist">
-          <ListIcon />
+          <ListIcon classes={{ root: classes.bottomIcons }} />
         </IconButton>
         <IconButton
           onClick={() => {
             dispatch({ type: PLAY_PAUSE });
           }}
         >
-          {playing ? <PauseCircleFilledIcon /> : <PlayCircleFilledIcon />}
+          {playing ? (
+            <PauseCircleFilledIcon classes={{ root: classes.bottomIcons }} />
+          ) : (
+            <PlayCircleFilledIcon classes={{ root: classes.bottomIcons }} />
+          )}
         </IconButton>
         <IconButton onClick={() => dispatch({ type: ON_NEXT })}>
-          <SkipNextIcon />
+          <SkipNextIcon classes={{ root: classes.bottomIcons }} />
         </IconButton>
       </Toolbar>
     </Fragment>

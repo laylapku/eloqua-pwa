@@ -2,6 +2,7 @@ import { createMuiTheme } from "@material-ui/core/styles";
 
 export default createMuiTheme({
   overrides: {
+    //color
     MuiBottomNavigation: {
       root: {
         background: "#F4F4F4",
@@ -55,42 +56,6 @@ export default createMuiTheme({
       }
     },
 
-    MuiAvatar: {
-      root: {
-        width: "80px",
-        height: "80px",
-        margin: "10px"
-      }
-    },
-    MuiGridListTileBar: {
-      title: {
-        fontSize: "0.8rem",
-        lineHeight: "20px",
-        whiteSpace: "normal"
-      }
-    },
-
-    MuiPaper: {
-      root: {
-        backgroundColor: "inherit"
-      },
-      elevation1: {
-        boxShadow: "none"
-      }
-    },
-    MuiDialogContent: {
-      root: {
-        padding: "18px 18px",
-        position: "fixed",
-        bottom: "30px",
-        borderRadius: "5px",
-        background: "linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%)",
-        "&:first-child": {
-          paddingTop: 0
-        }
-      }
-    },
-
     MuiSlider: {
       root: {
         color: "RGB(203,125,64)",
@@ -105,12 +70,44 @@ export default createMuiTheme({
       root: {
         padding: "12px 20px",
         color: "RGB(111,134,131)"
-        /* padding: 0 */
       }
     },
     MuiSvgIcon: {
       root: {
         transform: "scale(1.2)"
+      }
+    },
+
+    //layout
+    MuiDialogContent: {
+      root: {
+        padding: "18px 18px",
+        position: "fixed",
+        bottom: "30px",
+        borderRadius: "5px",
+        background: "linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%)",
+        "&:first-child": {
+          paddingTop: 0
+        }
+      }
+    },
+    MuiAvatar: {
+      root: {
+        width: "80px",
+        height: "80px",
+        margin: "10px"
+      }
+    },
+    MuiGridListTileBar: {
+      title: {
+        fontSize: "0.8rem",
+        lineHeight: "20px",
+        whiteSpace: "normal"
+      }
+    },
+    MuiDivider: {
+      root: {
+        marginLeft: "50px"
       }
     }
   },

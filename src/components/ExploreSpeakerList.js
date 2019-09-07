@@ -2,9 +2,7 @@
 import React from "react";
 
 //material ui
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
+import { GridList, GridListTile, GridListTileBar } from "@material-ui/core";
 
 //components
 import FilteredList from "./ExploreFilteredList";

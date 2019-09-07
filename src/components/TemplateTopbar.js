@@ -20,9 +20,7 @@ const TemplateTopbar = props => {
   const { player, dispatch } = useContext(PlayerContext);
   const { playlist, favlist } = player;
   const classes = useStyles();
-
   const {
-    //props passed by parent components
     location: { pathname }
   } = props;
 
@@ -49,7 +47,7 @@ const TemplateTopbar = props => {
               dispatch({ type: DELETE_FROM_PLAYLIST, payload: "all" })
             }
           >
-            <DeleteIcon classes={{ root: classes.deleteIcon }} />
+            <DeleteIcon />
           </IconButton>
         </div>
       ) : (
