@@ -31,19 +31,20 @@ const useStyles = makeStyles({
     fill: "#f4f4f4"
   },
 
-  //PlayerControls
+  //AudioPlayer
   controlsContainer: {
-    overflowX: "hidden",
-    padding: "10px 10px",
     position: "fixed",
     top: "auto",
     bottom: 0,
+    //overflowX: "hidden",
+    paddingRight: "25px",
     touchAction: "none" // to fix slider error "Unable to preventDefault inside passive event listener due to target being treated as passive."
   },
-  iconWrapper: {
+  controlsFlex: {
     display: "flex",
     justifyContent: "center",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    width: "90%"
   },
   duration: {
     display: "flex",
@@ -59,13 +60,26 @@ const useStyles = makeStyles({
     borderRadius: "5px",
     boxShadow: "1px 1px 3px RGB(202,187,143)"
   },
+  speedDialog: {
+    background: "linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%)",
+    position: "fixed",
+    bottom: "30px",
+    padding: "16px 16px",
+    borderRadius: "5px",
+    "&:first-child": {
+      paddingTop: 0
+    }
+  },
 
-  //FavoritesTabView
-  favReminder: {
-    fontSize: "20px",
-    textAlign: "center",
-    opacity: 0.2,
-    marginTop: "80px"
+  //BottomViewToolbar
+  tbarGutters: {
+    display: "grid",
+    gridTemplateColumns: "auto 16% 10% 10%",
+    paddingRight: 0,
+    minHeight: "48px"
+  },
+  sliderThumb: {
+    height: 0
   },
 
   //ScriptTabView
@@ -76,11 +90,11 @@ const useStyles = makeStyles({
     overflow: "auto",
     position: "absolute",
     top: "150px",
-    bottom: "150px",
+    bottom: "135px",
     lineHeight: "2em",
     paddingRight: "20px",
     textAlign: "justify",
-    opacity: 0.7
+    opacity: 0.8
   },
 
   //SettingsAboutTab
@@ -96,8 +110,16 @@ const useStyles = makeStyles({
     textAlign: "center"
   },
   aboutIcons: {
-    fill: "RGB(111,134,131,0.8)",
+    fill: "RGB(111,134,131)",
     fontSize: "18px"
+  },
+
+  //FavoritesTabView
+  favReminder: {
+    fontSize: "20px",
+    textAlign: "center",
+    opacity: 0.2,
+    marginTop: "80px"
   },
 
   //TemplateList
@@ -115,8 +137,20 @@ const useStyles = makeStyles({
     justifyContent: "center"
   },
 
+  //ExploreSpeakerList
+  tileBarName: {
+    fontSize: "0.8rem",
+    lineHeight: "20px",
+    whiteSpace: "normal"
+  },
+
   //ExploreCategoryList
-  categoryName: {
+  ctgAvatar: {
+    width: "80px",
+    height: "80px",
+    margin: "10px"
+  },
+  ctgText: {
     fontSize: "12px",
     display: "flex",
     justifyContent: "center"

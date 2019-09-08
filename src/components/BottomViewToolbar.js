@@ -32,8 +32,12 @@ const BottomViewToolbar = () => {
 
   return (
     <Fragment>
-      <Slider value={played * 100} max={100} />
-      <Toolbar>
+      <Slider
+        value={played * 100}
+        max={100}
+        classes={{ thumb: classes.sliderThumb }}
+      />
+      <Toolbar classes={{ gutters: classes.tbarGutters }}>
         <Link to="/script">
           {
             <div className={titleMarquee()}>

@@ -27,7 +27,10 @@ const ExploreSpeakerList = props => {
               onClick={() => filterSpeech(ele.id)}
             >
               <img src={ele.img} alt={ele.name} />
-              <GridListTileBar title={ele.name} />
+              <GridListTileBar
+                title={ele.name}
+                classes={{ title: classes.tileBarName }}
+              />
             </GridListTile>
           ))}
         </GridList>

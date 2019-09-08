@@ -8,7 +8,7 @@ import { Container, Typography, IconButton } from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
 //components
-import PlayerControls from "./Player/PlayerControls.js";
+import AudioPlayer from "./Player/AudioPlayer.js";
 
 //data
 import speeches from "../data/speeches";
@@ -21,7 +21,6 @@ import useStyles from "../styles/customizedStyles";
 const ScriptTabView = props => {
   const { player } = useContext(PlayerContext);
   const { playlist, index } = player;
-  const { onSeekStart, onSeekEnd, onSliderClick, played } = props;
   const classes = useStyles();
 
   const speechPlaying = speeches.find(ele => ele.id === playlist[index]);
@@ -51,12 +50,7 @@ const ScriptTabView = props => {
         </Typography>
       </Container>
 
-      <PlayerControls
-        played={played}
-        onSeekStart={onSeekStart}
-        onSeekEnd={onSeekEnd}
-        onSliderClick={onSliderClick}
-      />
+      <AudioPlayer />
     </Fragment>
   );
 };

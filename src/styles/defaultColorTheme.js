@@ -2,7 +2,6 @@ import { createMuiTheme } from "@material-ui/core/styles";
 
 export default createMuiTheme({
   overrides: {
-    //color
     MuiBottomNavigation: {
       root: {
         background: "#F4F4F4",
@@ -19,14 +18,7 @@ export default createMuiTheme({
     },
     MuiToolbar: {
       gutters: {
-        display: "grid",
-        gridTemplateColumns: "auto 16% 10% 10%",
-        background: "RGB(202,187,143)",
-        paddingLeft: "10px",
-        paddingRight: 0
-      },
-      regular: {
-        minHeight: "48px"
+        background: "RGB(202,187,143)"
       }
     },
 
@@ -68,46 +60,12 @@ export default createMuiTheme({
     },
     MuiIconButton: {
       root: {
-        padding: "12px 20px",
         color: "RGB(111,134,131)"
       }
     },
     MuiSvgIcon: {
       root: {
         transform: "scale(1.2)"
-      }
-    },
-
-    //layout
-    MuiDialogContent: {
-      root: {
-        padding: "18px 18px",
-        position: "fixed",
-        bottom: "30px",
-        borderRadius: "5px",
-        background: "linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%)",
-        "&:first-child": {
-          paddingTop: 0
-        }
-      }
-    },
-    MuiAvatar: {
-      root: {
-        width: "80px",
-        height: "80px",
-        margin: "10px"
-      }
-    },
-    MuiGridListTileBar: {
-      title: {
-        fontSize: "0.8rem",
-        lineHeight: "20px",
-        whiteSpace: "normal"
-      }
-    },
-    MuiDivider: {
-      root: {
-        marginLeft: "50px"
       }
     }
   },

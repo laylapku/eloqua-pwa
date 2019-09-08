@@ -49,7 +49,7 @@ import speeches from "../../data/speeches";
 //styles
 import useStyles from "../../styles/customizedStyles";
 
-const PlayControls = props => {
+const AudioPlayer = props => {
   const { player, dispatch } = useContext(PlayerContext);
   const {
     playing,
@@ -139,7 +139,7 @@ const PlayControls = props => {
             <Duration seconds={duration} />
           </div>
 
-          <div className={classes.iconWrapper}>
+          <Container className={classes.controlsFlex}>
             <IconButton onClick={() => dispatch({ type: TOGGLE_LOOP })}>
               {loop ? <RepeatOneIcon /> : <LoopIcon />}
             </IconButton>
@@ -183,7 +183,11 @@ const PlayControls = props => {
               <span className={classes.speedBtn}>{speed + "x"}</span>
             </IconButton>
             <Dialog open={open} aria-labelledby="speed-dialog">
-              <DialogContent value={speed} onClick={handleSpeedChange}>
+              <DialogContent
+                value={speed}
+                onClick={handleSpeedChange}
+                classes={{ root: classes.speedDialog }}
+              >
                 <option value={0.75}>0.75x</option>
                 <option value={1}>1x</option>
                 <option value={1.5}>1.5x</option>
@@ -193,11 +197,11 @@ const PlayControls = props => {
             <IconButton component={Link} to="/playlist">
               <ListIcon />
             </IconButton>
-          </div>
+          </Container>
         </Container>
       )}
     </Fragment>
   );
 };
 
-export default PlayControls;
+export default AudioPlayer;

@@ -27,8 +27,9 @@ const ExploreCategoryList = props => {
                 alt={ele.theme}
                 src={ele.icon}
                 onClick={() => filterSpeech(ele.id)}
+                classes={{ root: classes.ctgAvatar }}
               />
-              <p className={classes.categoryName}>{ele.theme}</p>
+              <p className={classes.ctgText}>{ele.theme}</p>
             </div>
           ))}
         </Grid>
