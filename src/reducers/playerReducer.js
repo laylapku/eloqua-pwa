@@ -5,10 +5,13 @@ import {
   ON_PREV,
   ON_NEXT,
   TOGGLE_LOOP,
+  SET_SEEKING_TRUE,
+  SET_SEEKING_FALSE,
   SET_PLAYBACK_RATE,
   ADD_TO_PLAYLIST,
   DELETE_FROM_PLAYLIST,
-  TOGGLE_ADD_TO_FAVLIST
+  TOGGLE_ADD_TO_FAVLIST,
+  UPDATE_URL
 } from "./constants.js";
 
 import speeches from "../data/speeches";
@@ -25,6 +28,7 @@ export const playerReducer = (state, action) => {
 
     // player controls
     case PLAY_PAUSE:
+      console.log("aaa");
       return {
         ...state,
         playing: !state.playing
@@ -63,6 +67,12 @@ export const playerReducer = (state, action) => {
         ...state,
         loop: !state.loop
       };
+
+    case SET_SEEKING_TRUE:
+      return { ...state, seeking: true };
+
+    case SET_SEEKING_FALSE:
+      return { ...state, seeking: false };
 
     case SET_PLAYBACK_RATE:
       return {
@@ -134,6 +144,9 @@ export const playerReducer = (state, action) => {
             ...state,
             favlist: [...new Set([...state.favlist, ...action.payload])]
           };
+
+    case UPDATE_URL:
+      return { ...state, url: action.payload };
 
     default:
       return state;

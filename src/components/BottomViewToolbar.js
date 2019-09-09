@@ -2,7 +2,7 @@
 import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import { PlayerContext } from "../contexts/PlayerContext";
-import { PLAY_PAUSE, ON_NEXT } from "../reducers/constants";
+import { playPause, onNext } from "../reducers/actions";
 
 //material ui
 import { Slider, Toolbar, IconButton } from "@material-ui/core";
@@ -50,18 +50,14 @@ const BottomViewToolbar = () => {
         <IconButton component={Link} to="/playlist">
           <ListIcon classes={{ root: classes.bottomIcons }} />
         </IconButton>
-        <IconButton
-          onClick={() => {
-            dispatch({ type: PLAY_PAUSE });
-          }}
-        >
+        <IconButton onClick={() => dispatch(playPause())}>
           {playing ? (
             <PauseCircleFilledIcon classes={{ root: classes.bottomIcons }} />
           ) : (
             <PlayCircleFilledIcon classes={{ root: classes.bottomIcons }} />
           )}
         </IconButton>
-        <IconButton onClick={() => dispatch({ type: ON_NEXT })}>
+        <IconButton onClick={() => dispatch(onNext())}>
           <SkipNextIcon classes={{ root: classes.bottomIcons }} />
         </IconButton>
       </Toolbar>

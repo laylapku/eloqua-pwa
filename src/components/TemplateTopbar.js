@@ -2,10 +2,7 @@
 import React, { useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { PlayerContext } from "../contexts/PlayerContext";
-import {
-  DELETE_FROM_PLAYLIST,
-  TOGGLE_ADD_TO_FAVLIST
-} from "../reducers/constants";
+import { deleteFromPlaylist, toggleAddToFavlist } from "../reducers/actions";
 
 //material ui
 import { AppBar, IconButton } from "@material-ui/core";
@@ -31,22 +28,14 @@ const TemplateTopbar = props => {
       {pathname === "/playlist" ? (
         <div className={classes.appBarInner}>
           <h3>My Playlist</h3>
-          <IconButton
-            onClick={() =>
-              dispatch({ type: TOGGLE_ADD_TO_FAVLIST, payload: playlist })
-            }
-          >
+          <IconButton onClick={() => dispatch(toggleAddToFavlist(playlist))}>
             {favCheck ? (
               <FavoriteIcon classes={{ root: classes.favIcon }} />
             ) : (
               <FavoriteBorderIcon />
             )}
           </IconButton>
-          <IconButton
-            onClick={() =>
-              dispatch({ type: DELETE_FROM_PLAYLIST, payload: "all" })
-            }
-          >
+          <IconButton onClick={() => dispatch(deleteFromPlaylist("all"))}>
             <DeleteIcon />
           </IconButton>
         </div>

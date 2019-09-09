@@ -3,11 +3,11 @@ import React, { useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { PlayerContext } from "../contexts/PlayerContext";
 import {
-  PLAY_PAUSE,
-  ADD_TO_PLAYLIST,
-  DELETE_FROM_PLAYLIST,
-  TOGGLE_ADD_TO_FAVLIST
-} from "../reducers/constants";
+  playPause,
+  addToPlaylist,
+  deleteFromPlaylist,
+  toggleAddToFavlist
+} from "../reducers/actions";
 
 //material ui
 import {
@@ -56,9 +56,7 @@ const TemplateList = props => {
     <List className={classes.listGrid}>
       {id === speechPlaying.id ? (
         <IconButton
-          onClick={() => {
-            dispatch({ type: PLAY_PAUSE });
-          }}
+          onClick={() => dispatch(playPause())}
           style={stylesOnPlay(id)}
         >
           {playing ? <PauseIcon /> : <PlayArrowIcon />}
@@ -66,12 +64,7 @@ const TemplateList = props => {
       ) : (
         <p />
       )}
-      <ListItem
-        button
-        onClick={() => {
-          dispatch({ type: ADD_TO_PLAYLIST, payload: { id } });
-        }}
-      >
+      <ListItem button onClick={() => dispatch(addToPlaylist({ id }))}>
         <ListItemText
           primary={
             <Typography style={stylesOnPlay(id)}>
@@ -83,14 +76,7 @@ const TemplateList = props => {
           classes={{ root: classes.listItemText }}
         />
       </ListItem>
-      <IconButton
-        onClick={() =>
-          dispatch({
-            type: TOGGLE_ADD_TO_FAVLIST,
-            payload: [id]
-          })
-        }
-      >
+      <IconButton onClick={() => dispatch(toggleAddToFavlist([id]))}>
         {favlist.indexOf(id) !== -1 ? (
           <FavoriteIcon classes={{ root: classes.favIcon }} />
         ) : (
@@ -98,21 +84,12 @@ const TemplateList = props => {
         )}
       </IconButton>
       {pathname === "/playlist" ? (
-        <IconButton
-          onClick={() =>
-            dispatch({
-              type: DELETE_FROM_PLAYLIST,
-              payload: speechIndex
-            })
-          }
-        >
+        <IconButton onClick={() => dispatch(deleteFromPlaylist(speechIndex))}>
           <DeleteIcon />
         </IconButton>
       ) : (
         <IconButton
-          onClick={() =>
-            dispatch({ type: ADD_TO_PLAYLIST, payload: { id, noPlay } })
-          } //just add to playlist, don't play
+          onClick={() => dispatch(addToPlaylist({ id, noPlay }))} //just add to playlist, don't play
         >
           <PlaylistAddIcon />
         </IconButton>

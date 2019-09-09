@@ -5,7 +5,6 @@ import React from "react";
 import { ThemeProvider } from "@material-ui/styles";
 
 // components
-import AudioPlayer from "./Player/AudioPlayer";
 import Routes from "./Routes";
 
 //theme
@@ -82,7 +81,6 @@ const App = () => {
   return (
     <ThemeProvider theme={defaultColorTheme}>
       <Routes />
-      {/* <AudioPlayer noDisplay /> */}
     </ThemeProvider>
   );
 };

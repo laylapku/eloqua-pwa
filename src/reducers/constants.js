@@ -10,6 +10,10 @@ export const ON_PREV = "ON_PREV";
 
 export const TOGGLE_LOOP = "TOGGLE_LOOP";
 
+export const SET_SEEKING_TRUE = "SET_SEEKING_TRUE";
+
+export const SET_SEEKING_FALSE = "SET_SEEKING_FALSE";
+
 export const SET_PLAYBACK_RATE = "SET_PLAYBACK_RATE";
 
 export const ADD_TO_PLAYLIST = "ADD_TO_PLAYLIST";
@@ -17,3 +21,5 @@ export const ADD_TO_PLAYLIST = "ADD_TO_PLAYLIST";
 export const DELETE_FROM_PLAYLIST = "DELETE_FROM_PLAYLIST";
 
 export const TOGGLE_ADD_TO_FAVLIST = "TOGGLE_ADD_TO_FAVLIST";
+
+export const UPDATE_URL = "UPDATE_URL";
