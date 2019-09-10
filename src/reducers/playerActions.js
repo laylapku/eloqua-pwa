@@ -12,7 +12,7 @@ import {
   DELETE_FROM_PLAYLIST,
   TOGGLE_ADD_TO_FAVLIST,
   UPDATE_URL
-} from "./constants.js";
+} from "./playerConstants.js";
 
 export const onDuration = payload => ({
   type: ON_DURATION,
@@ -53,6 +53,11 @@ export const setPlaybackRate = payload => ({
   payload
 });
 
+export const updateUrl = payload => ({
+  type: UPDATE_URL,
+  payload
+});
+
 export const addToPlaylist = payload => ({
   type: ADD_TO_PLAYLIST,
   payload
@@ -65,10 +70,5 @@ export const deleteFromPlaylist = payload => ({
 
 export const toggleAddToFavlist = payload => ({
   type: TOGGLE_ADD_TO_FAVLIST,
-  payload
-});
-
-export const updateUrl = payload => ({
-  type: UPDATE_URL,
   payload
 });

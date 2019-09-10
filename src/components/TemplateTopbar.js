@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { PlayerContext } from "../contexts/PlayerContext";
-import { deleteFromPlaylist, toggleAddToFavlist } from "../reducers/actions";
+import { deleteFromPlaylist, toggleAddToFavlist } from "../reducers/playerActions";
 
 //material ui
 import { AppBar, IconButton } from "@material-ui/core";

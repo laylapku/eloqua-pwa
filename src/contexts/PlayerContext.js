@@ -6,9 +6,9 @@ import ReactPlayer from "react-player";
 import {
   onDuration,
   updatePlayed,
-  onNext,
-  updateUrl
-} from "../reducers/actions";
+  updateUrl,
+  onNext
+} from "../reducers/playerActions";
 
 // data
 import speeches from "../data/speeches";
@@ -21,11 +21,11 @@ const initState = {
   duration: 0,
   loop: false,
   playbackRate: 1.0,
+  seeking: false,
+  url: null,
   playlist: ["1"],
   index: 0,
-  favlist: [],
-  seeking: false,
-  url: null
+  favlist: []
 };
 
 const PlayerContextProvider = props => {
@@ -40,9 +40,9 @@ const PlayerContextProvider = props => {
     loop,
     playbackRate,
     seeking,
+    url,
     playlist,
-    index,
-    url
+    index
   } = player;
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 // react
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { PlayerContext } from "../../contexts/PlayerContext";
+import { PlayerContext } from "../contexts/PlayerContext";
 import {
   updatePlayed,
   playPause,
@@ -12,7 +12,7 @@ import {
   setSeekingFalse,
   setPlaybackRate,
   toggleAddToFavlist
-} from "../../reducers/actions";
+} from "../reducers/playerActions";
 
 // material ui
 import {
@@ -33,15 +33,15 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
 // components
-import Duration from "./Duration";
+import Duration from "./PlayerControlsDuration";
 
 // data
-import speeches from "../../data/speeches";
+import speeches from "../data/speeches";
 
 //styles
-import useStyles from "../../styles/customizedStyles";
+import useStyles from "../styles/customizedStyles";
 
-const AudioPlayer = props => {
+const PlayerControls = props => {
   const { player, playerRef, dispatch } = useContext(PlayerContext);
   const { playing, played, loop, duration, playlist, index, favlist } = player;
 
@@ -134,4 +134,4 @@ const AudioPlayer = props => {
   );
 };
 
-export default AudioPlayer;
+export default PlayerControls;

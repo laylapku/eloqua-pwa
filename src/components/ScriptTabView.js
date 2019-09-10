@@ -8,7 +8,7 @@ import { Container, Typography, IconButton } from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
 //components
-import AudioPlayer from "./Player/AudioPlayer.js";
+import PlayerControls from "./PlayerControls";
 
 //data
 import speeches from "../data/speeches";
@@ -50,7 +50,7 @@ const ScriptTabView = props => {
         </Typography>
       </Container>
 
-      <AudioPlayer />
+      <PlayerControls />
     </Fragment>
   );
 };

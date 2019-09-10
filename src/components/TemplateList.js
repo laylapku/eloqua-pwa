@@ -7,7 +7,7 @@ import {
   addToPlaylist,
   deleteFromPlaylist,
   toggleAddToFavlist
-} from "../reducers/actions";
+} from "../reducers/playerActions";
 
 //material ui
 import {

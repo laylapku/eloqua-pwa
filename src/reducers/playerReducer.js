@@ -12,7 +12,7 @@ import {
   DELETE_FROM_PLAYLIST,
   TOGGLE_ADD_TO_FAVLIST,
   UPDATE_URL
-} from "./constants.js";
+} from "./playerConstants";
 
 import speeches from "../data/speeches";
 
@@ -28,7 +28,6 @@ export const playerReducer = (state, action) => {
 
     // player controls
     case PLAY_PAUSE:
-      console.log("aaa");
       return {
         ...state,
         playing: !state.playing
@@ -79,6 +78,9 @@ export const playerReducer = (state, action) => {
         ...state,
         playbackRate: action.payload
       };
+
+    case UPDATE_URL:
+      return { ...state, url: action.payload };
 
     case ADD_TO_PLAYLIST:
       newState = { ...state };
@@ -144,9 +146,6 @@ export const playerReducer = (state, action) => {
             ...state,
             favlist: [...new Set([...state.favlist, ...action.payload])]
           };
-
-    case UPDATE_URL:
-      return { ...state, url: action.payload };
 
     default:
       return state;

@@ -2,7 +2,7 @@
 import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import { PlayerContext } from "../contexts/PlayerContext";
-import { playPause, onNext } from "../reducers/actions";
+import { playPause, onNext } from "../reducers/playerActions";
 
 //material ui
 import { Slider, Toolbar, IconButton } from "@material-ui/core";
