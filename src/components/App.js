@@ -10,7 +10,9 @@ import Routes from "./Routes";
 //theme
 import defaultColorTheme from "../styles/defaultColorTheme";
 
-/* class App extends Component {
+/* const MediaMetadata = window.MediaMetadata;
+
+class App extends Component {
    constructor(props) {
     super(props);
 
