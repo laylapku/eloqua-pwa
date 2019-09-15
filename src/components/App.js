@@ -1,49 +1,35 @@
-// react
-import React from "react";
+//react
+import React, { useContext } from "react";
+import { PlayerContext } from "../contexts/PlayerContext";
+import {
+  playPause,
+  onNext,
+  onPrev,
+  updatePlayed
+} from "../reducers/playerActions";
 
 //material ui
 import { ThemeProvider } from "@material-ui/styles";
 
-// components
+//components
 import Routes from "./Routes";
+
+//data
+import speeches from "../data/speeches";
+import speakers from "../data/speakers";
 
 //theme
 import defaultColorTheme from "../styles/defaultColorTheme";
 
-/* const MediaMetadata = window.MediaMetadata;
+const MediaMetadata = window.MediaMetadata;
 
-class App extends Component {
-   constructor(props) {
-    super(props);
+const App = () => {
+  const { player, playerRef, dispatch } = useContext(PlayerContext);
+  const { duration, played, playlist, index } = player;
 
-    if ("mediaSession" in navigator) {
-      this.updateMetadata();
-      navigator.mediaSession.setActionHandler("play", () => {
-        this.props.playPause();
-      });
-      navigator.mediaSession.setActionHandler("pause", () => {
-        this.props.playPause();
-      });
-      navigator.mediaSession.setActionHandler("previoustrack", () => {
-        this.props.onPrev();
-        this.updateMetadata();
-      });
-      navigator.mediaSession.setActionHandler("nexttrack", () => {
-        this.props.onNext();
-        this.updateMetadata();
-      });
-      navigator.mediaSession.setActionHandler("seekbackward", () => {
-        this.seekBackward();
-      });
-      navigator.mediaSession.setActionHandler("seekforward", () => {
-        this.seekForward();
-      });
-    }
-  }
-  updateMetadata = () => {
-    let speech = speeches.find(
-      ele => ele.id === this.props.playlist[this.props.index]
-    );
+  //update media session info
+  const updateMetadata = () => {
+    let speech = speeches.find(ele => ele.id === playlist[index]);
     let speaker = speakers[speech.speakerId].name;
     let avatar = speakers[speech.speakerId].img;
     if ("mediaSession" in navigator) {
@@ -61,25 +47,44 @@ class App extends Component {
       });
     }
   };
-  // seek methods for media session
-  seekBackward = () => {
+  //seek methods for media session
+  const seekBackward = () => {
     let skipTime = 0.05;
-    let played = Math.max(this.props.played - skipTime, 0);
-    this.props.updatePlayed(played);
-    this.player.seekTo(played);
+    let newPlayed = Math.max(played - skipTime, 0);
+    dispatch(updatePlayed(newPlayed));
+    playerRef.current.seekTo(newPlayed);
   };
-  seekForward = () => {
+  const seekForward = () => {
     let skipTime = 0.05;
-    let played = Math.min(this.props.played + skipTime, this.props.duration);
-    this.props.updatePlayed(played);
-    this.player.seekTo(played);
-  }; 
-  render() {
-    return null;
-  }
-} */
+    let newPlayed = Math.min(played + skipTime, duration);
+    dispatch(updatePlayed(newPlayed));
+    playerRef.current.seekTo(newPlayed);
+  };
 
-const App = () => {
+  if ("mediaSession" in navigator) {
+    updateMetadata();
+    navigator.mediaSession.setActionHandler("play", () => {
+      dispatch(playPause());
+    });
+    navigator.mediaSession.setActionHandler("pause", () => {
+      dispatch(playPause());
+    });
+    navigator.mediaSession.setActionHandler("previoustrack", () => {
+      dispatch(onPrev());
+      updateMetadata();
+    });
+    navigator.mediaSession.setActionHandler("nexttrack", () => {
+      dispatch(onNext());
+      updateMetadata();
+    });
+    navigator.mediaSession.setActionHandler("seekbackward", () => {
+      seekBackward();
+    });
+    navigator.mediaSession.setActionHandler("seekforward", () => {
+      seekForward();
+    });
+  }
+
   return (
     <ThemeProvider theme={defaultColorTheme}>
       <Routes />
