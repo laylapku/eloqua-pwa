@@ -2970,14 +2970,6 @@ const texts = [
     Those who came to this land sought to build more than just a new country. They sought a new world. So I have come here today to your campus to say that you can make their vision our reality. So let us from this moment begin our work so that in the future men will look back and say: It was then, after a long and weary way, that man turned the exploits of his genius to the full enrichment of his life.
     
     Thank you. Good-bye.`
-  },
-  {
-    speechId: "",
-    text: ``
-  },
-  {
-    speechId: "",
-    text: ``
   }
 ];
 

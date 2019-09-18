@@ -8,7 +8,7 @@ import { Avatar, Grid } from "@material-ui/core";
 import ExploreFilteredList from "./ExploreFilteredList";
 
 //data
-import categories from "../data/categories.js";
+import { categories } from "../data/categories.js";
 
 //styles
 import useStyles from "../styles/customizedStyles";
@@ -24,12 +24,12 @@ const ExploreCategoryList = props => {
           {categories.map((ele, index) => (
             <div key={"category-" + index}>
               <Avatar
-                alt={ele.theme}
+                alt={ele.name}
                 src={ele.icon}
                 onClick={() => filterSpeech(ele.id)}
                 classes={{ root: classes.ctgAvatar }}
               />
-              <p className={classes.ctgText}>{ele.theme}</p>
+              <p className={classes.ctgText}>{ele.name}</p>
             </div>
           ))}
         </Grid>
