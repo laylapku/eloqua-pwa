@@ -8,9 +8,11 @@ import TemplateList from "./TemplateList.js";
 import speeches from "../data/speeches";
 import speakers from "../data/speakers";
 
-const ExploreFilteredList = props => {
-  const { speakerFilter, categoryFilter, inputFilter } = props;
-
+const ExploreFilteredList = ({
+  speakerFilter,
+  categoryFilter,
+  inputFilter
+}) => {
   return (
     <Fragment>
       {speeches

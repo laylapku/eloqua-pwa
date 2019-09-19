@@ -13,8 +13,7 @@ import speakers from "../data/speakers.js";
 //styles
 import useStyles from "../styles/customizedStyles";
 
-const ExploreSpeakerList = props => {
-  const { filter, filterSpeech } = props;
+const ExploreSpeakerList = ({ filter, filterSpeech }) => {
   const classes = useStyles();
 
   return (

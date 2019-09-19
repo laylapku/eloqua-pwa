@@ -11,8 +11,7 @@ import ExploreFilteredList from "./ExploreFilteredList";
 //styles
 import useStyles from "../styles/customizedStyles";
 
-const ExploreSpeechList = props => {
-  const { filter, onSearchInputChange } = props;
+const ExploreSpeechList = ({ filter, onSearchInputChange }) => {
   const classes = useStyles();
 
   return (

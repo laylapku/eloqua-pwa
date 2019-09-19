@@ -41,7 +41,7 @@ import speeches from "../data/speeches";
 //styles
 import useStyles from "../styles/customizedStyles";
 
-const PlayerControls = props => {
+const PlayerControls = () => {
   const { player, playerRef, dispatch } = useContext(PlayerContext);
   const { playing, played, loop, duration, playlist, index, favlist } = player;
 

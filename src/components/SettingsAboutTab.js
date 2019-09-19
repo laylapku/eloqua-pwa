@@ -1,5 +1,5 @@
 //react
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 
 //material ui
 import { Container, IconButton } from "@material-ui/core";
@@ -12,47 +12,9 @@ import ContactSupportIcon from "@material-ui/icons/ContactSupport";
 
 //styles
 import useStyles from "../styles/customizedStyles";
-import { firestore } from "../utils/firebase.utils";
-
-import scripts from "../data/scripts";
-import speeches from "../data/speeches";
-import data from "./data";
 
 const SettingsAboutTab = props => {
   const classes = useStyles();
-
-  useEffect(() => {
-    /* const result = speeches.map(speech => {
-      return {
-        id: speech.id,
-        firebaseId: data.find(
-          item => item.title === speech.title && item.date === speech.date
-        ).id
-      };
-    });
-
-    const newScripts = scripts.map(text => {
-      return {
-        ...text,
-        speechId: result.find(item => item.id === text.speechId).firebaseId
-      };
-    });
-
-    const writeScript = () => {
-      newScripts.map(ele =>
-        firestore
-          .collection("speeches")
-          .doc(ele.speechId)
-          .collection("extra")
-          .doc("text")
-          .set({
-            script: ele.text
-          })
-      );
-    };
-    writeScript(); */
-
-  }, []);
 
   return (
     <Fragment>

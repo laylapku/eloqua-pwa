@@ -9,11 +9,7 @@ import { AppBar } from "@material-ui/core";
 import BottomViewToolbar from "./BottomViewToolbar";
 import BottomViewTabs from "./BottomViewTabs";
 
-const BottomView = props => {
-  const {
-    location: { pathname }
-  } = props;
-
+const BottomView = ({ location: { pathname } }) => {
   return (
     <Fragment>
       {pathname !== "/script" && pathname !== "/about" && (

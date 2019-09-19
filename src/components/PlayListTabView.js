@@ -9,7 +9,7 @@ import TemplateList from "./TemplateList.js";
 //styles
 import useStyles from "../styles/customizedStyles";
 
-const PlayListTabView = () => {
+const PlaylistTabView = () => {
   const { player } = useContext(PlayerContext);
   const { playlist } = player;
   const classes = useStyles();
@@ -32,4 +32,4 @@ const PlayListTabView = () => {
   );
 };
 
-export default PlayListTabView;
+export default PlaylistTabView;

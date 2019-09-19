@@ -9,11 +9,7 @@ import ExploreIcon from "@material-ui/icons/Explore";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import SettingsIcon from "@material-ui/icons/Settings";
 
-const BottomViewTabs = props => {
-  const {
-    location: { pathname }
-  } = props;
-
+const BottomViewTabs = ({ location: { pathname } }) => {
   return (
     <BottomNavigation showLabels value={setRouteIndex(pathname)}>
       <BottomNavigationAction

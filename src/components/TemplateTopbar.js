@@ -2,7 +2,10 @@
 import React, { useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { PlayerContext } from "../contexts/PlayerContext";
-import { deleteFromPlaylist, toggleAddToFavlist } from "../reducers/playerActions";
+import {
+  deleteFromPlaylist,
+  toggleAddToFavlist
+} from "../reducers/playerActions";
 
 //material ui
 import { AppBar, IconButton } from "@material-ui/core";
@@ -13,14 +16,10 @@ import DeleteIcon from "@material-ui/icons/Delete";
 //styles
 import useStyles from "../styles/customizedStyles";
 
-const TemplateTopbar = props => {
+const TemplateTopbar = ({ location: { pathname } }) => {
   const { player, dispatch } = useContext(PlayerContext);
   const { playlist, favlist } = player;
   const classes = useStyles();
-  const {
-    location: { pathname }
-  } = props;
-
   const favCheck = playlist.every(ele => favlist.indexOf(ele) !== -1);
 
   return (
