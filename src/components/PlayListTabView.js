@@ -1,6 +1,6 @@
 //react
 import React, { Fragment, useContext } from "react";
-import { PlayerContext } from "../contexts/PlayerContext";
+import { PlayerContext } from "../contexts/player/player.context";
 
 //components
 import TemplateTopbar from "./TemplateTopbar";

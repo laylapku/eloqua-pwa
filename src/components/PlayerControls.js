@@ -1,7 +1,7 @@
 // react
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { PlayerContext } from "../contexts/PlayerContext";
+import { PlayerContext } from "../contexts/player/player.context";
 import {
   updatePlayed,
   playPause,
@@ -12,7 +12,7 @@ import {
   setSeekingFalse,
   setPlaybackRate,
   toggleAddToFavlist
-} from "../reducers/playerActions";
+} from "../contexts/player/player.actions";
 
 // material ui
 import {

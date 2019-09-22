@@ -12,9 +12,9 @@ import {
   DELETE_FROM_PLAYLIST,
   TOGGLE_ADD_TO_FAVLIST,
   UPDATE_URL
-} from "./playerConstants";
+} from "./player.constants";
 
-import speeches from "../data/speeches";
+import speeches from "../../data/speeches";
 
 export const playerReducer = (state, action) => {
   let newState;

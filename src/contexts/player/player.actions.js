@@ -12,7 +12,7 @@ import {
   DELETE_FROM_PLAYLIST,
   TOGGLE_ADD_TO_FAVLIST,
   UPDATE_URL
-} from "./playerConstants.js";
+} from "./player.constants";
 
 export const onDuration = payload => ({
   type: ON_DURATION,

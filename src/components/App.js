@@ -1,12 +1,12 @@
 //react
 import React, { useContext } from "react";
-import { PlayerContext } from "../contexts/PlayerContext";
+import { PlayerContext } from "../contexts/player/player.context";
 import {
   playPause,
   onNext,
   onPrev,
   updatePlayed
-} from "../reducers/playerActions";
+} from "../contexts/player/player.actions";
 
 //material ui
 import { ThemeProvider } from "@material-ui/styles";

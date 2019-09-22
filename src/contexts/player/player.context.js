@@ -1,17 +1,16 @@
-import React, { createContext, useReducer, useEffect, useRef } from "react";
-import { playerReducer } from "../reducers/playerReducer";
+import React, {
+  createContext,
+  useReducer,
+  useEffect,
+  useRef,
+  useContext
+} from "react";
+import { playerReducer } from "./player.reducer";
+import { onDuration, updatePlayed, updateUrl, onNext } from "./player.actions";
 
 import ReactPlayer from "react-player";
 
-import {
-  onDuration,
-  updatePlayed,
-  updateUrl,
-  onNext
-} from "../reducers/playerActions";
-
-// data
-import speeches from "../data/speeches";
+import { FirebaseContext } from "../data/firebase.context";
 
 export const PlayerContext = createContext();
 
@@ -34,6 +33,9 @@ const PlayerContextProvider = props => {
     return localData ? JSON.parse(localData) : initState;
   });
 
+  const { speeches } = useContext(FirebaseContext);
+  //speeches && console.log(speeches);
+
   const {
     playing,
     played,
@@ -49,9 +51,10 @@ const PlayerContextProvider = props => {
     localStorage.setItem("player", JSON.stringify(player));
   }, [player]);
 
-  useEffect(() => {
-    dispatch(updateUrl(speeches.find(ele => ele.id === playlist[index]).url));
-  }, [index, playlist]);
+  /*  useEffect(() => {
+    speeches &&
+      dispatch(updateUrl(speeches.find(ele => ele.id === playlist[index]).url));
+  }, [speeches, index, playlist]); */
 
   // workaround for react-player onProgress compatible issue with react hooks
   const seekingRef = useRef(null);

@@ -1,8 +1,8 @@
 //react
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 
-//database
-import { firestore } from "../utils/firebase.utils";
+//data
+import { FirebaseContext } from "../contexts/data/firebase.context";
 
 //material ui
 import { Avatar, Grid } from "@material-ui/core";
@@ -14,23 +14,14 @@ import ExploreFilteredList from "./ExploreFilteredList";
 import useStyles from "../styles/customizedStyles";
 
 const ExploreCategoryList = ({ filter, filterSpeech }) => {
+  const { categories } = useContext(FirebaseContext);
   const classes = useStyles();
-  const [ctgs, setCtgs] = useState([]);
-  useEffect(() => {
-    // anonymous function used as closure
-    (async () => {
-      const querySnapshot = await firestore.collection("categories").get();
-      setCtgs(
-        querySnapshot.docs.map(doc => Object.assign({ id: doc.id }, doc.data()))
-      );
-    })();
-  }, []);
 
   return (
     <div className={classes.listContainer}>
       {filter === "" ? (
         <Grid container justify="space-around">
-          {ctgs.map((ele, index) => (
+          {categories.map((ele, index) => (
             <div key={"category-" + index}>
               <Avatar
                 alt={ele.name}

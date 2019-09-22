@@ -1,7 +1,7 @@
 //react
 import React, { Fragment, useContext } from "react";
 import { withRouter } from "react-router-dom";
-import { PlayerContext } from "../contexts/PlayerContext";
+import { PlayerContext } from "../contexts/player/player.context";
 
 //material ui
 import { Container, Typography, IconButton } from "@material-ui/core";

@@ -1,13 +1,13 @@
 //react
 import React, { useContext } from "react";
 import { withRouter } from "react-router-dom";
-import { PlayerContext } from "../contexts/PlayerContext";
+import { PlayerContext } from "../contexts/player/player.context";
 import {
   playPause,
   addToPlaylist,
   deleteFromPlaylist,
   toggleAddToFavlist
-} from "../reducers/playerActions";
+} from "../contexts/player/player.actions";
 
 //material ui
 import {

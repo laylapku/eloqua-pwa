@@ -12,19 +12,46 @@ var firebaseConfig = {
   appId: "1:129800811948:web:4ee380a6bcd2b2dbb53609"
 };
 
-// write data to firebase
-/* export const addCollectionAndDocuments = async (
-  collectionKey,
-  objectsToAdd
-) => {
-  const collectionRef = firestore.collection(collectionKey);
-  const batch = firestore.batch();
-  objectsToAdd.forEach(obj => {
-    const newDocRef = collectionRef.doc();
-    batch.set(newDocRef, obj);
+// get data from firestore
+export const convertSpeakersSnapshotToMap = collection => {
+  return collection.docs.map(doc => {
+    const { name, img } = doc.data();
+    return {
+      id: doc.id,
+      name,
+      img
+    };
   });
-  return await batch.commit();
-}; */
+};
+
+export const convertCategoriesSnapshotToMap = collection => {
+  return collection.docs.map(doc => {
+    const { name, icon } = doc.data();
+    return {
+      id: doc.id,
+      name,
+      icon
+    };
+  });
+};
+
+export const convertSpeechesSnapshotToMap = collection => {
+  const transformedCollection = collection.docs.map(doc => {
+    const { title, date, url, speakerId } = doc.data();
+    return {
+      id: doc.id,
+      title,
+      date,
+      url,
+      speakerId
+    };
+  });
+
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.id] = collection;
+    return accumulator;
+  }, {});
+};
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

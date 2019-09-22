@@ -1,7 +1,8 @@
 // react
 import React from "react";
 import ReactDOM from "react-dom";
-import PlayerContextProvider from "./contexts/PlayerContext";
+import PlayerContextProvider from "./contexts/player/player.context";
+import FirebaseContextProvider from "./contexts/data/firebase.context";
 
 // sw
 import * as serviceWorker from "./serviceWorker";
@@ -13,9 +14,11 @@ import "./index.css";
 import App from "./components/App.js";
 
 ReactDOM.render(
-  <PlayerContextProvider>
-    <App />
-  </PlayerContextProvider>,
+  <FirebaseContextProvider>
+    <PlayerContextProvider>
+      <App />
+    </PlayerContextProvider>
+  </FirebaseContextProvider>,
   document.getElementById("root")
 );
 
