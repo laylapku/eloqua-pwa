@@ -4,7 +4,7 @@ import { PlayerContext } from "../contexts/player/player.context";
 
 //components
 import TemplateTopbar from "./TemplateTopbar";
-import TemplateList from "./TemplateList.js";
+//import SpeechListItem from "./SpeechListItem.js";
 
 //styles
 import useStyles from "../styles/customizedStyles";
@@ -22,13 +22,9 @@ const FavoritesTabView = () => {
           <h3 className={classes.favReminder}>Add the first speech!</h3>
         ) : (
           favlist.map((ele, index) => {
-            return (
-              <TemplateList
-                key={"favListSpeech-" + index}
-                id={ele}
-                noPlay={true}
-              />
-            );
+            return {
+              /* <SpeechListItem key={"favListSpeech-" + index} id={ele} /> */
+            };
           })
         )}
       </div>

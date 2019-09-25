@@ -4,7 +4,7 @@ import { PlayerContext } from "../contexts/player/player.context";
 
 //components
 import TemplateTopbar from "./TemplateTopbar";
-import TemplateList from "./TemplateList.js";
+//import SpeechListItem from "./SpeechListItem.js";
 
 //styles
 import useStyles from "../styles/customizedStyles";
@@ -16,15 +16,16 @@ const PlaylistTabView = () => {
 
   return (
     <Fragment>
-      <TemplateTopbar />
+      <TemplateTopbar isPlaylist />
       <div className={classes.listContainer}>
         {playlist.map((ele, index) => {
+          //console.log(ele);
           return (
-            <TemplateList
+            {/* <SpeechListItem
               key={"playListSpeech-" + index}
-              id={ele}
+              speech={ele}
               speechIndex={index}
-            />
+            /> */}
           );
         })}
       </div>

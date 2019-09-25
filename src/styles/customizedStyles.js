@@ -122,7 +122,7 @@ const useStyles = makeStyles({
     marginTop: "80px"
   },
 
-  //TemplateList
+  //SpeechListItem
   listGrid: {
     display: "grid",
     alignItems: "center",

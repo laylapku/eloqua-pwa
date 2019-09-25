@@ -1,6 +1,5 @@
 //react
 import React, { useContext } from "react";
-import { withRouter } from "react-router-dom";
 import { PlayerContext } from "../contexts/player/player.context";
 import {
   deleteFromPlaylist,
@@ -16,7 +15,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 //styles
 import useStyles from "../styles/customizedStyles";
 
-const TemplateTopbar = ({ location: { pathname } }) => {
+const TemplateTopbar = ({ isPlaylist }) => {
   const { player, dispatch } = useContext(PlayerContext);
   const { playlist, favlist } = player;
   const classes = useStyles();
@@ -24,7 +23,7 @@ const TemplateTopbar = ({ location: { pathname } }) => {
 
   return (
     <AppBar classes={{ root: classes.appBar }}>
-      {pathname === "/playlist" ? (
+      {isPlaylist === true ? (
         <div className={classes.appBarInner}>
           <h3>My Playlist</h3>
           <IconButton onClick={() => dispatch(toggleAddToFavlist(playlist))}>
@@ -45,4 +44,4 @@ const TemplateTopbar = ({ location: { pathname } }) => {
   );
 };
 
-export default withRouter(TemplateTopbar);
+export default TemplateTopbar;

@@ -15,7 +15,7 @@ const BottomView = ({ location: { pathname } }) => {
       {pathname !== "/script" && pathname !== "/about" && (
         <AppBar style={{ bottom: 0, top: "auto" }}>
           <BottomViewToolbar />
-          <BottomViewTabs />
+          <BottomViewTabs pathname={pathname} />
         </AppBar>
       )}
     </Fragment>

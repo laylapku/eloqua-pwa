@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 import { PlayerContext } from "../contexts/player/player.context";
 import { playPause, onNext } from "../contexts/player/player.actions";
 
+//data
+import { SpeakersContext } from "../contexts/speakers.context";
+import { SpeechesContext } from "../contexts/speeches.context";
+
 //material ui
 import { Slider, Toolbar, IconButton } from "@material-ui/core";
 import ListIcon from "@material-ui/icons/List";
@@ -11,24 +15,24 @@ import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
 
-//data
-import speakers from "../data/speakers";
-import speeches from "../data/speeches";
-
 //styles
 import useStyles from "../styles/customizedStyles";
 
 const BottomViewToolbar = () => {
   const { player, dispatch } = useContext(PlayerContext);
   const { playing, played, playlist, index } = player;
-  const classes = useStyles();
+  const { speakers } = useContext(SpeakersContext);
+  const { speeches } = useContext(SpeechesContext);
 
-  const speechPlaying = speeches.find(ele => ele.id === playlist[index]);
-  const speakerName = speakers[speechPlaying.speakerId].name;
+  const speechOn = speeches && speeches[playlist[index]];
+  const speakerName = speakers && speakers[speechOn.speakerId].name;
+
   const titleMarquee = () => {
-    const titleLength = speechPlaying.title.split("").length;
+    const titleLength = speechOn && speechOn.title.split("").length;
     return titleLength > 27 ? "marquee" : null;
   };
+
+  const classes = useStyles();
 
   return (
     <Fragment>
@@ -41,7 +45,7 @@ const BottomViewToolbar = () => {
         <Link to="/script">
           {
             <div className={titleMarquee()}>
-              <span>{speechPlaying.title}</span>
+              <span>{speechOn && speechOn.title}</span>
               <br />
               <em className="speaker-name">{speakerName}</em>
             </div>

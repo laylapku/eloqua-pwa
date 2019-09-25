@@ -1,32 +1,42 @@
 //react
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { PlayerContext } from "../contexts/player/player.context";
 import {
-  playPause,
+  /* playPause,
   onNext,
   onPrev,
-  updatePlayed
+  updatePlayed, */
+  updateUrl
 } from "../contexts/player/player.actions";
+
+//data
+/*import speeches from "../data/speeches";
+import speakers from "../data/speakers"; */
+import { SpeechesContext } from "../contexts/speeches.context";
 
 //material ui
 import { ThemeProvider } from "@material-ui/styles";
 
-//components
-import Routes from "./Routes";
-
-//data
-import speeches from "../data/speeches";
-import speakers from "../data/speakers";
-
 //theme
 import defaultColorTheme from "../styles/defaultColorTheme";
 
-const MediaMetadata = window.MediaMetadata;
+//components
+import Routes from "./Routes";
+import withContexts from "./with-contexts.hoc";
+
+// const MediaMetadata = window.MediaMetadata;
 
 const App = () => {
-  const { player, playerRef, dispatch } = useContext(PlayerContext);
-  const { duration, played, playlist, index } = player;
+  const { player, dispatch } = useContext(PlayerContext);
+  const { playlist, index } = player;
+  const { speeches } = useContext(SpeechesContext);
 
+  useEffect(() => {
+    const url = speeches && speeches[playlist[index]].url;
+    dispatch(updateUrl(url));
+  }, [speeches, dispatch, playlist, index]);
+
+  /* 
   //update media session info
   const updateMetadata = () => {
     let speech = speeches.find(ele => ele.id === playlist[index]);
@@ -83,7 +93,7 @@ const App = () => {
     navigator.mediaSession.setActionHandler("seekforward", () => {
       seekForward();
     });
-  }
+  } */
 
   return (
     <ThemeProvider theme={defaultColorTheme}>
@@ -92,4 +102,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withContexts(App);
