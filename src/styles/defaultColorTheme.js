@@ -67,6 +67,11 @@ export default createMuiTheme({
       root: {
         transform: "scale(1.2)"
       }
+    },
+    MuiCircularProgress: {
+      root: {
+        margin: "150px 150px"
+      }
     }
   },
   typography: {

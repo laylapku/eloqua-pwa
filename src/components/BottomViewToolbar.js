@@ -26,7 +26,6 @@ const BottomViewToolbar = () => {
 
   const speechOn = speeches && speeches[playlist[index]];
   const speakerName = speakers && speakers[speechOn.speakerId].name;
-
   const titleMarquee = () => {
     const titleLength = speechOn && speechOn.title.split("").length;
     return titleLength > 27 ? "marquee" : null;

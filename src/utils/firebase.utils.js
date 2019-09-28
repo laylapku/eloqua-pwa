@@ -1,8 +1,9 @@
 import * as firebase from "firebase/app";
 import "firebase/firestore";
+import "firebase/storage";
 
 // Firebase configuration
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyDQjBFO6nuQe_Em9KDdgpacji3ZJ9C8sUM",
   authDomain: "speech-pwa.firebaseapp.com",
   databaseURL: "https://speech-pwa.firebaseio.com",
@@ -90,23 +91,21 @@ export const convertSpeechCategorySnapshotToMap = collection => {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-// Get a reference to the database service
+// get a reference to the database service
 export const firestore = firebase.firestore();
 
-// persist firestore to local storage
-firebase
-  .firestore()
-  .enablePersistence()
-  .catch(function(err) {
-    if (err.code === "failed-precondition") {
-      // Multiple tabs open, persistence can only be enabled
-      // in one tab at a a time.
-      // ...
-    } else if (err.code === "unimplemented") {
-      // The current browser does not support all of the
-      // features required to enable persistence
-      // ...
-    }
-  });
+// get a reference to the storage service
+export const storage = firebase.storage();
+
+// get audio url from firebase storage
+const storageRef = storage.ref();
+export const getAudioRefFromStorage = audioFileName => {
+  storageRef
+    .child(audioFileName)
+    .getDownloadURL()
+    .then(function(url) {
+      return url;
+    });
+};
 
 export default firebase;

@@ -1,4 +1,4 @@
-const data = [
+const firestoreData = [
   {
     id: "MqSlVZC1adt0CAnWQlis",
     speakerId: "OAFcQhBKsCrspLC16npA",
@@ -501,4 +501,4 @@ const data = [
   }
 ];
 
-export default data;
+export default firestoreData;

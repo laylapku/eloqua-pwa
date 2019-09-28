@@ -14,9 +14,6 @@ import {
   toggleAddToFavlist
 } from "../contexts/player/player.actions";
 
-//data
-import { SpeechesContext } from "../contexts/speeches.context";
-
 // material ui
 import {
   Slider,
@@ -41,10 +38,9 @@ import Duration from "./PlayerControlsDuration";
 // styles
 import useStyles from "../styles/customizedStyles";
 
-const PlayerControls = () => {
+const PlayerControls = ({ speechOn }) => {
   const { player, playerRef, dispatch } = useContext(PlayerContext);
-  const { playing, played, loop, duration, playlist, index, favlist } = player;
-  const { speeches } = useContext(SpeechesContext);
+  const { playing, played, loop, duration, favlist } = player;
 
   // seek methods for player slider
   const onSeekEnd = (e, value) => {
@@ -66,7 +62,6 @@ const PlayerControls = () => {
     dispatch(setPlaybackRate(parseFloat(e.target.value)));
   };
 
-  const speechOn = speeches && speeches[playlist[index]];
   const classes = useStyles();
 
   return (

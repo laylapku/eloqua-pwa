@@ -1,19 +1,24 @@
 //react
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { PlayerContext } from "../contexts/player/player.context";
 
+// firebase
+import { firestore } from "../utils/firebase.utils";
+
 //material ui
-import { Container, Typography, IconButton } from "@material-ui/core";
+import {
+  Container,
+  Typography,
+  IconButton,
+  CircularProgress
+} from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
 //components
 import PlayerControls from "./PlayerControls";
 
 //data
-/* import speeches from "../data/speeches";
-import speakers from "../data/speakers";
-import scripts from "../data/scripts"; */
 import { SpeakersContext } from "../contexts/speakers.context";
 import { SpeechesContext } from "../contexts/speeches.context";
 
@@ -25,12 +30,29 @@ const ScriptTabView = props => {
   const { playlist, index } = player;
   const { speakers } = useContext(SpeakersContext);
   const { speeches } = useContext(SpeechesContext);
+  const [script, setScript] = useState();
 
   const speechOn = speeches && speeches[playlist[index]];
   const speakerName = speakers && speakers[speechOn.speakerId].name;
   const options = { year: "numeric", month: "long", day: "numeric" };
   const date = speechOn && speechOn.date.toLocaleDateString("en-US", options);
-  //const scriptShown = scripts.find(ele => ele.speechId === playlist[index]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const querySnapshot = await firestore
+          .collection("speeches")
+          .doc(speechOn.id)
+          .collection("extra")
+          .get();
+        querySnapshot.forEach(doc => {
+          setScript(doc.data().script);
+        });
+      } catch (error) {
+        return error;
+      }
+    })();
+  }, [speechOn]);
 
   const classes = useStyles();
 
@@ -52,12 +74,14 @@ const ScriptTabView = props => {
           </Typography>
           <Typography>{date}</Typography>
         </div>
-        {/* <Typography className={classes.scriptContainer}>
-          {scriptShown.text}
-        </Typography> */}
+        {script ? (
+          <Typography className={classes.scriptContainer}>{script}</Typography>
+        ) : (
+          <CircularProgress />
+        )}
       </Container>
 
-      <PlayerControls />
+      <PlayerControls speechOn={speechOn} />
     </Fragment>
   );
 };

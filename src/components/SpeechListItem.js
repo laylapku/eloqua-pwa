@@ -35,11 +35,10 @@ const SpeechListItem = ({
   speechIndex,
   isPlaylist
 }) => {
-  //console.log(id, title, date, url, speakerName, speechIndex, isPlaylist);
-
   const { player, dispatch } = useContext(PlayerContext);
   const { playing, index, playlist, favlist } = player;
   const { speeches } = useContext(SpeechesContext);
+
   const speechOn = speeches && speeches[playlist[index]];
   const stylesOnPlay = id => ({
     color: speechOn && (speechOn.id === id ? "#CC5500" : "#1B1811")
@@ -62,7 +61,7 @@ const SpeechListItem = ({
       <ListItem button onClick={() => dispatch(addToPlaylist({ id }))}>
         <ListItemText
           primary={
-            <Typography /* style={stylesOnPlay(id)} */>
+            <Typography style={stylesOnPlay(id)}>
               {`${title} (${date.getFullYear()})`}
               <br />
               <em className="speaker-name">{speakerName}</em>

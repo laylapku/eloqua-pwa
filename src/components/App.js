@@ -10,8 +10,6 @@ import {
 } from "../contexts/player/player.actions";
 
 //data
-/*import speeches from "../data/speeches";
-import speakers from "../data/speakers"; */
 import { SpeechesContext } from "../contexts/speeches.context";
 
 //material ui
@@ -31,15 +29,15 @@ const App = () => {
   const { playlist, index } = player;
   const { speeches } = useContext(SpeechesContext);
 
-  useEffect(() => {
+  /* useEffect(() => {
     const url = speeches && speeches[playlist[index]].url;
     dispatch(updateUrl(url));
-  }, [speeches, dispatch, playlist, index]);
+  }, [speeches, dispatch, playlist, index]); */
 
   /* 
   //update media session info
-  const updateMetadata = () => {
-    let speech = speeches.find(ele => ele.id === playlist[index]);
+  const updateMetadata = () => {(speeches && speakers) &&
+    let speech = speeches[playlist[index]];
     let speaker = speakers[speech.speakerId].name;
     let avatar = speakers[speech.speakerId].img;
     if ("mediaSession" in navigator) {

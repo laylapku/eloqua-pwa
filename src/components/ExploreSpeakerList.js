@@ -5,7 +5,12 @@ import React, { useContext } from "react";
 import { SpeakersContext } from "../contexts/speakers.context";
 
 //material ui
-import { GridList, GridListTile, GridListTileBar } from "@material-ui/core";
+import {
+  GridList,
+  GridListTile,
+  GridListTileBar,
+  CircularProgress
+} from "@material-ui/core";
 
 //components
 import FilteredList from "./ExploreFilteredList";
@@ -22,21 +27,21 @@ const ExploreSpeakerList = ({ filter, filterSpeech }) => {
       {filter === "" ? (
         speakers ? (
           <GridList cellHeight={150} cols={3} spacing={1}>
-            {Object.values(speakers).map((ele, index) => (
+            {Object.values(speakers).map(speaker => (
               <GridListTile
-                key={"speakerTile-" + index}
-                onClick={() => filterSpeech(ele.id)}
+                key={speaker.id}
+                onClick={() => filterSpeech(speaker.id)}
               >
-                <img src={ele.img} alt={ele.name} />
+                <img src={speaker.img} alt={speaker.name} />
                 <GridListTileBar
-                  title={ele.name}
+                  title={speaker.name}
                   classes={{ title: classes.tileBarName }}
                 />
               </GridListTile>
             ))}
           </GridList>
         ) : (
-          "Loading..."
+          <CircularProgress />
         )
       ) : (
         <FilteredList speakerFilter={filter} />
