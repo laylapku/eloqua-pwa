@@ -2,7 +2,6 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage";
 
-// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDQjBFO6nuQe_Em9KDdgpacji3ZJ9C8sUM",
   authDomain: "speech-pwa.firebaseapp.com",
@@ -13,19 +12,7 @@ const firebaseConfig = {
   appId: "1:129800811948:web:4ee380a6bcd2b2dbb53609"
 };
 
-// write data to firestore
-/* export const addCollectionAndDocuments = async (
-  collectionKey,
-  objectsToAdd
-) => {
-  const collectionRef = firestore.collection(collectionKey);
-  const batch = firestore.batch();
-  objectsToAdd.forEach(obj => {
-    const newDocRef = collectionRef.doc();
-    batch.set(newDocRef, obj);
-  });
-  return await batch.commit();
-}; */
+firebase.initializeApp(firebaseConfig);
 
 // get data from firestore collections
 export const convertCategoriesSnapshotToMap = collection => {
@@ -62,12 +49,12 @@ export const convertSpeakersSnapshotToMap = collection => {
 
 export const convertSpeechesSnapshotToMap = collection => {
   const transformedCollection = collection.docs.map(doc => {
-    const { title, date, url, speakerId } = doc.data();
+    const { audioFileName, title, date, speakerId } = doc.data();
     return {
       id: doc.id,
+      audioFileName,
       title,
       date: date.toDate(),
-      url,
       speakerId
     };
   });
@@ -88,24 +75,14 @@ export const convertSpeechCategorySnapshotToMap = collection => {
   });
 };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
-// get a reference to the database service
 export const firestore = firebase.firestore();
 
-// get a reference to the storage service
 export const storage = firebase.storage();
 
-// get audio url from firebase storage
-const storageRef = storage.ref();
-export const getAudioRefFromStorage = audioFileName => {
-  storageRef
-    .child(audioFileName)
-    .getDownloadURL()
-    .then(function(url) {
-      return url;
-    });
+// use audio file name to get corresponding url from storage
+export const getAudioRefFromStorage = async audioFileName => {
+  const storageRef = storage.ref();
+  return await storageRef.child(audioFileName).getDownloadURL();
 };
 
 export default firebase;

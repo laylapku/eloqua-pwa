@@ -71,6 +71,9 @@ export default createMuiTheme({
     MuiCircularProgress: {
       root: {
         margin: "150px 150px"
+      },
+      colorPrimary: {
+        color: "RGB(202,187,143)"
       }
     }
   },

@@ -1,16 +1,14 @@
-//react
+// react
 import React, { Fragment, useContext } from "react";
 import { PlayerContext } from "../contexts/player/player.context";
-
-// data
 import { SpeakersContext } from "../contexts/speakers.context";
 import { SpeechesContext } from "../contexts/speeches.context";
 
-//components
+// components
 import TemplateTopbar from "./TemplateTopbar";
 import SpeechListItem from "./SpeechListItem";
 
-//styles
+// styles
 import useStyles from "../styles/customizedStyles";
 
 const PlaylistTabView = () => {

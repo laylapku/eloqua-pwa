@@ -1,7 +1,5 @@
-//react
+// react
 import React, { Fragment, useContext } from "react";
-
-// data
 import { SpeakersContext } from "../contexts/speakers.context";
 import { SpeechesContext } from "../contexts/speeches.context";
 import { SpeechCategoryContext } from "../contexts/speech_category.context";
@@ -9,7 +7,7 @@ import { SpeechCategoryContext } from "../contexts/speech_category.context";
 // material ui
 import { CircularProgress } from "@material-ui/core";
 
-//components
+// components
 import SpeechListItem from "./SpeechListItem.js";
 
 const ExploreFilteredList = ({

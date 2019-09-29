@@ -1,15 +1,15 @@
-//react
+// react
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-//material ui
+// material ui
 import { List, ListItem, ListItemText, IconButton } from "@material-ui/core";
 import HelpIcon from "@material-ui/icons/Help";
 import ColorLensIcon from "@material-ui/icons/ColorLens";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Divider from "@material-ui/core/Divider";
 
-//styles
+// styles
 import useStyles from "../styles/customizedStyles";
 
 const SettingsTabView = props => {

@@ -1,12 +1,14 @@
-//react
+// react
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { PlayerContext } from "../contexts/player/player.context";
+import { SpeakersContext } from "../contexts/speakers.context";
+import { SpeechesContext } from "../contexts/speeches.context";
 
 // firebase
 import { firestore } from "../utils/firebase.utils";
 
-//material ui
+// material ui
 import {
   Container,
   Typography,
@@ -15,14 +17,10 @@ import {
 } from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
-//components
+// components
 import PlayerControls from "./PlayerControls";
 
-//data
-import { SpeakersContext } from "../contexts/speakers.context";
-import { SpeechesContext } from "../contexts/speeches.context";
-
-//styles
+// styles
 import useStyles from "../styles/customizedStyles";
 
 const ScriptTabView = props => {
@@ -39,18 +37,17 @@ const ScriptTabView = props => {
 
   useEffect(() => {
     (async () => {
-      try {
-        const querySnapshot = await firestore
+      const snapshot =
+        speechOn &&
+        (await firestore
           .collection("speeches")
           .doc(speechOn.id)
           .collection("extra")
-          .get();
-        querySnapshot.forEach(doc => {
+          .get());
+      snapshot &&
+        snapshot.forEach(doc => {
           setScript(doc.data().script);
         });
-      } catch (error) {
-        return error;
-      }
     })();
   }, [speechOn]);
 

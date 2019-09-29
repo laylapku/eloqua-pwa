@@ -1,4 +1,4 @@
-//react
+// react
 import React, { useContext } from "react";
 import { PlayerContext } from "../contexts/player/player.context";
 import {
@@ -7,11 +7,9 @@ import {
   deleteFromPlaylist,
   toggleAddToFavlist
 } from "../contexts/player/player.actions";
-
-//data
 import { SpeechesContext } from "../contexts/speeches.context";
 
-//material ui
+// material ui
 import {
   List,
   ListItem,
@@ -26,7 +24,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-//styles
+// styles
 import useStyles from "../styles/customizedStyles";
 
 const SpeechListItem = ({

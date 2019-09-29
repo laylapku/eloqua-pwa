@@ -1,16 +1,14 @@
-//react
+// react
 import React, { useContext } from "react";
-
-//data
 import { CategoriesContext } from "../contexts/categories.context";
 
-//material ui
+// material ui
 import { Avatar, Grid, CircularProgress } from "@material-ui/core";
 
-//components
+// components
 import ExploreFilteredList from "./ExploreFilteredList";
 
-//styles
+// styles
 import useStyles from "../styles/customizedStyles";
 
 const ExploreCategoryList = ({ filter, filterSpeech }) => {

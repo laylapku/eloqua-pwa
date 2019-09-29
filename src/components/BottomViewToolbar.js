@@ -1,21 +1,19 @@
-//react
+// react
 import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import { PlayerContext } from "../contexts/player/player.context";
 import { playPause, onNext } from "../contexts/player/player.actions";
-
-//data
 import { SpeakersContext } from "../contexts/speakers.context";
 import { SpeechesContext } from "../contexts/speeches.context";
 
-//material ui
+// material ui
 import { Slider, Toolbar, IconButton } from "@material-ui/core";
 import ListIcon from "@material-ui/icons/List";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
 
-//styles
+// styles
 import useStyles from "../styles/customizedStyles";
 
 const BottomViewToolbar = () => {

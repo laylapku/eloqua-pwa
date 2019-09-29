@@ -1,8 +1,8 @@
-//react
+// react
 import React from "react";
 import { Link } from "react-router-dom";
 
-//material ui
+// material ui
 import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 import ExploreIcon from "@material-ui/icons/Explore";
 import FavoriteIcon from "@material-ui/icons/Favorite";

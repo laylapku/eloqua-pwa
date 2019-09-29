@@ -17,7 +17,7 @@ const PlayerContextProvider = props => {
     loop: false,
     playbackRate: 1.0,
     seeking: false,
-    playlist: ["DMsjpQNzYqB86cuZrBWB", "RDfdVTU5zSbqBzAtBCET"],
+    playlist: ["933kMAtgyr4ohgNq2eiM"],
     index: 0,
     favlist: []
   };

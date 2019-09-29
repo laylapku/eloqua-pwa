@@ -1,10 +1,8 @@
-//react
+// react
 import React, { useContext } from "react";
-
-//data
 import { SpeakersContext } from "../contexts/speakers.context";
 
-//material ui
+// material ui
 import {
   GridList,
   GridListTile,
@@ -12,10 +10,10 @@ import {
   CircularProgress
 } from "@material-ui/core";
 
-//components
+// components
 import FilteredList from "./ExploreFilteredList";
 
-//styles
+// styles
 import useStyles from "../styles/customizedStyles";
 
 const ExploreSpeakerList = ({ filter, filterSpeech }) => {

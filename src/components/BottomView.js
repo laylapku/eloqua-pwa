@@ -1,11 +1,11 @@
-//react
+// react
 import React, { Fragment } from "react";
 import { withRouter } from "react-router-dom";
 
-//material ui
+// material ui
 import { AppBar } from "@material-ui/core";
 
-//components
+// components
 import BottomViewToolbar from "./BottomViewToolbar";
 import BottomViewTabs from "./BottomViewTabs";
 

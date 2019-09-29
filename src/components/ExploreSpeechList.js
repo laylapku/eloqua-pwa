@@ -1,14 +1,14 @@
-//react
+// react
 import React from "react";
 
-//material ui
+// material ui
 import { Input, IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 
-//components
+// components
 import ExploreFilteredList from "./ExploreFilteredList";
 
-//styles
+// styles
 import useStyles from "../styles/customizedStyles";
 
 const ExploreSpeechList = ({ filter, onSearchInputChange }) => {

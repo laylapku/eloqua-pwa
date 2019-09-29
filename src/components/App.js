@@ -1,4 +1,4 @@
-//react
+// react
 import React, { useContext, useEffect } from "react";
 import { PlayerContext } from "../contexts/player/player.context";
 import {
@@ -8,17 +8,18 @@ import {
   updatePlayed, */
   updateUrl
 } from "../contexts/player/player.actions";
-
-//data
 import { SpeechesContext } from "../contexts/speeches.context";
 
-//material ui
+// firebase
+import { getAudioRefFromStorage } from "../utils/firebase.utils";
+
+// material ui
 import { ThemeProvider } from "@material-ui/styles";
 
-//theme
+// theme
 import defaultColorTheme from "../styles/defaultColorTheme";
 
-//components
+// components
 import Routes from "./Routes";
 import withContexts from "./with-contexts.hoc";
 
@@ -29,10 +30,14 @@ const App = () => {
   const { playlist, index } = player;
   const { speeches } = useContext(SpeechesContext);
 
-  /* useEffect(() => {
-    const url = speeches && speeches[playlist[index]].url;
-    dispatch(updateUrl(url));
-  }, [speeches, dispatch, playlist, index]); */
+  useEffect(() => {
+    (async () => {
+      const audioFileName = speeches && speeches[playlist[index]].audioFileName;
+      const url =
+        audioFileName && (await getAudioRefFromStorage(audioFileName));
+      dispatch(updateUrl(url));
+    })();
+  }, [speeches, dispatch, playlist, index]);
 
   /* 
   //update media session info

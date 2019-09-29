@@ -1,4 +1,4 @@
-//react
+// react
 import React, { useContext } from "react";
 import { PlayerContext } from "../contexts/player/player.context";
 import {
@@ -6,13 +6,13 @@ import {
   toggleAddToFavlist
 } from "../contexts/player/player.actions";
 
-//material ui
+// material ui
 import { AppBar, IconButton } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-//styles
+// styles
 import useStyles from "../styles/customizedStyles";
 
 const TemplateTopbar = ({ isPlaylist }) => {
