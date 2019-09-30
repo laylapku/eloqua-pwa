@@ -2,13 +2,14 @@
 import React, { useContext, useEffect } from "react";
 import { PlayerContext } from "../contexts/player/player.context";
 import {
-  /* playPause,
+  playPause,
   onNext,
   onPrev,
-  updatePlayed, */
+  updatePlayed,
   updateUrl
 } from "../contexts/player/player.actions";
 import { SpeechesContext } from "../contexts/speeches.context";
+import { SpeakersContext } from "../contexts/speakers.context";
 
 // firebase
 import { getAudioRefFromStorage } from "../utils/firebase.utils";
@@ -23,12 +24,13 @@ import defaultColorTheme from "../styles/defaultColorTheme";
 import Routes from "./Routes";
 import withContexts from "./with-contexts.hoc";
 
-// const MediaMetadata = window.MediaMetadata;
+const MediaMetadata = window.MediaMetadata;
 
 const App = () => {
-  const { player, dispatch } = useContext(PlayerContext);
-  const { playlist, index } = player;
+  const { player, playerRef, dispatch } = useContext(PlayerContext);
+  const { playlist, index, played, duration } = player;
   const { speeches } = useContext(SpeechesContext);
+  const { speakers } = useContext(SpeakersContext);
 
   useEffect(() => {
     (async () => {
@@ -39,13 +41,13 @@ const App = () => {
     })();
   }, [speeches, dispatch, playlist, index]);
 
-  /* 
-  //update media session info
-  const updateMetadata = () => {(speeches && speakers) &&
-    let speech = speeches[playlist[index]];
-    let speaker = speakers[speech.speakerId].name;
-    let avatar = speakers[speech.speakerId].img;
-    if ("mediaSession" in navigator) {
+  // update media session info
+  const updateMetadata = () => {
+    if ("mediaSession" in navigator && speeches && speakers) {
+      let speech = speeches[playlist[index]];
+      let speaker = speakers[speech.speakerId].name;
+      let avatar = speakers[speech.speakerId].img;
+
       navigator.mediaSession.metadata = new MediaMetadata({
         title: speech.title,
         artist: speaker,
@@ -60,20 +62,22 @@ const App = () => {
       });
     }
   };
-  //seek methods for media session
+
+  // seek methods for media session
   const seekBackward = () => {
     let skipTime = 0.05;
-    let newPlayed = Math.max(played - skipTime, 0);
-    dispatch(updatePlayed(newPlayed));
-    playerRef.current.seekTo(newPlayed);
+    let currPlayed = Math.max(played - skipTime, 0);
+    dispatch(updatePlayed(currPlayed));
+    playerRef.current.seekTo(currPlayed);
   };
   const seekForward = () => {
     let skipTime = 0.05;
-    let newPlayed = Math.min(played + skipTime, duration);
-    dispatch(updatePlayed(newPlayed));
-    playerRef.current.seekTo(newPlayed);
+    let currPlayed = Math.min(played + skipTime, duration);
+    dispatch(updatePlayed(currPlayed));
+    playerRef.current.seekTo(currPlayed);
   };
 
+  // media session controls
   if ("mediaSession" in navigator) {
     updateMetadata();
     navigator.mediaSession.setActionHandler("play", () => {
@@ -96,7 +100,7 @@ const App = () => {
     navigator.mediaSession.setActionHandler("seekforward", () => {
       seekForward();
     });
-  } */
+  }
 
   return (
     <ThemeProvider theme={defaultColorTheme}>

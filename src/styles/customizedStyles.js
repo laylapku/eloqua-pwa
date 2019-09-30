@@ -89,7 +89,7 @@ const useStyles = makeStyles({
   scriptContainer: {
     overflow: "auto",
     position: "absolute",
-    top: "150px",
+    top: "135px",
     bottom: "135px",
     lineHeight: "2em",
     paddingRight: "20px",
