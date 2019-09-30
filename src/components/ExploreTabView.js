@@ -1,10 +1,10 @@
-//react
+// react
 import React, { Fragment, useState } from "react";
 
-//material ui
+// material ui
 import { AppBar, Tabs, Tab } from "@material-ui/core";
 
-//components
+// components
 import ExploreSpeechList from "./ExploreSpeechList.js";
 import ExploreSpeakerList from "./ExploreSpeakerList.js";
 import ExploreCategoryList from "./ExploreCategoryList.js";

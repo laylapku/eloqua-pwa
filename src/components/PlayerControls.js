@@ -1,7 +1,7 @@
 // react
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { PlayerContext } from "../contexts/PlayerContext";
+import { PlayerContext } from "../contexts/player/player.context";
 import {
   updatePlayed,
   playPause,
@@ -12,7 +12,7 @@ import {
   setSeekingFalse,
   setPlaybackRate,
   toggleAddToFavlist
-} from "../reducers/playerActions";
+} from "../contexts/player/player.actions";
 
 // material ui
 import {
@@ -35,15 +35,12 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 // components
 import Duration from "./PlayerControlsDuration";
 
-// data
-import speeches from "../data/speeches";
-
-//styles
+// styles
 import useStyles from "../styles/customizedStyles";
 
-const PlayerControls = props => {
+const PlayerControls = ({ speechOn }) => {
   const { player, playerRef, dispatch } = useContext(PlayerContext);
-  const { playing, played, loop, duration, playlist, index, favlist } = player;
+  const { playing, played, loop, duration, favlist } = player;
 
   // seek methods for player slider
   const onSeekEnd = (e, value) => {
@@ -65,7 +62,6 @@ const PlayerControls = props => {
     dispatch(setPlaybackRate(parseFloat(e.target.value)));
   };
 
-  const speechPlaying = speeches.find(item => item.id === playlist[index]);
   const classes = useStyles();
 
   return (
@@ -98,9 +94,11 @@ const PlayerControls = props => {
           <SkipNextIcon />
         </IconButton>
         <IconButton
-          onClick={() => dispatch(toggleAddToFavlist([speechPlaying.id]))}
+          onClick={() =>
+            dispatch(toggleAddToFavlist(speechOn && [speechOn.id]))
+          }
         >
-          {favlist.indexOf(speechPlaying.id) !== -1 ? (
+          {favlist.indexOf(speechOn && speechOn.id) !== -1 ? (
             <FavoriteIcon classes={{ root: classes.favIcon }} />
           ) : (
             <FavoriteBorderIcon />

@@ -2,7 +2,7 @@ const speeches = [
   {
     id: "1",
     speakerId: "1",
-    category: "02,03,04",
+    category: "07,05,08",
     title: "I Have a Dream",
     date: "28 August 1963",
     url:
@@ -11,7 +11,7 @@ const speeches = [
   {
     id: "2",
     speakerId: "2",
-    category: "09,02",
+    category: "04,07",
     title: "Inaugural Address",
     date: "20 January 1961",
     url:
@@ -20,7 +20,7 @@ const speeches = [
   {
     id: "3",
     speakerId: "6",
-    category: "02",
+    category: "07",
     title: "A Time for Choosing",
     date: "27 October 1964",
     url:
@@ -29,7 +29,7 @@ const speeches = [
   {
     id: "4",
     speakerId: "5",
-    category: "09,02",
+    category: "04,07",
     title: "First Inaugural Address",
     date: "20 January 2009",
     url:
@@ -38,7 +38,7 @@ const speeches = [
   {
     id: "5",
     speakerId: "7",
-    category: "05",
+    category: "11",
     title: "Blood, Toil, Tears and Sweat",
     date: "13 May 1940",
     url:
@@ -48,7 +48,7 @@ const speeches = [
   {
     id: "6",
     speakerId: "14",
-    category: "02,07",
+    category: "07,09",
     title: "We Shall Overcome",
     date: "15 March 1965",
     url:
@@ -57,7 +57,7 @@ const speeches = [
   {
     id: "7",
     speakerId: "3",
-    category: "09,02",
+    category: "04,07",
     title: "First Inaugural Address",
     date: "4 March 1933",
     url:
@@ -66,7 +66,7 @@ const speeches = [
   {
     id: "8",
     speakerId: "4",
-    category: "06,05",
+    category: "06,11",
     title: "Gettysburg Address (Read by Sam Waterson)",
     date: "19 November 1863",
     url:
@@ -75,7 +75,7 @@ const speeches = [
   {
     id: "9",
     speakerId: "11",
-    category: "02",
+    category: "07",
     title: "Checkers",
     date: "23 September 1952",
     url:
@@ -84,7 +84,7 @@ const speeches = [
   {
     id: "10",
     speakerId: "13",
-    category: "07,02",
+    category: "09,07",
     title: "Democratic National Convention Keynote Address",
     date: "12 July 1976",
     url:
@@ -93,7 +93,7 @@ const speeches = [
   {
     id: "11",
     speakerId: "8",
-    category: "01,03",
+    category: "02,05",
     title: "Stanford University Speech",
     date: "12 June 2005",
     url:
@@ -102,7 +102,7 @@ const speeches = [
   {
     id: "12",
     speakerId: "23",
-    category: "06,03",
+    category: "06,05",
     title: "Duty, Honor, Country",
     date: "12 May 1962",
     url:
@@ -111,7 +111,7 @@ const speeches = [
   {
     id: "13",
     speakerId: "10",
-    category: "02",
+    category: "07",
     title: "Atoms for Peace",
     date: "8 December 1953",
     url:
@@ -120,7 +120,7 @@ const speeches = [
   {
     id: "14",
     speakerId: "17",
-    category: "10,03",
+    category: "01,05",
     title: "Speech Accepting the Nobel Prize in Literature",
     date: "December 10, 1950",
     url:
@@ -129,7 +129,7 @@ const speeches = [
   {
     id: "15",
     speakerId: "6",
-    category: "11",
+    category: "10",
     title: 'The Space Shuttle "Challenger" Tragedy Address',
     date: "28 January 1986",
     url:
@@ -138,7 +138,7 @@ const speeches = [
   {
     id: "16",
     speakerId: "18",
-    category: "07,03",
+    category: "09,05",
     title: "The Perils of Indifference",
     date: "12 April 1999",
     url:
@@ -147,7 +147,7 @@ const speeches = [
   {
     id: "17",
     speakerId: "26",
-    category: "10,03",
+    category: "01,05",
     title: "Keynote Address at the 54th National Prayer Breakfast",
     date: "2 February 2006",
     url:
@@ -156,7 +156,7 @@ const speeches = [
   {
     id: "18",
     speakerId: "16",
-    category: "02,07",
+    category: "07,09",
     title: "Women's Rights are Civil Rights",
     date: "5 September 1995",
     url:
@@ -165,7 +165,7 @@ const speeches = [
   {
     id: "19",
     speakerId: "21",
-    category: "01,03",
+    category: "02,05",
     title: "Commencement Address at Wellesley College",
     date: "1 June 1990",
     url:
@@ -174,7 +174,7 @@ const speeches = [
   {
     id: "20",
     speakerId: "5",
-    category: "02,07",
+    category: "07,09",
     title: "A More Perfect Union",
     date: "18 March 2008",
     url:
@@ -183,7 +183,7 @@ const speeches = [
   {
     id: "21",
     speakerId: "27",
-    category: "10,07,03",
+    category: "01,09,05",
     title: "2018 Golden Globes Speech",
     date: "7 January 2018",
     url:
@@ -192,7 +192,7 @@ const speeches = [
   {
     id: "22",
     speakerId: "10",
-    category: "08",
+    category: "03",
     title: "Farewell Address",
     date: "17 January 1961",
     url:
@@ -201,7 +201,7 @@ const speeches = [
   {
     id: "23",
     speakerId: "6",
-    category: "02,07",
+    category: "07,09",
     title: "Tear Down This Wall",
     date: "12 June 1987",
     url:
@@ -210,7 +210,7 @@ const speeches = [
   {
     id: "24",
     speakerId: "20",
-    category: "11,06,05",
+    category: "10,06,11",
     title: "9/11 Address to the Nation",
     date: "11 September 2001",
     url:
@@ -219,7 +219,7 @@ const speeches = [
   {
     id: "25",
     speakerId: "15",
-    category: "08",
+    category: "03",
     title: "Farewell Address",
     date: "18 January 2001",
     url:
@@ -228,7 +228,7 @@ const speeches = [
   {
     id: "26",
     speakerId: "23",
-    category: "08",
+    category: "03",
     title: "Farewell Address to Congress",
     date: "19 April 1951",
     url:
@@ -237,7 +237,7 @@ const speeches = [
   {
     id: "27",
     speakerId: "1",
-    category: "02,04",
+    category: "07,08",
     title: "I've Been to the Mountaintop",
     date: "3 April 1968",
     url:
@@ -246,7 +246,7 @@ const speeches = [
   {
     id: "28",
     speakerId: "11",
-    category: "05,06,02",
+    category: "11,06,07",
     title: "The Great Silent Majority",
     date: "3 November 1969",
     url:
@@ -255,7 +255,7 @@ const speeches = [
   {
     id: "29",
     speakerId: "6",
-    category: "09,02",
+    category: "04,07",
     title: "First Inaugural Address",
     date: "20 January 1981",
     url:
@@ -264,7 +264,7 @@ const speeches = [
   {
     id: "30",
     speakerId: "2",
-    category: "01,03",
+    category: "02,05",
     title: "American University Commencement Address",
     date: "10 June 1963",
     url:
@@ -273,7 +273,7 @@ const speeches = [
   {
     id: "31",
     speakerId: "2",
-    category: "05,02",
+    category: "11,07",
     title: "Cuban Missile Crisis Address to the Nation",
     date: "22 October 1962",
     url:
@@ -282,7 +282,7 @@ const speeches = [
   {
     id: "32",
     speakerId: "30",
-    category: "08,03",
+    category: "03,05",
     title: "Farewell to Baseball Address",
     date: "4 July 1939",
     url:
@@ -291,7 +291,7 @@ const speeches = [
   {
     id: "33",
     speakerId: "9",
-    category: "01,03",
+    category: "02,05",
     title: "Harvard Commencement Speech",
     date: "7 June 2007",
     url:
@@ -300,7 +300,7 @@ const speeches = [
   {
     id: "34",
     speakerId: "22",
-    category: "01,03",
+    category: "02,05",
     title: "University of Michigan Commencement Address",
     date: "2 May 2009",
     url:
@@ -309,7 +309,7 @@ const speeches = [
   {
     id: "35",
     speakerId: "28",
-    category: "02,07",
+    category: "07,09",
     title: "Address in Support of Religious Tolerance and New York City Mosque",
     date: "3 August 2010",
     url:
@@ -318,7 +318,7 @@ const speeches = [
   {
     id: "36",
     speakerId: "25",
-    category: "02,07",
+    category: "07,09",
     title: "2016 Democratic National Convention Speech",
     date: "26 Jul 2016",
     url:
@@ -327,7 +327,7 @@ const speeches = [
   {
     id: "37",
     speakerId: "32",
-    category: "01,03",
+    category: "02,05",
     title: "USC Commencement Speech",
     date: "16 May 2014",
     url:
@@ -336,7 +336,7 @@ const speeches = [
   {
     id: "38",
     speakerId: "3",
-    category: "05,06",
+    category: "11,06",
     title: "Pearl Harbor Address to the Nation",
     date: "8 December 1941",
     url:
@@ -345,7 +345,7 @@ const speeches = [
   {
     id: "39",
     speakerId: "31",
-    category: "01,03",
+    category: "02,05",
     title: "Princeton University Commencement Speech",
     date: "30 May 2010",
     url:
@@ -354,7 +354,7 @@ const speeches = [
   {
     id: "40",
     speakerId: "19",
-    category: "02,07",
+    category: "07,09",
     title: "The Arrogance of Power",
     date: "19 March 2003",
     url:
@@ -363,7 +363,7 @@ const speeches = [
   {
     id: "41",
     speakerId: "24",
-    category: "02,07",
+    category: "07,09",
     title: "On the Adoption of the Universal Declaration of Human Rights",
     date: "9 December 1948",
     url:
@@ -372,7 +372,7 @@ const speeches = [
   {
     id: "42",
     speakerId: "7",
-    category: "05,06",
+    category: "11,06",
     title: "Arm Yourselves and Be Ye Men of Valour",
     date: "19 May 1940",
     url:
@@ -381,7 +381,7 @@ const speeches = [
   {
     id: "43",
     speakerId: "15",
-    category: "11,06",
+    category: "10,06",
     title: "Address at the Muhammad Ali Memorial Service",
     date: "10 June 2016",
     url:
@@ -390,7 +390,7 @@ const speeches = [
   {
     id: "44",
     speakerId: "29",
-    category: "05,03",
+    category: "11,05",
     title: "Final Speech from The Great Dictator",
     date: "October 31, 1940",
     url:
@@ -399,7 +399,7 @@ const speeches = [
   {
     id: "45",
     speakerId: "12",
-    category: "09,02",
+    category: "04,07",
     title: "Inaugural Address",
     date: "Jan 20, 2017",
     url:
@@ -408,7 +408,7 @@ const speeches = [
   {
     id: "46",
     speakerId: "7",
-    category: "05,06",
+    category: "11,06",
     title: "We Shall Never Surrender",
     date: "4 June 1940",
     url:
@@ -417,7 +417,7 @@ const speeches = [
   {
     id: "47",
     speakerId: "2",
-    category: "02",
+    category: "07",
     title: "Ich bin ein Berliner (I am a 'Berliner')",
     date: "26 June 1963",
     url:
@@ -426,28 +426,12 @@ const speeches = [
   {
     id: "48",
     speakerId: "14",
-    category: "02,07",
+    category: "07,09",
     title: "The Great Society",
     date: "22 May 1964",
     url:
       "https://firebasestorage.googleapis.com/v0/b/speech-pwa.appspot.com/o/LBJTheGreatSociety.mp3?alt=media&token=bf469517-0e09-4c7a-9700-63942b30af4a"
   }
-  /*{
-    id: "",
-    speakerId: "",
-    category: "",
-    title: "",
-    date: "",
-    url: ""
-  },
-  {
-    id: "",
-    speakerId: "",
-    category: "",
-    title: "",
-    date: "",
-    url: ""
-  } */
 ];
 
 export default speeches;

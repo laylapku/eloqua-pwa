@@ -1,39 +1,46 @@
-//react
-import React from "react";
+// react
+import React, { useContext } from "react";
+import { SpeakersContext } from "../contexts/speakers.context";
 
-//material ui
-import { GridList, GridListTile, GridListTileBar } from "@material-ui/core";
+// material ui
+import {
+  GridList,
+  GridListTile,
+  GridListTileBar,
+  CircularProgress
+} from "@material-ui/core";
 
-//components
+// components
 import FilteredList from "./ExploreFilteredList";
 
-//data
-import speakers from "../data/speakers.js";
-
-//styles
+// styles
 import useStyles from "../styles/customizedStyles";
 
-const ExploreSpeakerList = props => {
-  const { filter, filterSpeech } = props;
+const ExploreSpeakerList = ({ filter, filterSpeech }) => {
+  const { speakers } = useContext(SpeakersContext);
   const classes = useStyles();
 
   return (
     <div className={classes.listContainer}>
       {filter === "" ? (
-        <GridList cellHeight={150} cols={3} spacing={1}>
-          {Object.values(speakers).map((ele, index) => (
-            <GridListTile
-              key={"speakerTile-" + index}
-              onClick={() => filterSpeech(ele.id)}
-            >
-              <img src={ele.img} alt={ele.name} />
-              <GridListTileBar
-                title={ele.name}
-                classes={{ title: classes.tileBarName }}
-              />
-            </GridListTile>
-          ))}
-        </GridList>
+        speakers ? (
+          <GridList cellHeight={150} cols={3} spacing={1}>
+            {Object.values(speakers).map(speaker => (
+              <GridListTile
+                key={speaker.id}
+                onClick={() => filterSpeech(speaker.id)}
+              >
+                <img src={speaker.img} alt={speaker.name} />
+                <GridListTileBar
+                  title={speaker.name}
+                  classes={{ title: classes.tileBarName }}
+                />
+              </GridListTile>
+            ))}
+          </GridList>
+        ) : (
+          <CircularProgress />
+        )
       ) : (
         <FilteredList speakerFilter={filter} />
       )}

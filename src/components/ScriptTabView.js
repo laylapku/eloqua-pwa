@@ -1,31 +1,57 @@
-//react
-import React, { Fragment, useContext } from "react";
+// react
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
-import { PlayerContext } from "../contexts/PlayerContext";
+import { PlayerContext } from "../contexts/player/player.context";
+import { SpeakersContext } from "../contexts/speakers.context";
+import { SpeechesContext } from "../contexts/speeches.context";
 
-//material ui
-import { Container, Typography, IconButton } from "@material-ui/core";
+// firebase
+import { firestore } from "../utils/firebase.utils";
+
+// material ui
+import {
+  Container,
+  Typography,
+  IconButton,
+  CircularProgress
+} from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
-//components
+// components
 import PlayerControls from "./PlayerControls";
 
-//data
-import speeches from "../data/speeches";
-import speakers from "../data/speakers";
-import scripts from "../data/scripts";
-
-//styles
+// styles
 import useStyles from "../styles/customizedStyles";
 
 const ScriptTabView = props => {
   const { player } = useContext(PlayerContext);
   const { playlist, index } = player;
-  const classes = useStyles();
+  const { speakers } = useContext(SpeakersContext);
+  const { speeches } = useContext(SpeechesContext);
+  const [script, setScript] = useState();
 
-  const speechPlaying = speeches.find(ele => ele.id === playlist[index]);
-  const scriptShown = scripts.find(ele => ele.speechId === playlist[index]);
-  const speakerName = speakers[speechPlaying.speakerId].name;
+  const speechOn = speeches && speeches[playlist[index]];
+  const speakerName = speakers && speakers[speechOn.speakerId].name;
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  const date = speechOn && speechOn.date.toLocaleDateString("en-US", options);
+
+  useEffect(() => {
+    (async () => {
+      const snapshot =
+        speechOn &&
+        (await firestore
+          .collection("speeches")
+          .doc(speechOn.id)
+          .collection("extra")
+          .get());
+      snapshot &&
+        snapshot.forEach(doc => {
+          setScript(doc.data().script);
+        });
+    })();
+  }, [speechOn]);
+
+  const classes = useStyles();
 
   return (
     <Fragment>
@@ -38,19 +64,21 @@ const ScriptTabView = props => {
         </IconButton>
         <div className={classes.scriptHeader}>
           <Typography>
-            <strong>{speechPlaying.title}</strong>
+            <strong>{speechOn && speechOn.title}</strong>
           </Typography>
           <Typography className="speaker-name">
             <em>{speakerName}</em>
           </Typography>
-          <Typography>{speechPlaying.date}</Typography>
+          <Typography>{date}</Typography>
         </div>
-        <Typography className={classes.scriptContainer}>
-          {scriptShown.text}
-        </Typography>
+        {script ? (
+          <Typography className={classes.scriptContainer}>{script}</Typography>
+        ) : (
+          <CircularProgress />
+        )}
       </Container>
 
-      <PlayerControls />
+      <PlayerControls speechOn={speechOn} />
     </Fragment>
   );
 };

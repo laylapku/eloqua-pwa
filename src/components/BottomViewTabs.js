@@ -1,19 +1,14 @@
-//react
+// react
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-//material ui
+// material ui
 import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
-
 import ExploreIcon from "@material-ui/icons/Explore";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import SettingsIcon from "@material-ui/icons/Settings";
 
-const BottomViewTabs = props => {
-  const {
-    location: { pathname }
-  } = props;
-
+const BottomViewTabs = ({ pathname }) => {
   return (
     <BottomNavigation showLabels value={setRouteIndex(pathname)}>
       <BottomNavigationAction
@@ -38,7 +33,7 @@ const BottomViewTabs = props => {
   );
 };
 
-export default withRouter(BottomViewTabs);
+export default BottomViewTabs;
 
 function setRouteIndex(pathname) {
   switch (pathname) {

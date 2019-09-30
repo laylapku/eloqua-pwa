@@ -1,25 +1,21 @@
-//react
+// react
 import React, { Fragment } from "react";
 import { withRouter } from "react-router-dom";
 
-//material ui
+// material ui
 import { AppBar } from "@material-ui/core";
 
-//components
+// components
 import BottomViewToolbar from "./BottomViewToolbar";
 import BottomViewTabs from "./BottomViewTabs";
 
-const BottomView = props => {
-  const {
-    location: { pathname }
-  } = props;
-
+const BottomView = ({ location: { pathname } }) => {
   return (
     <Fragment>
       {pathname !== "/script" && pathname !== "/about" && (
         <AppBar style={{ bottom: 0, top: "auto" }}>
           <BottomViewToolbar />
-          <BottomViewTabs />
+          <BottomViewTabs pathname={pathname} />
         </AppBar>
       )}
     </Fragment>

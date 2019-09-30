@@ -1,38 +1,40 @@
-//react
-import React from "react";
+// react
+import React, { useContext } from "react";
+import { CategoriesContext } from "../contexts/categories.context";
 
-//material ui
-import { Avatar, Grid } from "@material-ui/core";
+// material ui
+import { Avatar, Grid, CircularProgress } from "@material-ui/core";
 
-//components
+// components
 import ExploreFilteredList from "./ExploreFilteredList";
 
-//data
-import categories from "../data/categories.js";
-
-//styles
+// styles
 import useStyles from "../styles/customizedStyles";
 
-const ExploreCategoryList = props => {
-  const { filter, filterSpeech } = props;
+const ExploreCategoryList = ({ filter, filterSpeech }) => {
+  const { categories } = useContext(CategoriesContext);
   const classes = useStyles();
 
   return (
     <div className={classes.listContainer}>
       {filter === "" ? (
-        <Grid container justify="space-around">
-          {categories.map((ele, index) => (
-            <div key={"category-" + index}>
-              <Avatar
-                alt={ele.theme}
-                src={ele.icon}
-                onClick={() => filterSpeech(ele.id)}
-                classes={{ root: classes.ctgAvatar }}
-              />
-              <p className={classes.ctgText}>{ele.theme}</p>
-            </div>
-          ))}
-        </Grid>
+        categories ? (
+          <Grid container justify="space-around">
+            {Object.values(categories).map(category => (
+              <div key={category.id}>
+                <Avatar
+                  alt={category.name}
+                  src={category.icon}
+                  onClick={() => filterSpeech(category.id)}
+                  classes={{ root: classes.ctgAvatar }}
+                />
+                <p className={classes.ctgText}>{category.name}</p>
+              </div>
+            ))}
+          </Grid>
+        ) : (
+          <CircularProgress />
+        )
       ) : (
         <ExploreFilteredList categoryFilter={filter} />
       )}

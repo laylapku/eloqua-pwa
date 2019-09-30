@@ -1,57 +1,38 @@
+// react
 import React, { createContext, useReducer, useEffect, useRef } from "react";
-import { playerReducer } from "../reducers/playerReducer";
+import { playerReducer } from "./player.reducer";
+import { onDuration, updatePlayed, onNext } from "./player.actions";
 
+// dependencies
 import ReactPlayer from "react-player";
-
-import {
-  onDuration,
-  updatePlayed,
-  updateUrl,
-  onNext
-} from "../reducers/playerActions";
-
-// data
-import speeches from "../data/speeches";
 
 export const PlayerContext = createContext();
 
-const initState = {
-  playing: false,
-  played: 0,
-  duration: 0,
-  loop: false,
-  playbackRate: 1.0,
-  seeking: false,
-  url: null,
-  playlist: ["1"],
-  index: 0,
-  favlist: []
-};
-
 const PlayerContextProvider = props => {
+  const initState = {
+    url: null,
+    playing: false,
+    played: 0,
+    duration: 0,
+    loop: false,
+    playbackRate: 1.0,
+    seeking: false,
+    playlist: ["933kMAtgyr4ohgNq2eiM"],
+    index: 0,
+    favlist: []
+  };
+
   const [player, dispatch] = useReducer(playerReducer, [], () => {
     const localData = localStorage.getItem("player");
     return localData ? JSON.parse(localData) : initState;
   });
 
-  const {
-    playing,
-    played,
-    loop,
-    playbackRate,
-    seeking,
-    url,
-    playlist,
-    index
-  } = player;
-
   useEffect(() => {
     localStorage.setItem("player", JSON.stringify(player));
   }, [player]);
 
-  useEffect(() => {
-    dispatch(updateUrl(speeches.find(ele => ele.id === playlist[index]).url));
-  }, [index, playlist]);
+  const { url, playing, played, loop, playbackRate, seeking } = player;
+  const playerRef = useRef(null);
 
   // workaround for react-player onProgress compatible issue with react hooks
   const seekingRef = useRef(null);
@@ -62,7 +43,6 @@ const PlayerContextProvider = props => {
   // and more importantly this react issue: https://github.com/facebook/react/issues/14031
   // also react documentation: https://reactjs.org/docs/hooks-faq.html#how-to-read-an-often-changing-value-from-usecallback
 
-  const playerRef = useRef(null);
   return (
     <PlayerContext.Provider value={{ player, playerRef, dispatch }}>
       <ReactPlayer

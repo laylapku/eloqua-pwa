@@ -1,38 +1,53 @@
-//react
-import React, { useContext } from "react";
-import { PlayerContext } from "../contexts/PlayerContext";
+// react
+import React, { useContext, useEffect } from "react";
+import { PlayerContext } from "../contexts/player/player.context";
 import {
   playPause,
   onNext,
   onPrev,
-  updatePlayed
-} from "../reducers/playerActions";
+  updatePlayed,
+  updateUrl
+} from "../contexts/player/player.actions";
+import { SpeechesContext } from "../contexts/speeches.context";
+import { SpeakersContext } from "../contexts/speakers.context";
 
-//material ui
+// firebase
+import { getAudioRefFromStorage } from "../utils/firebase.utils";
+
+// material ui
 import { ThemeProvider } from "@material-ui/styles";
 
-//components
-import Routes from "./Routes";
-
-//data
-import speeches from "../data/speeches";
-import speakers from "../data/speakers";
-
-//theme
+// theme
 import defaultColorTheme from "../styles/defaultColorTheme";
+
+// components
+import Routes from "./Routes";
+import withContexts from "./with-contexts.hoc";
 
 const MediaMetadata = window.MediaMetadata;
 
 const App = () => {
   const { player, playerRef, dispatch } = useContext(PlayerContext);
-  const { duration, played, playlist, index } = player;
+  const { playlist, index, played, duration } = player;
+  const { speeches } = useContext(SpeechesContext);
+  const { speakers } = useContext(SpeakersContext);
 
-  //update media session info
+  useEffect(() => {
+    (async () => {
+      const audioFileName = speeches && speeches[playlist[index]].audioFileName;
+      const url =
+        audioFileName && (await getAudioRefFromStorage(audioFileName));
+      dispatch(updateUrl(url));
+    })();
+  }, [speeches, dispatch, playlist, index]);
+
+  // update media session info
   const updateMetadata = () => {
-    let speech = speeches.find(ele => ele.id === playlist[index]);
-    let speaker = speakers[speech.speakerId].name;
-    let avatar = speakers[speech.speakerId].img;
-    if ("mediaSession" in navigator) {
+    if ("mediaSession" in navigator && speeches && speakers) {
+      let speech = speeches[playlist[index]];
+      let speaker = speakers[speech.speakerId].name;
+      let avatar = speakers[speech.speakerId].img;
+
       navigator.mediaSession.metadata = new MediaMetadata({
         title: speech.title,
         artist: speaker,
@@ -47,20 +62,22 @@ const App = () => {
       });
     }
   };
-  //seek methods for media session
+
+  // seek methods for media session
   const seekBackward = () => {
     let skipTime = 0.05;
-    let newPlayed = Math.max(played - skipTime, 0);
-    dispatch(updatePlayed(newPlayed));
-    playerRef.current.seekTo(newPlayed);
+    let currPlayed = Math.max(played - skipTime, 0);
+    dispatch(updatePlayed(currPlayed));
+    playerRef.current.seekTo(currPlayed);
   };
   const seekForward = () => {
     let skipTime = 0.05;
-    let newPlayed = Math.min(played + skipTime, duration);
-    dispatch(updatePlayed(newPlayed));
-    playerRef.current.seekTo(newPlayed);
+    let currPlayed = Math.min(played + skipTime, duration);
+    dispatch(updatePlayed(currPlayed));
+    playerRef.current.seekTo(currPlayed);
   };
 
+  // media session controls
   if ("mediaSession" in navigator) {
     updateMetadata();
     navigator.mediaSession.setActionHandler("play", () => {
@@ -92,4 +109,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withContexts(App);

@@ -1,17 +1,21 @@
-//react
+// react
 import React, { Fragment, useContext } from "react";
-import { PlayerContext } from "../contexts/PlayerContext";
+import { PlayerContext } from "../contexts/player/player.context";
+import { SpeakersContext } from "../contexts/speakers.context";
+import { SpeechesContext } from "../contexts/speeches.context";
 
-//components
+// components
 import TemplateTopbar from "./TemplateTopbar";
-import TemplateList from "./TemplateList.js";
+import SpeechListItem from "./SpeechListItem.js";
 
-//styles
+// styles
 import useStyles from "../styles/customizedStyles";
 
 const FavoritesTabView = () => {
   const { player } = useContext(PlayerContext);
   const { favlist } = player;
+  const { speeches } = useContext(SpeechesContext);
+  const { speakers } = useContext(SpeakersContext);
   const classes = useStyles();
 
   return (
@@ -21,12 +25,16 @@ const FavoritesTabView = () => {
         {favlist.length < 1 ? (
           <h3 className={classes.favReminder}>Add the first speech!</h3>
         ) : (
-          favlist.map((ele, index) => {
+          speeches &&
+          speakers &&
+          favlist.map(id => {
+            const speech = speeches[id];
+            const speakerName = speakers[speech.speakerId].name;
             return (
-              <TemplateList
-                key={"favListSpeech-" + index}
-                id={ele}
-                noPlay={true}
+              <SpeechListItem
+                key={id}
+                speech={speech}
+                speakerName={speakerName}
               />
             );
           })

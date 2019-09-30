@@ -1,31 +1,29 @@
-//react
+// react
 import React, { useContext } from "react";
-import { withRouter } from "react-router-dom";
-import { PlayerContext } from "../contexts/PlayerContext";
-import { deleteFromPlaylist, toggleAddToFavlist } from "../reducers/playerActions";
+import { PlayerContext } from "../contexts/player/player.context";
+import {
+  deleteFromPlaylist,
+  toggleAddToFavlist
+} from "../contexts/player/player.actions";
 
-//material ui
+// material ui
 import { AppBar, IconButton } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-//styles
+// styles
 import useStyles from "../styles/customizedStyles";
 
-const TemplateTopbar = props => {
+const TemplateTopbar = ({ isPlaylist }) => {
   const { player, dispatch } = useContext(PlayerContext);
   const { playlist, favlist } = player;
   const classes = useStyles();
-  const {
-    location: { pathname }
-  } = props;
-
   const favCheck = playlist.every(ele => favlist.indexOf(ele) !== -1);
 
   return (
     <AppBar classes={{ root: classes.appBar }}>
-      {pathname === "/playlist" ? (
+      {isPlaylist === true ? (
         <div className={classes.appBarInner}>
           <h3>My Playlist</h3>
           <IconButton onClick={() => dispatch(toggleAddToFavlist(playlist))}>
@@ -46,4 +44,4 @@ const TemplateTopbar = props => {
   );
 };
 
-export default withRouter(TemplateTopbar);
+export default TemplateTopbar;

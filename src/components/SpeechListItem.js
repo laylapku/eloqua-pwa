@@ -1,15 +1,15 @@
-//react
+// react
 import React, { useContext } from "react";
-import { withRouter } from "react-router-dom";
-import { PlayerContext } from "../contexts/PlayerContext";
+import { PlayerContext } from "../contexts/player/player.context";
 import {
   playPause,
   addToPlaylist,
   deleteFromPlaylist,
   toggleAddToFavlist
-} from "../reducers/playerActions";
+} from "../contexts/player/player.actions";
+import { SpeechesContext } from "../contexts/speeches.context";
 
-//material ui
+// material ui
 import {
   List,
   ListItem,
@@ -24,37 +24,29 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-//data
-import speeches from "../data/speeches";
-import speakers from "../data/speakers";
-
-//styles
+// styles
 import useStyles from "../styles/customizedStyles";
 
-const TemplateList = props => {
+const SpeechListItem = ({
+  speech: { id, title, date },
+  speakerName,
+  speechIndex,
+  isPlaylist
+}) => {
   const { player, dispatch } = useContext(PlayerContext);
   const { playing, index, playlist, favlist } = player;
-  const classes = useStyles();
+  const { speeches } = useContext(SpeechesContext);
 
-  const {
-    location: { pathname },
-    //props passed by parent components
-    id,
-    speechIndex,
-    noPlay
-  } = props;
-
-  const speechDisplayed = speeches.find(item => item.id === id);
-  const year = speechDisplayed.date.split(" ")[2]; //"27 October 1964" -> "1964"
-  const speakerName = speakers[speechDisplayed.speakerId].name;
-  const speechPlaying = speeches.find(item => item.id === playlist[index]);
+  const speechOn = speeches && speeches[playlist[index]];
   const stylesOnPlay = id => ({
-    color: speechPlaying.id === id ? "#CC5500" : "#1B1811"
+    color: speechOn && (speechOn.id === id ? "#CC5500" : "#1B1811")
   });
+
+  const classes = useStyles();
 
   return (
     <List className={classes.listGrid}>
-      {id === speechPlaying.id ? (
+      {id === speechOn.id ? (
         <IconButton
           onClick={() => dispatch(playPause())}
           style={stylesOnPlay(id)}
@@ -68,7 +60,7 @@ const TemplateList = props => {
         <ListItemText
           primary={
             <Typography style={stylesOnPlay(id)}>
-              {speechDisplayed.title + "(" + year + ")"}
+              {`${title} (${date.getFullYear()})`}
               <br />
               <em className="speaker-name">{speakerName}</em>
             </Typography>
@@ -83,13 +75,13 @@ const TemplateList = props => {
           <FavoriteBorderIcon />
         )}
       </IconButton>
-      {pathname === "/playlist" ? (
+      {isPlaylist ? (
         <IconButton onClick={() => dispatch(deleteFromPlaylist(speechIndex))}>
           <DeleteIcon />
         </IconButton>
       ) : (
         <IconButton
-          onClick={() => dispatch(addToPlaylist({ id, noPlay }))} //just add to playlist, don't play
+          onClick={() => dispatch(addToPlaylist({ id, noPlay: true }))} //just add to playlist, don't play
         >
           <PlaylistAddIcon />
         </IconButton>
@@ -98,4 +90,4 @@ const TemplateList = props => {
   );
 };
 
-export default withRouter(TemplateList);
+export default SpeechListItem;

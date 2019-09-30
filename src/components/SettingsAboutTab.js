@@ -1,7 +1,7 @@
-//react
+// react
 import React, { Fragment } from "react";
 
-//material ui
+// material ui
 import { Container, IconButton } from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
@@ -10,7 +10,7 @@ import WebIcon from "@material-ui/icons/Web";
 import StarIcon from "@material-ui/icons/Star";
 import ContactSupportIcon from "@material-ui/icons/ContactSupport";
 
-//styles
+// styles
 import useStyles from "../styles/customizedStyles";
 
 const SettingsAboutTab = props => {

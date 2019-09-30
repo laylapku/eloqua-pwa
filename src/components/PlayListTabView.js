@@ -1,35 +1,45 @@
-//react
+// react
 import React, { Fragment, useContext } from "react";
-import { PlayerContext } from "../contexts/PlayerContext";
+import { PlayerContext } from "../contexts/player/player.context";
+import { SpeakersContext } from "../contexts/speakers.context";
+import { SpeechesContext } from "../contexts/speeches.context";
 
-//components
+// components
 import TemplateTopbar from "./TemplateTopbar";
-import TemplateList from "./TemplateList.js";
+import SpeechListItem from "./SpeechListItem";
 
-//styles
+// styles
 import useStyles from "../styles/customizedStyles";
 
-const PlayListTabView = () => {
+const PlaylistTabView = () => {
   const { player } = useContext(PlayerContext);
   const { playlist } = player;
+  const { speeches } = useContext(SpeechesContext);
+  const { speakers } = useContext(SpeakersContext);
   const classes = useStyles();
 
   return (
     <Fragment>
-      <TemplateTopbar />
+      <TemplateTopbar isPlaylist />
       <div className={classes.listContainer}>
-        {playlist.map((ele, index) => {
-          return (
-            <TemplateList
-              key={"playListSpeech-" + index}
-              id={ele}
-              speechIndex={index}
-            />
-          );
-        })}
+        {speeches &&
+          speakers &&
+          playlist.map((id, index) => {
+            const speech = speeches[id];
+            const speakerName = speakers[speech.speakerId].name;
+            return (
+              <SpeechListItem
+                key={id}
+                speech={speech}
+                speakerName={speakerName}
+                speechIndex={index}
+                isPlaylist={true}
+              />
+            );
+          })}
       </div>
     </Fragment>
   );
 };
 
-export default PlayListTabView;
+export default PlaylistTabView;
