@@ -31,7 +31,7 @@ const useStyles = makeStyles({
     fill: "#f4f4f4"
   },
 
-  //AudioPlayer
+  //PlayerControls
   controlsContainer: {
     position: "fixed",
     top: "auto",
@@ -42,9 +42,7 @@ const useStyles = makeStyles({
   },
   controlsFlex: {
     display: "flex",
-    justifyContent: "center",
-    flexWrap: "wrap",
-    width: "90%"
+    justifyContent: "space-evenly"
   },
   duration: {
     display: "flex",
@@ -89,8 +87,8 @@ const useStyles = makeStyles({
   scriptContainer: {
     overflow: "auto",
     position: "absolute",
-    top: "135px",
-    bottom: "135px",
+    top: "150px",
+    bottom: "150px",
     lineHeight: "2em",
     paddingRight: "20px",
     textAlign: "justify",
@@ -145,15 +143,8 @@ const useStyles = makeStyles({
   },
 
   //ExploreCategoryList
-  ctgAvatar: {
-    width: "80px",
-    height: "80px",
-    margin: "10px"
-  },
   ctgText: {
-    fontSize: "12px",
-    display: "flex",
-    justifyContent: "center"
+    fontSize: "10px"
   }
 });
 

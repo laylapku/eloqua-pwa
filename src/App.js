@@ -1,28 +1,28 @@
 // react
 import React, { useContext, useEffect } from "react";
-import { PlayerContext } from "../contexts/player/player.context";
+import { PlayerContext } from "./contexts/player/player.context";
 import {
   playPause,
   onNext,
   onPrev,
   updatePlayed,
   updateUrl
-} from "../contexts/player/player.actions";
-import { SpeechesContext } from "../contexts/speeches.context";
-import { SpeakersContext } from "../contexts/speakers.context";
+} from "./contexts/player/player.actions";
+import { SpeechesContext } from "./contexts/speeches.context";
+import { SpeakersContext } from "./contexts/speakers.context";
 
 // firebase
-import { getAudioRefFromStorage } from "../utils/firebase.utils";
+import { getAudioRefFromStorage } from "./utils/firebase.utils";
 
 // material ui
 import { ThemeProvider } from "@material-ui/styles";
 
 // theme
-import defaultColorTheme from "../styles/defaultColorTheme";
+import defaultColorTheme from "./styles/defaultColorTheme";
 
 // components
-import Routes from "./Routes";
-import withContexts from "./with-contexts.hoc";
+import Routes from "./components/Routes";
+import withContexts from "./components/with-contexts.hoc";
 
 const MediaMetadata = window.MediaMetadata;
 
@@ -45,12 +45,12 @@ const App = () => {
   const updateMetadata = () => {
     if ("mediaSession" in navigator && speeches && speakers) {
       let speech = speeches[playlist[index]];
-      let speaker = speakers[speech.speakerId].name;
-      let avatar = speakers[speech.speakerId].img;
+      let speaker = speech && speakers[speech.speakerId].name;
+      let avatar = speech && speakers[speech.speakerId].img;
 
       navigator.mediaSession.metadata = new MediaMetadata({
-        title: speech.title,
-        artist: speaker,
+        title: speech && speech.title,
+        artist: speaker && speaker,
         artwork: [
           { src: avatar, sizes: "96x96", type: "image/png" },
           { src: avatar, sizes: "128x128", type: "image/png" },

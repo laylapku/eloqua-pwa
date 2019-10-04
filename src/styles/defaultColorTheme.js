@@ -48,6 +48,15 @@ export default createMuiTheme({
       }
     },
 
+    MuiCircularProgress: {
+      root: {
+        margin: "150px 150px"
+      },
+      colorPrimary: {
+        color: "RGB(202,187,143)"
+      }
+    },
+
     MuiSlider: {
       root: {
         color: "RGB(203,125,64)",
@@ -68,12 +77,17 @@ export default createMuiTheme({
         transform: "scale(1.2)"
       }
     },
-    MuiCircularProgress: {
+
+    MuiGrid: {
+      item: {
+        textAlign: "-webkit-center",
+        padding: "5px"
+      }
+    },
+    MuiAvatar: {
       root: {
-        margin: "150px 150px"
-      },
-      colorPrimary: {
-        color: "RGB(202,187,143)"
+        width: "80px",
+        height: "80px"
       }
     }
   },

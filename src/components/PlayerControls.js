@@ -76,7 +76,7 @@ const PlayerControls = ({ speechOn }) => {
         <Duration seconds={duration} />
       </div>
 
-      <Container className={classes.controlsFlex}>
+      <div className={classes.controlsFlex}>
         <IconButton onClick={() => dispatch(toggleLoop())}>
           {loop ? <RepeatOneIcon /> : <LoopIcon />}
         </IconButton>
@@ -104,7 +104,8 @@ const PlayerControls = ({ speechOn }) => {
             <FavoriteBorderIcon />
           )}
         </IconButton>
-
+      </div>
+      <div className={classes.controlsFlex}>
         <IconButton
           onClick={() => {
             setOpen(true);
@@ -127,7 +128,7 @@ const PlayerControls = ({ speechOn }) => {
         <IconButton component={Link} to="/playlist">
           <ListIcon />
         </IconButton>
-      </Container>
+      </div>
     </Container>
   );
 };

@@ -14,8 +14,6 @@ import {
   UPDATE_URL
 } from "./player.constants";
 
-import speeches from "../../data/speeches";
-
 export const playerReducer = (state, action) => {
   let newState;
   switch (action.type) {
@@ -128,7 +126,8 @@ export const playerReducer = (state, action) => {
         // add a random speech if last one or all deleted
         newState = {
           ...newState,
-          playlist: [speeches[Math.floor(Math.random() * speeches.length)].id],
+          url: null,
+          playlist: ["933kMAtgyr4ohgNq2eiM"], //[speeches[Math.floor(Math.random() * speeches.length)].id],
           index: 0,
           playing: false
         };

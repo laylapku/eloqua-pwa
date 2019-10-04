@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { CategoriesContext } from "../contexts/categories.context";
 
 // material ui
-import { Avatar, Grid, CircularProgress } from "@material-ui/core";
+import { Avatar, Grid, Typography, CircularProgress } from "@material-ui/core";
 
 // components
 import ExploreFilteredList from "./ExploreFilteredList";
@@ -19,17 +19,19 @@ const ExploreCategoryList = ({ filter, filterSpeech }) => {
     <div className={classes.listContainer}>
       {filter === "" ? (
         categories ? (
-          <Grid container justify="space-around">
+          <Grid container>
             {Object.values(categories).map(category => (
-              <div key={category.id}>
+              <Grid item xs={4} key={category.id}>
                 <Avatar
                   alt={category.name}
                   src={category.icon}
                   onClick={() => filterSpeech(category.id)}
                   classes={{ root: classes.ctgAvatar }}
                 />
-                <p className={classes.ctgText}>{category.name}</p>
-              </div>
+                <Typography align="center" className={classes.ctgText}>
+                  {category.name}
+                </Typography>
+              </Grid>
             ))}
           </Grid>
         ) : (
