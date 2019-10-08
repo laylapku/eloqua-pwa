@@ -25,6 +25,7 @@ const SettingsTabView = props => {
   const routeChange = path => {
     props.history.push(path);
   };
+  const checkedVal = Boolean(dark);
 
   return (
     <List>
@@ -41,7 +42,7 @@ const SettingsTabView = props => {
           <Brightness3Icon />
         </IconButton>
         <ListItemText primary="Night Mode" />
-        <Switch value={!dark} onClick={toggleTheme} />
+        <Switch checked={checkedVal} onChange={toggleTheme} />
       </ListItem>
       <Divider variant="inset" component="li" />
     </List>
