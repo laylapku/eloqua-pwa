@@ -26,7 +26,7 @@ const BottomViewToolbar = () => {
   const speakerName = speakers && speakers[speechOn.speakerId].name;
   const titleMarquee = () => {
     const titleLength = speechOn && speechOn.title.split("").length;
-    return titleLength > 27 ? "marquee" : null;
+    return titleLength > 37 ? "marquee" : null;
   };
 
   const classes = useStyles();
@@ -38,28 +38,28 @@ const BottomViewToolbar = () => {
         max={100}
         classes={{ thumb: classes.sliderThumb }}
       />
-      <Toolbar classes={{ gutters: classes.tbarGutters }}>
+      <Toolbar>
         <Link to="/script">
           {
             <div className={titleMarquee()}>
               <span>{speechOn && speechOn.title}</span>
               <br />
-              <em className="speaker-name">{speakerName}</em>
+              <em className={classes.speakerName}>{speakerName}</em>
             </div>
           }
         </Link>
         <IconButton component={Link} to="/playlist">
-          <ListIcon classes={{ root: classes.bottomIcons }} />
+          <ListIcon classes={{ root: classes.toolbarIcon }} />
         </IconButton>
         <IconButton onClick={() => dispatch(playPause())}>
           {playing ? (
-            <PauseCircleFilledIcon classes={{ root: classes.bottomIcons }} />
+            <PauseCircleFilledIcon classes={{ root: classes.toolbarIcon }} />
           ) : (
-            <PlayCircleFilledIcon classes={{ root: classes.bottomIcons }} />
+            <PlayCircleFilledIcon classes={{ root: classes.toolbarIcon }} />
           )}
         </IconButton>
         <IconButton onClick={() => dispatch(onNext())}>
-          <SkipNextIcon classes={{ root: classes.bottomIcons }} />
+          <SkipNextIcon classes={{ root: classes.toolbarIcon }} />
         </IconButton>
       </Toolbar>
     </Fragment>

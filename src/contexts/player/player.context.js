@@ -8,7 +8,7 @@ import ReactPlayer from "react-player";
 
 export const PlayerContext = createContext();
 
-const PlayerContextProvider = props => {
+const PlayerContextProvider = ({ children }) => {
   const initState = {
     url: null,
     playing: false,
@@ -59,7 +59,7 @@ const PlayerContextProvider = props => {
           !seekingRef.current && dispatch(updatePlayed(status.played))
         } // update ui values with values from player
       />
-      {props.children}
+      {children}
     </PlayerContext.Provider>
   );
 };

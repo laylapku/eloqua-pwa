@@ -22,9 +22,9 @@ const TemplateTopbar = ({ isPlaylist }) => {
   const favCheck = playlist.every(ele => favlist.indexOf(ele) !== -1);
 
   return (
-    <AppBar classes={{ root: classes.appBar }}>
+    <AppBar classes={{ root: classes.topBar }}>
       {isPlaylist === true ? (
-        <div className={classes.appBarInner}>
+        <div className={classes.topBarInner}>
           <h3>My Playlist</h3>
           <IconButton onClick={() => dispatch(toggleAddToFavlist(playlist))}>
             {favCheck ? (
@@ -38,7 +38,7 @@ const TemplateTopbar = ({ isPlaylist }) => {
           </IconButton>
         </div>
       ) : (
-        <h3 className={classes.appBarInner}>My Library</h3>
+        <h3 className={classes.topBarInner}>My Library</h3>
       )}
     </AppBar>
   );

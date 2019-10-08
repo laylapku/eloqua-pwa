@@ -1,4 +1,5 @@
 import React from "react";
+import ThemeContextProvider from "../contexts/theme.context";
 import CategoriesContextProvider from "../contexts/categories.context";
 import SpeakersContextProvider from "../contexts/speakers.context";
 import SpeechesContextProvider from "../contexts/speeches.context";
@@ -13,7 +14,9 @@ const withContexts = WrappedComponent => {
           <SpeechesContextProvider>
             <SpeechCategoryContextProvider>
               <PlayerContextProvider>
-                <WrappedComponent {...props} />
+                <ThemeContextProvider>
+                  <WrappedComponent {...props} />
+                </ThemeContextProvider>
               </PlayerContextProvider>
             </SpeechCategoryContextProvider>
           </SpeechesContextProvider>

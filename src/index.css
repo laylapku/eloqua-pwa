@@ -4,17 +4,13 @@ body {
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(
-    90deg,
-    RGB(202, 187, 143, 0.3) 0%,
-    RGB(202, 187, 143, 0.5) 100%
-  );
+  background: var(--background);
 }
 
 a {
   cursor: pointer;
   text-decoration: none;
-  color: #fff;
+  color: #f4f4f4;
 }
 
 option {
@@ -35,13 +31,9 @@ option {
 }
 @keyframes marquee {
   0% {
-    transform: translateX(0);
+    transform: translateX(5%);
   }
   100% {
-    transform: translateX(-55%);
+    transform: translateX(-50%);
   }
-}
-
-.speaker-name {
-  opacity: 0.8;
 }

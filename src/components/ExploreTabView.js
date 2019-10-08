@@ -29,7 +29,7 @@ const ExploreTabView = () => {
   return (
     <Fragment>
       <AppBar>
-        <Tabs value={tabIdx} onChange={handleTabChange} centered>
+        <Tabs value={tabIdx} centered onChange={handleTabChange}>
           <Tab label="All" />
           <Tab label="Speaker" />
           <Tab label="Category" />

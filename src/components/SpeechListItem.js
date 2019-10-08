@@ -39,7 +39,7 @@ const SpeechListItem = ({
 
   const speechOn = speeches && speeches[playlist[index]];
   const stylesOnPlay = id => ({
-    color: speechOn && (speechOn.id === id ? "#CC5500" : "#1B1811")
+    color: speechOn && (speechOn.id === id && "var(--textOnPlay)")
   });
 
   const classes = useStyles();
@@ -62,10 +62,9 @@ const SpeechListItem = ({
             <Typography style={stylesOnPlay(id)}>
               {`${title} (${date.getFullYear()})`}
               <br />
-              <em className="speaker-name">{speakerName}</em>
+              <em className={classes.speakerName}>{speakerName}</em>
             </Typography>
           }
-          classes={{ root: classes.listItemText }}
         />
       </ListItem>
       <IconButton onClick={() => dispatch(toggleAddToFavlist([id]))}>

@@ -32,7 +32,7 @@ const ScriptTabView = props => {
 
   const speechOn = speeches && speeches[playlist[index]];
   const speakerName = speakers && speakers[speechOn.speakerId].name;
-  const options = { year: "numeric", month: "long", day: "numeric" };
+  const options = { year: "numeric", month: "short", day: "numeric" };
   const date = speechOn && speechOn.date.toLocaleDateString("en-US", options);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const ScriptTabView = props => {
           <Typography>
             <strong>{speechOn && speechOn.title}</strong>
           </Typography>
-          <Typography className="speaker-name">
+          <Typography className={classes.speakerName}>
             <em>{speakerName}</em>
           </Typography>
           <Typography>{date}</Typography>

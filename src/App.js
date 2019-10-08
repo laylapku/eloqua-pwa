@@ -18,7 +18,7 @@ import { getAudioRefFromStorage } from "./utils/firebase.utils";
 import { ThemeProvider } from "@material-ui/styles";
 
 // theme
-import defaultColorTheme from "./styles/defaultColorTheme";
+import MuiThemeTemplate from "./styles/MuiThemeTemplate";
 
 // components
 import Routes from "./components/Routes";
@@ -66,15 +66,15 @@ const App = () => {
   // seek methods for media session
   const seekBackward = () => {
     let skipTime = 0.05;
-    let currPlayed = Math.max(played - skipTime, 0);
-    dispatch(updatePlayed(currPlayed));
-    playerRef.current.seekTo(currPlayed);
+    let nextPlayed = Math.max(played - skipTime, 0);
+    dispatch(updatePlayed(nextPlayed));
+    playerRef.current.seekTo(nextPlayed);
   };
   const seekForward = () => {
     let skipTime = 0.05;
-    let currPlayed = Math.min(played + skipTime, duration);
-    dispatch(updatePlayed(currPlayed));
-    playerRef.current.seekTo(currPlayed);
+    let nextPlayed = Math.min(played + skipTime, duration);
+    dispatch(updatePlayed(nextPlayed));
+    playerRef.current.seekTo(nextPlayed);
   };
 
   // media session controls
@@ -103,7 +103,7 @@ const App = () => {
   }
 
   return (
-    <ThemeProvider theme={defaultColorTheme}>
+    <ThemeProvider theme={MuiThemeTemplate}>
       <Routes />
     </ThemeProvider>
   );
