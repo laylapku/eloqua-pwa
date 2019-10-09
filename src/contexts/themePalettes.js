@@ -19,7 +19,7 @@ export const lightTheme = [
 
   // other
   "--background: linear-gradient(90deg, RGB(202, 187, 143, 0.3) 0%, RGB(202, 187, 143, 0.5) 100%)",
-  "--svgIcon: #6f8683",
+  "--aboutSvgF: #6f8683",
   "--textOnPlay: #CC5500"
 ];
 
@@ -29,22 +29,22 @@ export const darkTheme = [
   "--tlbarGuttersBg: #424242",
   "--appbarBg: #424242",
   "--tabSltBg: #7e7e7e",
-  "--sliderRailBg: RGB(202,187,143)",
+  "--sliderRailBg: #c2b07e",
   "--dividerBg: #a8a8a8",
   "--dialogBg: linear-gradient(135deg, #a8a8a8 0%, #7e7e7e 100%)",
-  "--btmNavActionC: #d3d3d3",
-  "--btmNavActionCSlt: #c3b091",
+  "--btmNavActionC: #bababa",
+  "--btmNavActionCSlt: #a88c60",
   "--appbarC: inherit",
   "--tabSltC: #d3d3d3",
   "--circularC: #a8a8a8",
   "--sliderC: #c49102",
-  "--btnC: #c3b091",
+  "--btnC: #a88c60",
   "--inputBefore: 1px solid #a8a8a8",
   "--inputAfter: 1px solid #c49102",
-  "--typoC: #d3d3d3",
+  "--typoC: #bababa",
 
   // other
   "--background: #121212",
-  "--svgIcon: #c3b091",
+  "--aboutSvgF: #a88c60",
   "--textOnPlay: #c49102"
 ];

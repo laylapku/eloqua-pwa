@@ -34,7 +34,7 @@ const SettingsTabView = props => {
           <HelpIcon />
         </IconButton>
         <ListItemText primary="About" />
-        <ChevronRightIcon className={classes.svgIcon} />
+        <ChevronRightIcon className={classes.aboutSvg} />
       </ListItem>
       <Divider variant="inset" component="li" />
       <ListItem>

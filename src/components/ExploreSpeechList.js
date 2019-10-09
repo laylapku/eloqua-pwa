@@ -16,7 +16,7 @@ const ExploreSpeechList = ({ filter, onSearchInputChange }) => {
 
   return (
     <div className={classes.listContainer}>
-      <div className={classes.searchInputArea}>
+      <div className={classes.searchInput}>
         <IconButton>
           <SearchIcon />
         </IconButton>

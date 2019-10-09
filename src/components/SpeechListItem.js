@@ -69,7 +69,7 @@ const SpeechListItem = ({
       </ListItem>
       <IconButton onClick={() => dispatch(toggleAddToFavlist([id]))}>
         {favlist.indexOf(id) !== -1 ? (
-          <FavoriteIcon classes={{ root: classes.favIcon }} />
+          <FavoriteIcon className={classes.favBtn} />
         ) : (
           <FavoriteBorderIcon />
         )}

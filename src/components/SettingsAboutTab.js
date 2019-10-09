@@ -25,17 +25,14 @@ const SettingsAboutTab = props => {
 
   return (
     <Container>
-      <IconButton
-        onClick={props.history.goBack}
-        classes={{ root: classes.backBtn }}
-      >
+      <IconButton onClick={props.history.goBack} className={classes.backBtn}>
         <ChevronLeftIcon />
       </IconButton>
 
       <List>
         <ListItem>
           <ListItemIcon>
-            <ContactSupportIcon className={classes.svgIcon} />
+            <ContactSupportIcon className={classes.aboutSvg} />
           </ListItemIcon>
           <ListItemText
             primary="Version"
@@ -46,7 +43,7 @@ const SettingsAboutTab = props => {
         </ListItem>
         <ListItem>
           <ListItemIcon>
-            <PermIdentityIcon className={classes.svgIcon} />
+            <PermIdentityIcon className={classes.aboutSvg} />
           </ListItemIcon>
           <ListItemText
             primary="Created by"
@@ -59,7 +56,7 @@ const SettingsAboutTab = props => {
         </ListItem>
         <ListItem>
           <ListItemIcon>
-            <WebIcon className={classes.svgIcon} />
+            <WebIcon className={classes.aboutSvg} />
           </ListItemIcon>
           <ListItemText
             primary="Github"
@@ -74,7 +71,7 @@ const SettingsAboutTab = props => {
         </ListItem>
         <ListItem>
           <ListItemIcon>
-            <EmailIcon className={classes.svgIcon} />
+            <EmailIcon className={classes.aboutSvg} />
           </ListItemIcon>
           <ListItemText
             primary="Get in Touch"

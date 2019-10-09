@@ -65,7 +65,7 @@ const PlayerControls = ({ speechOn }) => {
   const classes = useStyles();
 
   return (
-    <Container className={classes.controlsContainer}>
+    <Container className={classes.ctrlsContainer}>
       <Slider
         value={played * 100}
         onChange={onSliderClick}
@@ -76,7 +76,7 @@ const PlayerControls = ({ speechOn }) => {
         <Duration seconds={duration} />
       </div>
 
-      <div className={classes.controlsFlex}>
+      <div className={classes.ctrlsFlex}>
         <IconButton onClick={() => dispatch(toggleLoop())}>
           {loop ? <RepeatOneIcon /> : <LoopIcon />}
         </IconButton>
@@ -99,13 +99,13 @@ const PlayerControls = ({ speechOn }) => {
           }
         >
           {favlist.indexOf(speechOn && speechOn.id) !== -1 ? (
-            <FavoriteIcon classes={{ root: classes.favIcon }} />
+            <FavoriteIcon className={classes.favIcon} />
           ) : (
             <FavoriteBorderIcon />
           )}
         </IconButton>
       </div>
-      <div className={classes.controlsFlex}>
+      <div className={classes.ctrlsFlex}>
         <IconButton
           onClick={() => {
             setOpen(true);
@@ -117,7 +117,7 @@ const PlayerControls = ({ speechOn }) => {
           <DialogContent
             value={speed}
             onClick={handleSpeedChange}
-            classes={{ root: classes.speedDialog }}
+            className={classes.speedDialog}
           >
             <option value={0.75}>0.75x</option>
             <option value={1}>1x</option>

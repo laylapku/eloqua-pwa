@@ -56,10 +56,7 @@ const ScriptTabView = props => {
   return (
     <Fragment>
       <Container>
-        <IconButton
-          onClick={props.history.goBack}
-          classes={{ root: classes.backBtn }}
-        >
+        <IconButton onClick={props.history.goBack} className={classes.backBtn}>
           <ChevronLeftIcon />
         </IconButton>
         <div className={classes.scriptHeader}>

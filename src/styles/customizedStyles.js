@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
+// !important required(but not for all Mui components??) for changing values of built-in css props
 const useStyles = makeStyles({
   // global
   listContainer: {
@@ -9,23 +10,27 @@ const useStyles = makeStyles({
   backBtn: {
     padding: "5px 0"
   },
-  favIcon: {
+  favBtn: {
     fill: "RGB(206,32,41,0.8)"
   },
-  toolbarIcon: {
+  tlbarBtn: {
     fill: "#f4f4f4"
   },
   speakerName: {
     opacity: 0.7
   },
 
-  // BottomViewToolbar
-  sliderThumb: {
-    height: 0
+  // SpeechListItem
+  listGrid: {
+    display: "grid",
+    alignItems: "center",
+    gridTemplateColumns: "5% auto repeat(2, 10%)",
+    boxShadow: "2px 2px 2px RGB(192, 178, 131, 0.5)",
+    padding: 0
   },
 
   // PlayerControls
-  controlsContainer: {
+  ctrlsContainer: {
     position: "fixed",
     top: "auto",
     bottom: 0,
@@ -33,7 +38,7 @@ const useStyles = makeStyles({
     paddingRight: "25px",
     touchAction: "none" // to fix slider error "Unable to preventDefault inside passive event listener due to target being treated as passive."
   },
-  controlsFlex: {
+  ctrlsFlex: {
     display: "flex",
     justifyContent: "space-evenly"
   },
@@ -41,7 +46,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "flex-end"
   },
-  playPauseIcon: {
+  playPauseBtn: {
     transform: "scale(1.8)"
   },
   speedBtn: {
@@ -54,35 +59,10 @@ const useStyles = makeStyles({
   speedDialog: {
     position: "fixed",
     bottom: "30px",
-    padding: "16px 16px",
     borderRadius: "5px",
     "&:first-child": {
-      paddingTop: 0
+      paddingTop: "0 !important"
     }
-  },
-
-  // ExploreSpeechList
-  searchInputArea: {
-    display: "flex",
-    justifyContent: "center"
-  },
-
-  // ExploreCategoryList
-  ctgAvatar: {
-    width: "80px",
-    height: "80px"
-  },
-  ctgText: {
-    fontSize: "12px",
-    fontFamily: "cursive"
-  },
-
-  // FavoritesTabView
-  favReminder: {
-    fontSize: "20px",
-    textAlign: "center",
-    opacity: 0.3,
-    marginTop: "80px"
   },
 
   // ScriptTabView
@@ -94,24 +74,30 @@ const useStyles = makeStyles({
     position: "absolute",
     top: "150px",
     bottom: "150px",
-    lineHeight: "2em",
+    lineHeight: "2em !important",
     paddingRight: "20px",
     textAlign: "justify",
     opacity: 0.8
   },
 
-  // SettingsAboutTab
-  svgIcon: {
-    fill: "var(--svgIcon)"
+  // ExploreCategoryList
+  ctgAvatar: {
+    width: "70px !important",
+    height: "70px !important"
   },
-  aboutTypo: {
-    opacity: 0.7
+  ctgName: {
+    fontSize: "12px !important"
   },
-  aboutFooter: {
-    position: "fixed",
-    bottom: "10px",
-    width: "100%",
-    textAlign: "center"
+
+  // ExploreSpeechList
+  searchInput: {
+    display: "flex",
+    justifyContent: "center"
+  },
+
+  // BottomViewToolbar
+  sliderThumb: {
+    height: 0
   },
 
   // TemplateTopbar
@@ -125,13 +111,26 @@ const useStyles = makeStyles({
     padding: "0 15px"
   },
 
-  // SpeechListItem
-  listGrid: {
-    display: "grid",
-    alignItems: "center",
-    gridTemplateColumns: "5% auto repeat(2, 10%)",
-    boxShadow: "2px 2px 5px RGB(192, 178, 131, 0.5)",
-    padding: 0
+  // SettingsAboutTab
+  aboutSvg: {
+    fill: "var(--aboutSvgF)"
+  },
+  aboutTypo: {
+    opacity: 0.7
+  },
+  aboutFooter: {
+    position: "fixed",
+    bottom: "10px",
+    width: "100%",
+    textAlign: "center"
+  },
+
+  // FavoritesTabView
+  favReminder: {
+    fontSize: "20px",
+    textAlign: "center",
+    opacity: 0.3,
+    marginTop: "80px"
   }
 });
 

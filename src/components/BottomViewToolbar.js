@@ -49,17 +49,17 @@ const BottomViewToolbar = () => {
           }
         </Link>
         <IconButton component={Link} to="/playlist">
-          <ListIcon classes={{ root: classes.toolbarIcon }} />
+          <ListIcon className={classes.tlbarBtn} />
         </IconButton>
         <IconButton onClick={() => dispatch(playPause())}>
           {playing ? (
-            <PauseCircleFilledIcon classes={{ root: classes.toolbarIcon }} />
+            <PauseCircleFilledIcon className={classes.tlbarBtn} />
           ) : (
-            <PlayCircleFilledIcon classes={{ root: classes.toolbarIcon }} />
+            <PlayCircleFilledIcon className={classes.tlbarBtn} />
           )}
         </IconButton>
         <IconButton onClick={() => dispatch(onNext())}>
-          <SkipNextIcon classes={{ root: classes.toolbarIcon }} />
+          <SkipNextIcon className={classes.tlbarBtn} />
         </IconButton>
       </Toolbar>
     </Fragment>

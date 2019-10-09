@@ -26,9 +26,9 @@ const ExploreCategoryList = ({ filter, filterSpeech }) => {
                   alt={category.name}
                   src={category.icon}
                   onClick={() => filterSpeech(category.id)}
-                  classes={{ root: classes.ctgAvatar }}
+                  className={classes.ctgAvatar}
                 />
-                <Typography align="center" className={classes.ctgText}>
+                <Typography className={classes.ctgName}>
                   {category.name}
                 </Typography>
               </Grid>
