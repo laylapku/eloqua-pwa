@@ -35,7 +35,7 @@ const SettingsAboutTab = props => {
             <ContactSupportIcon className={classes.aboutSvg} />
           </ListItemIcon>
           <ListItemText
-            primary="Version"
+            primary="VERSION"
             secondary={
               <Typography className={classes.aboutTypo}>1.0</Typography>
             }
@@ -46,7 +46,7 @@ const SettingsAboutTab = props => {
             <PermIdentityIcon className={classes.aboutSvg} />
           </ListItemIcon>
           <ListItemText
-            primary="Created by"
+            primary="MADE BY"
             secondary={
               <Typography className={classes.aboutTypo}>
                 Sean Lee, Layla Ouyang
@@ -59,12 +59,24 @@ const SettingsAboutTab = props => {
             <WebIcon className={classes.aboutSvg} />
           </ListItemIcon>
           <ListItemText
-            primary="Github"
+            primary="MORE ABOUT US"
             secondary={
-              <Typography className={classes.aboutTypo}>
-                https://github.com/ilovepku
+              <Typography>
+                <a
+                  className={classes.aboutLink}
+                  href="//seanlee.netlify.com"
+                  target="__blank"
+                >
+                  https://seanlee.netlify.com/
+                </a>
                 <br />
-                https://github.com/laylapku
+                <a
+                  className={classes.aboutLink}
+                  href="//laylaoy.netlify.com"
+                  target="__blank"
+                >
+                  https://laylaoy.netlify.com/
+                </a>
               </Typography>
             }
           />
@@ -74,12 +86,12 @@ const SettingsAboutTab = props => {
             <EmailIcon className={classes.aboutSvg} />
           </ListItemIcon>
           <ListItemText
-            primary="Get in Touch"
+            primary="GET IN TOUCH"
             secondary={
               <Typography className={classes.aboutTypo}>
                 seanleecoder@gmail.com
                 <br />
-                ouyangleilei515@gmail.com
+                laylaoy@gmail.com
               </Typography>
             }
           />

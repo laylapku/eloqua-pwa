@@ -118,6 +118,10 @@ const useStyles = makeStyles({
   aboutTypo: {
     opacity: 0.7
   },
+  aboutLink: {
+    color: "inherit",
+    opacity: 0.7
+  },
   aboutFooter: {
     position: "fixed",
     bottom: "10px",
