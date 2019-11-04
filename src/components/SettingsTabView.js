@@ -1,6 +1,5 @@
 // react
 import React, { useContext } from "react";
-import { withRouter } from "react-router-dom";
 import { ThemeContext } from "../contexts/theme.context";
 
 // material ui
@@ -49,4 +48,4 @@ const SettingsTabView = props => {
   );
 };
 
-export default withRouter(SettingsTabView);
+export default SettingsTabView;

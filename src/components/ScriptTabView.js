@@ -1,6 +1,5 @@
 // react
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import { withRouter } from "react-router-dom";
 import { PlayerContext } from "../contexts/player/player.context";
 import { SpeakersContext } from "../contexts/speakers.context";
 import { SpeechesContext } from "../contexts/speeches.context";
@@ -80,4 +79,4 @@ const ScriptTabView = props => {
   );
 };
 
-export default withRouter(ScriptTabView);
+export default ScriptTabView;

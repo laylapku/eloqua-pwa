@@ -49,7 +49,7 @@ const SettingsAboutTab = props => {
             primary="Created by"
             secondary={
               <Typography className={classes.aboutTypo}>
-                Layla Ouyang, Sean Lee
+                Sean Lee, Layla Ouyang
               </Typography>
             }
           />
@@ -62,9 +62,9 @@ const SettingsAboutTab = props => {
             primary="Github"
             secondary={
               <Typography className={classes.aboutTypo}>
-                https://github.com/laylapku
-                <br />
                 https://github.com/ilovepku
+                <br />
+                https://github.com/laylapku
               </Typography>
             }
           />
@@ -77,9 +77,9 @@ const SettingsAboutTab = props => {
             primary="Get in Touch"
             secondary={
               <Typography className={classes.aboutTypo}>
-                ouyangleilei515@gmail.com
-                <br />
                 seanleecoder@gmail.com
+                <br />
+                ouyangleilei515@gmail.com
               </Typography>
             }
           />

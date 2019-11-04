@@ -85,9 +85,9 @@ const PlayerControls = ({ speechOn }) => {
         </IconButton>
         <IconButton onClick={() => dispatch(playPause())}>
           {playing ? (
-            <PauseCircleOutlineIcon className={classes.playPauseIcon} />
+            <PauseCircleOutlineIcon className={classes.playPauseBtn} />
           ) : (
-            <PlayCircleOutlineIcon className={classes.playPauseIcon} />
+            <PlayCircleOutlineIcon className={classes.playPauseBtn} />
           )}
         </IconButton>
         <IconButton onClick={() => dispatch(onNext())}>
@@ -99,7 +99,7 @@ const PlayerControls = ({ speechOn }) => {
           }
         >
           {favlist.indexOf(speechOn && speechOn.id) !== -1 ? (
-            <FavoriteIcon className={classes.favIcon} />
+            <FavoriteIcon className={classes.favBtn} />
           ) : (
             <FavoriteBorderIcon />
           )}
