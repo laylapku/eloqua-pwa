@@ -31,7 +31,9 @@ export default createMuiTheme({
     MuiAppBar: {
       colorPrimary: {
         color: "var(--appbarC)",
-        backgroundColor: "var(--appbarBg)"
+        backgroundColor: "var(--appbarBg)",
+        maxWidth: "576px",
+        right: "auto"
       }
     },
     MuiTabs: {
