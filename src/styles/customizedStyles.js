@@ -34,9 +34,10 @@ const useStyles = makeStyles({
     position: "fixed",
     top: "auto",
     bottom: 0,
-    //overflowX: "hidden",
     paddingRight: "25px",
-    touchAction: "none" // to fix slider error "Unable to preventDefault inside passive event listener due to target being treated as passive."
+    touchAction: "none", // to fix slider error "Unable to preventDefault inside passive event listener due to target being treated as passive."
+    // desktop look
+    maxWidth: "576px"
   },
   ctrlsFlex: {
     display: "flex",
@@ -77,7 +78,9 @@ const useStyles = makeStyles({
     lineHeight: "2em !important",
     paddingRight: "20px",
     textAlign: "justify",
-    opacity: 0.8
+    opacity: 0.8,
+    // desktop look
+    maxWidth: "576px"
   },
 
   // ExploreCategoryList

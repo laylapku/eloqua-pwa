@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import BottomView from "./BottomView";
-import PlaylistTabView from "./PlayListTabView";
+import PlaylistTabView from "./PlaylistTabView";
 import ScriptTabView from "./ScriptTabView";
 import ExploreTabView from "./ExploreTabView";
 import FavoritesTabView from "./FavoritesTabView";
