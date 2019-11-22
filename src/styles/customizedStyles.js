@@ -95,7 +95,8 @@ const useStyles = makeStyles({
   // ExploreSpeechList
   searchInput: {
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
+    boxShadow: "2px 2px 2px RGB(192, 178, 131, 0.5)"
   },
 
   // BottomViewToolbar
