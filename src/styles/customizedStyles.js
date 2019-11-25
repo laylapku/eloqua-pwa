@@ -37,7 +37,7 @@ const useStyles = makeStyles({
     paddingRight: "25px",
     touchAction: "none", // to fix slider error "Unable to preventDefault inside passive event listener due to target being treated as passive."
     // desktop look
-    maxWidth: "576px"
+    maxWidth: "600px !important"
   },
   ctrlsFlex: {
     display: "flex",
