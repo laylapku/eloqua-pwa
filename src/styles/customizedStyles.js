@@ -130,7 +130,9 @@ const useStyles = makeStyles({
     position: "fixed",
     bottom: "10px",
     width: "100%",
-    textAlign: "center"
+    textAlign: "center",
+    // desktop look
+    maxWidth: "576px"
   },
 
   // FavoritesTabView
