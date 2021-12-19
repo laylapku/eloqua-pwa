@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import BottomView from "./BottomView";
-import PlaylistTabView from "./PlaylistTabView";
+import PlayListTabView from "./PlayListTabView";
 import ScriptTabView from "./ScriptTabView";
 import ExploreTabView from "./ExploreTabView";
 import FavoritesTabView from "./FavoritesTabView";
@@ -14,7 +14,7 @@ const Routes = () => {
     <Router>
       <Switch>
         <Route exact path="/" component={ExploreTabView} />
-        <Route exact path="/playlist" component={PlaylistTabView} />
+        <Route exact path="/playlist" component={PlayListTabView} />
         <Route exact path="/script" component={ScriptTabView} />
         <Route exact path="/favorites" component={FavoritesTabView} />
         <Route exact path="/settings" component={SettingsTabView} />
